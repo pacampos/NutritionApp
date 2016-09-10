@@ -9,9 +9,14 @@
     <string name="age_text">Age</string>
     <string name="weight_text">Weight</string>
     <string name="gender_text">Gender</string>
+    <string name="male_text">Male</string>
+    <string name="female_text">Female</string>
+    <string name="goal_title">100 Day Goals</string>
     <string name="goalWeight_text">Goal Weight</string>
     <string name="goalExercise_text">Exercise Goal</string>
     <string name="exercise_placeholder">Hours per Day</string>
-    <string name="upload_photo">Upload a Photo</string>
+    <string name="measurement_text">Measurements</string>
+    <string name="waist_text">Waist</string>
+    <string name="arm_text">Arm </string>
     <string name="nextButtonText">Start reaching your goal!</string>
 </resources>

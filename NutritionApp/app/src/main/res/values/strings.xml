@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">Welcome</string>
+    <string name="app_name"> </string>
+    <string name="welcome_text">Welcome to your Personal Nutrition Manager!</string>
+    <string name="signup_text">Get Started!</string>
+    <string name="alternatelogin_text">Or if you already have an account: </string>
+    <string name="login_text">Log In</string>
+    <string name="create_text">Create an Account!</string>
+    <string name="name_text">Name</string>
+    <string name="age_text">Age</string>
+    <string name="weight_text">Weight</string>
+    <string name="gender_text">Gender</string>
+    <string name="goalWeight_text">Goal Weight</string>
+    <string name="goalExercise_text">Exercise Goal</string>
+    <string name="exercise_placeholder">Hours per Day</string>
+    <string name="upload_photo">Upload a Photo</string>
+    <string name="nextButtonText">Start reaching your goal!</string>
 </resources>

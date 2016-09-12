@@ -25,8 +25,26 @@ public class CalorieDayModel {
         waters.add(water);
     }
 
+    public int getTotalWater(){
+        int totalOunces=0;
+        for(WaterModel water:waters){
+            totalOunces+=water.getOunces();
+        }
 
+        return totalOunces;
+    }
 
+    public void removeWater(String id){
+        WaterModel water=null;
+        for(int i=0;i<waters.size();++i){
+            if(waters.get(i).getWaterID()==id){
+                water=waters.get(i);
+            }
+        }
+        if(water!=null)
+        {
+            waters.remove(water);
+        }
 
-
+    }
 }

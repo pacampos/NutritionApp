@@ -6,4 +6,20 @@ package com.example.nutrition.nutritionapp.Model;
 public class WaterModel {
     private int ounces;
     private String waterID;
+
+    public String getWaterID() {
+        return waterID;
+    }
+
+    public void setWaterID(String waterID) {
+        this.waterID = waterID;
+    }
+
+    public int getOunces() {
+        return ounces;
+    }
+
+    public void setOunces(int ounces) {
+        this.ounces = ounces;
+    }
 }

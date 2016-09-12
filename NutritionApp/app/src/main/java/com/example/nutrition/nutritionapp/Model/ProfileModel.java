@@ -6,6 +6,7 @@ import java.util.List;
  * Created by phoenixcampos01 on 9/8/16.
  */
 public class ProfileModel {
+    public String profileID;
     public static final double FEET_TO_METERS=0.3048;
     public static final double INCHES_TO_METERS=0.0254;
     public static final double METERS_TO_INCHES=39.3700;
@@ -122,6 +123,14 @@ public class ProfileModel {
     }
 
     public double getUserBMI(){ return currWeightKilos/(heightMeters*heightMeters); }
+
+    public String getProfileID() {
+        return profileID;
+    }
+
+    public void setProfileID(String profileID) {
+        this.profileID = profileID;
+    }
 
     private double poundsToKilos(double pounds){
         return pounds*POUNDS_TO_KILOS;

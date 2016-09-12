@@ -5,11 +5,31 @@ package com.example.nutrition.nutritionapp.Model;
  * amount of calories you would burn for a specific amount of time.
  */
 public class ExerciseModel {
-    private enum exercises{
-
-    }
-
     private int calories;
     private int minutes;
     private String exerciseID;
+
+    public int getCalories() {
+        return calories;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
+    }
+
+    public String getExerciseID() {
+        return exerciseID;
+    }
+
+    public void setExerciseID(String exerciseID) {
+        this.exerciseID = exerciseID;
+    }
 }

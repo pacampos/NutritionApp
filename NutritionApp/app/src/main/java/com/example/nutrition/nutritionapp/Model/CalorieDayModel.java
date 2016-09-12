@@ -12,6 +12,10 @@ public class CalorieDayModel {
     private List<ExerciseModel> exercises;
     private List<WaterModel> waters;
 
+    private int waterGoal;
+    private int exerciseGoal;
+    private int foodGoal;
+
 
     public void addFood(FoodModel food){
         foods.add(food);
@@ -28,7 +32,7 @@ public class CalorieDayModel {
     public int getTotalWater(){
         int totalOunces=0;
         for(WaterModel water:waters){
-            totalOunces+=water.getOunces();
+            totalOunces+=water.getOuncesDrank();
         }
 
         return totalOunces;

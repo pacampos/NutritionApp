@@ -1,5 +1,7 @@
 package com.example.nutrition.nutritionapp.Model;
 
+import android.media.Image;
+
 import java.util.Date;
 import java.util.List;
 
@@ -7,7 +9,8 @@ import java.util.List;
  * Created by phoenixcampos01 on 9/8/16.
  */
 public class ProfileModel {
-    public String profileID;
+    private String profileID;
+    private Image profilePic;
     public static final double FEET_TO_METERS=0.3048;
     public static final double INCHES_TO_METERS=0.0254;
     public static final double METERS_TO_INCHES=39.3700;
@@ -145,6 +148,14 @@ public class ProfileModel {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public Image getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(Image profilePic) {
+        this.profilePic = profilePic;
     }
 
     private double poundsToKilos(double pounds){

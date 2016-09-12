@@ -1,5 +1,6 @@
 package com.example.nutrition.nutritionapp.Model;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +22,7 @@ public class ProfileModel {
     private double currWeightKilos;
     private double goalWeightPounds;
     private double goalWeightKilos;
+    private Date dateOfBirth;
 
     /* this models everyday this specific user inputs info within a day */
     private List<CalorieDayModel> days;
@@ -124,12 +126,25 @@ public class ProfileModel {
 
     public double getUserBMI(){ return currWeightKilos/(heightMeters*heightMeters); }
 
+    /* update to create acceptable ranges for the BMI */
+    public int getBMIHealth(){
+        return -1;
+    }
+
     public String getProfileID() {
         return profileID;
     }
 
     public void setProfileID(String profileID) {
         this.profileID = profileID;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     private double poundsToKilos(double pounds){
@@ -139,4 +154,6 @@ public class ProfileModel {
     private double kilosToPounds(double kilos){
         return kilos/POUNDS_TO_KILOS;
     }
+
+
 }

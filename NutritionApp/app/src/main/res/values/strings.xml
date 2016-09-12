@@ -1,22 +1,32 @@
 <resources>
     <string name="app_name"> </string>
+
     <string name="welcome_text">Welcome to your Personal Nutrition Manager!</string>
     <string name="signup_text">Get Started!</string>
     <string name="alternatelogin_text">Or if you already have an account: </string>
     <string name="login_text">Log In</string>
-    <string name="create_text">Create an Account!</string>
+
+
+    <string name="create_text">Create a User!</string>
     <string name="name_text">Name</string>
-    <string name="age_text">Age</string>
+    <string name="username_text">Username</string>
+    <string name="password_text">Password</string>
+    <string name="age_text">Date of Birth</string>
     <string name="weight_text">Weight</string>
+    <string name="height_text">Height</string>
     <string name="gender_text">Gender</string>
     <string name="male_text">Male</string>
     <string name="female_text">Female</string>
+    <string name="avatar_text">Select an Avatar</string>
+
     <string name="goal_title">100 Day Goals</string>
     <string name="goalWeight_text">Goal Weight</string>
     <string name="goalExercise_text">Exercise Goal</string>
     <string name="exercise_placeholder">Hours per Day</string>
-    <string name="measurement_text">Measurements</string>
-    <string name="waist_text">Waist</string>
-    <string name="arm_text">Arm </string>
-    <string name="nextButtonText">Start reaching your goal!</string>
+
+
+    <string name="nextButtonText">Continue</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

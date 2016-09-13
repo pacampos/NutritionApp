@@ -12,9 +12,9 @@ public class CalorieDayModel {
     private List<ExerciseModel> exercises;
     private List<WaterModel> waters;
 
-    private int waterGoal;
-    private int exerciseGoal;
-    private int foodGoal;
+    private int waterAmountGoal;
+    private int exerciseCalorieGoal;
+    private int foodCalorieGoal;
 
 
     public void addFood(FoodModel food){
@@ -50,5 +50,47 @@ public class CalorieDayModel {
             waters.remove(water);
         }
 
+    }
+
+    public int getTotalCaloriesBurned(){
+        int sum=0;
+        for(ExerciseModel exercise: exercises){
+            sum+=exercise.getCalories();
+        }
+
+        return sum;
+    }
+
+    public int getTotalCaloriesAte(){
+        int sum=0;
+        for(FoodModel food:foods){
+            sum+=food.getCalories();
+        }
+
+        return sum;
+    }
+
+    public int getWaterAmountGoal() {
+        return waterAmountGoal;
+    }
+
+    public void setWaterAmountGoal(int waterAmountGoal) {
+        this.waterAmountGoal = waterAmountGoal;
+    }
+
+    public int getExerciseCalorieGoal() {
+        return exerciseCalorieGoal;
+    }
+
+    public void setExerciseCalorieGoal(int exerciseCalorieGoal) {
+        this.exerciseCalorieGoal = exerciseCalorieGoal;
+    }
+
+    public int getFoodCalorieGoal() {
+        return foodCalorieGoal;
+    }
+
+    public void setFoodCalorieGoal(int foodCalorieGoal) {
+        this.foodCalorieGoal = foodCalorieGoal;
     }
 }

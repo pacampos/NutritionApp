@@ -1,7 +1,9 @@
 package com.example.nutrition.nutritionapp;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.Checkable;
 import android.widget.ImageView;
 
@@ -27,7 +29,16 @@ public class CheckableImageView extends ImageView implements Checkable {
 
     @Override
     public void toggle() {
+
+    }
+    public void toggle(ImageView prevImage) {
+        if (prevImage != null) {
+            prevImage.getDrawable().clearColorFilter();
+            prevImage.invalidate();
+        }
+
         setChecked(!mChecked);
+
     }
 
     @Override
@@ -37,10 +48,22 @@ public class CheckableImageView extends ImageView implements Checkable {
 
     @Override
     public void setChecked(final boolean checked) {
-        if (mChecked == checked)
-            return;
+        if (mChecked) {
+            this.getDrawable().clearColorFilter();
+            this.invalidate();
+          //  mChecked = checked;
+            //return;
+        } else{
+
+            this.getDrawable().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+            this.invalidate();
+         //   mChecked = checked;
+        }
         mChecked = checked;
- //     Log.d("CREATION", "BOOOP")
+
+
+
+     Log.d("CREATION", "BOOOP");
         refreshDrawableState();
     }
 }

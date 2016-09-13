@@ -8,6 +8,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 /**
  * Created by AnanthNarayanVenkate on 9/11/2016.
@@ -33,22 +34,24 @@ public class ImageAdapter extends BaseAdapter {
 
     // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
-        RadioButton radioButton;
+        CheckableImageView imageView;
+
         if (convertView == null) {
             // if it's not recycled, initialize some attributes
-            radioButton = new RadioButton(mContext);
-            radioButton.setLayoutParams(new GridView.LayoutParams(85, 85));
-//            radioButton.setScaleType(RadioButton.ScaleType.CENTER_CROP);
-            radioButton.setPadding(8, 8, 8, 8);
+            imageView = new CheckableImageView(mContext);
+            imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setPadding(8, 8, 8, 8);
+
         } else {
-            radioButton = (RadioButton) convertView;
+            imageView = (CheckableImageView) convertView;
         }
 
-//       radioButton.setButtonDrawable(mThumbIds[position]);
+        imageView.setImageResource(mThumbIds[position]);
 //        radioButton.setBackground(null);
 //        radioButton.setHeight(10);
 //        radioButton.setWidth(10);
-        return radioButton;
+        return imageView;
     }
 
     // references to our images

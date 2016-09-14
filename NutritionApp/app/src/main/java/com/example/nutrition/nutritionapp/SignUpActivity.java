@@ -22,7 +22,7 @@ public class SignUpActivity extends FragmentActivity {
      * The pager widget, which handles animation and allows swiping horizontally to access previous
      * and next wizard steps.
      */
-    private ViewPager mPager;
+    private CustomViewPager mPager;
 
     /**
      * The pager adapter, which provides the pages to the view pager widget.
@@ -36,7 +36,7 @@ public class SignUpActivity extends FragmentActivity {
         setContentView(R.layout.activity_sign_up);
 
         // Instantiate a ViewPager and PagerAdapter
-        mPager = (ViewPager) findViewById(R.id.fragment_container);
+        mPager = (CustomViewPager) findViewById(R.id.fragment_container);
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
 

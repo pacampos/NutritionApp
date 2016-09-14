@@ -19,8 +19,6 @@ import java.util.ArrayList;
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
 
-    private ArrayList<ImageView> imageViews = new ArrayList<>();
-
     public ImageAdapter(Context c) {
         mContext = c;
     }
@@ -31,8 +29,7 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     public Object getItem(int position) {
-        Log.d("HERE", "Size: " + imageViews.size());
-        return imageViews.get(position);
+        return null;
     }
 
     public long getItemId(int position) {
@@ -46,7 +43,7 @@ public class ImageAdapter extends BaseAdapter {
         if (convertView == null) {
             // if it's not recycled, initialize some attributes
             imageView = new CheckableImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
+            imageView.setLayoutParams(new GridView.LayoutParams(150, 150));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(8, 8, 8, 8);
 
@@ -55,20 +52,19 @@ public class ImageAdapter extends BaseAdapter {
         }
 
         imageView.setImageResource(mThumbIds[position]);
-        imageViews.add(imageView);
         return imageView;
     }
 
     // references to our images
     private Integer[] mThumbIds = {
             R.drawable.apple, R.drawable.pineapple,
-            R.drawable.cherries, R.drawable.grapes,
-            R.drawable.lemon, R.drawable.orange,
-            R.drawable.watermelon, R.drawable.tomato,
-            R.drawable.carrot, R.drawable.broccoli,
-            R.drawable.cauliflower, R.drawable.mushrooms,
-            R.drawable.peas, R.drawable.salad,
-            R.drawable.strawberry
+            R.drawable.orange, R.drawable.broccoli,
+            R.drawable.carrot, R.drawable.cherries,
+            R.drawable.salad, R.drawable.tomato,
+            R.drawable.mushrooms, R.drawable.watermelon,
+            R.drawable.strawberry, R.drawable.weight,
+            R.drawable.jump_rope, R.drawable.strength,
+            R.drawable.shoe, R.drawable.bicycle
 
     };
 }

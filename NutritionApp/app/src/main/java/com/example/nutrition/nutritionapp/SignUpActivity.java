@@ -40,20 +40,6 @@ public class SignUpActivity extends FragmentActivity {
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
 
-//        // Inflate goal information fragment into this activity
-//
-//        // get manager
-//        FragmentManager fm = getSupportFragmentManager();
-//        // get location of where we want to load the fragment
-//        Fragment f = fm.findFragmentById(R.id.fragment_container);
-//
-//        if (f==null) { // activity and fragment created for the first time
-//            f = new signUpFragment(); // instantiate the sign up fragment
-//            // create transaction
-//            FragmentTransaction ft = fm.beginTransaction();
-//            ft.add(R.id.fragment_container, f);
-//            ft.commit();
-//        }
     }
     public void jumpToPage(View view) {
         mPager.setCurrentItem(mPager.getCurrentItem() + 1, true);

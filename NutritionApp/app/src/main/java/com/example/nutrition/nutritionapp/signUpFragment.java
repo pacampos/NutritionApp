@@ -24,7 +24,7 @@ import java.util.TimeZone;
 
 
 public class signUpFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
-
+    private CheckableImageView clickedImage;
     private int _day;
     private int _month;
     private int _birthYear;
@@ -53,41 +53,18 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
         Button nextButton = (Button) v.findViewById(R.id.nextButton);
         nextButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         dobInput = (EditText) v.findViewById(R.id.dobInput);
+
         final GridView gridView = (GridView) v.findViewById(R.id.gridview);
 
-        gridView.setAdapter(new ImageAdapter(getActivity()));
+        ImageAdapter imageAdapter = new ImageAdapter(getActivity());
+        gridView.setAdapter(imageAdapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                CheckableImageView imageView = (CheckableImageView) gridView.getChildAt(position);
-                imageView.setChecked(true);
-//                imageView.setOnTouchListener(new View.OnTouchListener() {
-//                    @Override
-//                    public boolean onTouch(View v, MotionEvent event) {
-//                        switch (event.getAction()) {
-//                            case MotionEvent.ACTION_DOWN: {
-//                                ImageView view = (ImageView) v;
-//                                //overlay is black with transparency of 0x77 (119)
-//                                view.getDrawable().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-//                                view.invalidate();
-//                                break;
-//                            }
-//                            case MotionEvent.ACTION_UP:
-//                            case MotionEvent.ACTION_CANCEL: {
-//                                ImageView view = (ImageView) v;
-//                                //clear the overlay
-//                                view.getDrawable().clearColorFilter();
-//                                view.invalidate();
-//                                break;
-//                            }
-//                        }
-//                        return true;
-//
-//                    }
-//                });
-
-
+                imageView.toggle(clickedImage);
+                clickedImage = imageView;
                 // set dob edit text to be clickable
                 dobInput.setFocusable(false);
                 dobInput.setClickable(true);

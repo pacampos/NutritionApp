@@ -1,6 +1,7 @@
 package com.example.nutrition.nutritionapp;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,22 +11,28 @@ import android.widget.ListAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import java.util.ArrayList;
+
 /**
  * Created by AnanthNarayanVenkate on 9/11/2016.
  */
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
 
+    private ArrayList<ImageView> imageViews = new ArrayList<>();
+
     public ImageAdapter(Context c) {
         mContext = c;
     }
+
 
     public int getCount() {
         return mThumbIds.length;
     }
 
     public Object getItem(int position) {
-        return null;
+        Log.d("HERE", "Size: " + imageViews.size());
+        return imageViews.get(position);
     }
 
     public long getItemId(int position) {
@@ -48,9 +55,7 @@ public class ImageAdapter extends BaseAdapter {
         }
 
         imageView.setImageResource(mThumbIds[position]);
-//        radioButton.setBackground(null);
-//        radioButton.setHeight(10);
-//        radioButton.setWidth(10);
+        imageViews.add(imageView);
         return imageView;
     }
 

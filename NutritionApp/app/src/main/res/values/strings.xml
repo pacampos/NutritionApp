@@ -24,6 +24,10 @@
     <string name="goalExercise_text">Exercise Goal</string>
     <string name="exercise_placeholder">Hours per Day</string>
 
+    <string name="measurements_title">Measurements</string>
+    <string name="arm_text">Arm</string>
+    <string name="waist_text">Waist</string>
+    <string name="thigh_text">Thigh</string>
 
     <string name="nextButtonText">Continue</string>
 

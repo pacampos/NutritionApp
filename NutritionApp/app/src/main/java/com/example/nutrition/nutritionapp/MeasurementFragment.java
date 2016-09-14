@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 public class MeasurementFragment extends Fragment {
@@ -19,6 +20,11 @@ public class MeasurementFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_measurement, container, false);
+       final View v = inflater.inflate(R.layout.fragment_measurement, container, false);
+
+        Button goToButton = (Button) v.findViewById(R.id.goToButton);
+        goToButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+        return v;
     }
 }

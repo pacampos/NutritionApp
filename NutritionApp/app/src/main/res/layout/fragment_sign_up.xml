@@ -196,7 +196,8 @@
                 android:text="@string/avatar_text"
                 android:id="@+id/textView6"
                 android:layout_gravity="center_horizontal"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="10dp" />
 
             <GridView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/gridview"
@@ -208,7 +209,7 @@
                 android:horizontalSpacing="10dp"
                 android:stretchMode="columnWidth"
                 android:gravity="center"
-                />
+                android:layout_marginTop="10dp" />
             <Button
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"

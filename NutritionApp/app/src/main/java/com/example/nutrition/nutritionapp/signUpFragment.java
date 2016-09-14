@@ -65,23 +65,24 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
                CheckableImageView imageView = (CheckableImageView) gridView.getChildAt(position);
                 imageView.toggle(clickedImage);
                 clickedImage = imageView;
-                // set dob edit text to be clickable
-                dobInput.setFocusable(false);
-                dobInput.setClickable(true);
 
-                dobInput.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-
-                        DatePickerDialog dialog = new DatePickerDialog(getActivity(), signUpFragment.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                                calendar.get(Calendar.DAY_OF_MONTH));
-                        dialog.show();
-                    }
-                });
 
             }
             });
+        // set dob edit text to be clickable
+        dobInput.setFocusable(false);
+        dobInput.setClickable(true);
+
+        dobInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+
+                DatePickerDialog dialog = new DatePickerDialog(getActivity(), signUpFragment.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH));
+                dialog.show();
+            }
+        });
         return v;
     }
     private void updateDisplay() {

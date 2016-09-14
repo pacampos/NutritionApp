@@ -2,16 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nutrition.nutritionapp.goalInformation">
+    tools:context="com.example.nutrition.nutritionapp.MeasurementFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nextButtonText"
-        android:id="@+id/continueButton"
-        android:layout_gravity="center"
-        android:onClick="jumpToPage"
-        />
+        android:text="New Text"
+        android:id="@+id/textView8"
+        android:layout_gravity="center" />
 </FrameLayout>

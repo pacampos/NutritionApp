@@ -16,7 +16,7 @@ public class SignUpActivity extends FragmentActivity {
     /**
      * The number of pages (wizard steps) to show in this demo.
      */
-    private static final int NUM_PAGES = 2;
+    private static final int NUM_PAGES = 3;
 
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
@@ -60,10 +60,11 @@ public class SignUpActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            if (position == 0) {
-                return new signUpFragment();
-            } else {
-                return new goalInformation();
+            switch(position) {
+                case 0: return new signUpFragment();
+                case 1: return new goalInformation();
+                case 2: return new MeasurementFragment();
+                default: return new signUpFragment();
             }
         }
 

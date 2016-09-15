@@ -1,6 +1,7 @@
 package com.example.nutrition.nutritionapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,6 +26,13 @@ public class MeasurementFragment extends Fragment {
         Button goToButton = (Button) v.findViewById(R.id.goToButton);
         goToButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
+        goToButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), ProfileActivity.class);
+                startActivity(i);
+            }
+        });
         return v;
     }
 }

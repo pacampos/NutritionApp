@@ -1,4 +1,4 @@
-package com.example.nutrition.nutritionapp;
+package com.example.nutrition.nutritionapp.Controller;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.nutrition.nutritionapp.R;
 
-public class goalInformation extends Fragment {
 
-    public goalInformation() {
+public class goalInformationFragment extends Fragment {
+
+    public goalInformationFragment() {
         // Required empty public constructor
     }
     @Override

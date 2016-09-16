@@ -1,13 +1,9 @@
-package com.example.nutrition.nutritionapp;
+package com.example.nutrition.nutritionapp.Controller;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
-import android.graphics.PorterDuff;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -15,9 +11,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.Toast;
+
+import com.example.nutrition.nutritionapp.R;
+import com.example.nutrition.nutritionapp.View.CheckableImageView;
 
 import java.util.Calendar;
 import java.util.TimeZone;

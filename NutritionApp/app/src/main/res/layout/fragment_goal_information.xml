@@ -117,8 +117,12 @@
             android:layout_height="wrap_content"
             android:id="@+id/spinner"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp" />
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:prompt="@string/spinner_title"
+            android:entries="@array/activityLevel_array"
+            android:layout_marginBottom="40dp" />
+        />
 
         <Button
             android:layout_width="wrap_content"

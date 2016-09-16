@@ -25,6 +25,13 @@
     <string name="exercise_placeholder">Hours per Day</string>
     <string name="activityLevel_title">Average Daily Activity Level</string>
     <string name="activityLevelInfoButton">Not sure what you are?</string>
+    <string name="spinner_title">Choose your activity level</string>
+
+    <string-array name="activityLevel_array">
+        <item>Sedentary</item>
+        <item>Moderately Active</item>
+        <item>Extremely Active</item>
+    </string-array>
 
     <!-- Measurements Page !-->
     <string name="measurements_title">Measurements</string>

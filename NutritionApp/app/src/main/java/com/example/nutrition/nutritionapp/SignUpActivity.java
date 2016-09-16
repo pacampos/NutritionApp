@@ -1,17 +1,12 @@
-package com.example.nutrition.nutritionapp.Controller;
+package com.example.nutrition.nutritionapp;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.View;
-
-import com.example.nutrition.nutritionapp.CustomViewPager;
-import com.example.nutrition.nutritionapp.MeasurementFragment;
-import com.example.nutrition.nutritionapp.R;
 
 public class SignUpActivity extends FragmentActivity {
     /**

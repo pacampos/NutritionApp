@@ -1,4 +1,4 @@
-package com.example.nutrition.nutritionapp.View;
+package com.example.nutrition.nutritionapp;
 
 import android.content.Context;
 import android.graphics.PorterDuff;

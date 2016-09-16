@@ -12,20 +12,23 @@
     <string name="username_text">Username</string>
     <string name="password_text">Password</string>
     <string name="age_text">Date of Birth</string>
-    <string name="weight_text">Weight</string>
-    <string name="height_text">Height</string>
+    <string name="weight_text">Current Weight (lbs)</string>
+    <string name="height_text">Current Height (cm)</string>
     <string name="gender_text">Gender</string>
     <string name="male_text">Male</string>
     <string name="female_text">Female</string>
     <string name="avatar_text">Select an Avatar</string>
 
-    <string name="goal_title">100 Day Goals</string>
-    <string name="goalWeight_text">Goal Weight</string>
+    <string name="goal_title">100 Day Goal</string>
+    <string name="goalWeight_text">Goal Weight (lbs)</string>
     <string name="goalExercise_text">Exercise Goal</string>
     <string name="exercise_placeholder">Hours per Day</string>
+    <string name="activityLevel_title">Average Daily Activity Level</string>
+    <string name="activityLevelInfoButton">Not sure what you are?</string>
 
 
     <string name="nextButtonText">Continue</string>
+    <string name="startReachingText">Start reaching your goal!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

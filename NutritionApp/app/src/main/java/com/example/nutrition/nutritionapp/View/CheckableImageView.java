@@ -1,4 +1,4 @@
-package com.example.nutrition.nutritionapp;
+package com.example.nutrition.nutritionapp.View;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.Checkable;
 import android.widget.ImageView;
+
+import com.example.nutrition.nutritionapp.R;
 
 /**
  * Created by AnanthNarayanVenkate on 9/11/2016.

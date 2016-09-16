@@ -5,7 +5,6 @@
     tools:context="com.example.nutrition.nutritionapp.goalInformation">
 
     <!-- TODO: Update blank fragment layout -->
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"

@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name"> </string>
 
+    <!-- Welcome Page !-->
     <string name="welcome_text">Welcome to your Personal Nutrition Manager!</string>
     <string name="signup_text">Get Started!</string>
     <string name="alternatelogin_text">Or if you already have an account: </string>
     <string name="login_text">Log In</string>
 
-
+    <!-- Sign up !-->
     <string name="create_text">Create a User!</string>
-    <string name="name_text">Name</string>
     <string name="username_text">Username</string>
     <string name="password_text">Password</string>
     <string name="age_text">Date of Birth</string>
@@ -26,10 +26,22 @@
     <string name="activityLevel_title">Average Daily Activity Level</string>
     <string name="activityLevelInfoButton">Not sure what you are?</string>
 
+    <!-- Measurements Page !-->
+    <string name="measurements_title">Measurements</string>
+    <string name="arm_text">Arm</string>
+    <string name="waist_text">Waist</string>
+    <string name="thigh_text">Thigh</string>
 
+    <!-- Profile Page !-->
+    <string name="bmi_text">Current BMI</string>
+    <string name="calories_text">Daily Calorie Count</string>
+    <string name="progressPage">See Progress</string>
+
+    <!-- General Strings !-->
     <string name="nextButtonText">Continue</string>
     <string name="startReachingText">Start reaching your goal!</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name_text">Name</string>
+
+    <string name="title_activity_profile">Profile</string>
 </resources>

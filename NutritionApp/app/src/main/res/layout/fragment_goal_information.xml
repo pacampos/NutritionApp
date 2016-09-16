@@ -2,8 +2,134 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nutrition.nutritionapp.goalInformation">
+    tools:context=".Controller.goalInformationFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="529dp"
+        android:layout_gravity="left|top"
+        android:background="#ffffff"
+        android:backgroundTint="#ffffff">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:id="@+id/imageView"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/pineapple"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/goal_title"
+            android:id="@+id/textView9"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weight_text"
+                android:id="@+id/textView10"
+                android:layout_marginTop="5dp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText"
+                android:layout_weight="0.37"
+                android:layout_marginRight="20dp"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/height_text"
+                android:id="@+id/textView11"
+                android:layout_marginTop="5dp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText2"
+                android:layout_weight="0.37"
+                android:layout_marginRight="20dp"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/goalWeight_text"
+                android:id="@+id/textView12"
+                android:layout_marginTop="5dp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText3"
+                android:layout_weight="0.37"
+                android:layout_marginRight="20dp"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activityLevel_title"
+            android:id="@+id/textView13"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold"
+            android:paddingTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activityLevelInfoButton"
+            android:id="@+id/textView14"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold"
+            android:textColor="#52b7bd" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/startReachingText"
+            android:id="@+id/continueButton"
+            android:layout_gravity="center_horizontal|bottom"
+            android:onClick="jumpToPage"
+            android:background="#52b7bd"
+            android:textColor="#ffffff"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp" />
+    </LinearLayout>
 </FrameLayout>

@@ -1,4 +1,4 @@
-package com.example.nutrition.nutritionapp.Controller;
+package com.example.nutrition.nutritionapp;
 
 import com.example.nutrition.nutritionapp.Model.AccountModel;
 import com.google.firebase.database.DatabaseReference;

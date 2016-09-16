@@ -1,17 +1,14 @@
-package com.example.nutrition.nutritionapp;
+package com.example.nutrition.nutritionapp.Controller;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
-import java.util.ArrayList;
+import com.example.nutrition.nutritionapp.R;
+import com.example.nutrition.nutritionapp.View.CheckableImageView;
 
 /**
  * Created by AnanthNarayanVenkate on 9/11/2016.

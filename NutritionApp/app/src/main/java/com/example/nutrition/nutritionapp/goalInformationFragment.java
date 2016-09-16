@@ -1,4 +1,4 @@
-package com.example.nutrition.nutritionapp.Controller;
+package com.example.nutrition.nutritionapp;
 
 import android.content.Context;
 import android.net.Uri;

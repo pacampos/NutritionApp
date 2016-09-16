@@ -51,8 +51,10 @@ public class CalorieDayModel {
         {
             waters.remove(water);
         }
-
     }
+
+
+    /* remove food, remove exercise */
 
     public int getTotalCaloriesBurned(){
         int sum=0;

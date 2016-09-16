@@ -1,4 +1,4 @@
-package com.example.nutrition.nutritionapp.Controller;
+package com.example.nutrition.nutritionapp;
 
 import android.content.Context;
 import android.view.View;
@@ -6,9 +6,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-
-import com.example.nutrition.nutritionapp.R;
-import com.example.nutrition.nutritionapp.View.CheckableImageView;
 
 /**
  * Created by AnanthNarayanVenkate on 9/11/2016.

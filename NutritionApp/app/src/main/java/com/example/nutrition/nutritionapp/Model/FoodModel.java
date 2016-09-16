@@ -63,4 +63,5 @@ public class FoodModel {
     public void setFoodType(int foodType) {
         this.foodType = foodType;
     }
+
 }

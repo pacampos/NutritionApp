@@ -29,6 +29,8 @@ public class CalorieDayModel {
         waters.add(water);
     }
 
+    //remove water, food, exercise, profile
+
     public int getTotalWater(){
         int totalOunces=0;
         for(WaterModel water:waters){

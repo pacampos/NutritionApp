@@ -26,6 +26,9 @@ public class ProfileModel {
     private double goalWeightPounds;
     private double goalWeightKilos;
     private Date dateOfBirth;
+    private double waistMeasure;
+    private double thighMeasure;
+    private double armMeasure;
 
     /* this models everyday this specific user inputs info within a day */
     private List<CalorieDayModel> days;

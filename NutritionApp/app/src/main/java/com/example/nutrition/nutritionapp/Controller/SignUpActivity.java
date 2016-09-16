@@ -9,6 +9,8 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.nutrition.nutritionapp.CustomViewPager;
+import com.example.nutrition.nutritionapp.MeasurementFragment;
 import com.example.nutrition.nutritionapp.R;
 
 public class SignUpActivity extends FragmentActivity {
@@ -59,18 +61,11 @@ public class SignUpActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-<<<<<<< HEAD:NutritionApp/app/src/main/java/com/example/nutrition/nutritionapp/SignUpActivity.java
             switch(position) {
                 case 0: return new signUpFragment();
-                case 1: return new goalInformation();
+                case 1: return new goalInformationFragment();
                 case 2: return new MeasurementFragment();
                 default: return new signUpFragment();
-=======
-            if (position == 0) {
-                return new signUpFragment();
-            } else {
-                return new goalInformationFragment();
->>>>>>> origin/DBModel:NutritionApp/app/src/main/java/com/example/nutrition/nutritionapp/Controller/SignUpActivity.java
             }
         }
 

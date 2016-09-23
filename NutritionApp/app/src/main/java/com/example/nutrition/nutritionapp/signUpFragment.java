@@ -3,6 +3,7 @@ package com.example.nutrition.nutritionapp;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,13 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.RadioButton;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
 
@@ -23,6 +29,13 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
     private int _month;
     private int _birthYear;
     EditText dobInput;
+
+    private String date;
+    private int age = 0;
+    private String username;
+    private String password;
+    private String name;
+    private boolean gender = true;
 
     public signUpFragment() {
         // Required empty public constructor
@@ -48,6 +61,8 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
         nextButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         dobInput = (EditText) v.findViewById(R.id.dobInput);
         final GridView gridView = (GridView) v.findViewById(R.id.gridview);
+
+
         // Set ImageAdapter to the GridView
         ImageAdapter imageAdapter = new ImageAdapter(getActivity());
         gridView.setAdapter(imageAdapter);
@@ -77,13 +92,57 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
                 dialog.show();
             }
         });
+
+        // User information
+
+        // Name
+        EditText nameInput = (EditText) v.findViewById(R.id.nameInput);
+        name = nameInput.getText().toString();
+
+        // Username
+        EditText usernameInput = (EditText) v.findViewById(R.id.usernameInput);
+        username = usernameInput.getText().toString();
+
+        // Password
+        EditText passInput = (EditText) v.findViewById(R.id.passwordInput);
+        password = passInput.getText().toString();
+
+
+        // Gender
+        RadioButton maleButton = (RadioButton) v.findViewById(R.id.maleButton);
+
+        if (maleButton.isChecked()) {
+            gender = true;
+        } else {
+            gender = false;
+        }
+
+
+        // Next button
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new goalInformationFragment();
+                replaceFragment(fragment);
+            }
+        });
+
         return v;
     }
     // Append the text from the date picker to the editText
     private void updateDisplay() {
-        dobInput.setText(new StringBuilder()
-        .append(_month + 1).append("/").append(_day).append("/").append(_birthYear).append(" "));
+        date = new StringBuilder()
+                .append(_month + 1).append("/").append(_day).append("/").append(_birthYear).append(" ").toString();
+
+        dobInput.setText(date);
 
     }
 
+    private void replaceFragment(Fragment fragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 }
+

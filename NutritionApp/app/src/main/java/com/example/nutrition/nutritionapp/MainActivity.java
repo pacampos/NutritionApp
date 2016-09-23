@@ -1,6 +1,9 @@
 package com.example.nutrition.nutritionapp;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,20 +17,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Get references to elements on page
-        Button signupButton = (Button) this.findViewById(R.id.signupButton);
-        Button loginButton = (Button) this.findViewById(R.id.loginButton);
-        signupButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        loginButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        //get manager
+        FragmentManager fm= getSupportFragmentManager();
+        //get the ID/ location of where we want to load fragment
+        Fragment f=fm.findFragmentById(R.id.welcome_fragment_container);
 
-        // Go to new activity when clicking sign up button
-        signupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), SignUpActivity.class);
-                startActivity(i);
-            }
-        });
+        if(f==null){ // activity and fragment are created for the first time
+            f = new welcomeFragment(); // instantiate Profile Fragment
+            // create transaction
+            FragmentTransaction ft= fm.beginTransaction();
+            ft.add(R.id.welcome_fragment_container,f);
+            ft.commit();
+        }
+
     }
 
 

@@ -8,13 +8,21 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.example.nutrition.nutritionapp.R;
 
 
-public class goalInformationFragment extends Fragment {
 
+
+public class goalInformationFragment extends Fragment {
+    private String weight;
+    private String height;
+    private String goalWeight;
+    private int activityLevelFactor;
     public goalInformationFragment() {
         // Required empty public constructor
     }
@@ -25,6 +33,28 @@ public class goalInformationFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_goal_information, container, false);
 
         // get references
+        EditText weightInput = (EditText) v.findViewById(R.id.weightInput);
+        weight = weightInput.getText().toString();
+
+        EditText heightInput = (EditText) v.findViewById(R.id.heightInput);
+        height = heightInput.getText().toString();
+
+        EditText goalWeightInput = (EditText) v.findViewById(R.id.goalWeightInput);
+        goalWeight = goalWeightInput.getText().toString();
+
+        final Spinner activityLevelSpinner = (Spinner) v.findViewById(R.id.spinner);
+        activityLevelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                activityLevelFactor = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         Button continueButton = (Button) v.findViewById(R.id.continueButton);
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override

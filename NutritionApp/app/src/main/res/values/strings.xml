@@ -50,6 +50,6 @@
     <string name="name_text">Name</string>
     <string name="title_activity_profile">Profile</string>
     <string name="login_text">Login</string>
-    <string name="username_text">Username</string>
+    <string name="username_text">Email</string>
     <string name="password_text">Password</string>
 </resources>

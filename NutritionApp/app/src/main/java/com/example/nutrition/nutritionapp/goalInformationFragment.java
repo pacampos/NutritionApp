@@ -15,6 +15,7 @@ import com.example.nutrition.nutritionapp.R;
 
 public class goalInformationFragment extends Fragment {
 
+
     public goalInformationFragment() {
         // Required empty public constructor
     }

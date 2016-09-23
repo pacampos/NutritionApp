@@ -31,11 +31,12 @@ public class ProfileModel {
     private double waistMeasureCentimeter;
     private double thighMeasureCentimeter;
     private double armMeasureCentimeter;
+    private int activityLevel;
 
     public ProfileModel(String imageName, String name, int age, int heightInchesPart,
                         int heightFeetPart, boolean gender, double currWeightPounds,
                         double goalWeightPounds, Date dateOfBirth, double waistMeasureInches,
-                        double thighMeasureInches, double armMeasureInches, List<CalorieDayModel> days) {
+                        double thighMeasureInches, double armMeasureInches, List<CalorieDayModel> days, int activityLevel) {
         this.imageName = imageName;
         this.name = name;
         this.age = age;
@@ -49,13 +50,14 @@ public class ProfileModel {
         this.thighMeasureInches = thighMeasureInches;
         this.armMeasureInches = armMeasureInches;
         this.days = days;
+        this.activityLevel = activityLevel;
     }
 
     public ProfileModel(String imageName, String name, int age, double heightCentimeters,
                         boolean gender, double currWeightKilos, double goalWeightKilos,
                         Date dateOfBirth, double waistMeasureCentimeter,
                         double thighMeasureCentimeter, double armMeasureCentimeter,
-                        List<CalorieDayModel> days) {
+                        List<CalorieDayModel> days, int activityLevel) {
         this.imageName = imageName;
         this.name = name;
         this.age = age;
@@ -68,6 +70,7 @@ public class ProfileModel {
         this.thighMeasureCentimeter = thighMeasureCentimeter;
         this.armMeasureCentimeter = armMeasureCentimeter;
         this.days = days;
+        this.activityLevel = activityLevel;
     }
 
     /* this models everyday this specific user inputs info within a day */
@@ -224,5 +227,13 @@ public class ProfileModel {
 
     public void setArmMeasureCentimeter(double armMeasureCentimeter) {
         this.armMeasureCentimeter = armMeasureCentimeter;
+    }
+
+    public int getActivityLevel() {
+        return activityLevel;
+    }
+
+    public void setActivityLevel(int activityLevel) {
+        this.activityLevel = activityLevel;
     }
 }

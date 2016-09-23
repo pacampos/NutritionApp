@@ -23,6 +23,16 @@ import java.util.TimeZone;
 
 
 public class signUpFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
+    public static String EMAIL="com.example.nutritionapp.username";
+    public static String PASSWORD="com.example.nutritionapp.password";
+    public static String NAME = "com.example.nutritionapp.name";
+    public static String GENDER = "com.example.nutritionapp.gender";
+    public static String IMAGE_POS = "com.example.nutritionapp.image_pos";
+    public static String BIRTH_DATE = "com.example.nutritionapp.birth_date";
+    public static String BIRTH_MONTH = "com.example.nutritionapp.birth_month";
+    public static String BIRTH_YEAR = "com.example.nutritionapp.birth_year";
+    public static String AGE = "com.example.nutritionapp.age";
+
     private CheckableImageView clickedImage;
     private int clickedImagePosition = -1;
     private int _day;
@@ -32,7 +42,7 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
 
     private String date;
     private int age = 0;
-    private String username;
+    private String email;
     private String password;
     private String name;
     private boolean gender = true;
@@ -101,10 +111,10 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
 
         // Username
         EditText usernameInput = (EditText) v.findViewById(R.id.usernameInput);
-        username = usernameInput.getText().toString();
+        email = usernameInput.getText().toString();
 
         // Password
-        EditText passInput = (EditText) v.findViewById(R.id.passwordInput);
+        final EditText passInput = (EditText) v.findViewById(R.id.passwordInput);
         password = passInput.getText().toString();
 
 
@@ -123,6 +133,17 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
             @Override
             public void onClick(View v) {
                 Fragment fragment = new goalInformationFragment();
+                Bundle data= new Bundle();
+                data.putString(EMAIL,email);
+                data.putString(PASSWORD, password);
+                data.putString(NAME, name);
+                data.putBoolean(GENDER,gender);
+                data.putInt(IMAGE_POS, clickedImagePosition);
+                data.putInt(BIRTH_DATE,_day);
+                data.putInt(BIRTH_MONTH, _month);
+                data.putInt(BIRTH_YEAR, _birthYear);
+                data.putInt(AGE, age);
+                fragment.setArguments(data);
                 replaceFragment(fragment);
             }
         });

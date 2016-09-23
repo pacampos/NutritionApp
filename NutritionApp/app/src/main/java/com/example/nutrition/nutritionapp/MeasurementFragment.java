@@ -41,6 +41,8 @@ public class MeasurementFragment extends Fragment {
         EditText thighInput = (EditText) v.findViewById(R.id.thighInput);
         thigh = thighInput.getText().toString();
 
+
+
         goToButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

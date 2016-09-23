@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -127,6 +128,9 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
             gender = false;
         }
 
+        // Age from DOB
+
+       age = getAge(_birthYear, _month, _day);
 
         // Next button
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -158,6 +162,22 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
 
         dobInput.setText(date);
 
+    }
+    private int getAge(int year, int month, int day){
+        Calendar dob = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
+
+        dob.set(year, month, day);
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
+            age--;
+        }
+
+        Integer ageInt = new Integer(age);
+
+        return ageInt;
     }
 
     private void replaceFragment(Fragment fragment) {

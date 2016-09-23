@@ -15,7 +15,7 @@ import android.widget.Spinner;
 
 import com.example.nutrition.nutritionapp.R;
 
-
+import java.util.Calendar;
 
 
 public class goalInformationFragment extends Fragment {
@@ -55,6 +55,7 @@ public class goalInformationFragment extends Fragment {
             }
         });
 
+
         Button continueButton = (Button) v.findViewById(R.id.continueButton);
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,5 +72,6 @@ public class goalInformationFragment extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
 
 }

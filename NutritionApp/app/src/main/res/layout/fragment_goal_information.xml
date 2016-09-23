@@ -54,7 +54,7 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText"
+                android:id="@+id/weightInput"
                 android:layout_weight="0.37"
                 android:layout_marginRight="20dp"
                 android:inputType="number" />
@@ -76,7 +76,7 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText2"
+                android:id="@+id/heightInput"
                 android:layout_weight="0.37"
                 android:layout_marginRight="20dp"
                 android:inputType="number" />
@@ -98,7 +98,7 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText3"
+                android:id="@+id/goalWeightInput"
                 android:layout_weight="0.37"
                 android:layout_marginRight="20dp"
                 android:inputType="number" />

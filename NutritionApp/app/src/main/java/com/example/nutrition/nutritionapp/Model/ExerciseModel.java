@@ -9,6 +9,12 @@ public class ExerciseModel {
     private int minutes;
     private String exerciseID;
 
+    public ExerciseModel(int calories, int minutes, String exerciseID) {
+        this.calories = calories;
+        this.minutes = minutes;
+        this.exerciseID = exerciseID;
+    }
+
     public int getCalories() {
         return calories;
     }

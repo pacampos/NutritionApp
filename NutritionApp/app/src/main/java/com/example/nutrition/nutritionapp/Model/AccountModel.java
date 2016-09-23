@@ -1,15 +1,22 @@
 package com.example.nutrition.nutritionapp.Model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by phoenixcampos01 on 9/12/16.
  */
 public class AccountModel {
-    private List<ProfileModel> profiles;
+    private HashMap<String,ProfileModel> profiles;
     private String username;
     private String password;
     private String hashedPassword;
+
+    public AccountModel(String username) {
+        this.username = username;
+        profiles = new HashMap<String,ProfileModel>();
+    }
 
     public String getPassword() {
         return password;
@@ -27,11 +34,11 @@ public class AccountModel {
         this.username = username;
     }
 
-    public List<ProfileModel> getProfiles() {
+    public HashMap<String,ProfileModel> getProfiles() {
         return profiles;
     }
 
-    public void setProfiles(List<ProfileModel> profiles) {
+    public void setProfiles(HashMap<String,ProfileModel> profiles) {
         this.profiles = profiles;
     }
 }

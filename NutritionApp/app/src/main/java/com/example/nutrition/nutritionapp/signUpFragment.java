@@ -79,6 +79,7 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
         });
         return v;
     }
+
     // Append the text from the date picker to the editText
     private void updateDisplay() {
         dobInput.setText(new StringBuilder()

@@ -7,6 +7,12 @@ public class WaterModel {
     private int ouncesDrank;
     private String waterID;
 
+
+    public WaterModel(int ouncesDrank, String waterID) {
+        this.ouncesDrank = ouncesDrank;
+        this.waterID = waterID;
+    }
+
     public String getWaterID() {
         return waterID;
     }

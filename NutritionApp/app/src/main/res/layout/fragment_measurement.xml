@@ -6,6 +6,14 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:theme="?attr/actionBarTheme"
+        android:minHeight="?attr/actionBarSize"
+        android:id="@+id/toolbar5" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,7 +29,8 @@
                 android:layout_height="150dp"
                 android:id="@+id/imageView"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/pineapple"/>
+                android:src="@drawable/pineapple"
+                android:layout_marginTop="50dp" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -117,7 +126,7 @@
                 android:id="@+id/goToButton"
                 android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="200dp" />
+                android:layout_marginTop="20dp" />
 
         </LinearLayout>
     </RelativeLayout>

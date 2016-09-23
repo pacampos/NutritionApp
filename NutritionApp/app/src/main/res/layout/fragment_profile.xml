@@ -6,6 +6,14 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:theme="?attr/actionBarTheme"
+        android:minHeight="?attr/actionBarSize"
+        android:id="@+id/toolbar3" />
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -17,137 +25,150 @@
             android:layout_height="150dp"
             android:id="@+id/imageView2"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/pineapple" />
+            android:src="@drawable/pineapple"
+            android:layout_marginTop="50dp" />
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginLeft="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name_text"
+                android:id="@+id/textView12"
+                android:layout_weight="1" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Vishnu Venkateswaran"
                 android:id="@+id/nameProfile"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/name_text"
-                android:id="@+id/textView12" />
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_marginLeft="80dp" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="20dp" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="6&apos;1"
-                android:id="@+id/height"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/height_text"
-                android:id="@+id/textView19" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="20dp" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="170lbs"
-                android:id="@+id/currentWeight"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/weight_text"
-                android:id="@+id/textView18" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="165lbs"
-                android:id="@+id/targetWeight"
-                android:textStyle="bold" />
+                android:text="@string/height_text"
+                android:id="@+id/textView19"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6&apos;1"
+                android:id="@+id/height"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_marginRight="130dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weight_text"
+                android:id="@+id/textView18"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="170lbs"
+                android:id="@+id/currentWeight"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_marginRight="108dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/goalWeight_text"
-                android:id="@+id/textView14" />
+                android:id="@+id/textView14"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="165lbs"
+                android:id="@+id/targetWeight"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_marginRight="90dp" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="20dp" >
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/calories_text"
+                android:id="@+id/textView15"
+                android:layout_weight="1" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2200 kCalories"
                 android:id="@+id/calorieCount"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_marginRight="45dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/calories_text"
-                android:id="@+id/textView15" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="20dp" >
+                android:text="@string/bmi_text"
+                android:id="@+id/textView16"
+                android:layout_weight="1" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="22.4"
                 android:id="@+id/bmi"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/bmi_text"
-                android:id="@+id/textView16" />
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_marginRight="65dp" />
         </LinearLayout>
 
         <Button

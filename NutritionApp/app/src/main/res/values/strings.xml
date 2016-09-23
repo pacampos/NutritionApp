@@ -5,12 +5,12 @@
     <string name="welcome_text">Welcome to your Personal Nutrition Manager!</string>
     <string name="signup_text">Get Started!</string>
     <string name="alternatelogin_text">Or if you already have an account: </string>
-    <string name="login_text">Log In</string>
+
+    <!-- Login Page !-->
+    <string name="welcome_back">Welcome Back!</string>
 
     <!-- Sign up !-->
     <string name="create_text">Create a User!</string>
-    <string name="username_text">Username</string>
-    <string name="password_text">Password</string>
     <string name="age_text">Date of Birth</string>
     <string name="weight_text">Current Weight (lbs)</string>
     <string name="height_text">Current Height (cm)</string>
@@ -47,8 +47,9 @@
     <!-- General Strings !-->
     <string name="nextButtonText">Continue</string>
     <string name="startReachingText">Start reaching your goal!</string>
-
     <string name="name_text">Name</string>
-
     <string name="title_activity_profile">Profile</string>
+    <string name="login_text">Login</string>
+    <string name="username_text">Username</string>
+    <string name="password_text">Password</string>
 </resources>

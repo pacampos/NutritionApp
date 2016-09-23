@@ -12,6 +12,9 @@ import java.util.List;
  */
 public class NutritionSingleton {
     private static NutritionSingleton mInstance = null;
+    private static String USERS_CHILD= "users";
+
+
 
     private ProfileModel currProfile;
 
@@ -31,5 +34,7 @@ public class NutritionSingleton {
         }
         return mInstance;
     }
+
+
 
 }

@@ -15,7 +15,6 @@ public class FoodModel {
     private String name;
     private int calories;
     private int servings;
-
 //    we need to uniquely identify every food item so we can remove it easily
     private String foodID;
     private int foodType;
@@ -23,6 +22,13 @@ public class FoodModel {
 //    private enum FoodType
     /* GRAINS, DAIRY, FRUITS, VEGGIES, MEAT, FATS,OILS,SWEETS */
 
+    public FoodModel(String name, int calories, int servings, String foodID, int foodType) {
+        this.name = name;
+        this.calories = calories;
+        this.servings = servings;
+        this.foodID = foodID;
+        this.foodType = foodType;
+    }
 
     public String getName() {
         return name;

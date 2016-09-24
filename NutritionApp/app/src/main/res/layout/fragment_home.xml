@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app=""
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/exerciseEntryButton">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="544dp"
+        android:layout_gravity="center_horizontal|top"
+        android:weightSum="1">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:theme="?attr/actionBarTheme"
+            android:minHeight="?attr/actionBarSize"
+            android:id="@+id/toolbar8" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="22dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Daily Totals"
+                android:id="@+id/textView8"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/common_google_signin_btn_text_light_focused"
+                android:textSize="22sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+
+            <ImageView
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/pyramid" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="580 calories remaining today!"
+                android:id="@+id/textView8"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingLeft="100dp"
+            android:paddingRight="100dp">
+
+            <Button
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/button4"
+                android:layout_weight="1"
+                android:background="@drawable/cookie"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/button2"
+                android:layout_weight="1"
+                android:background="@drawable/cookie"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/button2"
+                android:layout_weight="1"
+                android:background="@drawable/cookie"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="120dp"
+                android:layout_marginRight="120dp"
+                tools:text="I ate no cookies!"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="10.5sp"
+                android:minHeight="25dp"
+                android:minWidth="0dp"
+                android:fontFamily="sans-serif-medium" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:paddingLeft="70dp"
+            android:paddingRight="70dp"
+            android:layout_marginTop="22dp"
+            android:layout_height="30dp">
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="34dp"
+                android:id="@+id/imageView3"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/foodEntry"
+                android:layout_marginTop="50dp" />
+
+            <Button
+                android:layout_width="180dp"
+                android:text="Food and Drink Entry"
+                android:id="@+id/foodDrinkEntrybutton"
+                android:textColor="@color/white"
+                android:layout_gravity="center_horizontal"
+                android:background="#52b7bd"
+                android:minHeight="25dp"
+                android:minWidth="0dp"
+                android:layout_weight="1"
+                android:layout_height="30dp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:paddingLeft="70dp"
+            android:paddingRight="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="30dp">
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="34dp"
+                android:id="@+id/imageView3"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/waterEntry"
+                android:layout_marginTop="50dp" />
+
+            <Button
+                android:layout_width="180dp"
+                android:text="Water Entry"
+                android:id="@+id/waterEntryButton"
+                android:textColor="@color/white"
+                android:layout_gravity="center_horizontal"
+                android:background="#52b7bd"
+                android:minHeight="25dp"
+                android:minWidth="0dp"
+                android:layout_weight="1"
+                android:layout_height="30dp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:paddingLeft="70dp"
+            android:paddingRight="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="30dp">
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="34dp"
+                android:id="@+id/imageView3"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/exerciseEntry"
+                android:layout_marginTop="50dp" />
+
+            <Button
+                android:layout_width="180dp"
+                android:text="Exercise"
+                android:id="@+id/button3"
+                android:textColor="@color/white"
+                android:layout_gravity="center_horizontal"
+                android:background="#52b7bd"
+                android:minHeight="25dp"
+                android:minWidth="0dp"
+                android:layout_weight="1"
+                android:layout_height="30dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:background="?attr/colorPrimary"
+        android:theme="?attr/actionBarTheme"
+        android:minHeight="?attr/actionBarSize"
+        android:id="@+id/toolbar9" />
+
+</LinearLayout>

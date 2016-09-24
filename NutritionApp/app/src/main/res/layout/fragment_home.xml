@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app=""
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -32,7 +31,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Current Daily Totals"
-                android:id="@+id/textView8"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/common_google_signin_btn_text_light_focused"
                 android:textSize="22sp" />
@@ -84,7 +82,6 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/button2"
                 android:layout_weight="1"
                 android:background="@drawable/cookie"
                 android:layout_marginLeft="4dp"
@@ -93,7 +90,6 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/button2"
                 android:layout_weight="1"
                 android:background="@drawable/cookie"
                 android:layout_marginLeft="4dp"
@@ -128,9 +124,8 @@
             <ImageView
                 android:layout_width="42dp"
                 android:layout_height="34dp"
-                android:id="@+id/imageView3"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/foodEntry"
+                android:src="@drawable/food_entry"
                 android:layout_marginTop="50dp" />
 
             <Button
@@ -158,9 +153,8 @@
             <ImageView
                 android:layout_width="42dp"
                 android:layout_height="34dp"
-                android:id="@+id/imageView3"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/waterEntry"
+                android:src="@drawable/water_entry"
                 android:layout_marginTop="50dp" />
 
             <Button
@@ -190,7 +184,7 @@
                 android:layout_height="34dp"
                 android:id="@+id/imageView3"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/exerciseEntry"
+                android:src="@drawable/exercise_entry"
                 android:layout_marginTop="50dp" />
 
             <Button

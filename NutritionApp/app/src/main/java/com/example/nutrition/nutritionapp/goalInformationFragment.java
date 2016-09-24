@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +13,24 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.nutrition.nutritionapp.R;
 import java.util.Calendar;
+
+import static android.R.attr.defaultValue;
 
 public class goalInformationFragment extends Fragment {
     private String weight;
     private String height;
     private String goalWeight;
     private int activityLevelFactor;
+
+    private Bundle bundle;
+    public static String WEIGHT ="com.example.nutritionapp.weight";
+    public static String HEIGHT ="com.example.nutritionapp.height";
+    public static String GOAL ="com.example.nutritionapp.goal";
+    public static String ACTIVITY ="com.example.nutritionapp.activity";
 
     public goalInformationFragment() {
         // Required empty public constructor
@@ -29,21 +39,24 @@ public class goalInformationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        
+
+
+        bundle = this.getArguments();
+
+      //  Toast.makeText(getActivity(), String.valueOf(), Toast.LENGTH_SHORT).show();
+
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_goal_information, container, false);
 
         // get references
-        EditText weightInput = (EditText) v.findViewById(R.id.weightInput);
-        weight = weightInput.getText().toString();
+        final EditText weightInput = (EditText) v.findViewById(R.id.weightInput);
 
-        EditText heightInput = (EditText) v.findViewById(R.id.heightInput);
-        height = heightInput.getText().toString();
+        final EditText heightInput = (EditText) v.findViewById(R.id.heightInput);
 
-        EditText goalWeightInput = (EditText) v.findViewById(R.id.goalWeightInput);
-        goalWeight = goalWeightInput.getText().toString();
+        final EditText goalWeightInput = (EditText) v.findViewById(R.id.goalWeightInput);
 
-        final Spinner activityLevelSpinner = (Spinner) v.findViewById(R.id.spinner);
+
+        Spinner activityLevelSpinner = (Spinner) v.findViewById(R.id.spinner);
         activityLevelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -61,7 +74,15 @@ public class goalInformationFragment extends Fragment {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                weight = weightInput.getText().toString();
+                height = heightInput.getText().toString();
+                goalWeight = goalWeightInput.getText().toString();
                 Fragment fragment = new MeasurementFragment();
+                bundle.putInt(WEIGHT,Integer.parseInt(weight));
+                bundle.putInt(HEIGHT,Integer.parseInt(height));
+                bundle.putInt(GOAL, Integer.parseInt(goalWeight));
+                bundle.putInt(ACTIVITY, activityLevelFactor);
+                fragment.setArguments(bundle);
                 replaceFragment(fragment);
             }
         });

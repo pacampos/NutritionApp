@@ -29,7 +29,7 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
     public static String NAME = "com.example.nutritionapp.name";
     public static String GENDER = "com.example.nutritionapp.gender";
     public static String IMAGE_POS = "com.example.nutritionapp.image_pos";
-    public static String BIRTH_DATE = "com.example.nutritionapp.birth_date";
+    public static String BIRTH_DATE = "com.exam`ple.nutritionapp.birth_date";
     public static String BIRTH_MONTH = "com.example.nutritionapp.birth_month";
     public static String BIRTH_YEAR = "com.example.nutritionapp.birth_year";
     public static String AGE = "com.example.nutritionapp.age";
@@ -107,35 +107,34 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
         // User information
 
         // Name
-        EditText nameInput = (EditText) v.findViewById(R.id.nameInput);
-        name = nameInput.getText().toString();
+        final EditText nameInput = (EditText) v.findViewById(R.id.nameInput);
 
         // Username
-        EditText usernameInput = (EditText) v.findViewById(R.id.usernameInput);
-        email = usernameInput.getText().toString();
+        final EditText usernameInput = (EditText) v.findViewById(R.id.usernameInput);
 
         // Password
         final EditText passInput = (EditText) v.findViewById(R.id.passwordInput);
-        password = passInput.getText().toString();
 
 
         // Gender
-        RadioButton maleButton = (RadioButton) v.findViewById(R.id.maleButton);
+        final RadioButton maleButton = (RadioButton) v.findViewById(R.id.maleButton);
 
-        if (maleButton.isChecked()) {
-            gender = true;
-        } else {
-            gender = false;
-        }
-
-        // Age from DOB
-
-       age = getAge(_birthYear, _month, _day);
 
         // Next button
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                name = nameInput.getText().toString();
+                email = usernameInput.getText().toString();
+                password = passInput.getText().toString();
+                if (maleButton.isChecked()) {
+                    gender = true;
+                } else {
+                    gender = false;
+                }
+
+                age = getAge(_birthYear, _month, _day);
+
                 Fragment fragment = new goalInformationFragment();
                 Bundle data= new Bundle();
                 data.putString(EMAIL,email);

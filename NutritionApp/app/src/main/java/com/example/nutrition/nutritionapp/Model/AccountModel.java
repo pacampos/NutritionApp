@@ -11,7 +11,9 @@ public class AccountModel {
     private HashMap<String,ProfileModel> profiles;
     private String username;
     private String password;
-    private String hashedPassword;
+
+    public AccountModel() {
+    }
 
     public AccountModel(String username) {
         this.username = username;
@@ -32,6 +34,10 @@ public class AccountModel {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public void addUserProfile(ProfileModel model){
+        profiles.put(model.getName(), model);
     }
 
     public HashMap<String,ProfileModel> getProfiles() {

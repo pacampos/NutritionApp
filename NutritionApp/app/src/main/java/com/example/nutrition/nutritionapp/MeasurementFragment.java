@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.Date;
+
 
 public class MeasurementFragment extends Fragment {
     private String arm;
@@ -23,6 +25,8 @@ public class MeasurementFragment extends Fragment {
     public static String ARM ="com.example.nutritionapp.arm";
     public static String WAIST ="com.example.nutritionapp.waist";
     public static String THIGH ="com.example.nutritionapp.thigh";
+
+    NutritionSingleton singleton;
 
     public MeasurementFragment() {
         // Required empty public constructor
@@ -47,7 +51,7 @@ public class MeasurementFragment extends Fragment {
 
         final EditText thighInput = (EditText) v.findViewById(R.id.thighInput);
 
-
+        singleton=NutritionSingleton.getInstance();
 
 
         goToButton.setOnClickListener(new View.OnClickListener() {
@@ -57,9 +61,31 @@ public class MeasurementFragment extends Fragment {
                 waist = waistInput.getText().toString();
                 thigh = thighInput.getText().toString();
 
-                bundle.putInt(ARM, Integer.parseInt(arm));
-                bundle.putInt(WAIST, Integer.parseInt(waist));
-                bundle.putInt(THIGH, Integer.parseInt(thigh));
+                double armMeasure=Double.parseDouble(arm);
+                double waistMeasure=Double.parseDouble(waist);
+                double thighMeasure=Double.parseDouble(thigh);
+
+                String email= bundle.getString(signUpFragment.EMAIL);
+                String password=bundle.getString(signUpFragment.PASSWORD);
+
+                singleton.CreateNewAccount("fakey2");
+
+                singleton.CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),
+                        bundle.getString(signUpFragment.NAME),
+                        bundle.getDouble(signUpFragment.AGE),
+                        bundle.getDouble(goalInformationFragment.HEIGHT),
+                        bundle.getBoolean(signUpFragment.GENDER),
+                        bundle.getDouble(goalInformationFragment.WEIGHT),
+                        bundle.getDouble(goalInformationFragment.GOAL),
+                        bundle.getDouble(signUpFragment.BIRTH_DATE),
+                        bundle.getDouble(signUpFragment.BIRTH_MONTH),
+                        bundle.getDouble(signUpFragment.BIRTH_YEAR),
+                        waistMeasure,
+                        thighMeasure,
+                        armMeasure,
+                        bundle.getDouble(goalInformationFragment.ACTIVITY));
+
+                ((SignUpActivity)getActivity()).finishSignup(email,password);
 
                 Intent i = new Intent(getActivity(), ProfileActivity.class);
                 startActivity(i);
@@ -67,4 +93,6 @@ public class MeasurementFragment extends Fragment {
         });
         return v;
     }
+
+
 }

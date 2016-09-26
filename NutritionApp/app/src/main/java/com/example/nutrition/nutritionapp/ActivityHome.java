@@ -1,14 +1,10 @@
 package com.example.nutrition.nutritionapp;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 public class ActivityHome extends AppCompatActivity {
 
@@ -24,7 +20,7 @@ public class ActivityHome extends AppCompatActivity {
         Fragment f=fm.findFragmentById(R.id.home_fragment_container);
 
         if(f==null){ // activity and fragment are created for the first time
-            f = new HomeFragment2(); // instantiate Profile Fragment
+            f = new HomeFragment(); // instantiate Profile Fragment
             // create transaction
             FragmentTransaction ft= fm.beginTransaction();
             ft.add(R.id.home_fragment_container,f);

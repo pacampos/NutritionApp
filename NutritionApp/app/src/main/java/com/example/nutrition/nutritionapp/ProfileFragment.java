@@ -1,7 +1,6 @@
 package com.example.nutrition.nutritionapp;
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ public class ProfileFragment extends Fragment {
     public ProfileFragment() {
         // Required empty public constructor
     }
+    
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,6 +25,13 @@ public class ProfileFragment extends Fragment {
         // get references
         Button progressButton = (Button) v.findViewById(R.id.progressButton);
         progressButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+        progressButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent i = new Intent(getActivity(), ActivityHome.class);
+                    startActivity(i);
+                }
+        });
 
         return v;
     }

@@ -12,9 +12,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.nutrition.nutritionapp.Model.ProfileModel;
 import com.example.nutrition.nutritionapp.R;
 import java.util.Calendar;
 
@@ -31,6 +33,7 @@ public class goalInformationFragment extends Fragment {
     public static String HEIGHT ="com.example.nutritionapp.height";
     public static String GOAL ="com.example.nutritionapp.goal";
     public static String ACTIVITY ="com.example.nutritionapp.activity";
+    public static String IMAGE_POS = "com.example.nutritionapp.image_pos";
 
     public goalInformationFragment() {
         // Required empty public constructor
@@ -55,6 +58,18 @@ public class goalInformationFragment extends Fragment {
 
         final EditText goalWeightInput = (EditText) v.findViewById(R.id.goalWeightInput);
 
+        ImageView icon = (ImageView) v.findViewById(R.id.iconImage);
+
+//        NutritionSingleton singleton=NutritionSingleton.getInstance();
+//        ProfileModel model=singleton.getCurrProfile();
+//        double imagePos = model.getImagePos();
+
+        double imagePos = bundle.getDouble(IMAGE_POS, defaultValue);
+
+        // get image from array
+        icon.setImageResource(CheckableImageView.mOriginalIds[(int) imagePos]);
+
+
 
         Spinner activityLevelSpinner = (Spinner) v.findViewById(R.id.spinner);
         activityLevelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -77,13 +92,20 @@ public class goalInformationFragment extends Fragment {
                 weight = weightInput.getText().toString();
                 height = heightInput.getText().toString();
                 goalWeight = goalWeightInput.getText().toString();
-                Fragment fragment = new MeasurementFragment();
-                bundle.putInt(WEIGHT,Integer.parseInt(weight));
-                bundle.putInt(HEIGHT,Integer.parseInt(height));
-                bundle.putInt(GOAL, Integer.parseInt(goalWeight));
-                bundle.putInt(ACTIVITY, activityLevelFactor);
-                fragment.setArguments(bundle);
-                replaceFragment(fragment);
+
+                if (weight.length() == 0 || height.length() == 0 || goalWeight.length() == 0) {
+                    Toast.makeText(getActivity(),"Please fill in all fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    Fragment fragment = new MeasurementFragment();
+                    bundle.putDouble(WEIGHT,Double.parseDouble(weight));
+                    bundle.putDouble(HEIGHT,Double.parseDouble(height));
+                    bundle.putDouble(GOAL, Double.parseDouble(goalWeight));
+                    bundle.putDouble(ACTIVITY, activityLevelFactor);
+                    fragment.setArguments(bundle);
+                    replaceFragment(fragment);
+                }
+
+
             }
         });
         return v;

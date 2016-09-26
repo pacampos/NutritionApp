@@ -23,7 +23,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="150dp"
-            android:id="@+id/imageView2"
+            android:id="@+id/profileImage"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/pineapple"
             android:layout_marginTop="50dp" />
@@ -68,11 +68,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="6&apos;1"
                 android:id="@+id/height"
                 android:textStyle="bold"
-                android:layout_weight="1"
-                android:layout_marginRight="130dp" />
+                android:layout_weight="0.31"
+                android:layout_marginRight="138dp"
+                android:text="123" />
         </LinearLayout>
 
         <LinearLayout

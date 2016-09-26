@@ -16,6 +16,8 @@ public class CalorieDayModel {
     private int exerciseCalorieGoal;
     private int foodCalorieGoal;
 
+    public CalorieDayModel() {
+    }
 
     public void addFood(FoodModel food){
         foods.add(food);

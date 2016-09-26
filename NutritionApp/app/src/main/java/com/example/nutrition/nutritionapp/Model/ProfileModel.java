@@ -9,35 +9,40 @@ import java.util.List;
  * Created by phoenixcampos01 on 9/8/16.
  */
 public class ProfileModel {
-    private String imageName;
+    private double imagePos;
     public static final double FEET_TO_METERS=30.48;
     public static final double INCHES_TO_CENTIMETERS=2.54;
     public static final double CENTIMETERS_TO_INCHES=0.393701;
     public static final double POUNDS_TO_KILOS=0.453592;
     private String name;
-    private int age;
+    private double age;
     private double heightCentimeters;
-    private int heightInchesPart;
-    private int heightFeetPart;
+    private double heightInchesPart;
+    private double heightFeetPart;
     private boolean gender;
     private double currWeightPounds;
     private double currWeightKilos;
     private double goalWeightPounds;
     private double goalWeightKilos;
-    private Date dateOfBirth;
+    private double dayBirth;
+    private double monthBirth;
+    private double yearBirth;
     private double waistMeasureInches;
     private double thighMeasureInches;
     private double armMeasureInches;
     private double waistMeasureCentimeter;
     private double thighMeasureCentimeter;
     private double armMeasureCentimeter;
-    private int activityLevel;
+    private double activityLevel;
 
-    public ProfileModel(String imageName, String name, int age, int heightInchesPart,
-                        int heightFeetPart, boolean gender, double currWeightPounds,
-                        double goalWeightPounds, Date dateOfBirth, double waistMeasureInches,
-                        double thighMeasureInches, double armMeasureInches, List<CalorieDayModel> days, int activityLevel) {
-        this.imageName = imageName;
+    public ProfileModel() {
+    }
+
+    public ProfileModel(double imagePos, String name, double age, double heightInchesPart,
+                        double heightFeetPart, boolean gender, double currWeightPounds,
+                        double goalWeightPounds, double dayBirth, double monthBirth, double yearBirth, double waistMeasureInches,
+                        double thighMeasureInches, double armMeasureInches, double activityLevel) {
+        this.imagePos = imagePos;
         this.name = name;
         this.age = age;
         this.heightInchesPart = heightInchesPart;
@@ -45,36 +50,37 @@ public class ProfileModel {
         this.gender = gender;
         this.currWeightPounds = currWeightPounds;
         this.goalWeightPounds = goalWeightPounds;
-        this.dateOfBirth = dateOfBirth;
+        this.dayBirth = dayBirth;
+        this.monthBirth = monthBirth;
+        this.yearBirth = yearBirth;
         this.waistMeasureInches = waistMeasureInches;
         this.thighMeasureInches = thighMeasureInches;
         this.armMeasureInches = armMeasureInches;
-        this.days = days;
         this.activityLevel = activityLevel;
     }
 
-    public ProfileModel(String imageName, String name, int age, double heightCentimeters,
+    public ProfileModel(double imagePos, String name, double age, double heightCentimeters,
                         boolean gender, double currWeightKilos, double goalWeightKilos,
-                        Date dateOfBirth, double waistMeasureCentimeter,
-                        double thighMeasureCentimeter, double armMeasureCentimeter,
-                        List<CalorieDayModel> days, int activityLevel) {
-        this.imageName = imageName;
+                        double dayBirth, double monthBirth, double yearBirth, double waistMeasureCentimeter,
+                        double thighMeasureCentimeter, double armMeasureCentimeter, double activityLevel) {
+        this.imagePos = imagePos;
         this.name = name;
         this.age = age;
         this.heightCentimeters = heightCentimeters;
         this.gender = gender;
         this.currWeightKilos = currWeightKilos;
         this.goalWeightKilos = goalWeightKilos;
-        this.dateOfBirth = dateOfBirth;
+        this.dayBirth = dayBirth;
+        this.monthBirth = monthBirth;
+        this.yearBirth = yearBirth;
         this.waistMeasureCentimeter = waistMeasureCentimeter;
         this.thighMeasureCentimeter = thighMeasureCentimeter;
         this.armMeasureCentimeter = armMeasureCentimeter;
-        this.days = days;
         this.activityLevel = activityLevel;
     }
 
-    /* this models everyday this specific user inputs info within a day */
-    private List<CalorieDayModel> days;
+//    /* this models everyday this specific user inputs info within a day */
+//    private List<CalorieDayModel> days;
 
     public String getName() {
         return name;
@@ -84,11 +90,11 @@ public class ProfileModel {
         this.name = name;
     }
 
-    public int getAge() {
+    public double getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(double age) {
         this.age = age;
     }
 
@@ -100,11 +106,11 @@ public class ProfileModel {
         return heightInchesPart;
     }
 
-    private void setHeightInchesPart(int heightInchesPart) {
+    private void setHeightInchesPart(double heightInchesPart) {
         this.heightInchesPart = heightInchesPart;
     }
 
-    private void setHeightFeetPart(int heightFeetPart) {
+    private void setHeightFeetPart(double heightFeetPart) {
         this.heightFeetPart = heightFeetPart;
     }
 
@@ -117,12 +123,12 @@ public class ProfileModel {
     public void setHeightCentimeters(double centimeters){
         heightCentimeters=centimeters;
 
-        int feet=(int)(heightCentimeters*CENTIMETERS_TO_INCHES)/12;
-        int inches=(int)(heightCentimeters*CENTIMETERS_TO_INCHES)%12;
+        double feet=(heightCentimeters*CENTIMETERS_TO_INCHES)/12;
+        double inches=(heightCentimeters*CENTIMETERS_TO_INCHES)%12;
         setHeightWithFeetAndInches(feet,inches);
     }
 
-    public void setHeightWithFeetAndInches(int feet, int inches){
+    public void setHeightWithFeetAndInches(double feet, double inches){
         setHeightFeetPart(feet);
         setHeightInchesPart(inches);
         setHeightCentimeters((feet*FEET_TO_METERS)+(inches*INCHES_TO_CENTIMETERS));
@@ -165,29 +171,44 @@ public class ProfileModel {
         setCurrWeightPounds(kilosToPounds(getCurrWeightKilos()));
     }
 
-    public List<CalorieDayModel> getDays() { return days; }
+//    public List<CalorieDayModel> getDays() { return days; }
+//
+//    public void setDays(List<CalorieDayModel> days) { this.days = days; }
+//
+//    public void addDay(CalorieDayModel day){
+//        days.add(day);
+//    }
 
-    public void setDays(List<CalorieDayModel> days) { this.days = days; }
+//    public double getUserBMI(){ return currWeightKilos/(heightCentimeters*heightCentimeters); }
+//
+//    /* update to create acceptable ranges for the BMI */
+//    public int getBMIHealth(){
+//        return -1;
+//    }
 
-    public void addDay(CalorieDayModel day){
-        days.add(day);
+    public double getDayBirth() {
+        return dayBirth;
     }
 
-    public double getUserBMI(){ return currWeightKilos/(heightCentimeters*heightCentimeters); }
-
-    /* update to create acceptable ranges for the BMI */
-    public int getBMIHealth(){
-        return -1;
+    public void setDayBirth(int dayBirth) {
+        this.dayBirth = dayBirth;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public double getMonthBirth() {
+        return monthBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setMonthBirth(int monthBirth) {
+        this.monthBirth = monthBirth;
     }
 
+    public double getYearBirth() {
+        return yearBirth;
+    }
+
+    public void setYearBirth(int yearBirth) {
+        this.yearBirth = yearBirth;
+    }
 
     private double poundsToKilos(double pounds){
         return pounds*POUNDS_TO_KILOS;
@@ -197,12 +218,12 @@ public class ProfileModel {
         return kilos/POUNDS_TO_KILOS;
     }
 
-    public String getImageName() {
-        return imageName;
+    public double getImagePos() {
+        return imagePos;
     }
 
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
+    public void setImagePos(int imagePos) {
+        this.imagePos = imagePos;
     }
 
     public double getWaistMeasureCentimeter() {
@@ -229,11 +250,35 @@ public class ProfileModel {
         this.armMeasureCentimeter = armMeasureCentimeter;
     }
 
-    public int getActivityLevel() {
+    public double getWaistMeasureInches() {
+        return waistMeasureInches;
+    }
+
+    public void setWaistMeasureInches(double waistMeasureInches) {
+        this.waistMeasureInches = waistMeasureInches;
+    }
+
+    public double getThighMeasureInches() {
+        return thighMeasureInches;
+    }
+
+    public void setThighMeasureInches(double thighMeasureInches) {
+        this.thighMeasureInches = thighMeasureInches;
+    }
+
+    public double getArmMeasureInches() {
+        return armMeasureInches;
+    }
+
+    public void setArmMeasureInches(double armMeasureInches) {
+        this.armMeasureInches = armMeasureInches;
+    }
+
+    public double getActivityLevel() {
         return activityLevel;
     }
 
-    public void setActivityLevel(int activityLevel) {
+    public void setActivityLevel(double activityLevel) {
         this.activityLevel = activityLevel;
     }
 }

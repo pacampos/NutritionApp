@@ -23,9 +23,16 @@ public class LoginFragment extends Fragment {
         Button loginButton = (Button) v.findViewById(R.id.loginButton1);
         loginButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
-        EditText usernameInput = (EditText) v.findViewById(R.id.usernameInput1);
-        EditText passwordInput = (EditText) v.findViewById(R.id.passwordInput1);
+        final EditText usernameInput = (EditText) v.findViewById(R.id.usernameInput1);
+        final EditText passwordInput = (EditText) v.findViewById(R.id.passwordInput1);
 
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)getActivity()).signIn(usernameInput.getText().toString(),passwordInput.getText().toString());
+            }
+        });
 
         return v;
     }

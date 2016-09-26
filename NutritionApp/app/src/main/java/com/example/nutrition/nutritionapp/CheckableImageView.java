@@ -83,7 +83,7 @@ public class CheckableImageView extends ImageView implements Checkable {
 
     };
     // references to our images
-    private Integer[] mOriginalIds = {
+    public static final Integer[] mOriginalIds = {
             R.drawable.apple, R.drawable.pineapple,
             R.drawable.orange, R.drawable.broccoli,
             R.drawable.carrot, R.drawable.cherries,

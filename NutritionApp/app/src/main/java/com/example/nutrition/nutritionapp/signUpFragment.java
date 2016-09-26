@@ -15,6 +15,8 @@ import android.widget.GridView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -47,6 +49,9 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
     private String password;
     private String name;
     private boolean gender = true;
+
+
+
 
     public signUpFragment() {
         // Required empty public constructor
@@ -141,11 +146,11 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
                 data.putString(PASSWORD, password);
                 data.putString(NAME, name);
                 data.putBoolean(GENDER,gender);
-                data.putInt(IMAGE_POS, clickedImagePosition);
-                data.putInt(BIRTH_DATE,_day);
-                data.putInt(BIRTH_MONTH, _month);
-                data.putInt(BIRTH_YEAR, _birthYear);
-                data.putInt(AGE, age);
+                data.putDouble(IMAGE_POS, clickedImagePosition);
+                data.putDouble(BIRTH_DATE,_day);
+                data.putDouble(BIRTH_MONTH, _month);
+                data.putDouble(BIRTH_YEAR, _birthYear);
+                data.putDouble(AGE, age);
                 fragment.setArguments(data);
                 replaceFragment(fragment);
             }

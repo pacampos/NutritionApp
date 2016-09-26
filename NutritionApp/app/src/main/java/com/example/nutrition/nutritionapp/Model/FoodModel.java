@@ -13,16 +13,19 @@ public class FoodModel {
 
 
     private String name;
-    private int calories;
-    private int servings;
+    private double calories;
+    private double servings;
 //    we need to uniquely identify every food item so we can remove it easily
     private String foodID;
-    private int foodType;
+    private double foodType;
 //    Must decide how to split food into the food pyramid
 //    private enum FoodType
     /* GRAINS, DAIRY, FRUITS, VEGGIES, MEAT, FATS,OILS,SWEETS */
 
-    public FoodModel(String name, int calories, int servings, String foodID, int foodType) {
+    public FoodModel() {
+    }
+
+    public FoodModel(String name, double calories, double servings, String foodID, double foodType) {
         this.name = name;
         this.calories = calories;
         this.servings = servings;
@@ -38,7 +41,7 @@ public class FoodModel {
         this.name = name;
     }
 
-    public int getCalories() {
+    public double getCalories() {
         return calories;
     }
 
@@ -46,7 +49,7 @@ public class FoodModel {
         this.calories = calories;
     }
 
-    public int getServings() {
+    public double getServings() {
         return servings;
     }
 
@@ -62,7 +65,7 @@ public class FoodModel {
         this.foodID = foodID;
     }
 
-    public int getFoodType() {
+    public double getFoodType() {
         return foodType;
     }
 

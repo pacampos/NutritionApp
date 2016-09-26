@@ -5,17 +5,20 @@ package com.example.nutrition.nutritionapp.Model;
  * amount of calories you would burn for a specific amount of time.
  */
 public class ExerciseModel {
-    private int calories;
-    private int minutes;
+    private double calories;
+    private double minutes;
     private String exerciseID;
 
-    public ExerciseModel(int calories, int minutes, String exerciseID) {
+    public ExerciseModel() {
+    }
+
+    public ExerciseModel(double calories, double minutes, String exerciseID) {
         this.calories = calories;
         this.minutes = minutes;
         this.exerciseID = exerciseID;
     }
 
-    public int getCalories() {
+    public double getCalories() {
         return calories;
     }
 
@@ -23,7 +26,7 @@ public class ExerciseModel {
         this.calories = calories;
     }
 
-    public int getMinutes() {
+    public double getMinutes() {
         return minutes;
     }
 

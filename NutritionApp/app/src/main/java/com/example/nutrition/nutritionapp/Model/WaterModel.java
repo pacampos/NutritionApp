@@ -4,9 +4,11 @@ package com.example.nutrition.nutritionapp.Model;
  * Created by phoenixcampos01 on 9/12/16.
  */
 public class WaterModel {
-    private int ouncesDrank;
+    private double ouncesDrank;
     private String waterID;
 
+    public WaterModel() {
+    }
 
     public WaterModel(int ouncesDrank, String waterID) {
         this.ouncesDrank = ouncesDrank;
@@ -21,7 +23,7 @@ public class WaterModel {
         this.waterID = waterID;
     }
 
-    public int getOuncesDrank() {
+    public double getOuncesDrank() {
         return ouncesDrank;
     }
 

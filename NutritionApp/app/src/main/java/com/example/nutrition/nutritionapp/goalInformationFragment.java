@@ -78,10 +78,10 @@ public class goalInformationFragment extends Fragment {
                 height = heightInput.getText().toString();
                 goalWeight = goalWeightInput.getText().toString();
                 Fragment fragment = new MeasurementFragment();
-                bundle.putInt(WEIGHT,Integer.parseInt(weight));
-                bundle.putInt(HEIGHT,Integer.parseInt(height));
-                bundle.putInt(GOAL, Integer.parseInt(goalWeight));
-                bundle.putInt(ACTIVITY, activityLevelFactor);
+                bundle.putDouble(WEIGHT,Double.parseDouble(weight));
+                bundle.putDouble(HEIGHT,Double.parseDouble(height));
+                bundle.putDouble(GOAL, Double.parseDouble(goalWeight));
+                bundle.putDouble(ACTIVITY, activityLevelFactor);
                 fragment.setArguments(bundle);
                 replaceFragment(fragment);
             }

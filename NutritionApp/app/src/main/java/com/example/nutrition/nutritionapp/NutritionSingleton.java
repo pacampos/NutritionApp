@@ -83,5 +83,19 @@ public class NutritionSingleton {
         }
     }
 
+    public AccountModel getCurrAccount() {
+        return currAccount;
+    }
 
+    public void setCurrAccount(AccountModel currAccount) {
+        this.currAccount = currAccount;
+    }
+
+    public ProfileModel getCurrProfile() {
+        return currProfile;
+    }
+
+    public void setCurrProfile(ProfileModel currProfile) {
+        this.currProfile = currProfile;
+    }
 }

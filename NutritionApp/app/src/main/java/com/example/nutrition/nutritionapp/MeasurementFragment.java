@@ -68,6 +68,8 @@ public class MeasurementFragment extends Fragment {
                 String email= bundle.getString(signUpFragment.EMAIL);
                 String password=bundle.getString(signUpFragment.PASSWORD);
 
+                ((SignUpActivity)getActivity()).finishSignup(email,password);
+
                 singleton.CreateNewAccount("fakey2");
 
                 singleton.CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),
@@ -85,7 +87,7 @@ public class MeasurementFragment extends Fragment {
                         armMeasure,
                         bundle.getDouble(goalInformationFragment.ACTIVITY));
 
-                ((SignUpActivity)getActivity()).finishSignup(email,password);
+
 
                 Intent i = new Intent(getActivity(), ProfileActivity.class);
                 startActivity(i);

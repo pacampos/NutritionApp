@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -117,12 +118,14 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
         // Username
         final EditText usernameInput = (EditText) v.findViewById(R.id.usernameInput);
 
+
         // Password
         final EditText passInput = (EditText) v.findViewById(R.id.passwordInput);
 
 
         // Gender
         final RadioButton maleButton = (RadioButton) v.findViewById(R.id.maleButton);
+        maleButton.setChecked(true);
 
 
         // Next button
@@ -137,22 +140,24 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
                 } else {
                     gender = false;
                 }
-
                 age = getAge(_birthYear, _month, _day);
-
-                Fragment fragment = new goalInformationFragment();
-                Bundle data= new Bundle();
-                data.putString(EMAIL,email);
-                data.putString(PASSWORD, password);
-                data.putString(NAME, name);
-                data.putBoolean(GENDER,gender);
-                data.putDouble(IMAGE_POS, clickedImagePosition);
-                data.putDouble(BIRTH_DATE,_day);
-                data.putDouble(BIRTH_MONTH, _month);
-                data.putDouble(BIRTH_YEAR, _birthYear);
-                data.putDouble(AGE, age);
-                fragment.setArguments(data);
-                replaceFragment(fragment);
+                if(name.length() == 0 || email.length() == 0 || password.length() == 0 || dobInput.length() == 0 || clickedImagePosition == -1) {
+                    Toast.makeText(getActivity(),"Please fill in all fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    Fragment fragment = new goalInformationFragment();
+                    Bundle data= new Bundle();
+                    data.putString(EMAIL,email);
+                    data.putString(PASSWORD, password);
+                    data.putString(NAME, name);
+                    data.putBoolean(GENDER,gender);
+                    data.putDouble(IMAGE_POS, clickedImagePosition);
+                    data.putDouble(BIRTH_DATE,_day);
+                    data.putDouble(BIRTH_MONTH, _month);
+                    data.putDouble(BIRTH_YEAR, _birthYear);
+                    data.putDouble(AGE, age);
+                    fragment.setArguments(data);
+                    replaceFragment(fragment);
+                }
             }
         });
 

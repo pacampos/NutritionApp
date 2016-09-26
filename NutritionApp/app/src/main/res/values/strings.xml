@@ -44,6 +44,28 @@
     <string name="calories_text">Daily Calorie Count</string>
     <string name="progressPage">See Progress</string>
 
+    <!-- Exercise Page !-->
+    <string name="exercise_title">Exercise Tracker</string>
+    <string name="type_text">Type of Exercise</string>
+    <string name="duration_text">Duration</string>
+    <string name="record_text">Record my Exercise</string>
+    <string name="exercise_journal">View my Exercise Journal </string>
+
+    <string-array name="exerciseType_array">
+        <item>Walking</item>
+        <item>Running</item>
+        <item>Yoga</item>
+        <item>Biking</item>
+        <item>Swimming</item>
+    </string-array>
+    <string-array name="duration_array">
+        <item>10 minutes</item>
+        <item>20 minutes</item>
+        <item>30 minutes</item>
+        <item>40 minutes</item>
+        <item>50 minutes</item>
+        <item>60 minutes</item>
+    </string-array>
     <!-- General Strings !-->
     <string name="nextButtonText">Continue</string>
     <string name="startReachingText">Start reaching your goal!</string>
@@ -52,4 +74,7 @@
     <string name="login_text">Login</string>
     <string name="username_text">Email</string>
     <string name="password_text">Password</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

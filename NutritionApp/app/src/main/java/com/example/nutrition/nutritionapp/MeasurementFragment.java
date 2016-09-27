@@ -114,7 +114,7 @@ public class MeasurementFragment extends Fragment {
 
 
 
-                Intent i = new Intent(getActivity(), ProfileActivity.class);
+                Intent i = new Intent(getActivity(), ActivityHome.class);
                 startActivity(i);
             }
         });

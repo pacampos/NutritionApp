@@ -190,7 +190,7 @@
             <Button
                 android:layout_width="180dp"
                 android:text="Exercise"
-                android:id="@+id/button3"
+                android:id="@+id/exerciseButton"
                 android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"
                 android:background="#52b7bd"
@@ -210,5 +210,14 @@
         android:theme="?attr/actionBarTheme"
         android:minHeight="?attr/actionBarSize"
         android:id="@+id/toolbar9" />
+
+    <Button
+        android:text="@string/profileButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/profileButton"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"
+        style="?android:attr/borderlessButtonStyle"/>
 
 </FrameLayout>

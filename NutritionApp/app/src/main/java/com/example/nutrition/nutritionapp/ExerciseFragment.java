@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 
@@ -31,6 +32,8 @@ public class ExerciseFragment extends Fragment {
         Button recordButton = (Button) v.findViewById(R.id.recordButton);
         Button journalButton = (Button) v.findViewById(R.id.journalButton);
 
+        ImageView image = (ImageView) v.findViewById(R.id.footprint);
+        image.setRotation(320);
         return v;
     }
 

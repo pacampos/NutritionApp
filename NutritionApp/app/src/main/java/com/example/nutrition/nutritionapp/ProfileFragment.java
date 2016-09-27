@@ -55,8 +55,8 @@ public class ProfileFragment extends Fragment {
 
         progressButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Intent i = new Intent(getActivity(), ActivityHome.class);
-                    startActivity(i);
+//                    Intent i = new Intent(getActivity(), ActivityHome.class);
+//                    startActivity(i);
                 }
         });
 

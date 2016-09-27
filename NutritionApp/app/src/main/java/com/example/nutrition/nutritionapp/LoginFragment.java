@@ -1,6 +1,7 @@
 package com.example.nutrition.nutritionapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -31,6 +32,8 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((MainActivity)getActivity()).signIn(usernameInput.getText().toString(),passwordInput.getText().toString());
+
+
             }
         });
 

@@ -12,7 +12,7 @@
     <!-- Sign up !-->
     <string name="create_text">Create a User!</string>
     <string name="age_text">Date of Birth</string>
-    <string name="weight_text">Current Weight (lbs)</string>
+    <string name="weight_text">Current Weight (kg)</string>
     <string name="height_text">Current Height (cm)</string>
     <string name="gender_text">Gender</string>
     <string name="male_text">Male</string>
@@ -20,7 +20,7 @@
     <string name="avatar_text">Select an Avatar</string>
 
     <string name="goal_title">100 Day Goal</string>
-    <string name="goalWeight_text">Goal Weight (lbs)</string>
+    <string name="goalWeight_text">Goal Weight (kg)</string>
     <string name="goalExercise_text">Exercise Goal</string>
     <string name="exercise_placeholder">Hours per Day</string>
     <string name="activityLevel_title">Average Daily Activity Level</string>
@@ -43,6 +43,29 @@
     <string name="bmi_text">Current BMI</string>
     <string name="calories_text">Daily Calorie Count</string>
     <string name="progressPage">See Progress</string>
+
+    <!-- Water Entry Page !-->
+    <string name="water_entry_title">Daily Water Consumption</string>
+    <string name="water_entry_info">Please click the cup for every 8 oz consumed, or enter yourself!</string>
+    <string name="log_water_button">Log Water</string>
+
+    <!-- Food Entry Page !-->
+    <string name="food_entry_title">Food Entry</string>
+    <string name="food_entry_info">Please browse for the food or beverage consumed</string>
+    <string name="serving_size">Select your serving size</string>
+    <string-array name="servingSize_array">
+        <item>0.25</item>
+        <item>0.5</item>
+        <item>0.75</item>
+        <item>1.0</item>
+        <item>1.25</item>
+        <item>1.5</item>
+        <item>1.75</item>
+        <item>2</item>
+        <item>5</item>
+        <item>10</item>
+    </string-array>
+    <string name="log_food_button">Log Entry</string>
 
     <!-- Exercise Page !-->
     <string name="exercise_title">Exercise Tracker</string>

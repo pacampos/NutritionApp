@@ -98,10 +98,6 @@ public class ProfileModel {
         this.age = age;
     }
 
-    public double getHeightInchPart(){
-       return heightInchesPart;
-    }
-
     public double getHeightInchesPart() {
         return heightInchesPart;
     }
@@ -123,16 +119,16 @@ public class ProfileModel {
     public void setHeightCentimeters(double centimeters){
         heightCentimeters=centimeters;
 
-        double feet=(heightCentimeters*CENTIMETERS_TO_INCHES)/12;
-        double inches=(heightCentimeters*CENTIMETERS_TO_INCHES)%12;
-        setHeightWithFeetAndInches(feet,inches);
+//        double feet=(heightCentimeters*CENTIMETERS_TO_INCHES)/12;
+//        double inches=(heightCentimeters*CENTIMETERS_TO_INCHES)%12;
+//        setHeightWithFeetAndInches(feet,inches);
     }
 
-    public void setHeightWithFeetAndInches(double feet, double inches){
-        setHeightFeetPart(feet);
-        setHeightInchesPart(inches);
-        setHeightCentimeters((feet*FEET_TO_METERS)+(inches*INCHES_TO_CENTIMETERS));
-    }
+//    public void setHeightWithFeetAndInches(double feet, double inches){
+//        setHeightFeetPart(feet);
+//        setHeightInchesPart(inches);
+//        setHeightCentimeters((feet*FEET_TO_METERS)+(inches*INCHES_TO_CENTIMETERS));
+//    }
 
     public boolean isGender() { return gender; }
 
@@ -145,7 +141,7 @@ public class ProfileModel {
 
     public void setGoalWeightPounds(double goalWeightPounds) {
         this.goalWeightPounds = goalWeightPounds;
-        setGoalWeightKilos(poundsToKilos(getGoalWeightPounds()));
+//        setGoalWeightKilos(poundsToKilos(getGoalWeightPounds()));
     }
 
     public double getGoalWeightKilos() {
@@ -154,21 +150,21 @@ public class ProfileModel {
 
     public void setGoalWeightKilos(double goalWeightKilos) {
         this.goalWeightKilos = goalWeightKilos;
-        setGoalWeightPounds(kilosToPounds(getGoalWeightKilos()));
+//        setGoalWeightPounds(kilosToPounds(getGoalWeightKilos()));
     }
 
     public double getCurrWeightPounds() { return currWeightPounds; }
 
     public void setCurrWeightPounds(double currWeightPounds) {
         this.currWeightPounds = currWeightPounds;
-        setGoalWeightKilos(poundsToKilos(getCurrWeightPounds()));
+//        setGoalWeightKilos(poundsToKilos(getCurrWeightPounds()));
     }
 
     public double getCurrWeightKilos() { return currWeightKilos; }
 
     public void setCurrWeightKilos(double currWeightKilos) {
         this.currWeightKilos = currWeightKilos;
-        setCurrWeightPounds(kilosToPounds(getCurrWeightKilos()));
+//        setCurrWeightPounds(kilosToPounds(getCurrWeightKilos()));
     }
 
 //    public List<CalorieDayModel> getDays() { return days; }
@@ -179,7 +175,7 @@ public class ProfileModel {
 //        days.add(day);
 //    }
 
-//    public double getUserBMI(){ return currWeightKilos/(heightCentimeters*heightCentimeters); }
+    public double calculateBMI(){ return currWeightKilos/(heightCentimeters*heightCentimeters); }
 //
 //    /* update to create acceptable ranges for the BMI */
 //    public int getBMIHealth(){

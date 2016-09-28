@@ -1,5 +1,6 @@
 package com.example.nutrition.nutritionapp;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -40,7 +41,6 @@ public class SignUpActivity extends FragmentActivity {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
-                // ...
             }
         };
 
@@ -73,7 +73,7 @@ public class SignUpActivity extends FragmentActivity {
         }
     }
 
-    public void finishSignup(String email, String password){
+    public void finishSignup(String email, String password, final Bundle bundle){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -90,11 +90,27 @@ public class SignUpActivity extends FragmentActivity {
 
                         else{
                             Toast.makeText(SignUpActivity.this,"Signed In", Toast.LENGTH_SHORT).show();
+                            NutritionSingleton.getInstance().CreateNewAccount(mAuth.getCurrentUser().getUid());
+
+                            NutritionSingleton.getInstance().CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),
+                                    bundle.getString(signUpFragment.NAME),
+                                    bundle.getDouble(signUpFragment.AGE),
+                                    bundle.getDouble(goalInformationFragment.HEIGHT),
+                                    bundle.getBoolean(signUpFragment.GENDER),
+                                    bundle.getDouble(goalInformationFragment.WEIGHT),
+                                    bundle.getDouble(goalInformationFragment.GOAL),
+                                    bundle.getDouble(signUpFragment.BIRTH_DATE),
+                                    bundle.getDouble(signUpFragment.BIRTH_MONTH),
+                                    bundle.getDouble(signUpFragment.BIRTH_YEAR),
+                                    bundle.getDouble(MeasurementFragment.WAIST),
+                                    bundle.getDouble(MeasurementFragment.THIGH),
+                                    bundle.getDouble(MeasurementFragment.ARM),
+                                    bundle.getDouble(goalInformationFragment.ACTIVITY));
+
+                            Intent i = new Intent(SignUpActivity.this, ActivityHome.class);
+                            startActivity(i);
                         }
 
-
-
-                        // ...
                     }
                 });
     }

@@ -62,6 +62,7 @@ public class NutritionSingleton {
                     name=snapshot.getKey();
                 }
 
+
                 final DatabaseReference profileRef=ref.child(name);
                 profileRef.addValueEventListener(new ValueEventListener() {
                     @Override

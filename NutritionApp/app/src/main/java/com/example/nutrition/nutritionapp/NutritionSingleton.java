@@ -94,7 +94,7 @@ public class NutritionSingleton {
         AccountModel newAccount= new AccountModel(username);
         currAccount=newAccount;
         currUser=username;
-        mFirebaseDatabaseReference.child(USERS_CHILD).setValue(currAccount);
+        mFirebaseDatabaseReference.child(USERS_CHILD).setValue(currUser);
     }
 
     public void CreateNewProfile(double imagePos, String name, double age, double heightCentimeters, boolean gender,

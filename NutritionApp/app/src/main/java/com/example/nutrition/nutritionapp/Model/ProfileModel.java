@@ -20,6 +20,7 @@ public class ProfileModel {
     private double heightInchesPart;
     private double heightFeetPart;
     private boolean gender;
+    private boolean isMetric;
     private double currWeightPounds;
     private double currWeightKilos;
     private double goalWeightPounds;
@@ -81,6 +82,40 @@ public class ProfileModel {
 
 //    /* this models everyday this specific user inputs info within a day */
 //    private List<CalorieDayModel> days;
+
+    public double getCaloriesBurnedNaturally(){
+        double DCE = 0;
+        if(gender==true)
+        {
+            if(isMetric==true)
+            {
+                DCE = activityLevel * ((13.75 * currWeightKilos) + (5 * heightCentimeters) - (6.76 * age) + 66);
+            }
+            else
+            {
+                double feetToInches = heightFeetPart * 12;
+                double totalHeightInches = heightInchesPart + feetToInches;
+                DCE = activityLevel * ((6.25 * currWeightPounds) + (12.7 * totalHeightInches) - (6.76 * age) + 66);
+            }
+
+        }
+        else
+        {
+            if(isMetric==true)
+            {
+                DCE = activityLevel * ((9.56 * currWeightKilos) + (1.85 * heightCentimeters) - (4.68 * age) + 655);
+            }
+            else
+            {
+                double feetToInches = heightFeetPart * 12;
+                double totalHeightInches = heightInchesPart + feetToInches;
+                DCE = activityLevel * ((4.35 * currWeightPounds) + (4.7 * totalHeightInches) - (4.68 * age) + 655);
+            }
+        }
+        return DCE;
+    }
+
+    public boolean getIsMetric() { return isMetric; }
 
     public String getName() {
         return name;

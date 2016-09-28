@@ -1,5 +1,7 @@
 package com.example.nutrition.nutritionapp.Model;
 
+import com.example.nutrition.nutritionapp.NutritionSingleton;
+
 import java.util.List;
 
 /**
@@ -15,6 +17,9 @@ public class CalorieDayModel {
     private int waterAmountGoal;
     private int exerciseCalorieGoal;
     private int foodCalorieGoal;
+    private double caloriesBurnedExercising;
+
+    public static String exerciseType = "Walking";
 
     public CalorieDayModel() {
     }
@@ -32,6 +37,43 @@ public class CalorieDayModel {
     }
 
     //remove water, food, exercise, profile
+
+    public void setCaloriesBurned(){
+        ProfileModel profile = NutritionSingleton.getInstance().getCurrProfile();
+        //double hours = minutes from exercise model / 60
+        double step1 = 0;// = NutritionSingleton.getInstance().getCurrProfile()
+        if(profile.getIsMetric() == true)
+        {
+            step1 = profile.getCurrWeightKilos();
+        }
+        else
+        {
+            step1 = profile.getCurrWeightPounds() / 2.2;
+        }
+        double MET = 0; //needs to be database call in the future
+        if(exerciseType == "Walking") //walking for exercise MET value
+        {
+            MET = 4.3;
+        }
+        else if(exerciseType == "Running") //general jogging value
+        {
+            MET = 7;
+        }
+        else if(exerciseType == "Yoga") //light effort exercise
+        {
+            MET = 2.8;
+        }
+        else if(exerciseType == "Biking") //general bicycling
+        {
+            MET = 7.5;
+        }
+        else //if(exerciseType == "Swimming") //general swimming
+        {
+            MET = 6.0;
+        }
+        double step3 = step1 * MET;
+        //caloriesBurnedExercising += step3 * hours;
+    }
 
     public int getTotalWater(){
         int totalOunces=0;

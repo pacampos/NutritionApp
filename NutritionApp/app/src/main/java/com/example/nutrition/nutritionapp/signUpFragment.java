@@ -184,9 +184,7 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
             age--;
         }
 
-        Integer ageInt = new Integer(age);
-
-        return ageInt;
+        return age;
     }
 
     private void replaceFragment(Fragment fragment) {

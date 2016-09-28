@@ -47,7 +47,8 @@ public class ProfileFragment extends Fragment {
         currentWeight.setText(String.valueOf(model.getCurrWeightKilos()));
         targetWeight.setText(String.valueOf(model.getGoalWeightKilos()));
         icon.setImageResource(CheckableImageView.mOriginalIds[(int) model.getImagePos()]);
-        bmi.setText(String.valueOf(model.calculateBMI()));
+        bmi.setText(String.valueOf((int)model.calculateBMI()));
+        calorieCount.setText(String.valueOf((int)model.calcCaloriesBurnedNaturally()));
 
         // get references
         Button progressButton = (Button) v.findViewById(R.id.progressButton);

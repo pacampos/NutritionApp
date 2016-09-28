@@ -14,6 +14,7 @@ public class ProfileModel {
     public static final double INCHES_TO_CENTIMETERS=2.54;
     public static final double CENTIMETERS_TO_INCHES=0.393701;
     public static final double POUNDS_TO_KILOS=0.453592;
+    public static final double [] ACTIVITY_LEVEL ={1.2,1.55,1.725};
     private String name;
     private double age;
     private double heightCentimeters;
@@ -58,6 +59,7 @@ public class ProfileModel {
         this.thighMeasureInches = thighMeasureInches;
         this.armMeasureInches = armMeasureInches;
         this.activityLevel = activityLevel;
+        setMetric(true);
     }
 
     public ProfileModel(double imagePos, String name, double age, double heightCentimeters,
@@ -78,24 +80,25 @@ public class ProfileModel {
         this.thighMeasureCentimeter = thighMeasureCentimeter;
         this.armMeasureCentimeter = armMeasureCentimeter;
         this.activityLevel = activityLevel;
+        setMetric(true);
     }
 
 //    /* this models everyday this specific user inputs info within a day */
 //    private List<CalorieDayModel> days;
 
-    public double getCaloriesBurnedNaturally(){
+    public double calcCaloriesBurnedNaturally(){
         double DCE = 0;
         if(gender==true)
         {
             if(isMetric==true)
             {
-                DCE = activityLevel * ((13.75 * currWeightKilos) + (5 * heightCentimeters) - (6.76 * age) + 66);
+                DCE = ACTIVITY_LEVEL[(int)activityLevel] * ((13.75 * currWeightKilos) + (5 * heightCentimeters) - (6.76 * age) + 66);
             }
             else
             {
                 double feetToInches = heightFeetPart * 12;
                 double totalHeightInches = heightInchesPart + feetToInches;
-                DCE = activityLevel * ((6.25 * currWeightPounds) + (12.7 * totalHeightInches) - (6.76 * age) + 66);
+                DCE = ACTIVITY_LEVEL[(int)activityLevel] * ((6.25 * currWeightPounds) + (12.7 * totalHeightInches) - (6.76 * age) + 66);
             }
 
         }
@@ -103,16 +106,24 @@ public class ProfileModel {
         {
             if(isMetric==true)
             {
-                DCE = activityLevel * ((9.56 * currWeightKilos) + (1.85 * heightCentimeters) - (4.68 * age) + 655);
+                DCE = ACTIVITY_LEVEL[(int)activityLevel] * ((9.56 * currWeightKilos) + (1.85 * heightCentimeters) - (4.68 * age) + 655);
             }
             else
             {
                 double feetToInches = heightFeetPart * 12;
                 double totalHeightInches = heightInchesPart + feetToInches;
-                DCE = activityLevel * ((4.35 * currWeightPounds) + (4.7 * totalHeightInches) - (4.68 * age) + 655);
+                DCE = ACTIVITY_LEVEL[(int)activityLevel] * ((4.35 * currWeightPounds) + (4.7 * totalHeightInches) - (4.68 * age) + 655);
             }
         }
         return DCE;
+    }
+
+    public boolean isMetric() {
+        return isMetric;
+    }
+
+    public void setMetric(boolean metric) {
+        isMetric = metric;
     }
 
     public boolean getIsMetric() { return isMetric; }

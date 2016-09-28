@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity." ;
@@ -91,12 +92,11 @@ public class MainActivity extends AppCompatActivity {
 
                         else{
                             Toast.makeText(MainActivity.this,"Signed In", Toast.LENGTH_SHORT).show();
+                            mAuth=FirebaseAuth.getInstance();
+                            NutritionSingleton.getInstance().SetUser(mAuth.getCurrentUser());
                             Intent i = new Intent(MainActivity.this, ActivityHome.class);
                             startActivity(i);
                         }
-
-
-                        // ...
                     }
                 });
 

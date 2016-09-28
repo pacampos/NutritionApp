@@ -88,34 +88,15 @@ public class MeasurementFragment extends Fragment {
                     thighMeasure=Double.parseDouble(thigh);
                 }
 
+                bundle.putDouble(ARM,armMeasure);
+                bundle.putDouble(WAIST,waistMeasure);
+                bundle.putDouble(THIGH,thighMeasure);
 
 
                 String email= bundle.getString(signUpFragment.EMAIL);
                 String password=bundle.getString(signUpFragment.PASSWORD);
 
-                ((SignUpActivity)getActivity()).finishSignup(email,password);
-
-                singleton.CreateNewAccount("fakey2");
-
-                singleton.CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),
-                        bundle.getString(signUpFragment.NAME),
-                        bundle.getDouble(signUpFragment.AGE),
-                        bundle.getDouble(goalInformationFragment.HEIGHT),
-                        bundle.getBoolean(signUpFragment.GENDER),
-                        bundle.getDouble(goalInformationFragment.WEIGHT),
-                        bundle.getDouble(goalInformationFragment.GOAL),
-                        bundle.getDouble(signUpFragment.BIRTH_DATE),
-                        bundle.getDouble(signUpFragment.BIRTH_MONTH),
-                        bundle.getDouble(signUpFragment.BIRTH_YEAR),
-                        waistMeasure,
-                        thighMeasure,
-                        armMeasure,
-                        bundle.getDouble(goalInformationFragment.ACTIVITY));
-
-
-
-                Intent i = new Intent(getActivity(), ActivityHome.class);
-                startActivity(i);
+                ((SignUpActivity)getActivity()).finishSignup(email,password, bundle);
             }
         });
         return v;

@@ -44,6 +44,29 @@
     <string name="calories_text">Daily Calorie Count</string>
     <string name="progressPage">See Progress</string>
 
+    <!-- Water Entry Page !-->
+    <string name="water_entry_title">Daily Water Consumption</string>
+    <string name="water_entry_info">Please click the cup for every 8 oz consumed, or enter yourself!</string>
+    <string name="log_water_button">Log Water</string>
+
+    <!-- Food Entry Page !-->
+    <string name="food_entry_title">Food Entry</string>
+    <string name="food_entry_info">Please browse for the food or beverage consumed</string>
+    <string name="serving_size">Select your serving size</string>
+    <string-array name="servingSize_array">
+        <item>0.25</item>
+        <item>0.5</item>
+        <item>0.75</item>
+        <item>1.0</item>
+        <item>1.25</item>
+        <item>1.5</item>
+        <item>1.75</item>
+        <item>2</item>
+        <item>5</item>
+        <item>10</item>
+    </string-array>
+    <string name="log_food_button">Log Entry</string>
+
     <!-- Exercise Page !-->
     <string name="exercise_title">Exercise Tracker</string>
     <string name="type_text">Type of Exercise</string>

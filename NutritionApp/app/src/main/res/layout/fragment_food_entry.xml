@@ -1,0 +1,71 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.nutrition.nutritionapp.foodEntryFragment">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="182dp"
+            app:srcCompat="@drawable/food_entry_plate"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="20dp" />
+
+        <TextView
+            android:text="@string/food_entry_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="30dp"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:paddingBottom="30dp" />
+
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="59dp" >
+
+        </SearchView>
+
+        <TextView
+            android:text="@string/serving_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="30dp"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:paddingBottom="30dp"
+            android:id="@+id/textView27" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:prompt="@string/spinner_title"
+            android:entries="@array/servingSize_array"
+            android:layout_marginBottom="40dp" />
+
+        <Button
+            android:text="@string/log_food_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/logFoodButton"
+            android:layout_gravity="center_horizontal"
+            android:background="?android:attr/colorPrimary"
+            android:textColor="@color/white" />
+        />
+
+    </LinearLayout>
+
+</FrameLayout>

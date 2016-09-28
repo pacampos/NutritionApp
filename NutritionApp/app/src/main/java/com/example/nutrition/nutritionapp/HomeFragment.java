@@ -25,8 +25,9 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
         Button profileButton = (Button) v.findViewById(R.id.profileButton);
-
         Button exerciseButton = (Button) v.findViewById(R.id.exerciseButton);
+        Button waterEntryButton = (Button) v.findViewById(R.id.waterEntryButton);
+        Button foodEntryButton = (Button) v.findViewById(R.id.foodDrinkEntrybutton);
 
         exerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +45,21 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        waterEntryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new waterEntryFragment();
+                replaceFragment(fragment);
+            }
+        });
+
+        foodEntryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new foodEntryFragment();
+                replaceFragment(fragment);
+            }
+        });
         return v;
     }
 

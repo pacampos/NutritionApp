@@ -60,23 +60,19 @@ public class NutritionSingleton {
                 String name=null;
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
                     name=snapshot.getKey();
+                    final DatabaseReference profileRef=ref.child(name);
+                    profileRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            currProfile=dataSnapshot.getValue(ProfileModel.class);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
                 }
-
-
-                final DatabaseReference profileRef=ref.child(name);
-                profileRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        currProfile=dataSnapshot.getValue(ProfileModel.class);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
-
             }
 
             @Override

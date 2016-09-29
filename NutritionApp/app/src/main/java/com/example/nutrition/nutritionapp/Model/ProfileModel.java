@@ -221,7 +221,7 @@ public class ProfileModel {
 //        days.add(day);
 //    }
 
-    public double calculateBMI(){ return currWeightKilos/(heightCentimeters*heightCentimeters); }
+    public double calculateBMI(){ return 10000*(currWeightKilos/(heightCentimeters*heightCentimeters)); }
 //
 //    /* update to create acceptable ranges for the BMI */
 //    public int getBMIHealth(){

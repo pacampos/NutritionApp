@@ -1,11 +1,8 @@
 package com.example.nutrition.nutritionapp;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,37 +13,32 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.nutrition.nutritionapp.Model.ProfileModel;
-import com.example.nutrition.nutritionapp.R;
-import java.util.Calendar;
-
 import static android.R.attr.defaultValue;
 
 public class goalInformationFragment extends Fragment {
+    public static String WEIGHT = "com.example.nutritionapp.weight";
+    public static String HEIGHT = "com.example.nutritionapp.height";
+    public static String GOAL = "com.example.nutritionapp.goal";
+    public static String ACTIVITY = "com.example.nutritionapp.activity";
+    public static String IMAGE_POS = "com.example.nutritionapp.image_pos";
     private String weight;
     private String height;
     private String goalWeight;
     private int activityLevelFactor;
-
     private Bundle bundle;
-    public static String WEIGHT ="com.example.nutritionapp.weight";
-    public static String HEIGHT ="com.example.nutritionapp.height";
-    public static String GOAL ="com.example.nutritionapp.goal";
-    public static String ACTIVITY ="com.example.nutritionapp.activity";
-    public static String IMAGE_POS = "com.example.nutritionapp.image_pos";
 
     public goalInformationFragment() {
         // Required empty public constructor
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
 
-
         bundle = this.getArguments();
 
-      //  Toast.makeText(getActivity(), String.valueOf(), Toast.LENGTH_SHORT).show();
+        //  Toast.makeText(getActivity(), String.valueOf(), Toast.LENGTH_SHORT).show();
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_goal_information, container, false);
@@ -68,7 +60,6 @@ public class goalInformationFragment extends Fragment {
 
         // get image from array
         icon.setImageResource(CheckableImageView.mOriginalIds[(int) imagePos]);
-
 
 
         Spinner activityLevelSpinner = (Spinner) v.findViewById(R.id.spinner);
@@ -94,11 +85,11 @@ public class goalInformationFragment extends Fragment {
                 goalWeight = goalWeightInput.getText().toString();
 
                 if (weight.length() == 0 || height.length() == 0 || goalWeight.length() == 0) {
-                    Toast.makeText(getActivity(),"Please fill in all fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 } else {
                     Fragment fragment = new MeasurementFragment();
-                    bundle.putDouble(WEIGHT,Double.parseDouble(weight));
-                    bundle.putDouble(HEIGHT,Double.parseDouble(height));
+                    bundle.putDouble(WEIGHT, Double.parseDouble(weight));
+                    bundle.putDouble(HEIGHT, Double.parseDouble(height));
                     bundle.putDouble(GOAL, Double.parseDouble(goalWeight));
                     bundle.putDouble(ACTIVITY, activityLevelFactor);
                     fragment.setArguments(bundle);
@@ -110,6 +101,7 @@ public class goalInformationFragment extends Fragment {
         });
         return v;
     }
+
     private void replaceFragment(Fragment fragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);

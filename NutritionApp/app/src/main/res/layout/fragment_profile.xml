@@ -4,176 +4,174 @@
     android:layout_height="match_parent"
     tools:context="com.example.nutrition.nutritionapp.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
-        android:theme="?attr/actionBarTheme"
         android:minHeight="?attr/actionBarSize"
-        android:id="@+id/toolbar3" />
+        android:theme="?attr/actionBarTheme" />
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal|top">
+        android:layout_gravity="center_horizontal|top"
+        android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/profileImage"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
-            android:id="@+id/profileImage"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/pineapple"
-            android:layout_marginTop="50dp" />
+            android:layout_marginTop="50dp"
+            android:src="@drawable/pineapple" />
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp">
-
-            <TextView
-                android:layout_height="wrap_content"
-                android:text="@string/name_text"
-                android:id="@+id/textView12"
-                android:layout_weight="1"
-                android:layout_width="115dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vishnu Venkateswaran"
-                android:id="@+id/nameProfile"
-                android:textStyle="bold"
-                android:layout_weight="4.88" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="20dp">
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/textView12"
                 android:layout_width="115dp"
                 android:layout_height="wrap_content"
-                android:text="@string/height_text"
-                android:id="@+id/textView19"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:text="@string/name_text" />
 
             <TextView
+                android:id="@+id/nameProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/height"
-                android:textStyle="bold"
                 android:layout_weight="4.88"
-                android:text="123" />
+                android:text="Vishnu Venkateswaran"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/textView19"
+                android:layout_width="115dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/height_text" />
+
+            <TextView
+                android:id="@+id/height"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/weight_text"
+                android:layout_weight="4.88"
+                android:text="123"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
                 android:id="@+id/textView18"
-                android:layout_weight="1" />
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="170lbs"
+                android:layout_weight="1"
+                android:text="@string/weight_text" />
+
+            <TextView
                 android:id="@+id/currentWeight"
-                android:textStyle="bold"
-                android:layout_weight="6.52" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="6.52"
+                android:text="170lbs"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="40dp">
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/goalWeight_text"
                 android:id="@+id/textView14"
-                android:layout_weight="1" />
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="165lbs"
+                android:layout_weight="1"
+                android:text="@string/goalWeight_text" />
+
+            <TextView
                 android:id="@+id/targetWeight"
-                android:textStyle="bold"
-                android:layout_weight="3.67" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3.67"
+                android:text="165lbs"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="40dp">
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/calories_text"
                 android:id="@+id/textView15"
-                android:layout_weight="1" />
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2200"
+                android:layout_weight="1"
+                android:text="@string/calories_text" />
+
+            <TextView
                 android:id="@+id/calorieCount"
-                android:textStyle="bold"
-                android:layout_weight="5.73" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5.73"
+                android:text="2200"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="40dp">
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/bmi_text"
                 android:id="@+id/textView16"
-                android:layout_weight="0.65"
-                android:minWidth="100dp" />
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="22.4"
+                android:layout_weight="0.65"
+                android:minWidth="100dp"
+                android:text="@string/bmi_text" />
+
+            <TextView
                 android:id="@+id/bmi"
-                android:textStyle="bold"
-                android:layout_weight="2.18" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.18"
+                android:text="22.4"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <Button
+            android:id="@+id/progressButton"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="@string/progressPage"
-            android:id="@+id/progressButton"
-            android:textColor="@color/white"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:text="@string/progressPage"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 </FrameLayout>

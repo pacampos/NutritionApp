@@ -13,22 +13,15 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.TimeZone;
 
 
 public class signUpFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
-    public static String EMAIL="com.example.nutritionapp.username";
-    public static String PASSWORD="com.example.nutritionapp.password";
+    public static String EMAIL = "com.example.nutritionapp.username";
+    public static String PASSWORD = "com.example.nutritionapp.password";
     public static String NAME = "com.example.nutritionapp.name";
     public static String GENDER = "com.example.nutritionapp.gender";
     public static String IMAGE_POS = "com.example.nutritionapp.image_pos";
@@ -36,22 +29,18 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
     public static String BIRTH_MONTH = "com.example.nutritionapp.birth_month";
     public static String BIRTH_YEAR = "com.example.nutritionapp.birth_year";
     public static String AGE = "com.example.nutritionapp.age";
-
+    EditText dobInput;
     private CheckableImageView clickedImage;
     private int clickedImagePosition = -1;
     private int _day;
     private int _month;
     private int _birthYear;
-    EditText dobInput;
-
     private String date;
     private int age = 0;
     private String email;
     private String password;
     private String name;
     private boolean gender = true;
-
-
 
 
     public signUpFragment() {
@@ -71,7 +60,7 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       final View v = inflater.inflate(R.layout.fragment_sign_up, container, false);
+        final View v = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
         // Get references
         Button nextButton = (Button) v.findViewById(R.id.nextButton);
@@ -88,12 +77,12 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               CheckableImageView imageView = (CheckableImageView) gridView.getChildAt(position);
+                CheckableImageView imageView = (CheckableImageView) gridView.getChildAt(position);
                 imageView.toggle(clickedImage, clickedImagePosition, position);
                 clickedImage = imageView;
                 clickedImagePosition = position;
             }
-            });
+        });
 
         // set dob edit text to be clickable
         dobInput.setFocusable(false);
@@ -141,17 +130,17 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
                     gender = false;
                 }
                 age = getAge(_birthYear, _month, _day);
-                if(name.length() == 0 || email.length() == 0 || password.length() == 0 || dobInput.length() == 0 || clickedImagePosition == -1) {
-                    Toast.makeText(getActivity(),"Please fill in all fields", Toast.LENGTH_SHORT).show();
+                if (name.length() == 0 || email.length() == 0 || password.length() == 0 || dobInput.length() == 0 || clickedImagePosition == -1) {
+                    Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 } else {
                     Fragment fragment = new goalInformationFragment();
-                    Bundle data= new Bundle();
-                    data.putString(EMAIL,email);
+                    Bundle data = new Bundle();
+                    data.putString(EMAIL, email);
                     data.putString(PASSWORD, password);
                     data.putString(NAME, name);
-                    data.putBoolean(GENDER,gender);
+                    data.putBoolean(GENDER, gender);
                     data.putDouble(IMAGE_POS, clickedImagePosition);
-                    data.putDouble(BIRTH_DATE,_day);
+                    data.putDouble(BIRTH_DATE, _day);
                     data.putDouble(BIRTH_MONTH, _month);
                     data.putDouble(BIRTH_YEAR, _birthYear);
                     data.putDouble(AGE, age);
@@ -172,7 +161,8 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
         dobInput.setText(date);
 
     }
-    private int getAge(int year, int month, int day){
+
+    private int getAge(int year, int month, int day) {
         Calendar dob = Calendar.getInstance();
         Calendar today = Calendar.getInstance();
 
@@ -180,7 +170,7 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
 
         int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
 
-        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
             age--;
         }
 

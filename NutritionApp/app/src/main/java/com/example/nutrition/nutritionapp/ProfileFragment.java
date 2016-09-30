@@ -1,6 +1,5 @@
 package com.example.nutrition.nutritionapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,15 +11,13 @@ import android.widget.TextView;
 
 import com.example.nutrition.nutritionapp.Model.ProfileModel;
 
-import org.w3c.dom.Text;
-
 
 public class ProfileFragment extends Fragment {
 
     public ProfileFragment() {
         // Required empty public constructor
     }
-    
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,7 +36,6 @@ public class ProfileFragment extends Fragment {
         NutritionSingleton singleton = NutritionSingleton.getInstance();
 
 
-
         ProfileModel model = singleton.getCurrProfile();
 
         nameProfile.setText(model.getName());
@@ -47,18 +43,18 @@ public class ProfileFragment extends Fragment {
         currentWeight.setText(String.valueOf(model.getCurrWeightKilos()));
         targetWeight.setText(String.valueOf(model.getGoalWeightKilos()));
         icon.setImageResource(CheckableImageView.mOriginalIds[(int) model.getImagePos()]);
-        bmi.setText(String.valueOf((int)model.calculateBMI()));
-        calorieCount.setText(String.valueOf((int)model.calcCaloriesBurnedNaturally()));
+        bmi.setText(String.valueOf((int) model.calculateBMI()));
+        calorieCount.setText(String.valueOf((int) model.calcCaloriesBurnedNaturally()));
 
         // get references
         Button progressButton = (Button) v.findViewById(R.id.progressButton);
         progressButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         progressButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
+            public void onClick(View v) {
 //                    Intent i = new Intent(getActivity(), ActivityHome.class);
 //                    startActivity(i);
-                }
+            }
         });
 
         return v;

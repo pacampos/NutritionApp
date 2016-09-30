@@ -5,126 +5,124 @@
     android:layout_height="match_parent"
     tools:context="com.example.nutrition.nutritionapp.ExerciseFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <TextView
-        android:text="@string/exercise_title"
+        android:id="@+id/textView17"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView17"
+        android:text="@string/exercise_title"
         android:textAlignment="center"
         android:textSize="25sp" />
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
+        android:orientation="vertical"
         android:weightSum="1">
 
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/imageView7"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            app:srcCompat="@drawable/flag"
-            android:id="@+id/imageView7"
             android:layout_marginLeft="140dp"
+            android:layout_marginTop="50dp"
             android:layout_weight="0.00"
-            android:layout_marginTop="50dp" />
+            app:srcCompat="@drawable/flag" />
 
         <ImageView
+            android:id="@+id/footprint"
             android:layout_width="match_parent"
             android:layout_height="61dp"
-            app:srcCompat="@drawable/footprint123"
-            android:id="@+id/footprint"
-            android:layout_marginTop="80dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginRight="80dp"
-            android:scaleType="centerInside"
+            android:layout_marginTop="80dp"
             android:layout_weight="0.00"
-            android:layout_marginBottom="20dp" />
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/footprint123" />
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_marginRight="40dp"
-            android:layout_weight="0.00"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="50dp">
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="50dp"
+            android:layout_weight="0.00"
+            android:orientation="horizontal">
 
             <TextView
-                android:text="@string/type_text"
+                android:id="@+id/textView20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView20"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:text="@string/type_text" />
 
             <Spinner
+                android:id="@+id/typeSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/typeSpinner"
                 android:layout_weight="1"
                 android:entries="@array/exerciseType_array" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_marginRight="40dp"
-            android:layout_weight="0.00"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="20dp">
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="0.00"
+            android:orientation="horizontal">
 
             <TextView
-                android:text="@string/duration_text"
+                android:id="@+id/textView20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView20"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:text="@string/duration_text" />
 
             <Spinner
+                android:id="@+id/durationSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/durationSpinner"
                 android:layout_weight="0.21"
                 android:entries="@array/duration_array" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.00">
+            android:layout_weight="0.00"
+            android:orientation="vertical">
 
             <Button
-                android:text="@string/record_text"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
                 android:id="@+id/recordButton"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/white"
-                android:background="@color/colorPrimary"
-                android:layout_gravity="center_horizontal" />
-
-            <Button
-                android:text="@string/exercise_journal"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/journalButton"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:textColor="@color/white"
                 android:background="@color/colorPrimary"
+                android:text="@string/record_text"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/journalButton"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
                 android:layout_weight="0.00"
-                android:layout_gravity="center_horizontal" />
+                android:background="@color/colorPrimary"
+                android:text="@string/exercise_journal"
+                android:textColor="@color/white" />
         </LinearLayout>
 
     </LinearLayout>

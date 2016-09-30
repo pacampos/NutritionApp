@@ -1,10 +1,10 @@
 package com.example.nutrition.nutritionapp;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -17,18 +17,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class SignUpActivity extends FragmentActivity {
+    private static String TAG = "SignupActivity.";
     /* firebase auth instance variables */
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
-    private static String TAG="SignupActivity.";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        mAuth= FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -45,15 +44,15 @@ public class SignUpActivity extends FragmentActivity {
         };
 
         //get manager
-        FragmentManager fm= getSupportFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
         //get the ID/ location of where we want to load fragment
-        Fragment f=fm.findFragmentById(R.id.fragment_container);
+        Fragment f = fm.findFragmentById(R.id.fragment_container);
 
-        if(f==null){ // activity and fragment are created for the first time
+        if (f == null) { // activity and fragment are created for the first time
             f = new signUpFragment(); // instantiate Profile Fragment
             // create transaction
-            FragmentTransaction ft= fm.beginTransaction();
-            ft.add(R.id.fragment_container,f);
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.add(R.id.fragment_container, f);
             ft.commit();
         }
 
@@ -73,7 +72,7 @@ public class SignUpActivity extends FragmentActivity {
         }
     }
 
-    public void finishSignup(String email, String password, final Bundle bundle){
+    public void finishSignup(String email, String password, final Bundle bundle) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -86,10 +85,8 @@ public class SignUpActivity extends FragmentActivity {
                         if (!task.isSuccessful()) {
                             Toast.makeText(SignUpActivity.this, "Could not sign up",
                                     Toast.LENGTH_SHORT).show();
-                        }
-
-                        else{
-                            Toast.makeText(SignUpActivity.this,"Signed In", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(SignUpActivity.this, "Signed In", Toast.LENGTH_SHORT).show();
                             NutritionSingleton.getInstance().CreateNewAccount(mAuth.getCurrentUser().getUid());
 
                             NutritionSingleton.getInstance().CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),

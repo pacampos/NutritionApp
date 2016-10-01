@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="?android:attr/colorPrimary"
+            android:background="?attr/colorPrimary"
             android:text="@string/log_food_button"
             android:textColor="@color/white" />
         />

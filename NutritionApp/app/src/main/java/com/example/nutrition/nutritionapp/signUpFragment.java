@@ -97,6 +97,7 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
         dobInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dobInput.setError(null);
                 Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
                 DatePickerDialog dialog = new DatePickerDialog(getActivity(), signUpFragment.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
@@ -150,19 +151,27 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
                 if (name.length() == 0 || email.length() == 0 || password.length() == 0 || confirmPassword.length() == 0|| dobInput.length() == 0 || clickedImagePosition == -1) {
                     Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 }
+
+//                else if(!isValidDate(date)){
+//                    Toast.makeText(getActivity(), "Invalid date format", Toast.LENGTH_SHORT).show();
+//                }
                 /* check if email is valid */
                 else if(!isValidEmail(email)){
-                    Toast.makeText(getActivity(), "Please type in a valid email", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Please type in a valid email", Toast.LENGTH_SHORT).show();
+                    usernameInput.setError("Invalid format");
+
                 }
 
                 /* check if password is secure */
                 else if(!isValidPassword(password)){
-                    Toast.makeText(getActivity(), "Password must be a minimum 8 characters with at" +
-                            " least 1 Uppercase Alphabet, 1 Lowercase Alphabet and 1 Number", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Password must be a minimum 8 characters with at" +
+//                            " least 1 Uppercase Alphabet, 1 Lowercase Alphabet and 1 Number", Toast.LENGTH_SHORT).show();
+                    passInput.setError("Password must be a minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet and 1 Number");
                 }
 
                 else if(!password.equals(confirmPassword)){
-                    Toast.makeText(getActivity(), "Your passwords do not match. Please try again.",Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Your passwords do not match. Please try again.",Toast.LENGTH_SHORT).show();
+                    confirmPassInput.setError("Passwords do not match. Please try again.");
                 }
                 else {
                     Fragment fragment = new goalInformationFragment();
@@ -236,7 +245,16 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
         matcher = pattern.matcher(password);
 
         return matcher.matches();
+    }
 
+    public boolean isValidDate(final String date){
+        Pattern pattern;
+        Matcher matcher;
+        final String DATE_PATTERN = "^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2}$";
+        pattern = Pattern.compile(DATE_PATTERN);
+        matcher = pattern.matcher(date);
+
+        return matcher.matches();
     }
 }
 

@@ -22,12 +22,27 @@
             android:textAlignment="center"
             android:textSize="25sp" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="182dp"
-            android:layout_gravity="center_horizontal"
-            android:textAlignment="center"
-            app:srcCompat="@drawable/water_bottle" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="182dp"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                app:srcCompat="@drawable/water_bottle"
+                android:layout_weight="1" />
+
+            <TextView
+                android:text="0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/amountWaterDrankLabel"
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"

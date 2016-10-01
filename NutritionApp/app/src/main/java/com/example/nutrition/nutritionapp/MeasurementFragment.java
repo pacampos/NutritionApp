@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static android.R.attr.defaultValue;
 
@@ -71,31 +72,51 @@ public class MeasurementFragment extends Fragment {
                 waist = waistInput.getText().toString();
                 thigh = thighInput.getText().toString();
 
-
-                double armMeasure = 0.0;
-                double waistMeasure = 0.0;
-                double thighMeasure = 0.0;
-                if (arm.length() > 0) {
-                    armMeasure = Double.parseDouble(arm);
+                if(arm.length() == 0 || waist.length() == 0 || thigh.length() == 0){
+                    Toast.makeText(getContext(), "Please fill out all fields", Toast.LENGTH_SHORT).show();
                 }
 
-                if (waist.length() > 0) {
-                    waistMeasure = Double.parseDouble(waist);
+                else if(!goalInformationFragment.isNumeric(arm)){
+                    armInput.setError("Please enter a valid arm measurement.");
                 }
 
-                if (thigh.length() > 0) {
-                    thighMeasure = Double.parseDouble(thigh);
+                else if(!goalInformationFragment.isNumeric(waist)){
+                    waistInput.setError("Please enter a valid waist measurement");
                 }
 
-                bundle.putDouble(ARM, armMeasure);
-                bundle.putDouble(WAIST, waistMeasure);
-                bundle.putDouble(THIGH, thighMeasure);
+                else if(!goalInformationFragment.isNumeric(thigh)){
+                    thighInput.setError("Please enter a valid thigh measurement");
+                }
+
+                else{
+                    double armMeasure = 0.0;
+                    double waistMeasure = 0.0;
+                    double thighMeasure = 0.0;
+                    if (arm.length() > 0) {
+                        armMeasure = Double.parseDouble(arm);
+                    }
+
+                    if (waist.length() > 0) {
+                        waistMeasure = Double.parseDouble(waist);
+                    }
+
+                    if (thigh.length() > 0) {
+                        thighMeasure = Double.parseDouble(thigh);
+                    }
+
+                    bundle.putDouble(ARM, armMeasure);
+                    bundle.putDouble(WAIST, waistMeasure);
+                    bundle.putDouble(THIGH, thighMeasure);
 
 
-                String email = bundle.getString(signUpFragment.EMAIL);
-                String password = bundle.getString(signUpFragment.PASSWORD);
+                    String email = bundle.getString(signUpFragment.EMAIL);
+                    String password = bundle.getString(signUpFragment.PASSWORD);
 
-                ((SignUpActivity) getActivity()).finishSignup(email, password, bundle);
+                    ((SignUpActivity) getActivity()).finishSignup(email, password, bundle);
+                }
+
+
+
             }
         });
         return v;

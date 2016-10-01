@@ -14,6 +14,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static android.R.attr.defaultValue;
 
 public class goalInformationFragment extends Fragment {
@@ -89,7 +92,20 @@ public class goalInformationFragment extends Fragment {
 
                 if (weight.length() == 0 || height.length() == 0 || goalWeight.length() == 0) {
                     Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+
+                else if(!isNumeric(weight)){
+                    weightInput.setError("Please enter a valid weight.");
+                }
+                else if(!isNumeric(height)){
+                    heightInput.setError("Please enter a valid height.");
+                }
+
+                else if(!isNumeric(goalWeight)){
+                    goalWeightInput.setError("Please enter a valid weight.");
+                }
+
+                else {
                     Fragment fragment = new MeasurementFragment();
                     bundle.putDouble(WEIGHT, Double.parseDouble(weight));
                     bundle.putDouble(HEIGHT, Double.parseDouble(height));
@@ -108,6 +124,16 @@ public class goalInformationFragment extends Fragment {
         transaction.replace(R.id.fragment_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    public final static boolean isNumeric(String number){
+        Pattern pattern;
+        Matcher matcher;
+        final String DATE_PATTERN = "^(0|[1-9][0-9]*)$";
+        pattern = Pattern.compile(DATE_PATTERN);
+        matcher = pattern.matcher(number);
+
+        return matcher.matches();
     }
 
 

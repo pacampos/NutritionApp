@@ -22,6 +22,7 @@ public class DayModel {
     private double foodCalorieGoal;
     private double caloriesBurnedExercising;
 
+
     public DayModel() {
         foods=new ArrayList<>();
         foods.add(new FoodModel());
@@ -56,36 +57,6 @@ public class DayModel {
 
     //remove water, food, exercise, profile
 
-    public void setCaloriesBurned() {
-        ProfileModel profile = NutritionSingleton.getInstance().getCurrProfile();
-        //double hours = minutes from exercise model / 60
-        double step1 = 0;// = NutritionSingleton.getInstance().getCurrProfile()
-        if (profile.getIsImperial() == true) {
-            step1 = profile.getCurrWeightKilos();
-        } else {
-            step1 = profile.getCurrWeightPounds() / 2.2;
-        }
-        double MET = 0; //needs to be database call in the future
-        if (exerciseType == "Walking") //walking for exercise MET value
-        {
-            MET = 4.3;
-        } else if (exerciseType == "Running") //general jogging value
-        {
-            MET = 7;
-        } else if (exerciseType == "Yoga") //light effort exercise
-        {
-            MET = 2.8;
-        } else if (exerciseType == "Biking") //general bicycling
-        {
-            MET = 7.5;
-        } else //if(exerciseType == "Swimming") //general swimming
-        {
-            MET = 6.0;
-        }
-        double step3 = step1 * MET;
-        //caloriesBurnedExercising += step3 * hours;
-    }
-
     public double getWaterAmountDrank() {
         return waterAmountDrank;
     }
@@ -104,8 +75,8 @@ public class DayModel {
 
     /* remove food, remove exercise */
 
-    public int getTotalCaloriesBurned() {
-        int sum = 0;
+    public double calcTotalCaloriesBurned() {
+        double sum = 0.0;
         for (ExerciseModel exercise : exercises) {
             sum += exercise.getCalories();
         }
@@ -113,8 +84,8 @@ public class DayModel {
         return sum;
     }
 
-    public int getTotalCaloriesAte() {
-        int sum = 0;
+    public double calcTotalCaloriesAte() {
+        double sum = 0.0;
         for (FoodModel food : foods) {
             sum += food.getCalories();
         }

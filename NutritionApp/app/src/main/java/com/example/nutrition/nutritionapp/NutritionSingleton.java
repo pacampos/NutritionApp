@@ -2,6 +2,8 @@ package com.example.nutrition.nutritionapp;
 
 import com.example.nutrition.nutritionapp.Model.AccountModel;
 import com.example.nutrition.nutritionapp.Model.DayModel;
+import com.example.nutrition.nutritionapp.Model.ExerciseModel;
+import com.example.nutrition.nutritionapp.Model.FoodModel;
 import com.example.nutrition.nutritionapp.Model.ProfileModel;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -13,7 +15,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by phoenixcampos01 on 9/12/16.
@@ -31,6 +35,7 @@ public class NutritionSingleton {
     private FirebaseUser mUser;
 
     private NutritionSingleton() {
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
     }
 
@@ -47,6 +52,7 @@ public class NutritionSingleton {
 
     void SetUser(FirebaseUser user) {
         mUser = user;
+        currUser = mUser.getUid();
         final DatabaseReference ref = mFirebaseDatabaseReference.child(USERS_CHILD).child(mUser.getUid());
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -59,13 +65,12 @@ public class NutritionSingleton {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             currProfile = dataSnapshot.getValue(ProfileModel.class);
-                            // TODO: we have to determine the logic to get the current day
                             /*
                                 we use java date to find out what day it is,
                                 if it's a day not in the database, we create a new date and add that to the profile
                                 else, we create a new day, to begin appending water, exercise, and food to it
                              */
-                            currDay=currProfile.getDays().get(generateCurrDayString());
+                            currDay = currProfile.getDays().get(generateCurrDayString());
                             if(currDay == null){
                                 currDay = new DayModel();
                                 currProfile.getDays().put(generateCurrDayString(), currDay);
@@ -119,6 +124,7 @@ public class NutritionSingleton {
                                  double heightFeetPart, boolean gender, double currWeightPounds,
                                  double goalWeightPounds, double dayBirth, double monthBirth, double yearBirth, double waistMeasureInches,
                                  double thighMeasureInches, double armMeasureInches, double activityLevel, boolean isImperial) {
+
         currProfile = new ProfileModel(imagePos, name, age, heightInchesPart, heightFeetPart, gender, currWeightPounds,
                 goalWeightPounds, dayBirth, monthBirth, yearBirth, waistMeasureInches, thighMeasureInches, armMeasureInches, activityLevel, isImperial);
 
@@ -159,5 +165,29 @@ public class NutritionSingleton {
         SimpleDateFormat format= new SimpleDateFormat("MMddyyyy");
         String date = format.format(today);
         return date;
+    }
+
+    public void addDay(DayModel day){
+
+    }
+
+    public void addExercise(ExerciseModel exercise){
+        currDay.addExercise(exercise);
+        Map<String,Object> updateChildren=new HashMap<>();
+        updateChildren.put(String.valueOf(currDay.getExercises().size()-1),exercise);
+       mFirebaseDatabaseReference.child(USERS_CHILD).
+                child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).child("exercises").updateChildren(updateChildren);
+    }
+
+    public void addFood(FoodModel food){
+
+    }
+
+    public void updateWater(double water){
+        currDay.addWaterAmount(water);
+        Map<String,Object> updateChildren=new HashMap<>();
+        updateChildren.put("waterAmountDrank", currDay.getWaterAmountDrank()+water);
+        mFirebaseDatabaseReference.child(USERS_CHILD).
+                child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).updateChildren(updateChildren);
     }
 }

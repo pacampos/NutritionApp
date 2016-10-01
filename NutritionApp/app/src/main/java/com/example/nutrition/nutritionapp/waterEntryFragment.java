@@ -27,6 +27,9 @@ public class waterEntryFragment extends Fragment {
         Button waterEntryButton = (Button) v.findViewById(R.id.logWaterButton);
         ImageView cupImageView = (ImageView) v.findViewById(R.id.cupImageView);
         final TextView waterDrankTextView = (TextView) v.findViewById(R.id.amountWaterDrankLabel);
+        DayModel currDay = NutritionSingleton.getInstance().getCurrDay();
+        double water= currDay.getWaterAmountDrank();
+        waterDrankTextView.setText(String.valueOf(water));
 
         waterEntryButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,7 +37,7 @@ public class waterEntryFragment extends Fragment {
                 String amountOfWater=waterEntryEditText.getText().toString();
                 if(amountOfWater.length() > 0 && amountOfWater.matches("^[0-9]+$")){
                     DayModel day = NutritionSingleton.getInstance().getCurrDay();
-                    day.addWaterAmount(Double.parseDouble(amountOfWater));
+                    NutritionSingleton.getInstance().updateWater(Double.parseDouble(amountOfWater));
                     waterDrankTextView.setText(String.valueOf(day.getWaterAmountDrank()));
                 }
             }
@@ -44,7 +47,7 @@ public class waterEntryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 DayModel day = NutritionSingleton.getInstance().getCurrDay();
-                day.addEightOuncesWaterAmount();
+                NutritionSingleton.getInstance().updateWater(8.0);
                 waterDrankTextView.setText(String.valueOf(day.getWaterAmountDrank()));
             }
         });

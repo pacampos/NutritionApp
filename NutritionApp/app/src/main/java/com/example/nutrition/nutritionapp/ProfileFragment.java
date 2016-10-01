@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +34,9 @@ public class ProfileFragment extends Fragment {
         TextView calorieCount = (TextView) v.findViewById(R.id.calorieCount);
         TextView bmi = (TextView) v.findViewById(R.id.bmi);
         ImageView icon = (ImageView) v.findViewById(R.id.profileImage);
+        TextView currentWeightLabel = (TextView) v.findViewById(R.id.profileCurrentWeightTextView);
+        TextView currentHeightLabel = (TextView) v.findViewById(R.id.profileCurrentHeightLabel);
+        TextView goalWeightLabel = (TextView) v.findViewById(R.id.profileGoalWeightTextView);
         NutritionSingleton singleton = NutritionSingleton.getInstance();
 
 
@@ -45,6 +49,11 @@ public class ProfileFragment extends Fragment {
         icon.setImageResource(CheckableImageView.mOriginalIds[(int) model.getImagePos()]);
         bmi.setText(String.valueOf((int) model.calculateBMI()));
         calorieCount.setText(String.valueOf((int) model.calcCaloriesBurnedNaturally()));
+        if(model.getIsImperial()){
+            currentWeightLabel.setText(R.string.weight_text_imperial);
+            currentHeightLabel.setText(R.string.height_text_imperial);
+            goalWeightLabel.setText(R.string.goalWeight_text_imperial);
+        }
 
         // get references
         Button progressButton = (Button) v.findViewById(R.id.progressButton);

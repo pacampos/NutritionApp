@@ -31,6 +31,9 @@ public class ExerciseFragment extends Fragment {
 
         ImageView image = (ImageView) v.findViewById(R.id.footprint);
         image.setRotation(320);
+
+
+
         return v;
     }
 

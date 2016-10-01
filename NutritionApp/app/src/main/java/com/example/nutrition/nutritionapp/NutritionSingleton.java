@@ -1,6 +1,7 @@
 package com.example.nutrition.nutritionapp;
 
 import com.example.nutrition.nutritionapp.Model.AccountModel;
+import com.example.nutrition.nutritionapp.Model.DayModel;
 import com.example.nutrition.nutritionapp.Model.ProfileModel;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -9,6 +10,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,16 +22,13 @@ public class NutritionSingleton {
     private static NutritionSingleton mInstance = null;
     private static String USERS_CHILD = "users";
     private String currUser = null;
-
-
     private AccountModel currAccount;
     private ProfileModel currProfile;
+    private DayModel currDay;
 
     // Firebase instance variables
     private DatabaseReference mFirebaseDatabaseReference;
     private FirebaseUser mUser;
-
-    private List<AccountModel> accounts;
 
     private NutritionSingleton() {
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
@@ -58,6 +59,17 @@ public class NutritionSingleton {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             currProfile = dataSnapshot.getValue(ProfileModel.class);
+                            // TODO: we have to determine the logic to get the current day
+                            /*
+                                we use java date to find out what day it is,
+                                if it's a day not in the database, we create a new date and add that to the profile
+                                else, we create a new day, to begin appending water, exercise, and food to it
+                             */
+                            currDay=currProfile.getDays().get(generateCurrDayString());
+                            if(currDay == null){
+                                currDay = new DayModel();
+                                currProfile.getDays().put(generateCurrDayString(), currDay);
+                            }
                         }
 
                         @Override
@@ -90,12 +102,13 @@ public class NutritionSingleton {
     public void CreateNewProfile(double imagePos, String name, double age, double heightCentimeters, boolean gender,
                                  double currWeightKilos, double goalWeightKilos, double dayBirth, double monthBirth, double yearBirth,
                                  double waistMeasureCentimeter, double thighMeasureCentimeter,
-                                 double armMeasureCentimeter, double activityLevel) {
+                                 double armMeasureCentimeter, double activityLevel, boolean isImperial) {
         currProfile = new ProfileModel(imagePos, name, age, heightCentimeters, gender, currWeightKilos,
                 goalWeightKilos, dayBirth, monthBirth, yearBirth, waistMeasureCentimeter,
-                thighMeasureCentimeter, armMeasureCentimeter, activityLevel);
+                thighMeasureCentimeter, armMeasureCentimeter, activityLevel, isImperial);
 
         currAccount.addUserProfile(currProfile);
+
 
         if (currUser != null) {
             mFirebaseDatabaseReference.child(USERS_CHILD).child(currUser).child(name).setValue(currProfile);
@@ -105,11 +118,12 @@ public class NutritionSingleton {
     public void CreateNewProfile(double imagePos, String name, double age, double heightInchesPart,
                                  double heightFeetPart, boolean gender, double currWeightPounds,
                                  double goalWeightPounds, double dayBirth, double monthBirth, double yearBirth, double waistMeasureInches,
-                                 double thighMeasureInches, double armMeasureInches, double activityLevel) {
+                                 double thighMeasureInches, double armMeasureInches, double activityLevel, boolean isImperial) {
         currProfile = new ProfileModel(imagePos, name, age, heightInchesPart, heightFeetPart, gender, currWeightPounds,
-                goalWeightPounds, dayBirth, monthBirth, yearBirth, waistMeasureInches, thighMeasureInches, armMeasureInches, activityLevel);
+                goalWeightPounds, dayBirth, monthBirth, yearBirth, waistMeasureInches, thighMeasureInches, armMeasureInches, activityLevel, isImperial);
 
         currAccount.addUserProfile(currProfile);
+        currDay = currProfile.getDays().get(generateCurrDayString());
 
         if (currUser != null) {
             mFirebaseDatabaseReference.child(USERS_CHILD).child(currUser).child(name).setValue(currProfile);
@@ -130,5 +144,20 @@ public class NutritionSingleton {
 
     public void setCurrProfile(ProfileModel currProfile) {
         this.currProfile = currProfile;
+    }
+
+    public DayModel getCurrDay() {
+        return currDay;
+    }
+
+    public void setCurrDay(DayModel currDay) {
+        this.currDay = currDay;
+    }
+
+    public String generateCurrDayString(){
+        Date today=new Date();
+        SimpleDateFormat format= new SimpleDateFormat("MMddyyyy");
+        String date = format.format(today);
+        return date;
     }
 }

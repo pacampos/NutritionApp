@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import static android.R.attr.defaultValue;
@@ -38,29 +39,31 @@ public class goalInformationFragment extends Fragment {
 
         bundle = this.getArguments();
 
-        //  Toast.makeText(getActivity(), String.valueOf(), Toast.LENGTH_SHORT).show();
+        boolean isImperial= bundle.getBoolean(signUpFragment.METRIC);
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_goal_information, container, false);
 
         // get references
         final EditText weightInput = (EditText) v.findViewById(R.id.weightInput);
-
+        final TextView weightTextView = (TextView) v.findViewById(R.id.currentWeightLabel);
         final EditText heightInput = (EditText) v.findViewById(R.id.heightInput);
-
+        final TextView heightTextView = (TextView) v.findViewById(R.id.currentHeightLabel);
         final EditText goalWeightInput = (EditText) v.findViewById(R.id.goalWeightInput);
+        final TextView goalWeightTextView = (TextView) v.findViewById(R.id.goalWeightLabel);
+
+        if(isImperial == true){
+            weightTextView.setText(R.string.weight_text_imperial);
+            heightTextView.setText(R.string.height_text_imperial);
+            goalWeightTextView.setText(R.string.goalWeight_text_imperial);
+        }
 
         ImageView icon = (ImageView) v.findViewById(R.id.iconImage);
-
-//        NutritionSingleton singleton=NutritionSingleton.getInstance();
-//        ProfileModel model=singleton.getCurrProfile();
-//        double imagePos = model.getImagePos();
 
         double imagePos = bundle.getDouble(IMAGE_POS, defaultValue);
 
         // get image from array
         icon.setImageResource(CheckableImageView.mOriginalIds[(int) imagePos]);
-
 
         Spinner activityLevelSpinner = (Spinner) v.findViewById(R.id.spinner);
         activityLevelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -95,8 +98,6 @@ public class goalInformationFragment extends Fragment {
                     fragment.setArguments(bundle);
                     replaceFragment(fragment);
                 }
-
-
             }
         });
         return v;

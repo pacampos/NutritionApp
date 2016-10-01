@@ -52,11 +52,11 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/armTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@string/arm_text" />
+                    android:text="@string/arm_text_metric" />
 
                 <EditText
                     android:id="@+id/armInput"
@@ -77,11 +77,11 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/waistTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@string/waist_text" />
+                    android:text="@string/waist_text_metric" />
 
                 <EditText
                     android:id="@+id/waistInput"
@@ -101,11 +101,11 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/thighTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@string/thigh_text" />
+                    android:text="@string/thigh_text_metric" />
 
                 <EditText
                     android:id="@+id/thighInput"

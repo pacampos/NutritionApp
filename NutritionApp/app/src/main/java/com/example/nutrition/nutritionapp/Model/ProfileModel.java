@@ -1,5 +1,12 @@
 package com.example.nutrition.nutritionapp.Model;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * Created by phoenixcampos01 on 9/8/16.
  */
@@ -16,7 +23,7 @@ public class ProfileModel {
     private double heightInchesPart;
     private double heightFeetPart;
     private boolean gender;
-    private boolean isMetric;
+    private boolean isImperial;
     private double currWeightPounds;
     private double currWeightKilos;
     private double goalWeightPounds;
@@ -31,6 +38,8 @@ public class ProfileModel {
     private double thighMeasureCentimeter;
     private double armMeasureCentimeter;
     private double activityLevel;
+    /* this models everyday this specific user inputs info within a day */
+    private HashMap<String,DayModel> days;
 
     public ProfileModel() {
     }
@@ -38,7 +47,7 @@ public class ProfileModel {
     public ProfileModel(double imagePos, String name, double age, double heightInchesPart,
                         double heightFeetPart, boolean gender, double currWeightPounds,
                         double goalWeightPounds, double dayBirth, double monthBirth, double yearBirth, double waistMeasureInches,
-                        double thighMeasureInches, double armMeasureInches, double activityLevel) {
+                        double thighMeasureInches, double armMeasureInches, double activityLevel, boolean isImperial) {
         this.imagePos = imagePos;
         this.name = name;
         this.age = age;
@@ -54,13 +63,16 @@ public class ProfileModel {
         this.thighMeasureInches = thighMeasureInches;
         this.armMeasureInches = armMeasureInches;
         this.activityLevel = activityLevel;
-        setMetric(true);
+        this.isImperial=isImperial;
+        days=new HashMap<>();
+        days.put("first test",new DayModel());
+        days.put("second test",new DayModel());
     }
 
     public ProfileModel(double imagePos, String name, double age, double heightCentimeters,
                         boolean gender, double currWeightKilos, double goalWeightKilos,
                         double dayBirth, double monthBirth, double yearBirth, double waistMeasureCentimeter,
-                        double thighMeasureCentimeter, double armMeasureCentimeter, double activityLevel) {
+                        double thighMeasureCentimeter, double armMeasureCentimeter, double activityLevel, boolean isImperial) {
         this.imagePos = imagePos;
         this.name = name;
         this.age = age;
@@ -75,16 +87,15 @@ public class ProfileModel {
         this.thighMeasureCentimeter = thighMeasureCentimeter;
         this.armMeasureCentimeter = armMeasureCentimeter;
         this.activityLevel = activityLevel;
-        setMetric(true);
+        this.isImperial=isImperial;
+        days=new HashMap<>();
+        addDay(new DayModel());
     }
-
-//    /* this models everyday this specific user inputs info within a day */
-//    private List<CalorieDayModel> days;
 
     public double calcCaloriesBurnedNaturally() {
         double DCE = 0;
         if (gender == true) {
-            if (isMetric == true) {
+            if (!isImperial) {
                 DCE = ACTIVITY_LEVEL[(int) activityLevel] * ((13.75 * currWeightKilos) + (5 * heightCentimeters) - (6.76 * age) + 66);
             } else {
                 double feetToInches = heightFeetPart * 12;
@@ -93,7 +104,7 @@ public class ProfileModel {
             }
 
         } else {
-            if (isMetric == true) {
+            if (!isImperial) {
                 DCE = ACTIVITY_LEVEL[(int) activityLevel] * ((9.56 * currWeightKilos) + (1.85 * heightCentimeters) - (4.68 * age) + 655);
             } else {
                 double feetToInches = heightFeetPart * 12;
@@ -104,16 +115,12 @@ public class ProfileModel {
         return DCE;
     }
 
-    public boolean isMetric() {
-        return isMetric;
+    public void setImperial(boolean imperial) {
+        isImperial = imperial;
     }
 
-    public void setMetric(boolean metric) {
-        isMetric = metric;
-    }
-
-    public boolean getIsMetric() {
-        return isMetric;
+    public boolean getIsImperial() {
+        return isImperial;
     }
 
     public String getName() {
@@ -154,17 +161,7 @@ public class ProfileModel {
 
     public void setHeightCentimeters(double centimeters) {
         heightCentimeters = centimeters;
-
-//        double feet=(heightCentimeters*CENTIMETERS_TO_INCHES)/12;
-//        double inches=(heightCentimeters*CENTIMETERS_TO_INCHES)%12;
-//        setHeightWithFeetAndInches(feet,inches);
     }
-
-//    public void setHeightWithFeetAndInches(double feet, double inches){
-//        setHeightFeetPart(feet);
-//        setHeightInchesPart(inches);
-//        setHeightCentimeters((feet*FEET_TO_METERS)+(inches*INCHES_TO_CENTIMETERS));
-//    }
 
     public boolean isGender() {
         return gender;
@@ -211,13 +208,17 @@ public class ProfileModel {
 //        setCurrWeightPounds(kilosToPounds(getCurrWeightKilos()));
     }
 
-//    public List<CalorieDayModel> getDays() { return days; }
-//
-//    public void setDays(List<CalorieDayModel> days) { this.days = days; }
-//
-//    public void addDay(CalorieDayModel day){
-//        days.add(day);
-//    }
+    public HashMap<String,DayModel> getDays() { return days; }
+
+    public void setDays(HashMap<String,DayModel> days) { this.days = days; }
+
+    public void addDay(DayModel dayModel){
+        // Setting the day which this day represents
+        Date today=new Date();
+        SimpleDateFormat format= new SimpleDateFormat("MMddyyyy");
+        String date = format.format(today);
+        days.put(date,dayModel);
+    }
 
     public double calculateBMI() {
         return 10000 * (currWeightKilos / (heightCentimeters * heightCentimeters));

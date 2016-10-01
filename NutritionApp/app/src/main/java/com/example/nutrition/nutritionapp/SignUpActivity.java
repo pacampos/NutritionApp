@@ -102,7 +102,8 @@ public class SignUpActivity extends FragmentActivity {
                                     bundle.getDouble(MeasurementFragment.WAIST),
                                     bundle.getDouble(MeasurementFragment.THIGH),
                                     bundle.getDouble(MeasurementFragment.ARM),
-                                    bundle.getDouble(goalInformationFragment.ACTIVITY));
+                                    bundle.getDouble(goalInformationFragment.ACTIVITY),
+                                    bundle.getBoolean(signUpFragment.METRIC));
 
                             Intent i = new Intent(SignUpActivity.this, ActivityHome.class);
                             startActivity(i);

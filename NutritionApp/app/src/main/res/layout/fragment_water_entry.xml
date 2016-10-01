@@ -39,7 +39,7 @@
             android:textSize="18sp" />
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/cupImageView"
             android:layout_width="300dp"
             android:layout_height="86dp"
             android:layout_gravity="center_horizontal"
@@ -59,14 +59,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="number"
+                android:id="@+id/waterInput" />
 
             <Button
                 android:layout_width="132dp"
                 android:layout_height="wrap_content"
                 android:background="?attr/colorPrimary"
                 android:text="@string/log_water_button"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:id="@+id/logWaterButton" />
         </LinearLayout>
 
     </LinearLayout>

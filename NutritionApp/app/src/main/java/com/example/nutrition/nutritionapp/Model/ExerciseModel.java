@@ -8,14 +8,16 @@ public class ExerciseModel {
     private double calories;
     private double minutes;
     private String exerciseID;
+    private String exerciseType;
 
     public ExerciseModel() {
     }
 
-    public ExerciseModel(double calories, double minutes, String exerciseID) {
+    public ExerciseModel(double calories, double minutes, String exerciseID, String exerciseType) {
         this.calories = calories;
         this.minutes = minutes;
         this.exerciseID = exerciseID;
+        this.exerciseType=exerciseType;
     }
 
     public double getCalories() {
@@ -40,5 +42,13 @@ public class ExerciseModel {
 
     public void setExerciseID(String exerciseID) {
         this.exerciseID = exerciseID;
+    }
+
+    public String getExerciseType() {
+        return exerciseType;
+    }
+
+    public void setExerciseType(String exerciseType) {
+        this.exerciseType = exerciseType;
     }
 }

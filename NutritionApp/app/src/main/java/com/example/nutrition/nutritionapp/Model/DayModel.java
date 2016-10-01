@@ -2,6 +2,9 @@ package com.example.nutrition.nutritionapp.Model;
 
 import com.example.nutrition.nutritionapp.NutritionSingleton;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -9,17 +12,22 @@ import java.util.List;
  * for a single day which provides us with their net calorie gain.
  */
 
-public class CalorieDayModel {
+public class DayModel {
     public static String exerciseType = "Walking";
-    private List<FoodModel> foods;
-    private List<ExerciseModel> exercises;
-    private List<WaterModel> waters;
+    private ArrayList<FoodModel> foods;
+    private ArrayList<ExerciseModel> exercises;
+    private double waterAmountDrank;
     private double waterAmountGoal;
     private double exerciseCalorieGoal;
     private double foodCalorieGoal;
     private double caloriesBurnedExercising;
 
-    public CalorieDayModel() {
+    public DayModel() {
+        foods=new ArrayList<>();
+        foods.add(new FoodModel());
+        exercises=new ArrayList<>();
+        exercises.add(new ExerciseModel());
+        waterAmountDrank=0.0;
     }
 
     public void addFood(FoodModel food) {
@@ -30,8 +38,20 @@ public class CalorieDayModel {
         exercises.add(exercise);
     }
 
-    public void addWater(WaterModel water) {
-        waters.add(water);
+    public ArrayList<FoodModel> getFoods() {
+        return foods;
+    }
+
+    public void setFoods(ArrayList<FoodModel> foods) {
+        this.foods = foods;
+    }
+
+    public ArrayList<ExerciseModel> getExercises() {
+        return exercises;
+    }
+
+    public void setExercises(ArrayList<ExerciseModel> exercises) {
+        this.exercises = exercises;
     }
 
     //remove water, food, exercise, profile
@@ -40,7 +60,7 @@ public class CalorieDayModel {
         ProfileModel profile = NutritionSingleton.getInstance().getCurrProfile();
         //double hours = minutes from exercise model / 60
         double step1 = 0;// = NutritionSingleton.getInstance().getCurrProfile()
-        if (profile.getIsMetric() == true) {
+        if (profile.getIsImperial() == true) {
             step1 = profile.getCurrWeightKilos();
         } else {
             step1 = profile.getCurrWeightPounds() / 2.2;
@@ -66,27 +86,21 @@ public class CalorieDayModel {
         //caloriesBurnedExercising += step3 * hours;
     }
 
-    public int getTotalWater() {
-        int totalOunces = 0;
-        for (WaterModel water : waters) {
-            totalOunces += water.getOuncesDrank();
-        }
-
-        return totalOunces;
+    public double getWaterAmountDrank() {
+        return waterAmountDrank;
     }
 
-    public void removeWater(String id) {
-        WaterModel water = null;
-        for (int i = 0; i < waters.size(); ++i) {
-            if (waters.get(i).getWaterID() == id) {
-                water = waters.get(i);
-            }
-        }
-        if (water != null) {
-            waters.remove(water);
-        }
+    public void setWaterAmountDrank(double waterAmountDrank) {
+        this.waterAmountDrank = waterAmountDrank;
     }
 
+    public void addWaterAmount(double waterAmount){
+        setWaterAmountDrank(getWaterAmountDrank()+waterAmount);
+    }
+
+    public void addEightOuncesWaterAmount(){
+        setWaterAmountDrank(getWaterAmountDrank()+8.0);
+    }
 
     /* remove food, remove exercise */
 
@@ -131,4 +145,5 @@ public class CalorieDayModel {
     public void setFoodCalorieGoal(double foodCalorieGoal) {
         this.foodCalorieGoal = foodCalorieGoal;
     }
+
 }

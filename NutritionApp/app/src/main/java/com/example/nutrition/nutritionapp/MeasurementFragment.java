@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import static android.R.attr.defaultValue;
 
@@ -27,12 +28,12 @@ public class MeasurementFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         bundle = this.getArguments();
 
+        boolean isImperial = bundle.getBoolean(signUpFragment.METRIC);
         // Inflate the layout for this fragment
         final View v = inflater.inflate(R.layout.fragment_measurement, container, false);
 
@@ -41,10 +42,17 @@ public class MeasurementFragment extends Fragment {
         goToButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         final EditText armInput = (EditText) v.findViewById(R.id.armInput);
-
+        final TextView armTextView = (TextView) v.findViewById(R.id.armTextView);
         final EditText waistInput = (EditText) v.findViewById(R.id.waistInput);
-
+        final TextView waistTextView = (TextView) v.findViewById(R.id.waistTextView);
         final EditText thighInput = (EditText) v.findViewById(R.id.thighInput);
+        final TextView thighTextView = (TextView) v.findViewById(R.id.thighTextView);
+
+        if(isImperial){
+            armTextView.setText(R.string.arm_text_imperial);
+            waistTextView.setText(R.string.waist_text_imperial);
+            thighTextView.setText(R.string.thigh_text_imperial);
+        }
 
         ImageView icon = (ImageView) v.findViewById(R.id.secondPine);
 

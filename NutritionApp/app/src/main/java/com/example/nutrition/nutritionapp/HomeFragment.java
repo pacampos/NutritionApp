@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 
 public class HomeFragment extends Fragment {
@@ -26,6 +27,9 @@ public class HomeFragment extends Fragment {
         Button exerciseButton = (Button) v.findViewById(R.id.exerciseButton);
         Button waterEntryButton = (Button) v.findViewById(R.id.waterEntryButton);
         Button foodEntryButton = (Button) v.findViewById(R.id.foodDrinkEntrybutton);
+
+        
+
 
         exerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -78,7 +79,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_weight="1"
-                android:background="@drawable/cookie" />
+                android:background="@drawable/doughnut" />
 
             <Button
                 android:layout_width="match_parent"
@@ -86,7 +87,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_weight="1"
-                android:background="@drawable/cookie" />
+                android:background="@drawable/doughnut" />
 
             <Button
                 android:layout_width="match_parent"
@@ -94,7 +95,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_weight="1"
-                android:background="@drawable/cookie" />
+                android:background="@drawable/doughnut" />
         </LinearLayout>
 
         <LinearLayout
@@ -111,7 +112,7 @@
                 android:minWidth="0dp"
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="10.5sp"
-                tools:text="I ate no cookies!" />
+                tools:text="I ate no donuts!" />
         </LinearLayout>
 
         <LinearLayout
@@ -128,19 +129,20 @@
                 android:layout_height="34dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="50dp"
-                android:src="@drawable/food_entry" />
+                android:src="@drawable/food_entry"
+                android:id="@+id/@+id/hamburgerIcon" />
 
             <Button
                 android:id="@+id/foodDrinkEntrybutton"
-                android:layout_width="180dp"
+                android:layout_width="96dp"
                 android:layout_height="30dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
                 android:background="#52b7bd"
                 android:minHeight="25dp"
                 android:minWidth="0dp"
                 android:text="Food and Drink Entry"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:layout_weight="0.61"
+                android:layout_gravity="center_horizontal" />
 
         </LinearLayout>
 
@@ -158,11 +160,11 @@
                 android:layout_height="34dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="50dp"
-                android:src="@drawable/water_entry" />
+                android:src="@drawable/water_entry"
+                android:id="@+id/waterIcon" />
 
             <Button
                 android:id="@+id/waterEntryButton"
-                android:layout_width="180dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
@@ -170,7 +172,8 @@
                 android:minHeight="25dp"
                 android:minWidth="0dp"
                 android:text="Water Entry"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:layout_width="155dp" />
 
         </LinearLayout>
 
@@ -184,12 +187,12 @@
             android:paddingRight="70dp">
 
             <ImageView
-                android:id="@+id/imageView3"
                 android:layout_width="42dp"
                 android:layout_height="34dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="50dp"
-                android:src="@drawable/exercise_entry" />
+                android:src="@drawable/exercise_entry"
+                android:id="@+id/@+id/weightIcon" />
 
             <Button
                 android:id="@+id/exerciseButton"

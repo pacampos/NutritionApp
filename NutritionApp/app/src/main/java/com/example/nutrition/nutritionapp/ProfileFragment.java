@@ -1,5 +1,6 @@
 package com.example.nutrition.nutritionapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -61,8 +62,8 @@ public class ProfileFragment extends Fragment {
 
         progressButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                    Intent i = new Intent(getActivity(), ActivityHome.class);
-//                    startActivity(i);
+                    Intent i = new Intent(getActivity(), ProgressActivity.class);
+                    startActivity(i);
             }
         });
 

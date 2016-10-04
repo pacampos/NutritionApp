@@ -25,9 +25,7 @@ public class DayModel {
 
     public DayModel() {
         foods=new ArrayList<>();
-        foods.add(new FoodModel());
         exercises=new ArrayList<>();
-        exercises.add(new ExerciseModel());
         waterAmountDrank=0.0;
     }
 

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.nutrition.nutritionapp.Model.DayModel;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -22,7 +23,10 @@ import com.github.mikephil.charting.formatter.AxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class ProgressFragment extends Fragment {
 
@@ -41,14 +45,22 @@ public class ProgressFragment extends Fragment {
         BarChart chart = (BarChart) v.findViewById(R.id.chart);
 
         List<BarEntry> entries = new ArrayList<>();
+        HashMap<String, DayModel> dayMap = NutritionSingleton.getInstance().getCurrProfile().getDays();
+        Set<String> dayKeys = dayMap.keySet();
+        for(String key: dayKeys){
+            String month=key.substring(0,2);
+            String day= key.substring(2,4);
+            String year = key.substring(4);
+            Integer monthInt = Integer.parseInt(month);
+            Integer dayInt = Integer.parseInt(day);
+            Integer yearInt = Integer.parseInt(year);
+            Calendar today=Calendar.getInstance();
+            today.set(yearInt, monthInt-1, dayInt-1);
+            int dayOfYear=today.get(Calendar.DAY_OF_YEAR);
+            Double caloriesBurn=Double.valueOf(dayMap.get(key).calcTotalCaloriesBurned());
+            entries.add(new BarEntry(dayOfYear, caloriesBurn.intValue()));
 
-        entries.add(new BarEntry(1, 1));
-        entries.add(new BarEntry(2, 2));
-        entries.add(new BarEntry(3, 3));
-        entries.add(new BarEntry(4, 4));
-        entries.add(new BarEntry(5, 5));
-        entries.add(new BarEntry(6, 6));
-        entries.add(new BarEntry(7, 7));
+        }
 
         BarDataSet dataSet = new BarDataSet(entries, "Label");
         BarData barData = new BarData(dataSet);

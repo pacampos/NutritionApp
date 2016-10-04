@@ -2,6 +2,7 @@ package com.example.nutrition.nutritionapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -28,7 +29,7 @@ public class HomeFragment extends Fragment {
         Button waterEntryButton = (Button) v.findViewById(R.id.waterEntryButton);
         Button foodEntryButton = (Button) v.findViewById(R.id.foodDrinkEntrybutton);
 
-        
+
 
 
         exerciseButton.setOnClickListener(new View.OnClickListener() {
@@ -72,4 +73,5 @@ public class HomeFragment extends Fragment {
         transaction.commit();
     }
 
+    
 }

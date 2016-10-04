@@ -130,7 +130,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="50dp"
                 android:src="@drawable/food_entry"
-                android:id="@+id/@+id/hamburgerIcon" />
+                android:id="@+id/hamburgerIcon" />
 
             <Button
                 android:id="@+id/foodDrinkEntrybutton"
@@ -192,7 +192,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="50dp"
                 android:src="@drawable/exercise_entry"
-                android:id="@+id/@+id/weightIcon" />
+                android:id="@+id/weightIcon" />
 
             <Button
                 android:id="@+id/exerciseButton"

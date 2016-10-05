@@ -12,11 +12,23 @@ import android.widget.ImageView;
  */
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
+    // references to our images
+    private Integer[] mThumbIds = {
+            R.drawable.apple, R.drawable.pineapple,
+            R.drawable.orange, R.drawable.broccoli,
+            R.drawable.carrot, R.drawable.cherries,
+            R.drawable.salad, R.drawable.tomato,
+            R.drawable.mushrooms, R.drawable.watermelon,
+            R.drawable.strawberry, R.drawable.weight,
+            R.drawable.jump_rope, R.drawable.strength,
+            R.drawable.shoe, R.drawable.bicycle
+
+    };
+
 
     public ImageAdapter(Context c) {
         mContext = c;
     }
-
 
     public int getCount() {
         return mThumbIds.length;
@@ -48,18 +60,5 @@ public class ImageAdapter extends BaseAdapter {
         imageView.setImageResource(mThumbIds[position]);
         return imageView;
     }
-
-    // references to our images
-    private Integer[] mThumbIds = {
-            R.drawable.apple, R.drawable.pineapple,
-            R.drawable.orange, R.drawable.broccoli,
-            R.drawable.carrot, R.drawable.cherries,
-            R.drawable.salad, R.drawable.tomato,
-            R.drawable.mushrooms, R.drawable.watermelon,
-            R.drawable.strawberry, R.drawable.weight,
-            R.drawable.jump_rope, R.drawable.strength,
-            R.drawable.shoe, R.drawable.bicycle
-
-    };
 }
 

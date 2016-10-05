@@ -1,27 +1,29 @@
 package com.example.nutrition.nutritionapp.Model;
 
-import android.media.Image;
-
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by phoenixcampos01 on 9/8/16.
  */
 public class ProfileModel {
+    public static final double FEET_TO_METERS = 30.48;
+    public static final double INCHES_TO_CENTIMETERS = 2.54;
+    public static final double CENTIMETERS_TO_INCHES = 0.393701;
+    public static final double POUNDS_TO_KILOS = 0.453592;
+    public static final double[] ACTIVITY_LEVEL = {1.2, 1.55, 1.725};
     private double imagePos;
-    public static final double FEET_TO_METERS=30.48;
-    public static final double INCHES_TO_CENTIMETERS=2.54;
-    public static final double CENTIMETERS_TO_INCHES=0.393701;
-    public static final double POUNDS_TO_KILOS=0.453592;
-    public static final double [] ACTIVITY_LEVEL ={1.2,1.55,1.725};
     private String name;
     private double age;
     private double heightCentimeters;
     private double heightInchesPart;
     private double heightFeetPart;
     private boolean gender;
-    private boolean isMetric;
+    private boolean isImperial;
     private double currWeightPounds;
     private double currWeightKilos;
     private double goalWeightPounds;
@@ -36,6 +38,8 @@ public class ProfileModel {
     private double thighMeasureCentimeter;
     private double armMeasureCentimeter;
     private double activityLevel;
+    /* this models everyday this specific user inputs info within a day */
+    private HashMap<String,DayModel> days;
 
     public ProfileModel() {
     }
@@ -43,7 +47,7 @@ public class ProfileModel {
     public ProfileModel(double imagePos, String name, double age, double heightInchesPart,
                         double heightFeetPart, boolean gender, double currWeightPounds,
                         double goalWeightPounds, double dayBirth, double monthBirth, double yearBirth, double waistMeasureInches,
-                        double thighMeasureInches, double armMeasureInches, double activityLevel) {
+                        double thighMeasureInches, double armMeasureInches, double activityLevel, boolean isImperial) {
         this.imagePos = imagePos;
         this.name = name;
         this.age = age;
@@ -59,13 +63,16 @@ public class ProfileModel {
         this.thighMeasureInches = thighMeasureInches;
         this.armMeasureInches = armMeasureInches;
         this.activityLevel = activityLevel;
-        setMetric(true);
+        this.isImperial=isImperial;
+        days=new HashMap<>();
+        days.put("first test",new DayModel());
+        days.put("second test",new DayModel());
     }
 
     public ProfileModel(double imagePos, String name, double age, double heightCentimeters,
                         boolean gender, double currWeightKilos, double goalWeightKilos,
                         double dayBirth, double monthBirth, double yearBirth, double waistMeasureCentimeter,
-                        double thighMeasureCentimeter, double armMeasureCentimeter, double activityLevel) {
+                        double thighMeasureCentimeter, double armMeasureCentimeter, double activityLevel, boolean isImperial) {
         this.imagePos = imagePos;
         this.name = name;
         this.age = age;
@@ -80,53 +87,41 @@ public class ProfileModel {
         this.thighMeasureCentimeter = thighMeasureCentimeter;
         this.armMeasureCentimeter = armMeasureCentimeter;
         this.activityLevel = activityLevel;
-        setMetric(true);
+        this.isImperial=isImperial;
+        days=new HashMap<>();
+        addDay(new DayModel());
     }
 
-//    /* this models everyday this specific user inputs info within a day */
-//    private List<CalorieDayModel> days;
-
-    public double calcCaloriesBurnedNaturally(){
+    public double calcCaloriesBurnedNaturally() {
         double DCE = 0;
-        if(gender==true)
-        {
-            if(isMetric==true)
-            {
-                DCE = ACTIVITY_LEVEL[(int)activityLevel] * ((13.75 * currWeightKilos) + (5 * heightCentimeters) - (6.76 * age) + 66);
-            }
-            else
-            {
+        if (gender == true) {
+            if (!isImperial) {
+                DCE = ACTIVITY_LEVEL[(int) activityLevel] * ((13.75 * currWeightKilos) + (5 * heightCentimeters) - (6.76 * age) + 66);
+            } else {
                 double feetToInches = heightFeetPart * 12;
                 double totalHeightInches = heightInchesPart + feetToInches;
-                DCE = ACTIVITY_LEVEL[(int)activityLevel] * ((6.25 * currWeightPounds) + (12.7 * totalHeightInches) - (6.76 * age) + 66);
+                DCE = ACTIVITY_LEVEL[(int) activityLevel] * ((6.25 * currWeightPounds) + (12.7 * totalHeightInches) - (6.76 * age) + 66);
             }
 
-        }
-        else
-        {
-            if(isMetric==true)
-            {
-                DCE = ACTIVITY_LEVEL[(int)activityLevel] * ((9.56 * currWeightKilos) + (1.85 * heightCentimeters) - (4.68 * age) + 655);
-            }
-            else
-            {
+        } else {
+            if (!isImperial) {
+                DCE = ACTIVITY_LEVEL[(int) activityLevel] * ((9.56 * currWeightKilos) + (1.85 * heightCentimeters) - (4.68 * age) + 655);
+            } else {
                 double feetToInches = heightFeetPart * 12;
                 double totalHeightInches = heightInchesPart + feetToInches;
-                DCE = ACTIVITY_LEVEL[(int)activityLevel] * ((4.35 * currWeightPounds) + (4.7 * totalHeightInches) - (4.68 * age) + 655);
+                DCE = ACTIVITY_LEVEL[(int) activityLevel] * ((4.35 * currWeightPounds) + (4.7 * totalHeightInches) - (4.68 * age) + 655);
             }
         }
         return DCE;
     }
 
-    public boolean isMetric() {
-        return isMetric;
+    public void setImperial(boolean imperial) {
+        isImperial = imperial;
     }
 
-    public void setMetric(boolean metric) {
-        isMetric = metric;
+    public boolean getIsImperial() {
+        return isImperial;
     }
-
-    public boolean getIsMetric() { return isMetric; }
 
     public String getName() {
         return name;
@@ -152,33 +147,29 @@ public class ProfileModel {
         this.heightInchesPart = heightInchesPart;
     }
 
+    public double getHeightFeetPart() {
+        return heightFeetPart;
+    }
+
     private void setHeightFeetPart(double heightFeetPart) {
         this.heightFeetPart = heightFeetPart;
     }
 
-    public double getHeightFeetPart(){
-        return heightFeetPart;
+    public double getHeightCentimeters() {
+        return heightCentimeters;
     }
 
-    public double getHeightCentimeters(){ return heightCentimeters; }
-
-    public void setHeightCentimeters(double centimeters){
-        heightCentimeters=centimeters;
-
-//        double feet=(heightCentimeters*CENTIMETERS_TO_INCHES)/12;
-//        double inches=(heightCentimeters*CENTIMETERS_TO_INCHES)%12;
-//        setHeightWithFeetAndInches(feet,inches);
+    public void setHeightCentimeters(double centimeters) {
+        heightCentimeters = centimeters;
     }
 
-//    public void setHeightWithFeetAndInches(double feet, double inches){
-//        setHeightFeetPart(feet);
-//        setHeightInchesPart(inches);
-//        setHeightCentimeters((feet*FEET_TO_METERS)+(inches*INCHES_TO_CENTIMETERS));
-//    }
+    public boolean isGender() {
+        return gender;
+    }
 
-    public boolean isGender() { return gender; }
-
-    public void setGender(boolean gender) { this.gender = gender; }
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
 
 
     public double getGoalWeightPounds() {
@@ -199,29 +190,39 @@ public class ProfileModel {
 //        setGoalWeightPounds(kilosToPounds(getGoalWeightKilos()));
     }
 
-    public double getCurrWeightPounds() { return currWeightPounds; }
+    public double getCurrWeightPounds() {
+        return currWeightPounds;
+    }
 
     public void setCurrWeightPounds(double currWeightPounds) {
         this.currWeightPounds = currWeightPounds;
 //        setGoalWeightKilos(poundsToKilos(getCurrWeightPounds()));
     }
 
-    public double getCurrWeightKilos() { return currWeightKilos; }
+    public double getCurrWeightKilos() {
+        return currWeightKilos;
+    }
 
     public void setCurrWeightKilos(double currWeightKilos) {
         this.currWeightKilos = currWeightKilos;
 //        setCurrWeightPounds(kilosToPounds(getCurrWeightKilos()));
     }
 
-//    public List<CalorieDayModel> getDays() { return days; }
-//
-//    public void setDays(List<CalorieDayModel> days) { this.days = days; }
-//
-//    public void addDay(CalorieDayModel day){
-//        days.add(day);
-//    }
+    public HashMap<String,DayModel> getDays() { return days; }
 
-    public double calculateBMI(){ return currWeightKilos/(heightCentimeters*heightCentimeters); }
+    public void setDays(HashMap<String,DayModel> days) { this.days = days; }
+
+    public void addDay(DayModel dayModel){
+        // Setting the day which this day represents
+        Date today=new Date();
+        SimpleDateFormat format= new SimpleDateFormat("MMddyyyy");
+        String date = format.format(today);
+        days.put(date,dayModel);
+    }
+
+    public double calculateBMI() {
+        return 10000 * (currWeightKilos / (heightCentimeters * heightCentimeters));
+    }
 //
 //    /* update to create acceptable ranges for the BMI */
 //    public int getBMIHealth(){
@@ -252,12 +253,12 @@ public class ProfileModel {
         this.yearBirth = yearBirth;
     }
 
-    private double poundsToKilos(double pounds){
-        return pounds*POUNDS_TO_KILOS;
+    private double poundsToKilos(double pounds) {
+        return pounds * POUNDS_TO_KILOS;
     }
 
-    private double kilosToPounds(double kilos){
-        return kilos/POUNDS_TO_KILOS;
+    private double kilosToPounds(double kilos) {
+        return kilos / POUNDS_TO_KILOS;
     }
 
     public double getImagePos() {

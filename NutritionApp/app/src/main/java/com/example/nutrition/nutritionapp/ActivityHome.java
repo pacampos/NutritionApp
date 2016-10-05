@@ -15,15 +15,15 @@ public class ActivityHome extends AppCompatActivity {
 
 
         //get manager
-        FragmentManager fm= getSupportFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
         //get the ID/ location of where we want to load fragment
-        Fragment f=fm.findFragmentById(R.id.home_fragment_container);
+        Fragment f = fm.findFragmentById(R.id.home_fragment_container);
 
-        if(f==null){ // activity and fragment are created for the first time
+        if (f == null) { // activity and fragment are created for the first time
             f = new HomeFragment(); // instantiate Profile Fragment
             // create transaction
-            FragmentTransaction ft= fm.beginTransaction();
-            ft.add(R.id.home_fragment_container,f);
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.add(R.id.home_fragment_container, f);
             ft.commit();
         }
 

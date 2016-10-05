@@ -4,19 +4,15 @@ package com.example.nutrition.nutritionapp.Model;
  * Created by phoenixcampos01 on 9/8/16.
  */
 public class FoodModel {
-    public static final int GRAINS=0;
-    public static final int DAIRY=1;
-    public static final int FRUITS=2;
-    public static final int VEGGIES=3;
-    public static final int MEAT=4;
-    public static final int FATS=5;
-
-
+    public static final double GRAINS = 0.0;
+    public static final double DAIRY = 1.0;
+    public static final double FRUITS = 2.0;
+    public static final double VEGGIES = 3.0;
+    public static final double MEAT = 4.0;
+    public static final double FATS = 5.0;
     private String name;
     private double calories;
     private double servings;
-//    we need to uniquely identify every food item so we can remove it easily
-    private String foodID;
     private double foodType;
 //    Must decide how to split food into the food pyramid
 //    private enum FoodType
@@ -25,11 +21,10 @@ public class FoodModel {
     public FoodModel() {
     }
 
-    public FoodModel(String name, double calories, double servings, String foodID, double foodType) {
+    public FoodModel(String name, double calories, double servings, double foodType) {
         this.name = name;
         this.calories = calories;
         this.servings = servings;
-        this.foodID = foodID;
         this.foodType = foodType;
     }
 
@@ -57,19 +52,11 @@ public class FoodModel {
         this.servings = servings;
     }
 
-    public String getFoodID() {
-        return foodID;
-    }
-
-    public void setFoodID(String foodID) {
-        this.foodID = foodID;
-    }
-
     public double getFoodType() {
         return foodType;
     }
 
-    public void setFoodType(int foodType) {
+    public void setFoodType(double foodType) {
         this.foodType = foodType;
     }
 

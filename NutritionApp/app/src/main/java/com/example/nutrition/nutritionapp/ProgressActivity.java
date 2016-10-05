@@ -1,31 +1,29 @@
 package com.example.nutrition.nutritionapp;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProgressActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_progress);
 
         //get manager
         FragmentManager fm = getSupportFragmentManager();
         //get the ID/ location of where we want to load fragment
-        Fragment f = fm.findFragmentById(R.id.profile_fragment_container);
+        Fragment f = fm.findFragmentById(R.id.activity_progress_container);
 
         if (f == null) { // activity and fragment are created for the first time
-            f = new ProfileFragment(); // instantiate Profile Fragment
+            f = new ProgressFragment(); // instantiate Profile Fragment
             // create transaction
             FragmentTransaction ft = fm.beginTransaction();
-            ft.add(R.id.profile_fragment_container, f);
+            ft.add(R.id.activity_progress_container, f);
             ft.commit();
         }
-
     }
-
 }

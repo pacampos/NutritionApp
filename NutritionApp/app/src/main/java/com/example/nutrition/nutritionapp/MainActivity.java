@@ -1,15 +1,13 @@
 package com.example.nutrition.nutritionapp;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,13 +15,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity." ;
+    private static final String TAG = "MainActivity.";
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-//    Test Comment
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
+
+                    // TODO: this may be a way to enable persistence sign-in while the login token is valid
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
@@ -46,15 +45,15 @@ public class MainActivity extends AppCompatActivity {
         };
 
         //get manager
-        FragmentManager fm= getSupportFragmentManager();
-        //get the ID/ location of where we want to load fragment
-        Fragment f=fm.findFragmentById(R.id.welcome_fragment_container);
+        FragmentManager fm = getSupportFragmentManager();
+        //get the ID location of where we want to load fragment
+        Fragment f = fm.findFragmentById(R.id.welcome_fragment_container);
 
-        if(f==null){ // activity and fragment are created for the first time
+        if (f == null) { // activity and fragment are created for the first time
             f = new welcomeFragment(); // instantiate Profile Fragment
             // create transaction
-            FragmentTransaction ft= fm.beginTransaction();
-            ft.add(R.id.welcome_fragment_container,f);
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.add(R.id.welcome_fragment_container, f);
             ft.commit();
         }
 
@@ -74,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void signIn(String email, String password){
+    public void signIn(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -88,11 +87,9 @@ public class MainActivity extends AppCompatActivity {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
                             Toast.makeText(MainActivity.this, "Could not sign in",
                                     Toast.LENGTH_SHORT).show();
-                        }
-
-                        else{
-                            Toast.makeText(MainActivity.this,"Signed In", Toast.LENGTH_SHORT).show();
-                            mAuth=FirebaseAuth.getInstance();
+                        } else {
+                            Toast.makeText(MainActivity.this, "Signed In", Toast.LENGTH_SHORT).show();
+                            mAuth = FirebaseAuth.getInstance();
                             NutritionSingleton.getInstance().SetUser(mAuth.getCurrentUser());
                             Intent i = new Intent(MainActivity.this, ActivityHome.class);
                             startActivity(i);
@@ -101,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
-
 
 
 }

@@ -12,15 +12,18 @@
     <!-- Sign up !-->
     <string name="create_text">Create a User!</string>
     <string name="age_text">Date of Birth</string>
-    <string name="weight_text">Current Weight (kg)</string>
-    <string name="height_text">Current Height (cm)</string>
+    <string name="weight_text_metric">Current Weight (kg)</string>
+    <string name="weight_text_imperial">Current Weight (lbs)</string>
+    <string name="height_text_metric">Current Height (cm)</string>
+    <string name="height_text_imperial">Current Height (feet and inches)</string>
     <string name="gender_text">Gender</string>
     <string name="male_text">Male</string>
     <string name="female_text">Female</string>
     <string name="avatar_text">Select an Avatar</string>
 
     <string name="goal_title">100 Day Goal</string>
-    <string name="goalWeight_text">Goal Weight (kg)</string>
+    <string name="goalWeight_text_metric">Goal Weight (kg)</string>
+    <string name="goalWeight_text_imperial">Goal Weight (lbs)</string>
     <string name="goalExercise_text">Exercise Goal</string>
     <string name="exercise_placeholder">Hours per Day</string>
     <string name="activityLevel_title">Average Daily Activity Level</string>
@@ -35,9 +38,12 @@
 
     <!-- Measurements Page !-->
     <string name="measurements_title">Measurements</string>
-    <string name="arm_text">Arm</string>
-    <string name="waist_text">Waist</string>
-    <string name="thigh_text">Thigh</string>
+    <string name="arm_text_imperial">Arm (inches)</string>
+    <string name="waist_text_imperial">Waist (inches)</string>
+    <string name="thigh_text_imperial">Thigh (inches)</string>
+    <string name="arm_text_metric">Arm (cm)</string>
+    <string name="waist_text_metric">Waist (cm)</string>
+    <string name="thigh_text_metric">Thigh (cm)</string>
 
     <!-- Profile Page !-->
     <string name="bmi_text">Current BMI</string>
@@ -101,6 +107,10 @@
     <string name="logout_text">Logout</string>
     <string name="username_text">Email</string>
     <string name="password_text">Password</string>
+    <string name="confirm_password_text">Confirm Password</string>
+    <string name="metric_unit_label">Metric</string>
+    <string name="imperial_unit_label">Imperial</string>
+    <string name="unit_switch_label">Units</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

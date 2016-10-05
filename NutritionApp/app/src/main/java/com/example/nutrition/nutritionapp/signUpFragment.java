@@ -4,31 +4,29 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class signUpFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
-    public static String EMAIL="com.example.nutritionapp.username";
-    public static String PASSWORD="com.example.nutritionapp.password";
+    public static String EMAIL = "com.example.nutritionapp.username";
+    public static String PASSWORD = "com.example.nutritionapp.password";
     public static String NAME = "com.example.nutritionapp.name";
     public static String GENDER = "com.example.nutritionapp.gender";
     public static String IMAGE_POS = "com.example.nutritionapp.image_pos";
@@ -36,22 +34,21 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
     public static String BIRTH_MONTH = "com.example.nutritionapp.birth_month";
     public static String BIRTH_YEAR = "com.example.nutritionapp.birth_year";
     public static String AGE = "com.example.nutritionapp.age";
-
+    public static String METRIC = "com.example.nutritionapp.metric";
+    EditText dobInput;
     private CheckableImageView clickedImage;
     private int clickedImagePosition = -1;
     private int _day;
     private int _month;
     private int _birthYear;
-    EditText dobInput;
-
     private String date;
     private int age = 0;
     private String email;
     private String password;
+    private String confirmPassword;
     private String name;
+    private boolean isImperial = false;
     private boolean gender = true;
-
-
 
 
     public signUpFragment() {
@@ -71,15 +68,13 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       final View v = inflater.inflate(R.layout.fragment_sign_up, container, false);
+        final View v = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
         // Get references
         Button nextButton = (Button) v.findViewById(R.id.nextButton);
         nextButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         dobInput = (EditText) v.findViewById(R.id.dobInput);
         final GridView gridView = (GridView) v.findViewById(R.id.gridview);
-
-
         // Set ImageAdapter to the GridView
         ImageAdapter imageAdapter = new ImageAdapter(getActivity());
         gridView.setAdapter(imageAdapter);
@@ -88,12 +83,12 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               CheckableImageView imageView = (CheckableImageView) gridView.getChildAt(position);
+                CheckableImageView imageView = (CheckableImageView) gridView.getChildAt(position);
                 imageView.toggle(clickedImage, clickedImagePosition, position);
                 clickedImage = imageView;
                 clickedImagePosition = position;
             }
-            });
+        });
 
         // set dob edit text to be clickable
         dobInput.setFocusable(false);
@@ -102,6 +97,7 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
         dobInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dobInput.setError(null);
                 Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
                 DatePickerDialog dialog = new DatePickerDialog(getActivity(), signUpFragment.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
@@ -121,11 +117,20 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
 
         // Password
         final EditText passInput = (EditText) v.findViewById(R.id.passwordInput);
-
+        final EditText confirmPassInput = (EditText) v.findViewById(R.id.confirmPasswordEditText);
 
         // Gender
         final RadioButton maleButton = (RadioButton) v.findViewById(R.id.maleButton);
         maleButton.setChecked(true);
+
+        // Switch
+        Switch unitSwitch = (Switch) v.findViewById(R.id.unitSwitch);
+        unitSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isImperial =isChecked;
+            }
+        });
 
 
         // Next button
@@ -135,26 +140,52 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
                 name = nameInput.getText().toString();
                 email = usernameInput.getText().toString();
                 password = passInput.getText().toString();
+                confirmPassword = confirmPassInput.getText().toString();
                 if (maleButton.isChecked()) {
                     gender = true;
                 } else {
                     gender = false;
                 }
+
                 age = getAge(_birthYear, _month, _day);
-                if(name.length() == 0 || email.length() == 0 || password.length() == 0 || dobInput.length() == 0 || clickedImagePosition == -1) {
-                    Toast.makeText(getActivity(),"Please fill in all fields", Toast.LENGTH_SHORT).show();
-                } else {
+                if (name.length() == 0 || email.length() == 0 || password.length() == 0 || confirmPassword.length() == 0|| dobInput.length() == 0 || clickedImagePosition == -1) {
+                    Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                }
+
+//                else if(!isValidDate(date)){
+//                    Toast.makeText(getActivity(), "Invalid date format", Toast.LENGTH_SHORT).show();
+//                }
+                /* check if email is valid */
+                else if(!isValidEmail(email)){
+//                    Toast.makeText(getActivity(), "Please type in a valid email", Toast.LENGTH_SHORT).show();
+                    usernameInput.setError("Invalid format");
+
+                }
+
+                /* check if password is secure */
+                else if(!isValidPassword(password)){
+//                    Toast.makeText(getActivity(), "Password must be a minimum 8 characters with at" +
+//                            " least 1 Uppercase Alphabet, 1 Lowercase Alphabet and 1 Number", Toast.LENGTH_SHORT).show();
+                    passInput.setError("Password must be a minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet and 1 Number");
+                }
+
+                else if(!password.equals(confirmPassword)){
+//                    Toast.makeText(getActivity(), "Your passwords do not match. Please try again.",Toast.LENGTH_SHORT).show();
+                    confirmPassInput.setError("Passwords do not match. Please try again.");
+                }
+                else {
                     Fragment fragment = new goalInformationFragment();
-                    Bundle data= new Bundle();
-                    data.putString(EMAIL,email);
+                    Bundle data = new Bundle();
+                    data.putString(EMAIL, email);
                     data.putString(PASSWORD, password);
                     data.putString(NAME, name);
-                    data.putBoolean(GENDER,gender);
+                    data.putBoolean(GENDER, gender);
                     data.putDouble(IMAGE_POS, clickedImagePosition);
-                    data.putDouble(BIRTH_DATE,_day);
+                    data.putDouble(BIRTH_DATE, _day);
                     data.putDouble(BIRTH_MONTH, _month);
                     data.putDouble(BIRTH_YEAR, _birthYear);
                     data.putDouble(AGE, age);
+                    data.putBoolean(METRIC, isImperial);
                     fragment.setArguments(data);
                     replaceFragment(fragment);
                 }
@@ -172,7 +203,8 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
         dobInput.setText(date);
 
     }
-    private int getAge(int year, int month, int day){
+
+    private int getAge(int year, int month, int day) {
         Calendar dob = Calendar.getInstance();
         Calendar today = Calendar.getInstance();
 
@@ -180,7 +212,7 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
 
         int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
 
-        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
             age--;
         }
 
@@ -192,6 +224,37 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
         transaction.replace(R.id.fragment_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    public final static boolean isValidEmail(CharSequence target) {
+        if (TextUtils.isEmpty(target)) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        }
+    }
+
+    public boolean isValidPassword(final String password) {
+
+        Pattern pattern;
+        Matcher matcher;
+
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$";
+
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+    }
+
+    public boolean isValidDate(final String date){
+        Pattern pattern;
+        Matcher matcher;
+        final String DATE_PATTERN = "^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2}$";
+        pattern = Pattern.compile(DATE_PATTERN);
+        matcher = pattern.matcher(date);
+
+        return matcher.matches();
     }
 }
 

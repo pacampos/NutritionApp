@@ -4,96 +4,93 @@
     android:layout_height="match_parent"
     tools:context="com.example.nutrition.nutritionapp.LoginFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="150dp">
+        android:layout_marginTop="150dp"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
 
             <TextView
-                android:text="@string/welcome_back"
+                android:id="@+id/textView21"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView21"
                 android:layout_weight="1"
+                android:text="@string/welcome_back"
                 android:textAlignment="center"
                 android:textSize="25sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-          >
+            android:orientation="horizontal">
 
             <TextView
-                android:text="@string/username_text"
+                android:id="@+id/textView22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView22"
-                android:layout_weight="1"
                 android:layout_marginLeft="40dp"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="@string/username_text" />
 
             <EditText
+                android:id="@+id/usernameInput1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/usernameInput1"
+                android:layout_marginRight="40dp"
                 android:layout_weight="1"
-                android:layout_marginRight="40dp" />
+                android:ems="10"
+                android:inputType="textPersonName" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
-                android:text="@string/password_text"
+                android:id="@+id/textView23"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView23"
-                android:layout_weight="1"
                 android:layout_marginLeft="40dp"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="@string/password_text" />
 
             <EditText
+                android:id="@+id/passwordInput1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:id="@+id/passwordInput1"
-                android:ems="10"
+                android:layout_marginRight="40dp"
                 android:layout_weight="1"
-                android:layout_marginRight="40dp" />
+                android:ems="10"
+                android:inputType="textPassword" />
         </LinearLayout>
 
         <Button
-            android:text="@string/login_text"
+            android:id="@+id/loginButton1"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:id="@+id/loginButton1"
-            android:textColor="@color/white"
-            android:layout_marginTop="40dp" />
+            android:layout_marginTop="40dp"
+            android:text="@string/login_text"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
-        android:theme="?attr/actionBarTheme"
         android:minHeight="?attr/actionBarSize"
-        android:id="@+id/toolbar2" />
+        android:theme="?attr/actionBarTheme" />
 </FrameLayout>

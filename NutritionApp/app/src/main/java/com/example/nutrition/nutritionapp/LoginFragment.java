@@ -1,8 +1,5 @@
 package com.example.nutrition.nutritionapp;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,6 +12,7 @@ public class LoginFragment extends Fragment {
     public LoginFragment() {
         // Required empty public constructor
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -31,7 +29,7 @@ public class LoginFragment extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).signIn(usernameInput.getText().toString(),passwordInput.getText().toString());
+                ((MainActivity) getActivity()).signIn(usernameInput.getText().toString(), passwordInput.getText().toString());
 
 
             }

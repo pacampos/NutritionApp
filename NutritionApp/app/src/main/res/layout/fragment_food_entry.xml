@@ -31,12 +31,13 @@
 
         <SearchView
             android:layout_width="match_parent"
-            android:layout_height="59dp">
+            android:layout_height="59dp"
+            android:id="@+id/search_bar_food">
 
         </SearchView>
 
         <TextView
-            android:id="@+id/textView27"
+            android:id="@+id/textview_serving_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="30dp"
@@ -46,7 +47,7 @@
             android:textSize="18sp" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spinner_food_servings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -57,7 +58,7 @@
             android:prompt="@string/spinner_title" />
 
         <Button
-            android:id="@+id/logFoodButton"
+            android:id="@+id/button_log_food"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

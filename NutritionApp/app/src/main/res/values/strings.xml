@@ -55,7 +55,7 @@
     <string name="water_entry_info">Please click the cup for every 8 oz consumed, or enter yourself!</string>
     <string name="log_water_button">Log Water</string>
 
-    <!-- Food Entry Page !-->
+    <!-- com.example.nutrition.nutritionapp.Model.Food Entry Page !-->
     <string name="food_entry_title">Food Entry</string>
     <string name="food_entry_info">Please browse for the food or beverage consumed</string>
     <string name="serving_size">Select your serving size</string>

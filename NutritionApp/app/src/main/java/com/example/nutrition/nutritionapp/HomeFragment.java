@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-                alertDialog.setTitle("Food Entry");
+                alertDialog.setTitle("com.example.nutrition.nutritionapp.Model.Food Entry");
                 alertDialog.setMessage("Input and log your meals here.");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                         new DialogInterface.OnClickListener() {

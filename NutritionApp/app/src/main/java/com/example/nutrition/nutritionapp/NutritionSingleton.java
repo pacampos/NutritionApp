@@ -180,7 +180,11 @@ public class NutritionSingleton {
     }
 
     public void addFood(FoodModel food){
-
+        currDay.addFood(food);
+        Map<String,Object> updateChildren=new HashMap<>();
+        updateChildren.put(String.valueOf(currDay.getFoods().size()-1),food);
+        mFirebaseDatabaseReference.child(USERS_CHILD).
+                child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).child("foods").updateChildren(updateChildren);
     }
 
     public void updateWater(double water){

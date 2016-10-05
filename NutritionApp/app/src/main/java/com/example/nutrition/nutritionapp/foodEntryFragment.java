@@ -7,11 +7,17 @@ import android.support.v4.widget.TextViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.nutrition.nutritionapp.Model.CompactFood;
+import com.example.nutrition.nutritionapp.Model.Food;
+import com.example.nutrition.nutritionapp.Model.FoodModel;
+import com.example.nutrition.nutritionapp.Model.Serving;
 import com.example.nutrition.nutritionapp.fatservices.FoodService;
 import com.example.nutrition.nutritionapp.fatservices.Response;
 
@@ -26,6 +32,8 @@ public class foodEntryFragment extends Fragment {
     TextView textView;
     String API_SECRET= "118c4828b97848de9d1576137f9541b1";
     String API_CONSUMER = "739bfa1b0dd3407882ac1b24c5be4167";
+    double servings []={ 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2, 5, 10};
+    int servingPos=0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,16 +43,25 @@ public class foodEntryFragment extends Fragment {
         Button foodEntryButton = (Button) v.findViewById(R.id.button_log_food);
         final android.widget.SearchView searchView = (SearchView) v.findViewById(R.id.search_bar_food);
         textView= (TextView) v.findViewById(R.id.textview_serving_size);
+        Spinner servingSpinner = (Spinner) v.findViewById(R.id.spinner_food_servings);
+        servingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                servingPos=position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         foodEntryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String query=searchView.getQuery().toString();
                 if(!query.isEmpty()){
-
                     new MyTask().execute(query);
-
-
                 }
             }
         });
@@ -55,7 +72,8 @@ public class foodEntryFragment extends Fragment {
 
     private class MyTask extends AsyncTask<String, Integer, String> {
 
-        List<CompactFood> listFoods;
+        Food foodItem;
+        CompactFood compactFood;
         // Runs in UI before background thread is called
         @Override
         protected void onPreExecute() {
@@ -72,7 +90,9 @@ public class foodEntryFragment extends Fragment {
             FoodService userFood= new FoodService(API_CONSUMER,API_SECRET);
             Response<CompactFood> foods=userFood.searchFoods(query);
             if(foods != null){
-              listFoods=foods.getResults();
+                List<CompactFood> listFoods=foods.getResults();
+                 compactFood = listFoods.get(0);
+                foodItem=userFood.getFood(compactFood.getId());
                 return "results";
             }
 
@@ -91,8 +111,18 @@ public class foodEntryFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute("result");
-            textView.setText( listFoods.get(0).getName());
+            if(foodItem!=null){
+                List<Serving> foodServingList=foodItem.getServings();
+                Serving serving=foodServingList.get(0);
+                String name=compactFood.getName();
+                double calories=serving.getCalories().doubleValue();
+                double servingNum = servings[servingPos];
+                String foodType = "Food";
+                NutritionSingleton.getInstance().addFood(new FoodModel(name, calories, servingNum, 1.0));
+                Toast.makeText(getActivity(), "New Food item was added.", Toast.LENGTH_SHORT).show();
+            }
 
+//
             // Do things like hide the progress bar or change a TextView
         }
     }

@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.nutrition.nutritionapp.Model.DayModel;
 import com.example.nutrition.nutritionapp.Model.ExerciseModel;
@@ -73,10 +74,12 @@ public class ExerciseFragment extends Fragment {
                 DayModel day = NutritionSingleton.getInstance().getCurrDay();
                 if(profile.getIsImperial()){
                     NutritionSingleton.getInstance().addExercise(new ExerciseModel(profile.getIsImperial(),duration,exerciseType,profile.getCurrWeightPounds()));
+                    Toast.makeText(getActivity(), "Added Exercise Sucessfully", Toast.LENGTH_SHORT).show();
                 }
 
                 else{
                     NutritionSingleton.getInstance().addExercise(new ExerciseModel(profile.getIsImperial(),duration,exerciseType,profile.getCurrWeightKilos()));
+                    Toast.makeText(getActivity(), "Added Exercise Successfully", Toast.LENGTH_SHORT).show();
                 }
             }
         });

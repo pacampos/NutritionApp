@@ -2,6 +2,7 @@ package com.example.nutrition.nutritionapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,9 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View v = inflater.inflate(R.layout.fragment_profile, container, false);
+        final View v = inflater.inflate(R.layout.fragment_material_profile, container, false);
+
+
 
         // get references
         TextView nameProfile = (TextView) v.findViewById(R.id.nameProfile);
@@ -42,6 +45,11 @@ public class ProfileFragment extends Fragment {
 
 
         ProfileModel model = singleton.getCurrProfile();
+        CollapsingToolbarLayout collapsingToolbar =
+                (CollapsingToolbarLayout) v.findViewById(R.id.toolbar_layout);
+        collapsingToolbar.setTitle(model.getName()+"s Profile");
+        collapsingToolbar.setExpandedTitleTextAppearance(R.style.expandedappbar);
+        collapsingToolbar.setCollapsedTitleTextAppearance(R.style.collapsedappbar);
 
         nameProfile.setText(model.getName());
         height.setText(String.valueOf(model.getHeightCentimeters()));
@@ -66,6 +74,8 @@ public class ProfileFragment extends Fragment {
                     startActivity(i);
             }
         });
+
+
 
         return v;
     }

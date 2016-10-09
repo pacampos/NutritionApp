@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import static android.R.attr.id;
+import static android.R.attr.start;
 
 
 public class HomeFragment extends Fragment {
@@ -112,8 +113,8 @@ public class HomeFragment extends Fragment {
         foodEntryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new foodEntryFragment();
-                replaceFragment(fragment);
+                Intent i=new Intent(getActivity(), FoodActivity.class);
+                startActivity(i);
             }
         });
         return v;

@@ -1,10 +1,13 @@
 package com.example.nutrition.nutritionapp;
 
+import android.animation.ObjectAnimator;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,6 +17,9 @@ import android.widget.Toast;
 import com.example.nutrition.nutritionapp.Model.DayModel;
 
 public class waterEntryFragment extends Fragment {
+    private WaveHelper mWaveHelper;
+    private int mBorderColor = Color.parseColor("#44FFFFFF");
+    private int mBorderWidth = 10;
     public waterEntryFragment() {
         // Required empty public constructor
     }
@@ -31,6 +37,12 @@ public class waterEntryFragment extends Fragment {
         DayModel currDay = NutritionSingleton.getInstance().getCurrDay();
         double water= currDay.getWaterAmountDrank();
         waterDrankTextView.setText(String.valueOf(water));
+
+        final WaveView waveView = (WaveView) v.findViewById(R.id.wave);
+        mWaveHelper = new WaveHelper(waveView);
+        waveView.setShapeType(WaveView.ShapeType.CIRCLE);
+        waveView.setBorder(mBorderWidth, mBorderColor);
+        waveView.invalidate();
 
         waterEntryButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +64,21 @@ public class waterEntryFragment extends Fragment {
                 waterDrankTextView.setText(String.valueOf(day.getWaterAmountDrank()));
             }
         });
+
+
         // Inflate the layout for this fragment
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mWaveHelper.cancel();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mWaveHelper.start();
     }
 }

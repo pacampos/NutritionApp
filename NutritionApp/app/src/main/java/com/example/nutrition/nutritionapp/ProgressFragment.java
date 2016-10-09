@@ -4,7 +4,9 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -20,15 +22,20 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.AxisValueFormatter;
+import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
-public class ProgressFragment extends Fragment {
+public class ProgressFragment extends Fragment  {
+    private BarChart chart;
 
     public ProgressFragment() {
         // Required empty public constructor
@@ -42,9 +49,10 @@ public class ProgressFragment extends Fragment {
 
 
         // BarChart
-        BarChart chart = (BarChart) v.findViewById(R.id.chart);
+         chart = (BarChart) v.findViewById(R.id.chart);
 
         List<BarEntry> entries = new ArrayList<>();
+        TreeMap<Integer, Integer> thingies = new TreeMap<>();
         HashMap<String, DayModel> dayMap = NutritionSingleton.getInstance().getCurrProfile().getDays();
         Set<String> dayKeys = dayMap.keySet();
         for(String key: dayKeys){
@@ -58,8 +66,11 @@ public class ProgressFragment extends Fragment {
             today.set(yearInt, monthInt-1, dayInt-1);
             int dayOfYear=today.get(Calendar.DAY_OF_YEAR);
             Double caloriesBurn=Double.valueOf(dayMap.get(key).calcTotalCaloriesBurned());
-            entries.add(new BarEntry(dayOfYear, caloriesBurn.intValue()));
+            thingies.put(dayOfYear, caloriesBurn.intValue());
+        }
 
+        for (Map.Entry<Integer, Integer> entry : thingies.entrySet()) {
+            entries.add(new BarEntry(entry.getKey(), entry.getValue()));
         }
 
         BarDataSet dataSet = new BarDataSet(entries, "Label");
@@ -82,17 +93,31 @@ public class ProgressFragment extends Fragment {
         XAxis xAxis = chart.getXAxis();
         xAxis.setDrawGridLines(false);
 
+        chart.setTouchEnabled(true);
+
         AxisValueFormatter xAxisFormatter = new DayAxisValueFormatter(chart);
         xAxis.setValueFormatter(xAxisFormatter);
+
+        // Interval of 1 day
+      //  xAxis.setGranularity(1f);
 
         chart.setScaleYEnabled(false);
         chart.setPinchZoom(true);
 
+       // barData.setDrawValues(false);
         YAxis yAxis = chart.getAxisLeft();
         yAxis.setDrawGridLines(false);
 
+        // Pushes the graph down to 0
+        yAxis.setAxisMinValue(0f);
+
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+
+        chart.setNoDataText("There is no data available.");
+
+        //CustomMarkerView mv = new CustomMarkerView (getActivity(), R.layout.fragment_progress);
+        //chart.setMarkerView(mv);
 
         chart.animateY(2000);
         chart.invalidate();

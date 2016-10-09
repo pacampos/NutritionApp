@@ -23,6 +23,7 @@ public class welcomeFragment extends Fragment {
         // Get references to elements on page
         Button signupButton = (Button) v.findViewById(R.id.signupButton);
         Button loginButton = (Button) v.findViewById(R.id.loginButton);
+        Button testButton = (Button) v.findViewById(R.id.testButton);
         signupButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         loginButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
@@ -42,6 +43,15 @@ public class welcomeFragment extends Fragment {
                 replaceFragment(fragment);
             }
         });
+
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).signIn("hailey@usc.edu", "The_metheagle1");
+            }
+        });
+
+
         return v;
     }
 

@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nutrition.nutritionapp.Model.DayModel;
-import com.example.nutrition.nutritionapp.libs.WaveView;
 
 public class waterEntryFragment extends Fragment {
     private WaveHelper mWaveHelper;

@@ -10,8 +10,6 @@ import android.animation.ValueAnimator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
-import com.example.nutrition.nutritionapp.libs.WaveView;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,25 +1,25 @@
 package com.example.nutrition.nutritionapp;
 
-import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.nutrition.nutritionapp.Model.DayModel;
+import com.example.nutrition.nutritionapp.libs.WaveView;
 
 public class waterEntryFragment extends Fragment {
     private WaveHelper mWaveHelper;
-    private int mBorderColor = Color.parseColor("#44FFFFFF");
-    private int mBorderWidth = 10;
+    private int mBorderColor = Color.LTGRAY;
+    private int mBorderWidth = 1;
+    public WaveView waveView;
     public waterEntryFragment() {
         // Required empty public constructor
     }
@@ -38,12 +38,20 @@ public class waterEntryFragment extends Fragment {
         double water= currDay.getWaterAmountDrank();
         waterDrankTextView.setText(String.valueOf(water));
 
-        final WaveView waveView = (WaveView) v.findViewById(R.id.wave);
+        waveView = (WaveView) v.findViewById(R.id.wave);
         mWaveHelper = new WaveHelper(waveView);
-        waveView.setShapeType(WaveView.ShapeType.CIRCLE);
-        waveView.setBorder(mBorderWidth, mBorderColor);
-        waveView.setWaveColor(WaveView.DEFAULT_BEHIND_WAVE_COLOR,
-                WaveView.DEFAULT_FRONT_WAVE_COLOR);
+
+        waveView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                waveView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                waveView.setWaveColor(Color.WHITE,Color.BLUE);
+                waveView.setShapeType(WaveView.ShapeType.SQUARE);
+                waveView.setBorder(mBorderWidth, mBorderColor);
+
+            }
+        });
+
 
         waterEntryButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -221,7 +221,7 @@ public class ProfileModel {
     }
 
     public double calculateBMI() {
-        return 10000 * (currWeightKilos / (heightCentimeters * heightCentimeters));
+        return  (currWeightKilos / ((heightCentimeters/100) * (heightCentimeters/100)));
     }
 //
 //    /* update to create acceptable ranges for the BMI */

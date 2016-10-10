@@ -42,6 +42,7 @@ public class ProfileFragment extends Fragment {
         final TextView calorieCount = (TextView) v.findViewById(R.id.calorieCount);
         final TextView bmi = (TextView) v.findViewById(R.id.bmi);
         ImageView icon = (ImageView) v.findViewById(R.id.profileImage);
+        TextView nameProfile = (TextView) v.findViewById(R.id.nameProfile);
 
         final TextView currentWeightLabel = (TextView) v.findViewById(R.id.profileCurrentWeightTextView);
         final TextView currentHeightLabel = (TextView) v.findViewById(R.id.profileCurrentHeightLabel);
@@ -129,8 +130,8 @@ public class ProfileFragment extends Fragment {
                         currentWeight.setText(currWeight);
                         targetWeight.setText(goalWeight);
 
-                        bmi.setText(String.valueOf((int) NutritionSingleton.getInstance().getCurrProfile().calculateBMI()));
-                        calorieCount.setText(String.valueOf((int) NutritionSingleton.getInstance().getCurrProfile().calcCaloriesBurnedNaturally()));
+                        bmi.setText(String.valueOf((int) singleton.getCurrProfile().calculateBMI()));
+                        calorieCount.setText(String.valueOf((int) singleton.getCurrProfile().calcCaloriesBurnedNaturally()));
 
                         height.setVisibility(View.VISIBLE);
                         currentWeight.setVisibility(View.VISIBLE);
@@ -165,7 +166,7 @@ public class ProfileFragment extends Fragment {
         collapsingToolbar.setTitle(model.getName()+"'s Profile");
         collapsingToolbar.setExpandedTitleTextAppearance(R.style.expandedappbar);
         collapsingToolbar.setCollapsedTitleTextAppearance(R.style.collapsedappbar);
-
+        nameProfile.setText(model.getName());
         height.setText(String.valueOf(model.getHeightCentimeters()));
         currentWeight.setText(String.valueOf(model.getCurrWeightKilos()));
         targetWeight.setText(String.valueOf(model.getGoalWeightKilos()));

@@ -1,5 +1,8 @@
 package com.example.nutrition.nutritionapp;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Calendar;
 
 public class SignUpActivity extends FragmentActivity {
     private static String TAG = "SignupActivity.";
@@ -106,6 +111,13 @@ public class SignUpActivity extends FragmentActivity {
                                     bundle.getBoolean(signUpFragment.METRIC));
 
                             Intent i = new Intent(SignUpActivity.this, ActivityHome.class);
+                            Calendar sevendayalarm = Calendar.getInstance();
+                            sevendayalarm.add(Calendar.HOUR_OF_DAY, 20);
+                            Intent intent = new Intent(getApplicationContext(), Receiver.class);
+                            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
+
+                            AlarmManager am = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+                            am.setRepeating(AlarmManager.RTC_WAKEUP,sevendayalarm.getTimeInMillis(), 1000*60*24*10,pendingIntent);
                             startActivity(i);
                         }
 

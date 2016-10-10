@@ -42,7 +42,8 @@ public class waterEntryFragment extends Fragment {
         mWaveHelper = new WaveHelper(waveView);
         waveView.setShapeType(WaveView.ShapeType.CIRCLE);
         waveView.setBorder(mBorderWidth, mBorderColor);
-        waveView.invalidate();
+        waveView.setWaveColor(WaveView.DEFAULT_BEHIND_WAVE_COLOR,
+                WaveView.DEFAULT_FRONT_WAVE_COLOR);
 
         waterEntryButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,12 +74,12 @@ public class waterEntryFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        mWaveHelper.cancel();
+        mWaveHelper.start();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mWaveHelper.start();
+        mWaveHelper.cancel();
     }
 }

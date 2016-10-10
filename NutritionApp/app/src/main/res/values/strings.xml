@@ -80,6 +80,11 @@
     <string name="record_text">Record my Exercise</string>
     <string name="exercise_journal">View my Exercise Journal </string>
 
+    <!-- Exercise Journal !-->
+    <string name="journal_title">Exercise Journal</string>
+    <string name="today_calories">Calories Burned Today</string>
+    <string name="total_burned">Daily Total</string>
+
     <!-- Home Page !-->
     <string name="profileButton">Profile</string>
 

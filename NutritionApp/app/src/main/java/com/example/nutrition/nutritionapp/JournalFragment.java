@@ -4,26 +4,24 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.nutrition.nutritionapp.Model.DayModel;
+import com.example.nutrition.nutritionapp.Model.ExerciseModel;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.AxisValueFormatter;
-import com.github.mikephil.charting.listener.ChartTouchListener;
-import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
@@ -34,22 +32,60 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class ProgressFragment extends Fragment  {
+
+public class JournalFragment extends Fragment {
     private BarChart chart;
 
-    public ProgressFragment() {
+    public JournalFragment() {
         // Required empty public constructor
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v =  inflater.inflate(R.layout.fragment_progress, container, false);
+        View v = inflater.inflate(R.layout.fragment_journal, container, false);
+
+        // get references
+        TextView dailyTotal = new TextView(getContext());
+
+
+
+
+
+        // Construct the data source
+        ArrayList<ExerciseModel> arrayOfExercises = NutritionSingleton.getInstance().getCurrDay().getExercises();
+
+        // calculate total
+        int count = 0;
+        for (ExerciseModel exercise : arrayOfExercises) {
+            count += exercise.getCalories();
+        }
+
+
+        // Create the adapter to convert the array to views
+        ExerciseAdapter adapter = new ExerciseAdapter(getContext(), arrayOfExercises);
+        // Attach the adapter to a ListView
+        ListView listView = (ListView) v.findViewById(R.id.exerciseList);
+        listView.setAdapter(adapter);
+
+
+        String totalDaily = "Daily Total: " + count + " Calories Burned";
+        dailyTotal.setText(totalDaily);
+
+        listView.addFooterView(dailyTotal);
+        dailyTotal.setGravity(Gravity.CENTER_HORIZONTAL);
+
+
+        if(adapter.getCount() > 6){
+            View item = adapter.getView(0, null, listView);
+            item.measure(0, 0);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) (5.5 * item.getMeasuredHeight()));
+            listView.setLayoutParams(params);
+        }
 
 
         // BarChart
-        chart = (BarChart) v.findViewById(R.id.chart);
+        chart = (BarChart) v.findViewById(R.id.exerciseChart);
 
         List<BarEntry> entries = new ArrayList<>();
         TreeMap<Integer, Integer> thingies = new TreeMap<>();
@@ -77,6 +113,7 @@ public class ProgressFragment extends Fragment  {
         BarData barData = new BarData(dataSet);
 
         barData.setBarWidth(0.9f);
+
         chart.setData(barData);
         chart.setFitBars(true);
 
@@ -99,12 +136,12 @@ public class ProgressFragment extends Fragment  {
         xAxis.setValueFormatter(xAxisFormatter);
 
         // Interval of 1 day
-      //  xAxis.setGranularity(1f);
+        //  xAxis.setGranularity(1f);
 
         chart.setScaleYEnabled(false);
         chart.setPinchZoom(true);
 
-       // barData.setDrawValues(false);
+        // barData.setDrawValues(false);
         YAxis yAxis = chart.getAxisLeft();
         yAxis.setDrawGridLines(false);
 
@@ -121,7 +158,7 @@ public class ProgressFragment extends Fragment  {
 
         chart.animateY(2000);
         chart.invalidate();
+
         return v;
     }
-
 }

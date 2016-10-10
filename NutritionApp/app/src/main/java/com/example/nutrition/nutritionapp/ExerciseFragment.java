@@ -2,6 +2,7 @@ package com.example.nutrition.nutritionapp;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,15 @@ public class ExerciseFragment extends Fragment {
 
         // Get references
         final Spinner typeSpinner = (Spinner) v.findViewById(R.id.typeSpinner);
+        Button journalButton = (Button) v.findViewById(R.id.journalButton);
+
+        journalButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new JournalFragment();
+                replaceFragment(fragment);
+            }
+        });
         typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -62,7 +72,6 @@ public class ExerciseFragment extends Fragment {
 
 
         Button recordButton = (Button) v.findViewById(R.id.recordButton);
-        Button journalButton = (Button) v.findViewById(R.id.journalButton);
 
         ImageView image = (ImageView) v.findViewById(R.id.footprint);
         image.setRotation(320);
@@ -86,6 +95,12 @@ public class ExerciseFragment extends Fragment {
 
 
         return v;
+    }
+    private void replaceFragment(Fragment fragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.home_fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }

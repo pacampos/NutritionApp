@@ -194,7 +194,7 @@ public class NutritionSingleton {
     public void updateWater(double water){
         currDay.addWaterAmount(water);
         Map<String,Object> updateChildren=new HashMap<>();
-        updateChildren.put("waterAmountDrank", currDay.getWaterAmountDrank()+water);
+        updateChildren.put("waterAmountDrank", currDay.getWaterAmountDrank());
         mFirebaseDatabaseReference.child(USERS_CHILD).
                 child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).updateChildren(updateChildren);
     }

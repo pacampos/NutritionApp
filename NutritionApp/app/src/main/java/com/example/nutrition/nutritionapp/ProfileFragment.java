@@ -1,21 +1,28 @@
 package com.example.nutrition.nutritionapp;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.nutrition.nutritionapp.Model.ProfileModel;
 
 
 public class ProfileFragment extends Fragment {
+    boolean isEditMode=false;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -31,23 +38,156 @@ public class ProfileFragment extends Fragment {
 
 
         // get references
-        TextView nameProfile = (TextView) v.findViewById(R.id.nameProfile);
-        TextView height = (TextView) v.findViewById(R.id.height);
-        TextView currentWeight = (TextView) v.findViewById(R.id.currentWeight);
-        TextView targetWeight = (TextView) v.findViewById(R.id.targetWeight);
-        TextView calorieCount = (TextView) v.findViewById(R.id.calorieCount);
-        TextView bmi = (TextView) v.findViewById(R.id.bmi);
+        final TextView nameProfile = (TextView) v.findViewById(R.id.nameProfile);
+        final TextView height = (TextView) v.findViewById(R.id.height);
+        final TextView currentWeight = (TextView) v.findViewById(R.id.currentWeight);
+        final TextView targetWeight = (TextView) v.findViewById(R.id.targetWeight);
+        final TextView calorieCount = (TextView) v.findViewById(R.id.calorieCount);
+        final TextView bmi = (TextView) v.findViewById(R.id.bmi);
         ImageView icon = (ImageView) v.findViewById(R.id.profileImage);
-        TextView currentWeightLabel = (TextView) v.findViewById(R.id.profileCurrentWeightTextView);
-        TextView currentHeightLabel = (TextView) v.findViewById(R.id.profileCurrentHeightLabel);
-        TextView goalWeightLabel = (TextView) v.findViewById(R.id.profileGoalWeightTextView);
-        NutritionSingleton singleton = NutritionSingleton.getInstance();
+
+        final TextView currentWeightLabel = (TextView) v.findViewById(R.id.profileCurrentWeightTextView);
+        final TextView currentHeightLabel = (TextView) v.findViewById(R.id.profileCurrentHeightLabel);
+        final TextView goalWeightLabel = (TextView) v.findViewById(R.id.profileGoalWeightTextView);
+        final TextView nameLabel = (TextView) v.findViewById(R.id.editNameProfileLabel);
+
+        final NutritionSingleton singleton = NutritionSingleton.getInstance();
+        final FloatingActionButton editButton = (FloatingActionButton) v.findViewById(R.id.edit_fab);
+        final EditText currWeightEditText = (EditText) v.findViewById(R.id.editCurrentWeightEditText);
+        final EditText nameEditText = (EditText) v.findViewById(R.id.editNameEditText);
+        final EditText currHeightEditText = (EditText) v.findViewById(R.id.editCurrentHeightEditText);
+        final EditText goalWeightEditText = (EditText) v.findViewById(R.id.editGoalWeightEditText);
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isEditMode) {
+                    nameProfile.setVisibility(View.INVISIBLE);
+                    height.setVisibility(View.INVISIBLE);
+                    currentWeight.setVisibility(View.INVISIBLE);
+                    targetWeight.setVisibility(View.INVISIBLE);
+                    calorieCount.setVisibility(View.INVISIBLE);
+                    bmi.setVisibility(View.INVISIBLE);
+
+                    nameEditText.setVisibility(View.VISIBLE);
+                    nameEditText.setText(nameProfile.getText().toString());
+                    currHeightEditText.setVisibility(View.VISIBLE);
+                    currHeightEditText.setText(height.getText().toString());
+                    currWeightEditText.setVisibility(View.VISIBLE);
+                    currWeightEditText.setText(currentWeight.getText().toString());
+                    goalWeightEditText.setVisibility(View.VISIBLE);
+                    goalWeightEditText.setText(targetWeight.getText().toString());
+
+                    editButton.setImageResource(R.drawable.ic_done_white_24dp);
+
+                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    layoutParams.setMargins(convertDPToPixels(55), convertDPToPixels(50), convertDPToPixels(0), convertDPToPixels(0));
+
+                    nameLabel.setLayoutParams(layoutParams);
+                    currentHeightLabel.setLayoutParams(layoutParams);
+                    currentWeightLabel.setLayoutParams(layoutParams);
+                    goalWeightLabel.setLayoutParams(layoutParams);
+
+
+                    isEditMode=!isEditMode;
+                }
+
+                else{
+                    if(currWeightEditText.getText().toString().length() > 0 &&
+                            nameEditText.getText().toString().length() >0 &&
+                            currHeightEditText.getText().toString().length() > 0 &&
+                            goalWeightEditText.getText().toString().length() >0){
+                        isEditMode=!isEditMode;
+
+                        String name=nameEditText.getText().toString();
+                        String currHeight=currHeightEditText.getText().toString();
+                        String currWeight= currWeightEditText.getText().toString();
+                        String goalWeight=goalWeightEditText.getText().toString();
+
+                        NutritionSingleton singletone=NutritionSingleton.getInstance();
+                        if(!singleton.getCurrProfile().getName().equals(name)){
+                            singleton.updateName(name);
+                        }
+
+                        Double doubleCurrHeight=new Double(currHeight);
+                        Double doubleCurrWeight=new Double(currWeight);
+                        Double doubleGoalWeight=new Double(goalWeight);
+
+                        if(singleton.getCurrProfile().getIsImperial()){
+
+                            if(singleton.getCurrProfile().getHeightInchesPart() != doubleCurrHeight ){
+                                singleton.updateCurrHeight(doubleCurrHeight);
+                            }
+
+                            if(singleton.getCurrProfile().getCurrWeightPounds() != doubleCurrWeight){
+                                singleton.updateCurrWeight(doubleCurrWeight);
+                            }
+
+                            if(singleton.getCurrProfile().getGoalWeightPounds() != doubleGoalWeight){
+                                singleton.updateGoalWeight(doubleGoalWeight);
+                            }
+                        }
+
+                        else{
+                            if(singleton.getCurrProfile().getHeightCentimeters() != doubleCurrHeight ){
+                                singleton.updateCurrHeight(doubleCurrHeight);
+                            }
+
+                            if(singleton.getCurrProfile().getCurrWeightKilos() != doubleCurrWeight){
+                                singleton.updateCurrWeight(doubleCurrWeight);
+                            }
+
+                            if(singleton.getCurrProfile().getGoalWeightKilos() != doubleGoalWeight){
+                                singleton.updateCurrHeight(doubleGoalWeight);
+                            }
+                        }
+
+
+                        nameProfile.setText(name);
+                        height.setText(currHeight);
+                        currentWeight.setText(currWeight);
+                        targetWeight.setText(goalWeight);
+
+                        bmi.setText(String.valueOf((int) NutritionSingleton.getInstance().getCurrProfile().calculateBMI()));
+                        calorieCount.setText(String.valueOf((int) NutritionSingleton.getInstance().getCurrProfile().calcCaloriesBurnedNaturally()));
+
+
+                        nameProfile.setVisibility(View.VISIBLE);
+                        height.setVisibility(View.VISIBLE);
+                        currentWeight.setVisibility(View.VISIBLE);
+                        targetWeight.setVisibility(View.VISIBLE);
+                        calorieCount.setVisibility(View.VISIBLE);
+                        bmi.setVisibility(View.VISIBLE);
+
+                        nameEditText.setVisibility(View.INVISIBLE);
+                        currHeightEditText.setVisibility(View.INVISIBLE);
+                        currWeightEditText.setVisibility(View.INVISIBLE);
+                        goalWeightEditText.setVisibility(View.INVISIBLE);
+
+                        editButton.setImageResource(R.drawable.ic_mode_edit_white_24dp);
+                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        layoutParams.setMargins(convertDPToPixels(55), convertDPToPixels(30), convertDPToPixels(0), convertDPToPixels(0));
+
+                        nameLabel.setLayoutParams(layoutParams);
+                        currentHeightLabel.setLayoutParams(layoutParams);
+                        currentWeightLabel.setLayoutParams(layoutParams);
+                        goalWeightLabel.setLayoutParams(layoutParams);
+                    }
+
+                    else{
+                        Toast.makeText(getContext(),"Please fill in all fields", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+
+            }
+        });
 
 
         ProfileModel model = singleton.getCurrProfile();
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) v.findViewById(R.id.toolbar_layout);
-        collapsingToolbar.setTitle(model.getName()+"s Profile");
+        collapsingToolbar.setTitle(model.getName()+"'s Profile");
         collapsingToolbar.setExpandedTitleTextAppearance(R.style.expandedappbar);
         collapsingToolbar.setCollapsedTitleTextAppearance(R.style.collapsedappbar);
 
@@ -78,5 +218,16 @@ public class ProfileFragment extends Fragment {
 
 
         return v;
+    }
+
+    private int convertDPToPixels(int dp){
+        Resources r = getContext().getResources();
+        int px = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                dp,
+                r.getDisplayMetrics()
+        );
+
+        return px;
     }
 }

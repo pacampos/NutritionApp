@@ -65,16 +65,20 @@ public class NutritionSingleton {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             currProfile = dataSnapshot.getValue(ProfileModel.class);
-                            /*
+
+                            if(currProfile!=null){
+                                /*
                                 we use java date to find out what day it is,
                                 if it's a day not in the database, we create a new date and add that to the profile
                                 else, we create a new day, to begin appending water, exercise, and food to it
                              */
-                            currDay = currProfile.getDays().get(generateCurrDayString());
-                            if(currDay == null){
-                                currDay = new DayModel();
-                                currProfile.getDays().put(generateCurrDayString(), currDay);
+                                currDay = currProfile.getDays().get(generateCurrDayString());
+                                if(currDay != null){
+                                    currDay = new DayModel();
+                                    currProfile.getDays().put(generateCurrDayString(), currDay);
+                                }
                             }
+
                         }
 
                         @Override
@@ -193,5 +197,69 @@ public class NutritionSingleton {
         updateChildren.put("waterAmountDrank", currDay.getWaterAmountDrank()+water);
         mFirebaseDatabaseReference.child(USERS_CHILD).
                 child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).updateChildren(updateChildren);
+    }
+
+    public void updateName(String name){
+
+        Map<String,Object> updateChildren=new HashMap<>();
+        updateChildren.put("name", currProfile.getName());
+        mFirebaseDatabaseReference.child(USERS_CHILD).
+                child(currUser).child(currProfile.getName()).removeValue();
+        currProfile.setName(name);
+        mFirebaseDatabaseReference.child(USERS_CHILD).child(currUser).child(name).setValue(currProfile);
+    }
+
+    public void updateCurrWeight(double weight){
+        if(currProfile.getIsImperial()){
+            currProfile.setCurrWeightPounds(weight);
+            Map<String,Object> updateChildren=new HashMap<>();
+            updateChildren.put("currWeightPounds", currProfile.getCurrWeightPounds());
+            mFirebaseDatabaseReference.child(USERS_CHILD).
+                    child(currUser).child(currProfile.getName()).updateChildren(updateChildren);
+        }
+
+        else{
+            currProfile.setCurrWeightKilos(weight);
+            Map<String,Object> updateChildren=new HashMap<>();
+            updateChildren.put("currWeightKilos", currProfile.getCurrWeightKilos());
+            mFirebaseDatabaseReference.child(USERS_CHILD).
+                    child(currUser).child(currProfile.getName()).updateChildren(updateChildren);
+        }
+    }
+
+    public void updateGoalWeight(double weight){
+        if(currProfile.getIsImperial()){
+            currProfile.setGoalWeightPounds(weight);
+            Map<String,Object> updateChildren=new HashMap<>();
+            updateChildren.put("goalWeightPounds", currProfile.getGoalWeightPounds());
+            mFirebaseDatabaseReference.child(USERS_CHILD).
+                    child(currUser).child(currProfile.getName()).updateChildren(updateChildren);
+        }
+
+        else{
+            currProfile.setGoalWeightKilos(weight);
+            Map<String,Object> updateChildren=new HashMap<>();
+            updateChildren.put("goalWeightKilos", currProfile.getGoalWeightKilos());
+            mFirebaseDatabaseReference.child(USERS_CHILD).
+                    child(currUser).child(currProfile.getName()).updateChildren(updateChildren);
+        }
+    }
+
+    public void updateCurrHeight(double height){
+        if(currProfile.getIsImperial()){
+            currProfile.setHeightCentimeters(height);
+            Map<String,Object> updateChildren=new HashMap<>();
+            updateChildren.put("heightInchesPart", currProfile.getHeightInchesPart());
+            mFirebaseDatabaseReference.child(USERS_CHILD).
+                    child(currUser).child(currProfile.getName()).updateChildren(updateChildren);
+        }
+
+        else{
+            currProfile.setHeightCentimeters(height);
+            Map<String,Object> updateChildren=new HashMap<>();
+            updateChildren.put("heightCentimeters", currProfile.getHeightCentimeters());
+            mFirebaseDatabaseReference.child(USERS_CHILD).
+                    child(currUser).child(currProfile.getName()).updateChildren(updateChildren);
+        }
     }
 }

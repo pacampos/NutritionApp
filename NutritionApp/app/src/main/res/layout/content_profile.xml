@@ -39,7 +39,16 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#212121" />
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editNameEditText"
+                android:layout_marginLeft="50dp"
+                android:visibility="invisible"
+                android:inputType="textPersonName" />
+
             <TextView
+                android:id="@+id/editNameProfileLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/nameProfile"
@@ -77,6 +86,14 @@
                 android:text="123"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#212121" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editCurrentHeightEditText"
+                android:layout_marginLeft="50dp"
+                android:visibility="invisible"
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/profileCurrentHeightLabel"
@@ -118,6 +135,14 @@
                 android:text="170lbs"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#212121" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editCurrentWeightEditText"
+                android:layout_marginLeft="50dp"
+                android:visibility="invisible"
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/profileCurrentWeightTextView"
@@ -161,6 +186,14 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#212121" />
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editGoalWeightEditText"
+                android:layout_marginLeft="50dp"
+                android:visibility="invisible"
+                android:inputType="number" />
+
             <TextView
                 android:id="@+id/profileGoalWeightTextView"
                 android:layout_width="wrap_content"
@@ -203,6 +236,7 @@
                 android:textColor="#212121" />
 
             <TextView
+                android:id="@+id/editCalorieLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/calorieCount"
@@ -242,14 +276,14 @@
                 android:textColor="#212121" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/editBMILabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/bmi"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="8dp"
                 android:layout_toEndOf="@id/ivContactItem6"
-                android:text="@string/goalWeight_text_metric"
+                android:text="@string/bmi_text"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="#727272" />
         </RelativeLayout>

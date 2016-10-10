@@ -14,6 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -66,18 +67,19 @@ public class NutritionSingleton {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             currProfile = dataSnapshot.getValue(ProfileModel.class);
 
-                            if(currProfile!=null){
+
                                 /*
                                 we use java date to find out what day it is,
                                 if it's a day not in the database, we create a new date and add that to the profile
                                 else, we create a new day, to begin appending water, exercise, and food to it
                              */
                                 currDay = currProfile.getDays().get(generateCurrDayString());
-                                if(currDay != null){
+                                if(currDay == null){
                                     currDay = new DayModel();
-                                    currProfile.getDays().put(generateCurrDayString(), currDay);
+                                    NutritionSingleton.getInstance().addDay(currDay);
+
                                 }
-                            }
+
 
                         }
 
@@ -172,21 +174,29 @@ public class NutritionSingleton {
     }
 
     public void addDay(DayModel day){
-
+        currProfile.getDays().put(generateCurrDayString(), currDay);
+        mFirebaseDatabaseReference.child(USERS_CHILD).child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).setValue(currDay);
     }
 
     public void addExercise(ExerciseModel exercise){
-        currDay.addExercise(exercise);
+        if(currDay.getExercises() == null || currDay.getExercises().isEmpty()){
+            currDay.setExercises(new ArrayList<ExerciseModel>());
+        }
+
         Map<String,Object> updateChildren=new HashMap<>();
-        updateChildren.put(String.valueOf(currDay.getExercises().size()-1),exercise);
+        updateChildren.put(String.valueOf(currDay.getExercises().size()),exercise);
+        currDay.addExercise(exercise);
        mFirebaseDatabaseReference.child(USERS_CHILD).
                 child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).child("exercises").updateChildren(updateChildren);
     }
 
     public void addFood(FoodModel food){
-        currDay.addFood(food);
+        if(currDay.getFoods() == null || currDay.getFoods().isEmpty()){
+            currDay.setFoods(new ArrayList<FoodModel>());
+        }
         Map<String,Object> updateChildren=new HashMap<>();
-        updateChildren.put(String.valueOf(currDay.getFoods().size()-1),food);
+        updateChildren.put(String.valueOf(currDay.getFoods().size()),food);
+        currDay.addFood(food);
         mFirebaseDatabaseReference.child(USERS_CHILD).
                 child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).child("foods").updateChildren(updateChildren);
     }
@@ -197,16 +207,6 @@ public class NutritionSingleton {
         updateChildren.put("waterAmountDrank", currDay.getWaterAmountDrank());
         mFirebaseDatabaseReference.child(USERS_CHILD).
                 child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).updateChildren(updateChildren);
-    }
-
-    public void updateName(String name){
-
-        Map<String,Object> updateChildren=new HashMap<>();
-        updateChildren.put("name", currProfile.getName());
-        mFirebaseDatabaseReference.child(USERS_CHILD).
-                child(currUser).child(currProfile.getName()).removeValue();
-        currProfile.setName(name);
-        mFirebaseDatabaseReference.child(USERS_CHILD).child(currUser).child(name).setValue(currProfile);
     }
 
     public void updateCurrWeight(double weight){

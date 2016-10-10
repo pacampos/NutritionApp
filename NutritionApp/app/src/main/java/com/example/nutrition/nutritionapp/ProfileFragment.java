@@ -35,10 +35,7 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         final View v = inflater.inflate(R.layout.fragment_material_profile, container, false);
 
-
-
         // get references
-        final TextView nameProfile = (TextView) v.findViewById(R.id.nameProfile);
         final TextView height = (TextView) v.findViewById(R.id.height);
         final TextView currentWeight = (TextView) v.findViewById(R.id.currentWeight);
         final TextView targetWeight = (TextView) v.findViewById(R.id.targetWeight);
@@ -49,12 +46,10 @@ public class ProfileFragment extends Fragment {
         final TextView currentWeightLabel = (TextView) v.findViewById(R.id.profileCurrentWeightTextView);
         final TextView currentHeightLabel = (TextView) v.findViewById(R.id.profileCurrentHeightLabel);
         final TextView goalWeightLabel = (TextView) v.findViewById(R.id.profileGoalWeightTextView);
-        final TextView nameLabel = (TextView) v.findViewById(R.id.editNameProfileLabel);
 
         final NutritionSingleton singleton = NutritionSingleton.getInstance();
         final FloatingActionButton editButton = (FloatingActionButton) v.findViewById(R.id.edit_fab);
         final EditText currWeightEditText = (EditText) v.findViewById(R.id.editCurrentWeightEditText);
-        final EditText nameEditText = (EditText) v.findViewById(R.id.editNameEditText);
         final EditText currHeightEditText = (EditText) v.findViewById(R.id.editCurrentHeightEditText);
         final EditText goalWeightEditText = (EditText) v.findViewById(R.id.editGoalWeightEditText);
 
@@ -62,15 +57,10 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(!isEditMode) {
-                    nameProfile.setVisibility(View.INVISIBLE);
                     height.setVisibility(View.INVISIBLE);
                     currentWeight.setVisibility(View.INVISIBLE);
                     targetWeight.setVisibility(View.INVISIBLE);
-                    calorieCount.setVisibility(View.INVISIBLE);
-                    bmi.setVisibility(View.INVISIBLE);
 
-                    nameEditText.setVisibility(View.VISIBLE);
-                    nameEditText.setText(nameProfile.getText().toString());
                     currHeightEditText.setVisibility(View.VISIBLE);
                     currHeightEditText.setText(height.getText().toString());
                     currWeightEditText.setVisibility(View.VISIBLE);
@@ -83,31 +73,24 @@ public class ProfileFragment extends Fragment {
                     RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                     layoutParams.setMargins(convertDPToPixels(55), convertDPToPixels(50), convertDPToPixels(0), convertDPToPixels(0));
 
-                    nameLabel.setLayoutParams(layoutParams);
                     currentHeightLabel.setLayoutParams(layoutParams);
                     currentWeightLabel.setLayoutParams(layoutParams);
                     goalWeightLabel.setLayoutParams(layoutParams);
-
 
                     isEditMode=!isEditMode;
                 }
 
                 else{
                     if(currWeightEditText.getText().toString().length() > 0 &&
-                            nameEditText.getText().toString().length() >0 &&
                             currHeightEditText.getText().toString().length() > 0 &&
                             goalWeightEditText.getText().toString().length() >0){
                         isEditMode=!isEditMode;
 
-                        String name=nameEditText.getText().toString();
                         String currHeight=currHeightEditText.getText().toString();
                         String currWeight= currWeightEditText.getText().toString();
                         String goalWeight=goalWeightEditText.getText().toString();
 
-                        NutritionSingleton singletone=NutritionSingleton.getInstance();
-                        if(!singleton.getCurrProfile().getName().equals(name)){
-                            singleton.updateName(name);
-                        }
+                        NutritionSingleton singleton=NutritionSingleton.getInstance();
 
                         Double doubleCurrHeight=new Double(currHeight);
                         Double doubleCurrWeight=new Double(currWeight);
@@ -142,8 +125,6 @@ public class ProfileFragment extends Fragment {
                             }
                         }
 
-
-                        nameProfile.setText(name);
                         height.setText(currHeight);
                         currentWeight.setText(currWeight);
                         targetWeight.setText(goalWeight);
@@ -151,15 +132,10 @@ public class ProfileFragment extends Fragment {
                         bmi.setText(String.valueOf((int) NutritionSingleton.getInstance().getCurrProfile().calculateBMI()));
                         calorieCount.setText(String.valueOf((int) NutritionSingleton.getInstance().getCurrProfile().calcCaloriesBurnedNaturally()));
 
-
-                        nameProfile.setVisibility(View.VISIBLE);
                         height.setVisibility(View.VISIBLE);
                         currentWeight.setVisibility(View.VISIBLE);
                         targetWeight.setVisibility(View.VISIBLE);
-                        calorieCount.setVisibility(View.VISIBLE);
-                        bmi.setVisibility(View.VISIBLE);
 
-                        nameEditText.setVisibility(View.INVISIBLE);
                         currHeightEditText.setVisibility(View.INVISIBLE);
                         currWeightEditText.setVisibility(View.INVISIBLE);
                         goalWeightEditText.setVisibility(View.INVISIBLE);
@@ -168,7 +144,6 @@ public class ProfileFragment extends Fragment {
                         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                         layoutParams.setMargins(convertDPToPixels(55), convertDPToPixels(30), convertDPToPixels(0), convertDPToPixels(0));
 
-                        nameLabel.setLayoutParams(layoutParams);
                         currentHeightLabel.setLayoutParams(layoutParams);
                         currentWeightLabel.setLayoutParams(layoutParams);
                         goalWeightLabel.setLayoutParams(layoutParams);
@@ -191,7 +166,6 @@ public class ProfileFragment extends Fragment {
         collapsingToolbar.setExpandedTitleTextAppearance(R.style.expandedappbar);
         collapsingToolbar.setCollapsedTitleTextAppearance(R.style.collapsedappbar);
 
-        nameProfile.setText(model.getName());
         height.setText(String.valueOf(model.getHeightCentimeters()));
         currentWeight.setText(String.valueOf(model.getCurrWeightKilos()));
         targetWeight.setText(String.valueOf(model.getGoalWeightKilos()));

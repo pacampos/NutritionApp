@@ -38,7 +38,8 @@ public class waterEntryFragment extends Fragment {
         waterDrankTextView.setText(String.valueOf(water));
 
         waveView = (WaveView) v.findViewById(R.id.wave);
-        mWaveHelper = new WaveHelper(waveView);
+        double initWater = NutritionSingleton.getInstance().getCurrDay().getWaterAmountDrank();
+        mWaveHelper = new WaveHelper(waveView, new Float(initWater));
 
         waveView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -47,7 +48,6 @@ public class waterEntryFragment extends Fragment {
                 waveView.setWaveColor(Color.WHITE,Color.BLUE);
                 waveView.setShapeType(WaveView.ShapeType.SQUARE);
                 waveView.setBorder(mBorderWidth, mBorderColor);
-
             }
         });
 
@@ -57,9 +57,14 @@ public class waterEntryFragment extends Fragment {
             public void onClick(View v) {
                 String amountOfWater=waterEntryEditText.getText().toString();
                 if(amountOfWater.length() > 0 && amountOfWater.matches("^[0-9]+$")){
+
+                    double initWater = NutritionSingleton.getInstance().getCurrDay().getWaterAmountDrank();
+                    mWaveHelper.growWave(new Float(initWater)+new Float(amountOfWater));
+                    mWaveHelper.start();
                     DayModel day = NutritionSingleton.getInstance().getCurrDay();
                     NutritionSingleton.getInstance().updateWater(Double.parseDouble(amountOfWater));
                     waterDrankTextView.setText(String.valueOf(day.getWaterAmountDrank()));
+
                 }
             }
         });
@@ -67,6 +72,9 @@ public class waterEntryFragment extends Fragment {
         cupImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                double initWater = NutritionSingleton.getInstance().getCurrDay().getWaterAmountDrank();
+                mWaveHelper.growWave(new Float(initWater+8.0));
+                mWaveHelper.start();
                 DayModel day = NutritionSingleton.getInstance().getCurrDay();
                 NutritionSingleton.getInstance().updateWater(8.0);
                 waterDrankTextView.setText(String.valueOf(day.getWaterAmountDrank()));

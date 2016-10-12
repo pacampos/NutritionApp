@@ -33,6 +33,7 @@ public class HomeFragment extends Fragment {
         Button exerciseButton = (Button) v.findViewById(R.id.exerciseButton);
         Button waterEntryButton = (Button) v.findViewById(R.id.waterEntryButton);
         Button foodEntryButton = (Button) v.findViewById(R.id.foodDrinkEntrybutton);
+        Button switchUserButton = (Button) v.findViewById(R.id.switchUserButton);
 
         ImageView hamburgerIcon = (ImageView) v.findViewById(R.id.hamburgerIcon);
         ImageView waterIcon = (ImageView) v.findViewById(R.id.waterIcon);
@@ -106,6 +107,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Fragment fragment = new waterEntryFragment();
+                replaceFragment(fragment);
+            }
+        });
+
+        switchUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new SwitchUserFragment();
                 replaceFragment(fragment);
             }
         });

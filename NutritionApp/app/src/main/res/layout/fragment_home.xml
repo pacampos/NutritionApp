@@ -208,6 +208,29 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingLeft="70dp"
+            android:paddingRight="70dp">
+
+            <Button
+                android:id="@+id/switchUserButton"
+                android:layout_width="180dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:background="#52b7bd"
+                android:minHeight="25dp"
+                android:minWidth="0dp"
+                android:text="Switch User"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <android.support.v7.widget.Toolbar

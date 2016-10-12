@@ -33,10 +33,19 @@ public class HomeFragment extends Fragment {
         Button exerciseButton = (Button) v.findViewById(R.id.exerciseButton);
         Button waterEntryButton = (Button) v.findViewById(R.id.waterEntryButton);
         Button foodEntryButton = (Button) v.findViewById(R.id.foodDrinkEntrybutton);
+        Button servingButton = (Button) v.findViewById(R.id.servingButton);
 
         ImageView hamburgerIcon = (ImageView) v.findViewById(R.id.hamburgerIcon);
         ImageView waterIcon = (ImageView) v.findViewById(R.id.waterIcon);
         ImageView weightIcon = (ImageView) v.findViewById(R.id.weightIcon);
+
+        servingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment servingFragment = new servingFragment();
+                replaceFragment(servingFragment);
+            }
+        });
 
         hamburgerIcon.setOnClickListener(new View.OnClickListener() {
             @Override

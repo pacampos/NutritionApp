@@ -1,0 +1,137 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.nutrition.nutritionapp.servingFragment"
+    android:id="@+id/rl">
+
+
+    <TextView
+        android:text="@string/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:text="@string/grains_title"
+                android:layout_width="163dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/grainsText" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned"
+                android:ems="10"
+                android:id="@+id/grainsEdit"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:text="@string/veggies_title"
+                android:layout_width="163dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/veggiesText" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned"
+                android:ems="10"
+                android:id="@+id/veggieEdit"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:text="@string/fruits_title"
+                android:layout_width="163dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/fruitsText" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned"
+                android:ems="10"
+                android:id="@+id/fruitsEdit"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:text="@string/dairy_title"
+                android:layout_width="163dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/dairyText" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned"
+                android:ems="10"
+                android:id="@+id/dairyEdit"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:text="@string/meat_title"
+                android:layout_width="163dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/meatText" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned"
+                android:ems="10"
+                android:id="@+id/meatEdit"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <Button
+            android:text="Submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/enterButton" />
+
+    </LinearLayout>
+</FrameLayout>

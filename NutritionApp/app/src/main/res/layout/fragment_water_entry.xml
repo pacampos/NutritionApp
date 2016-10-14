@@ -33,7 +33,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/amountWaterDrankLabel"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_marginLeft="270dp" />
 
             <com.example.nutrition.nutritionapp.WaveView
                 android:id="@+id/wave"

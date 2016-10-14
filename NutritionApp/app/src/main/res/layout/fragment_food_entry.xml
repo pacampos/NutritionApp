@@ -61,35 +61,61 @@
 
         </LinearLayout>
 
+        <!--<LinearLayout-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+            <!--<Button-->
+                <!--android:id="@+id/button_calc_calories"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="?attr/colorPrimary"-->
+                <!--android:text="@string/log_food_button"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_gravity="center_vertical" />-->
+
+            <!--<Button-->
+                <!--android:text="@string/button_label_manual_enter"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="?attr/colorPrimary"-->
+                <!--android:textColor="@color/common_google_signin_btn_text_dark_default"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:id="@+id/button_enter_manual" />-->
+        <!--</LinearLayout>-->
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button_calc_calories"
+                android:id="@+id/button_log_food"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:background="?attr/colorPrimary"
                 android:text="@string/log_food_button"
                 android:textColor="@color/white"
                 android:layout_weight="1"
-                android:layout_gravity="center_vertical" />
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp" />
 
             <Button
-                android:text="@string/button_label_manual_enter"
+                android:id="@+id/button_food_journal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_gravity="center_horizontal"
                 android:background="?attr/colorPrimary"
-                android:textColor="@color/common_google_signin_btn_text_dark_default"
-                android:layout_gravity="center_vertical"
-                android:id="@+id/button_enter_manual" />
-        </LinearLayout><![CDATA[
-
-        />
-
-    ]]>
+                android:text="Food Journal"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp" />
+        </LinearLayout>
     </LinearLayout>
 
 </FrameLayout>

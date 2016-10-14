@@ -3,6 +3,7 @@ package com.example.nutrition.nutritionapp;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.TextViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,8 +46,8 @@ public class foodEntryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_food_entry, container, false);
-        Button calcCalories = (Button) v.findViewById(R.id.button_calc_calories);
-        Button enterManual = (Button) v.findViewById(R.id.button_enter_manual);
+        Button foodEntryButton = (Button) v.findViewById(R.id.button_log_food);
+        Button journalButton = (Button) v.findViewById(R.id.button_food_journal);
         final EditText editTextFoodName = (EditText) v.findViewById(R.id.search_bar_food);
         final EditText editTextFoodAmount = (EditText) v.findViewById(R.id.editTextFoodEaten);
         Spinner servingSpinner = (Spinner) v.findViewById(R.id.spinnerFoodMeasurements);
@@ -63,9 +64,16 @@ public class foodEntryFragment extends Fragment {
             }
         });
 
+        journalButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+                public void onClick(View v) {
+                    Fragment fragment = new FoodJournalFragment();
+                    replaceFragment(fragment);
+                }
+        });
 
+        foodEntryButton.setOnClickListener(new View.OnClickListener() {
 
-        calcCalories.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String foodName=editTextFoodName.getText().toString();
@@ -155,4 +163,11 @@ public class foodEntryFragment extends Fragment {
 
 
     }
+    private void replaceFragment(Fragment fragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.food_fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 }

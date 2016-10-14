@@ -20,7 +20,7 @@ public class waterEntryFragment extends Fragment {
     private int mBorderWidth = 1;
     public WaveView waveView;
     public waterEntryFragment() {
-        // Required empty public constructor
+
     }
 
     @Override

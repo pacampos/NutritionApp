@@ -32,8 +32,6 @@ public class servingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_serving, container, false);
-
-        Button exampleButton = (Button) v.findViewById(R.id.exampleButton);
         mRelativeLayout = (FrameLayout) v.findViewById(R.id.rl);
 
         TextView grainsText = (TextView) v.findViewById(R.id.grainsText);

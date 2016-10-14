@@ -85,6 +85,11 @@
     <string name="today_calories">Calories Burned Today</string>
     <string name="total_burned">Daily Total</string>
 
+    <!-- Food Journal !-->
+    <string name="fjournal_title">Food Journal </string>
+    <string name="calores_consumed">Calories Consumed Today</string>
+    <string name="total_consumed">Daily Total</string>
+
     <!-- Home Page !-->
     <string name="profileButton">Profile</string>
 

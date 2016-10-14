@@ -3,6 +3,7 @@ package com.example.nutrition.nutritionapp;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.TextViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,7 @@ public class foodEntryFragment extends Fragment {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_food_entry, container, false);
         Button foodEntryButton = (Button) v.findViewById(R.id.button_log_food);
+        Button journalButton = (Button) v.findViewById(R.id.button_food_journal);
         final android.widget.SearchView searchView = (SearchView) v.findViewById(R.id.search_bar_food);
         textView= (TextView) v.findViewById(R.id.textview_serving_size);
         Spinner servingSpinner = (Spinner) v.findViewById(R.id.spinner_food_servings);
@@ -54,6 +56,14 @@ public class foodEntryFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+        });
+
+        journalButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+                public void onClick(View v) {
+                    Fragment fragment = new FoodJournalFragment();
+                    replaceFragment(fragment);
+                }
         });
 
         foodEntryButton.setOnClickListener(new View.OnClickListener() {
@@ -126,4 +136,11 @@ public class foodEntryFragment extends Fragment {
             // Do things like hide the progress bar or change a TextView
         }
     }
+    private void replaceFragment(Fragment fragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.food_fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 }

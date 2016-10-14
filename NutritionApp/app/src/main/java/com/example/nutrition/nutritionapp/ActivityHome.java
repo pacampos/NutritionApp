@@ -16,7 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import java.util.Calendar;
 
-public class ActivityHome extends AppCompatActivity {
+public class ActivityHome extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,5 +39,4 @@ public class ActivityHome extends AppCompatActivity {
         }
 
     }
-
 }

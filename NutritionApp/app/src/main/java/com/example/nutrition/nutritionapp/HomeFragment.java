@@ -19,6 +19,15 @@ import static android.R.attr.start;
 
 public class HomeFragment extends Fragment {
 
+    private float grainsPortion = 0f;
+    private float veggiePortion = 0f;
+    private float fruitPortion= 0f;
+    private float dairyPortion = 0f;
+    private float meatPortion = 0f;
+
+
+    PyramidView pyramid;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -28,6 +37,8 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+
+        pyramid = (PyramidView) v.findViewById(R.id.pyramid);
 
         Button profileButton = (Button) v.findViewById(R.id.profileButton);
         Button exerciseButton = (Button) v.findViewById(R.id.exerciseButton);
@@ -126,6 +137,8 @@ public class HomeFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+
         return v;
     }
 
@@ -136,5 +149,39 @@ public class HomeFragment extends Fragment {
         transaction.commit();
     }
 
+    public void updateServings(float grainsPercent, float veggiesPercent, float fruitsPercent, float dairyPercent, float meatPercent ){
+        addToGrains(grainsPercent);
+        addToVeggies(veggiesPercent);
+        addToFruits(fruitsPercent);
+        addToDairy(dairyPercent);
+        addToMeat(meatPercent);
+        pyramid.setFirstPortion(grainsPortion);
+        pyramid.setSecondPortion(veggiePortion);
+        pyramid.setThirdPortion(fruitPortion);
+        pyramid.setFourthPortion(dairyPortion);
+        pyramid.setFifthPortion(meatPortion);
+        pyramid.invalidate();
+    }
+
+
+    private void addToGrains(float percentage){
+        grainsPortion+=percentage;
+    }
+
+    private void addToFruits(float percentage){
+        fruitPortion+=percentage;
+    }
+
+    private void addToVeggies(float percentage){
+        veggiePortion+=percentage;
+    }
+
+    private void addToDairy(float percentage){
+        dairyPortion=+percentage;
+    }
+
+    private void addToMeat(float percentage){
+        meatPortion+=percentage;
+    }
     
 }

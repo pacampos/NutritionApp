@@ -217,7 +217,7 @@ public class NutritionSingleton {
     }
 
     public void updateVeggies(double veggie){
-        currDay.addServingsGrains(veggie);
+        currDay.addServingsVeggie(veggie);
         Map<String,Object> updateChildren=new HashMap<>();
         updateChildren.put("servingsVeggie", currDay.getServingsVeggie());
         mFirebaseDatabaseReference.child(USERS_CHILD).
@@ -225,7 +225,7 @@ public class NutritionSingleton {
     }
 
     public void updateFruits(double fruits){
-        currDay.addServingsGrains(fruits);
+        currDay.addServingsFruit(fruits);
         Map<String,Object> updateChildren=new HashMap<>();
         updateChildren.put("servingsFruit", currDay.getServingsFruit());
         mFirebaseDatabaseReference.child(USERS_CHILD).
@@ -233,7 +233,7 @@ public class NutritionSingleton {
     }
 
     public void updateMeat(double meat){
-        currDay.addServingsGrains(meat);
+        currDay.addServingsMeat(meat);
         Map<String,Object> updateChildren=new HashMap<>();
         updateChildren.put("servingsMeat", currDay.getServingsMeat());
         mFirebaseDatabaseReference.child(USERS_CHILD).
@@ -241,7 +241,7 @@ public class NutritionSingleton {
     }
 
     public void updateDairy(double dairy){
-        currDay.addServingsGrains(dairy);
+        currDay.addServingsDairy(dairy);
         Map<String,Object> updateChildren=new HashMap<>();
         updateChildren.put("servingsDairy", currDay.getServingsDairy());
         mFirebaseDatabaseReference.child(USERS_CHILD).

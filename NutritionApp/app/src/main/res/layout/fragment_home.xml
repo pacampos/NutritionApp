@@ -76,13 +76,13 @@
             android:layout_width="367dp"
             android:layout_height="wrap_content"
             android:weightSum="1"
-            android:layout_marginLeft="90dp">
+            android:layout_marginLeft="110dp">
 
             <com.example.nutrition.nutritionapp.PyramidView
-                android:layout_width="100dp"
+                android:layout_width="106dp"
                 android:id="@+id/pyramid"
-                android:layout_height="180dp"
-                android:layout_weight=".25" />
+                android:layout_height="150dp"
+                android:layout_weight="0.09" />
         </LinearLayout>
 
         <LinearLayout
@@ -262,9 +262,8 @@
             <Button
                 android:id="@+id/exerciseButton"
                 android:layout_width="180dp"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
                 android:background="#52b7bd"
                 android:minHeight="25dp"
                 android:minWidth="0dp"

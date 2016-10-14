@@ -114,10 +114,10 @@ public class servingFragment extends Fragment {
                 if(meatEdit.getText().toString().length() > 0) {
                     singleton.updateMeat(Double.valueOf(meatEdit.getText().toString()));
                 }
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.home_fragment_container, new HomeFragment());
-                transaction.addToBackStack(null);
-                transaction.commit();
+//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                transaction.replace(R.id.home_fragment_container, new HomeFragment());
+//                transaction.addToBackStack(null);
+//                transaction.commit();
             }
         });
 

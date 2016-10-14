@@ -1,6 +1,9 @@
 package com.example.nutrition.nutritionapp;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +16,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.util.Calendar;
+
 import static android.R.attr.id;
 import static android.R.attr.start;
 
 
 public class HomeFragment extends Fragment {
+
+    private float grainsPortion = 0f;
+    private float veggiePortion = 0f;
+    private float fruitPortion= 0f;
+    private float dairyPortion = 0f;
+    private float meatPortion = 0f;
+
+
+    PyramidView pyramid;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -29,11 +43,14 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
+        pyramid = (PyramidView) v.findViewById(R.id.pyramid);
+
         Button profileButton = (Button) v.findViewById(R.id.profileButton);
         Button exerciseButton = (Button) v.findViewById(R.id.exerciseButton);
         Button waterEntryButton = (Button) v.findViewById(R.id.waterEntryButton);
         Button foodEntryButton = (Button) v.findViewById(R.id.foodDrinkEntrybutton);
         Button servingButton = (Button) v.findViewById(R.id.servingButton);
+        Button notifyButton = (Button) v.findViewById(R.id.notifyButton);
 
         ImageView hamburgerIcon = (ImageView) v.findViewById(R.id.hamburgerIcon);
         ImageView waterIcon = (ImageView) v.findViewById(R.id.waterIcon);
@@ -44,6 +61,20 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Fragment servingFragment = new servingFragment();
                 replaceFragment(servingFragment);
+            }
+        });
+
+        notifyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar sevendayalarm = Calendar.getInstance();
+                Intent intent = new Intent(getContext(), Receiver.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
+
+                AlarmManager am = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+
+//                am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,sevendayalarm.getTimeInMillis(),pendingIntent);
+                am.setRepeating(AlarmManager.RTC_WAKEUP,sevendayalarm.getTimeInMillis(), 5000,pendingIntent);
             }
         });
 
@@ -126,6 +157,8 @@ public class HomeFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+
         return v;
     }
 
@@ -136,5 +169,39 @@ public class HomeFragment extends Fragment {
         transaction.commit();
     }
 
+    public void updateServings(float grainsPercent, float veggiesPercent, float fruitsPercent, float dairyPercent, float meatPercent ){
+        addToGrains(grainsPercent);
+        addToVeggies(veggiesPercent);
+        addToFruits(fruitsPercent);
+        addToDairy(dairyPercent);
+        addToMeat(meatPercent);
+        pyramid.setFirstPortion(grainsPortion);
+        pyramid.setSecondPortion(veggiePortion);
+        pyramid.setThirdPortion(fruitPortion);
+        pyramid.setFourthPortion(dairyPortion);
+        pyramid.setFifthPortion(meatPortion);
+        pyramid.invalidate();
+    }
+
+
+    private void addToGrains(float percentage){
+        grainsPortion+=percentage;
+    }
+
+    private void addToFruits(float percentage){
+        fruitPortion+=percentage;
+    }
+
+    private void addToVeggies(float percentage){
+        veggiePortion+=percentage;
+    }
+
+    private void addToDairy(float percentage){
+        dairyPortion=+percentage;
+    }
+
+    private void addToMeat(float percentage){
+        meatPortion+=percentage;
+    }
     
 }

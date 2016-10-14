@@ -23,6 +23,17 @@ public class servingFragment extends Fragment {
     private FrameLayout mRelativeLayout;
     private PopupWindow mPopupWindow;
     private TextView tv;
+    final private float MAX_GRAINS= 6f;
+    final private float MAX_MEAT = 5f;
+    final private float MAX_VEGGIES = 4f;
+    final private float MAX_FRUIT = 3f;
+    final private float MAX_DAIRY = 2f;
+
+
+    public interface OnServingsEnteredListener{
+        public void onServingsEntered(float grainsPercent, float veggiesPercent, float fruitsPercent,
+                                     float dairyPercent, float meatPercent);
+    }
     public servingFragment() {
         // Required empty public constructor
     }
@@ -32,13 +43,16 @@ public class servingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_serving, container, false);
+
+
+        Button enterButton = (Button) v.findViewById(R.id.enterButton);
         mRelativeLayout = (FrameLayout) v.findViewById(R.id.rl);
 
-        TextView grainsText = (TextView) v.findViewById(R.id.grainsText);
-        TextView veggiesText = (TextView) v.findViewById(R.id.veggiesText);
-        TextView fruitsText = (TextView) v.findViewById(R.id.fruitsText);
-        TextView dairyText = (TextView) v.findViewById(R.id.dairyText);
-        TextView meatText = (TextView) v.findViewById(R.id.meatText);
+        final TextView grainsText = (TextView) v.findViewById(R.id.grainsText);
+        final TextView veggiesText = (TextView) v.findViewById(R.id.veggiesText);
+        final TextView fruitsText = (TextView) v.findViewById(R.id.fruitsText);
+        final TextView dairyText = (TextView) v.findViewById(R.id.dairyText);
+        final TextView meatText = (TextView) v.findViewById(R.id.meatText);
 
 
         grainsText.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +83,13 @@ public class servingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 createView(4);
+            }
+        });
+
+        enterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
@@ -214,6 +235,4 @@ public class servingFragment extends Fragment {
         // Finally, show the popup window at the center location of root relative layout
         mPopupWindow.showAtLocation(mRelativeLayout, Gravity.CENTER,0,0);
     }
-
-
 }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,16 +24,20 @@ import com.example.nutrition.nutritionapp.fatservices.Response;
 
 import org.w3c.dom.Text;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class foodEntryFragment extends Fragment {
     public foodEntryFragment() {
         // Required empty public constructor
     }
-    TextView textView;
+
+    final static String OUNCES = "oz";
+    final static String GRAMS = "g";
+    final static String MILLILETERS = "mL";
     String API_SECRET= "118c4828b97848de9d1576137f9541b1";
     String API_CONSUMER = "739bfa1b0dd3407882ac1b24c5be4167";
-    double servings []={ 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2, 5, 10};
+    String measurements [] = {"oz", "g", "mL"};
     int servingPos=0;
 
     @Override
@@ -40,10 +45,12 @@ public class foodEntryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_food_entry, container, false);
-        Button foodEntryButton = (Button) v.findViewById(R.id.button_log_food);
-        final android.widget.SearchView searchView = (SearchView) v.findViewById(R.id.search_bar_food);
-        textView= (TextView) v.findViewById(R.id.textview_serving_size);
-        Spinner servingSpinner = (Spinner) v.findViewById(R.id.spinner_food_servings);
+        Button calcCalories = (Button) v.findViewById(R.id.button_calc_calories);
+        Button enterManual = (Button) v.findViewById(R.id.button_enter_manual);
+        final EditText editTextFoodName = (EditText) v.findViewById(R.id.search_bar_food);
+        final EditText editTextFoodAmount = (EditText) v.findViewById(R.id.editTextFoodEaten);
+        Spinner servingSpinner = (Spinner) v.findViewById(R.id.spinnerFoodMeasurements);
+
         servingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -56,12 +63,28 @@ public class foodEntryFragment extends Fragment {
             }
         });
 
-        foodEntryButton.setOnClickListener(new View.OnClickListener() {
+
+
+        calcCalories.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String query=searchView.getQuery().toString();
-                if(!query.isEmpty()){
-                    new MyTask().execute(query);
+                String foodName=editTextFoodName.getText().toString();
+                String foodAmount = editTextFoodAmount.getText().toString();
+                if(!foodName.isEmpty() && !foodAmount.isEmpty()){
+                    new MyTask().execute(foodName);
+                }
+
+                else if(foodName.isEmpty() && foodAmount.isEmpty()){
+                    editTextFoodName.setError("Please enter a food.");
+                    editTextFoodAmount.setError("Please enter an amount.");
+                }
+
+                else if(foodName.isEmpty()){
+                    editTextFoodName.setError("Please enter a food.");
+                }
+
+                else{
+                    editTextFoodAmount.setError("Please enter an amount.");
                 }
             }
         });
@@ -112,18 +135,24 @@ public class foodEntryFragment extends Fragment {
         protected void onPostExecute(String result) {
             super.onPostExecute("result");
             if(foodItem!=null){
-                List<Serving> foodServingList=foodItem.getServings();
-                Serving serving=foodServingList.get(0);
-                String name=compactFood.getName();
-                double calories=serving.getCalories().doubleValue();
-                double servingNum = servings[servingPos];
-                String foodType = "Food";
-                NutritionSingleton.getInstance().addFood(new FoodModel(name, calories, servingNum, 1.0));
-                Toast.makeText(getActivity(), "New Food item was added.", Toast.LENGTH_SHORT).show();
+//                List<Serving> foodServingList=foodItem.getServings();
+//                Serving serving=foodServingList.get(0);
+//                String servingUnit=serving.getMetricServingUnit();
+//                BigDecimal servingAmount = serving.getMetricServingAmount();
+//                if()
+//                String name=compactFood.getName();
+//                double calories=serving.getCalories().doubleValue();
+//                double servingNum = servings[servingPos];
+//                String foodType = "Food";
+////                NutritionSingleton.getInstance().addFood(new FoodModel(name, calories, servingNum, 1.0));
+//                Toast.makeText(getActivity(), "New Food item was added.", Toast.LENGTH_SHORT).show();
             }
 
 //
             // Do things like hide the progress bar or change a TextView
         }
+
+
+
     }
 }

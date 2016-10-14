@@ -27,46 +27,69 @@
             android:paddingTop="30dp"
             android:text="@string/food_entry_info"
             android:textAlignment="center"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
 
-        <SearchView
-            android:layout_width="match_parent"
-            android:layout_height="59dp"
-            android:id="@+id/search_bar_food">
-
-        </SearchView>
-
-        <TextView
-            android:id="@+id/textview_serving_size"
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="30dp"
-            android:paddingTop="30dp"
-            android:text="@string/serving_size"
-            android:textAlignment="center"
-            android:textSize="18sp" />
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/search_bar_food" />
 
-        <Spinner
-            android:id="@+id/spinner_food_servings"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="40dp"
-            android:layout_marginLeft="70dp"
-            android:layout_marginRight="70dp"
-            android:entries="@array/servingSize_array"
-            android:prompt="@string/spinner_title" />
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/button_log_food"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="?attr/colorPrimary"
-            android:text="@string/log_food_button"
-            android:textColor="@color/white" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:layout_weight="1"
+                android:text="Food Eaten:"
+                android:id="@+id/editTextFoodEaten" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:entries="@array/measurement_array"
+                android:id="@+id/spinnerFoodMeasurements" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/button_calc_calories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:text="@string/log_food_button"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical" />
+
+            <Button
+                android:text="@string/button_label_manual_enter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/colorPrimary"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/button_enter_manual" />
+        </LinearLayout><![CDATA[
+
         />
 
+    ]]>
     </LinearLayout>
 
 </FrameLayout>

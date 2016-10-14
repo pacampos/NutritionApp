@@ -21,12 +21,22 @@ public class DayModel {
     private double exerciseCalorieGoal;
     private double foodCalorieGoal;
     private double caloriesBurnedExercising;
+    private double servingsGrains;
+    private double servingsVeggie;
+    private double servingsFruit;
+    private double servingsDairy;
+    private double servingsMeat;
 
 
     public DayModel() {
         foods=new ArrayList<>();
         exercises=new ArrayList<>();
         waterAmountDrank=0.0;
+        servingsGrains=0.0;
+        servingsVeggie=0.0;
+        servingsFruit=0.0;
+        servingsDairy=0.0;
+        servingsMeat=0.0;
     }
 
     public void addFood(FoodModel food) {
@@ -113,6 +123,66 @@ public class DayModel {
 
     public void setFoodCalorieGoal(double foodCalorieGoal) {
         this.foodCalorieGoal = foodCalorieGoal;
+    }
+
+    public double getServingsGrains() {
+        return servingsGrains;
+    }
+
+    public void setServingsGrains(double servingsGrains) {
+        this.servingsGrains = servingsGrains;
+    }
+
+    public double getServingsVeggie() {
+        return servingsVeggie;
+    }
+
+    public void setServingsVeggie(double servingsVeggie) {
+        this.servingsVeggie = servingsVeggie;
+    }
+
+    public double getServingsFruit() {
+        return servingsFruit;
+    }
+
+    public void setServingsFruit(double servingsFruit) {
+        this.servingsFruit = servingsFruit;
+    }
+
+    public double getServingsDairy() {
+        return servingsDairy;
+    }
+
+    public void setServingsDairy(double servingsDairy) {
+        this.servingsDairy = servingsDairy;
+    }
+
+    public double getServingsMeat() {
+        return servingsMeat;
+    }
+
+    public void setServingsMeat(double servingsMeat) {
+        this.servingsMeat = servingsMeat;
+    }
+
+    public void addServingsGrains(double addition){
+        setServingsGrains(getServingsGrains()+addition);
+    }
+
+    public void addServingsVeggie(double addition){
+        setServingsVeggie(getServingsVeggie()+addition);
+    }
+
+    public void addServingsFruit(double addition){
+        setServingsFruit(getServingsFruit()+addition);
+    }
+
+    public void addServingsDairy(double addition){
+        setServingsDairy(getServingsDairy()+addition);
+    }
+
+    public void addServingsMeat(double addition){
+        setServingsMeat(getServingsMeat()+addition);
     }
 
 }

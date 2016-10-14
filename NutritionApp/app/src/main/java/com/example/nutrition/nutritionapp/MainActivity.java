@@ -90,9 +90,9 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(MainActivity.this, "Signed In", Toast.LENGTH_SHORT).show();
                             mAuth = FirebaseAuth.getInstance();
-                            NutritionSingleton.getInstance().SetUser(mAuth.getCurrentUser());
                             Intent i = new Intent(MainActivity.this, ActivityHome.class);
-                            startActivity(i);
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            NutritionSingleton.getInstance().SetUser(mAuth.getCurrentUser(), i, getApplicationContext());
                         }
                     }
                 });

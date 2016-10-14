@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -16,14 +15,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import java.util.Calendar;
+import com.example.nutrition.nutritionapp.Model.DayModel;
 
-import static android.R.attr.id;
-import static android.R.attr.start;
+import java.util.Calendar;
 
 
 public class HomeFragment extends Fragment {
-
+    final private float MAX_GRAINS= 6f;
+    final private float MAX_MEAT = 2f;
+    final private float MAX_VEGGIES = 4f;
+    final private float MAX_FRUIT = 4f;
+    final private float MAX_DAIRY = 3f;
     private float grainsPortion = 0f;
     private float veggiePortion = 0f;
     private float fruitPortion= 0f;
@@ -37,6 +39,7 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,6 +47,13 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
         pyramid = (PyramidView) v.findViewById(R.id.pyramid);
+
+        DayModel dayModel=NutritionSingleton.getInstance().getCurrDay();
+        grainsPortion = new Float(dayModel.getServingsGrains());
+        veggiePortion = new Float(dayModel.getServingsVeggie());
+        fruitPortion = new Float(dayModel.getServingsFruit());
+        dairyPortion = new Float(dayModel.getServingsDairy());
+        meatPortion = new Float(dayModel.getServingsMeat());
 
         Button profileButton = (Button) v.findViewById(R.id.profileButton);
         Button exerciseButton = (Button) v.findViewById(R.id.exerciseButton);
@@ -55,6 +65,13 @@ public class HomeFragment extends Fragment {
         ImageView hamburgerIcon = (ImageView) v.findViewById(R.id.hamburgerIcon);
         ImageView waterIcon = (ImageView) v.findViewById(R.id.waterIcon);
         ImageView weightIcon = (ImageView) v.findViewById(R.id.weightIcon);
+
+        pyramid.setFirstPortion(grainsPortion/MAX_GRAINS);
+        pyramid.setSecondPortion(veggiePortion/MAX_VEGGIES);
+        pyramid.setThirdPortion(fruitPortion/MAX_FRUIT);
+        pyramid.setFourthPortion(dairyPortion/MAX_DAIRY);
+        pyramid.setFifthPortion(meatPortion/MAX_MEAT);
+        pyramid.invalidate();
 
         servingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,39 +186,7 @@ public class HomeFragment extends Fragment {
         transaction.commit();
     }
 
-    public void updateServings(float grainsPercent, float veggiesPercent, float fruitsPercent, float dairyPercent, float meatPercent ){
-        addToGrains(grainsPercent);
-        addToVeggies(veggiesPercent);
-        addToFruits(fruitsPercent);
-        addToDairy(dairyPercent);
-        addToMeat(meatPercent);
-        pyramid.setFirstPortion(grainsPortion);
-        pyramid.setSecondPortion(veggiePortion);
-        pyramid.setThirdPortion(fruitPortion);
-        pyramid.setFourthPortion(dairyPortion);
-        pyramid.setFifthPortion(meatPortion);
-        pyramid.invalidate();
-    }
 
 
-    private void addToGrains(float percentage){
-        grainsPortion+=percentage;
-    }
-
-    private void addToFruits(float percentage){
-        fruitPortion+=percentage;
-    }
-
-    private void addToVeggies(float percentage){
-        veggiePortion+=percentage;
-    }
-
-    private void addToDairy(float percentage){
-        dairyPortion=+percentage;
-    }
-
-    private void addToMeat(float percentage){
-        meatPortion+=percentage;
-    }
     
 }

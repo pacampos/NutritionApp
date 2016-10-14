@@ -1,20 +1,21 @@
 package com.example.nutrition.nutritionapp;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.nutrition.nutritionapp.Model.DayModel;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
@@ -23,11 +24,6 @@ public class servingFragment extends Fragment {
     private FrameLayout mRelativeLayout;
     private PopupWindow mPopupWindow;
     private TextView tv;
-    final private float MAX_GRAINS= 6f;
-    final private float MAX_MEAT = 5f;
-    final private float MAX_VEGGIES = 4f;
-    final private float MAX_FRUIT = 3f;
-    final private float MAX_DAIRY = 2f;
 
 
     public interface OnServingsEnteredListener{
@@ -52,6 +48,12 @@ public class servingFragment extends Fragment {
         final TextView fruitsText = (TextView) v.findViewById(R.id.fruitsText);
         final TextView dairyText = (TextView) v.findViewById(R.id.dairyText);
         final TextView meatText = (TextView) v.findViewById(R.id.meatText);
+
+        final EditText grainEdit =(EditText) v.findViewById(R.id.grainsEdit);
+        final EditText veggieEdit =(EditText) v.findViewById(R.id.veggieEdit);
+        final EditText fruitsEdit = (EditText) v.findViewById(R.id.fruitsEdit);
+        final EditText dairyEdit = (EditText) v.findViewById(R.id.dairyEdit);
+        final EditText meatEdit = (EditText) v.findViewById(R.id.meatEdit);
 
 
         grainsText.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +90,33 @@ public class servingFragment extends Fragment {
         enterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /* update the servings */
+                NutritionSingleton singleton=NutritionSingleton.getInstance();
 
+                if(grainEdit.getText().toString().length() > 0) {
+                    singleton.updateGrains(Double.valueOf(grainEdit.getText().toString()));
+                }
+
+                if(veggieEdit.getText().toString().length() >0){
+                    singleton.updateVeggies(Double.valueOf(veggieEdit.getText().toString()));
+                }
+
+                if(fruitsEdit.getText().toString().length() > 0 ){
+                    singleton.updateFruits(Double.valueOf(fruitsEdit.getText().toString()));
+
+                }
+
+                if(dairyEdit.getText().toString().length() >0){
+                    singleton.updateDairy(Double.valueOf(dairyEdit.getText().toString()));
+                }
+
+                if(meatEdit.getText().toString().length() > 0) {
+                    singleton.updateMeat(Double.valueOf(meatEdit.getText().toString()));
+                }
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.home_fragment_container, new HomeFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 

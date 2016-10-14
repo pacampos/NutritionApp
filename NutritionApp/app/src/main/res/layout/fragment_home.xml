@@ -6,6 +6,40 @@
     android:layout_height="match_parent"
     tools:context="com.example.nutrition.nutritionapp.HomeFragment">
 
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar9"
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+    <Button
+        android:text="Notify!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/notifyButton"
+        android:layout_gravity="center_horizontal" />
+
+
+    <Button
+        android:id="@+id/profileButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="@string/profileButton"
+        android:textColor="@color/white" />
+
+    <Button
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="280dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/logout_text"
+        android:textColor="@color/white" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="544dp"
@@ -39,12 +73,16 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="150dp">
+            android:layout_width="367dp"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:layout_marginLeft="90dp">
+
             <com.example.nutrition.nutritionapp.PyramidView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/pyramid"/>
+                android:layout_width="100dp"
+                android:id="@+id/pyramid"
+                android:layout_height="180dp"
+                android:layout_weight=".25" />
         </LinearLayout>
 
         <LinearLayout
@@ -236,40 +274,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar9"
-        android:layout_width="match_parent"
-        android:layout_height="71dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
-    <Button
-        android:text="Notify!"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/notifyButton"
-        android:layout_gravity="center_horizontal" />
-
-
-    <Button
-        android:id="@+id/profileButton"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="@string/profileButton"
-        android:textColor="@color/white" />
-
-    <Button
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="280dp"
-        android:background="@color/colorPrimary"
-        android:text="@string/logout_text"
-        android:textColor="@color/white" />
 
 </FrameLayout>

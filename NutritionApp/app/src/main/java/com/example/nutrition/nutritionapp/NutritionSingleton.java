@@ -1,5 +1,8 @@
 package com.example.nutrition.nutritionapp;
 
+import android.content.Context;
+import android.content.Intent;
+
 import com.example.nutrition.nutritionapp.Model.AccountModel;
 import com.example.nutrition.nutritionapp.Model.DayModel;
 import com.example.nutrition.nutritionapp.Model.ExerciseModel;
@@ -51,7 +54,7 @@ public class NutritionSingleton {
         return mUser;
     }
 
-    void SetUser(FirebaseUser user) {
+    void SetUser(FirebaseUser user, final Intent intent, final Context context) {
         mUser = user;
         currUser = mUser.getUid();
         final DatabaseReference ref = mFirebaseDatabaseReference.child(USERS_CHILD).child(mUser.getUid());
@@ -66,8 +69,6 @@ public class NutritionSingleton {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             currProfile = dataSnapshot.getValue(ProfileModel.class);
-
-
                                 /*
                                 we use java date to find out what day it is,
                                 if it's a day not in the database, we create a new date and add that to the profile
@@ -77,10 +78,8 @@ public class NutritionSingleton {
                                 if(currDay == null){
                                     currDay = new DayModel();
                                     NutritionSingleton.getInstance().addDay(currDay);
-
                                 }
-
-
+                                context.startActivity(intent);
                         }
 
                         @Override
@@ -205,6 +204,46 @@ public class NutritionSingleton {
         currDay.addWaterAmount(water);
         Map<String,Object> updateChildren=new HashMap<>();
         updateChildren.put("waterAmountDrank", currDay.getWaterAmountDrank());
+        mFirebaseDatabaseReference.child(USERS_CHILD).
+                child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).updateChildren(updateChildren);
+    }
+
+    public void updateGrains(double grains){
+        currDay.addServingsGrains(grains);
+        Map<String,Object> updateChildren=new HashMap<>();
+        updateChildren.put("servingsGrains", currDay.getServingsGrains());
+        mFirebaseDatabaseReference.child(USERS_CHILD).
+                child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).updateChildren(updateChildren);
+    }
+
+    public void updateVeggies(double veggie){
+        currDay.addServingsGrains(veggie);
+        Map<String,Object> updateChildren=new HashMap<>();
+        updateChildren.put("servingsVeggie", currDay.getServingsVeggie());
+        mFirebaseDatabaseReference.child(USERS_CHILD).
+                child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).updateChildren(updateChildren);
+    }
+
+    public void updateFruits(double fruits){
+        currDay.addServingsGrains(fruits);
+        Map<String,Object> updateChildren=new HashMap<>();
+        updateChildren.put("servingsFruit", currDay.getServingsFruit());
+        mFirebaseDatabaseReference.child(USERS_CHILD).
+                child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).updateChildren(updateChildren);
+    }
+
+    public void updateMeat(double meat){
+        currDay.addServingsGrains(meat);
+        Map<String,Object> updateChildren=new HashMap<>();
+        updateChildren.put("servingsMeat", currDay.getServingsMeat());
+        mFirebaseDatabaseReference.child(USERS_CHILD).
+                child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).updateChildren(updateChildren);
+    }
+
+    public void updateDairy(double dairy){
+        currDay.addServingsGrains(dairy);
+        Map<String,Object> updateChildren=new HashMap<>();
+        updateChildren.put("servingsDairy", currDay.getServingsDairy());
         mFirebaseDatabaseReference.child(USERS_CHILD).
                 child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).updateChildren(updateChildren);
     }

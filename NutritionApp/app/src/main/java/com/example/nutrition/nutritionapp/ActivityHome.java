@@ -23,8 +23,6 @@ public class ActivityHome extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
-
         //get manager
         FragmentManager fm = getSupportFragmentManager();
         //get the ID/ location of where we want to load fragment

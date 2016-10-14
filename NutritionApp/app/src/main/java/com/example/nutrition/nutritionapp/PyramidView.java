@@ -341,7 +341,7 @@ public class PyramidView extends View {
         float bottomLeftEdgeY = (heightOfTriangle+dpToPixels(pyramidThickness*15));
 
 
-        mPaint.setTextSize(75f);
+        mPaint.setTextSize(dpToPixels(10));
         canvas.drawText(String.valueOf((int) (firstPortion*100))+"%",bottomLeftEdgeX,bottomLeftEdgeY,mPaint);
     }
 
@@ -356,7 +356,7 @@ public class PyramidView extends View {
         float bottomLeftEdgeX =getLeft()+(getWidth()/5)+dpToPixels(pyramidThickness);
         float bottomLeftEdgeY = (heightOfTriangle+dpToPixels(pyramidThickness*15));
 
-        mPaint.setTextSize(75f);
+        mPaint.setTextSize(dpToPixels(10));
         canvas.drawText(String.valueOf((int) (secondPortion*100))+"%",bottomLeftEdgeX,bottomLeftEdgeY,mPaint);
 
     }
@@ -372,7 +372,7 @@ public class PyramidView extends View {
         float bottomLeftEdgeX =getLeft()+(2*(getWidth()/5))+dpToPixels(pyramidThickness);
         float bottomLeftEdgeY = (heightOfTriangle+dpToPixels(pyramidThickness*15));
 
-        mPaint.setTextSize(75f);
+        mPaint.setTextSize(dpToPixels(10));
         canvas.drawText(String.valueOf((int) (thirdPortion*100))+"%",bottomLeftEdgeX,bottomLeftEdgeY,mPaint);
     }
 
@@ -387,7 +387,7 @@ public class PyramidView extends View {
         float bottomLeftEdgeX =getLeft()+(3*(getWidth()/5))+dpToPixels(pyramidThickness);
         float bottomLeftEdgeY = (heightOfTriangle+dpToPixels(pyramidThickness*15));
 
-        mPaint.setTextSize(75f);
+        mPaint.setTextSize(dpToPixels(10));
         canvas.drawText(String.valueOf((int) (fourthPortion*100))+"%",bottomLeftEdgeX,bottomLeftEdgeY,mPaint);
 
     }
@@ -403,7 +403,7 @@ public class PyramidView extends View {
         float bottomLeftEdgeX =getLeft()+(4*(getWidth()/5))+dpToPixels(pyramidThickness);
         float bottomLeftEdgeY = (heightOfTriangle+dpToPixels(pyramidThickness*15));
 
-        mPaint.setTextSize(75f);
+        mPaint.setTextSize(dpToPixels(10));
         canvas.drawText(String.valueOf((int) (fifthPortion*100))+"%",bottomLeftEdgeX,bottomLeftEdgeY,mPaint);
     }
 

@@ -42,6 +42,7 @@
         </receiver>
 
         <activity android:name=".FoodActivity" />
+        <activity android:name=".WeightEntryActivity"></activity>
     </application>
 
 </manifest>

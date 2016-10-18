@@ -33,12 +33,15 @@ public class foodEntryFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private double OUNCE_TO_ML = 29.5735;
+    private double OUNCE_TO_G = 28.3495;
+    private double ML_TO_G = 1;
     final static String OUNCES = "oz";
     final static String GRAMS = "g";
-    final static String MILLILETERS = "mL";
+    final static String MILLILETERS = "ml";
     String API_SECRET= "118c4828b97848de9d1576137f9541b1";
     String API_CONSUMER = "739bfa1b0dd3407882ac1b24c5be4167";
-    String measurements [] = {"oz", "g", "mL"};
+    String measurements [] = {"oz", "g", "ml"};
     int servingPos=0;
 
     @Override
@@ -143,15 +146,25 @@ public class foodEntryFragment extends Fragment {
         protected void onPostExecute(String result) {
             super.onPostExecute("result");
             if(foodItem!=null){
-//                List<Serving> foodServingList=foodItem.getServings();
-//                Serving serving=foodServingList.get(0);
-//                String servingUnit=serving.getMetricServingUnit();
-//                BigDecimal servingAmount = serving.getMetricServingAmount();
+                List<Serving> foodServingList=foodItem.getServings();
+                Serving serving=foodServingList.get(0);
+                String servingUnit=serving.getMetricServingUnit();
+                BigDecimal servingAmount = serving.getMetricServingAmount();
+
+
+                /* once we find a serving unit, we have to convert it to unit the user selected
+                * ml to oz
+                * ml to g
+                * oz to ml
+                * oz to g
+                * g to oz
+                * g to ml
+                * */
+
 //                if()
 //                String name=compactFood.getName();
 //                double calories=serving.getCalories().doubleValue();
 //                double servingNum = servings[servingPos];
-//                String foodType = "Food";
 ////                NutritionSingleton.getInstance().addFood(new FoodModel(name, calories, servingNum, 1.0));
 //                Toast.makeText(getActivity(), "New Food item was added.", Toast.LENGTH_SHORT).show();
             }
@@ -168,6 +181,28 @@ public class foodEntryFragment extends Fragment {
         transaction.replace(R.id.food_fragment_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    private double ozToML(double ounces){
+        return ounces*OUNCE_TO_ML;
+    }
+
+    private double ozToG(double ounces){
+        return ounces*OUNCE_TO_G;
+    }
+    private double gToOZ(double gram) {
+        return gram/OUNCE_TO_G;
+    }
+    private double gToML(double gram){
+        return  gram/ML_TO_G;
+    }
+
+    private double mlToOz(double ml){
+        return ml/OUNCE_TO_ML;
+    }
+
+    private double mlToG(double ml){
+        return ml*ML_TO_G;
     }
 
 }

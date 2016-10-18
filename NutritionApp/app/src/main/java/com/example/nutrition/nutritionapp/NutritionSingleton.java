@@ -58,7 +58,8 @@ public class NutritionSingleton {
         mUser = user;
         currUser = mUser.getUid();
         final DatabaseReference ref = mFirebaseDatabaseReference.child(USERS_CHILD).child(mUser.getUid());
-        ref.addValueEventListener(new ValueEventListener() {
+
+        ValueEventListener valueEventListener =new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String name = null;
@@ -74,12 +75,17 @@ public class NutritionSingleton {
                                 if it's a day not in the database, we create a new date and add that to the profile
                                 else, we create a new day, to begin appending water, exercise, and food to it
                              */
-                                currDay = currProfile.getDays().get(generateCurrDayString());
-                                if(currDay == null){
-                                    currDay = new DayModel();
-                                    NutritionSingleton.getInstance().addDay(currDay);
-                                }
-                                context.startActivity(intent);
+                            currDay = currProfile.getDays().get(generateCurrDayString());
+                            if(currDay == null){
+                                currDay = new DayModel();
+                                NutritionSingleton.getInstance().addDay(currDay);
+
+                            }
+
+
+                            context.startActivity(intent);
+                            profileRef.removeEventListener(this);
+
                         }
 
                         @Override
@@ -87,14 +93,20 @@ public class NutritionSingleton {
 
                         }
                     });
+
                 }
+
+                ref.removeEventListener(this);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        };
+
+        ref.addValueEventListener(valueEventListener);
+
     }
 
     /**

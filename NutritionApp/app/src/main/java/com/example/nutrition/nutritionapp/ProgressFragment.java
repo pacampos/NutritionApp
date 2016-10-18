@@ -36,6 +36,7 @@ import java.util.TreeMap;
 
 public class ProgressFragment extends Fragment  {
     private BarChart chart;
+    private BarChart chart2;
 
     public ProgressFragment() {
         // Required empty public constructor
@@ -50,9 +51,12 @@ public class ProgressFragment extends Fragment  {
 
         // BarChart
         chart = (BarChart) v.findViewById(R.id.chart);
+        chart2 = (BarChart) v.findViewById(R.id.chart2);
 
         List<BarEntry> entries = new ArrayList<>();
+        List<BarEntry> entries2 = new ArrayList<>();
         TreeMap<Integer, Integer> thingies = new TreeMap<>();
+        TreeMap<Integer, Integer> sortedCalories = new TreeMap<>();
         HashMap<String, DayModel> dayMap = NutritionSingleton.getInstance().getCurrProfile().getDays();
         Set<String> dayKeys = dayMap.keySet();
         for(String key: dayKeys){
@@ -66,46 +70,60 @@ public class ProgressFragment extends Fragment  {
             today.set(yearInt, monthInt-1, dayInt-1);
             int dayOfYear=today.get(Calendar.DAY_OF_YEAR);
             Double caloriesBurn=Double.valueOf(dayMap.get(key).calcTotalCaloriesBurned());
+            Double caloriesConsumed = Double.valueOf(dayMap.get(key).calcTotalCaloriesAte());
             thingies.put(dayOfYear, caloriesBurn.intValue());
+            sortedCalories.put(dayOfYear, caloriesConsumed.intValue());
         }
 
         for (Map.Entry<Integer, Integer> entry : thingies.entrySet()) {
             entries.add(new BarEntry(entry.getKey(), entry.getValue()));
         }
 
+        for(Map.Entry<Integer, Integer> entry : sortedCalories.entrySet()) {
+            entries2.add(new BarEntry(entry.getKey(), entry.getValue()));
+        }
+
+        addChartSettings(entries, chart);
+        addChartSettings(entries2, chart2);
+
+
+        return v;
+    }
+
+    private void addChartSettings(List<BarEntry> entries, BarChart chartEntry) {
         BarDataSet dataSet = new BarDataSet(entries, "Label");
         BarData barData = new BarData(dataSet);
 
         barData.setBarWidth(0.9f);
-        chart.setData(barData);
-        chart.setFitBars(true);
+        chartEntry.setData(barData);
+        chartEntry.setFitBars(true);
 
-        chart.setDrawGridBackground(false);
+        chartEntry.setDrawGridBackground(false);
 
-        chart.setGridBackgroundColor(R.color.white);
+        chartEntry.setGridBackgroundColor(R.color.white);
 
-        chart.setDescription("");
+        chartEntry.setDescription("");
 
-        YAxis rightAxis = chart.getAxisRight();
+        YAxis rightAxis = chartEntry.getAxisRight();
         rightAxis.setEnabled(false);
 
 
-        XAxis xAxis = chart.getXAxis();
+        XAxis xAxis = chartEntry.getXAxis();
         xAxis.setDrawGridLines(false);
 
-        chart.setTouchEnabled(true);
+        chartEntry.setTouchEnabled(true);
 
-        AxisValueFormatter xAxisFormatter = new DayAxisValueFormatter(chart);
+        AxisValueFormatter xAxisFormatter = new DayAxisValueFormatter(chartEntry);
         xAxis.setValueFormatter(xAxisFormatter);
 
         // Interval of 1 day
-      //  xAxis.setGranularity(1f);
+        //  xAxis.setGranularity(1f);
 
-        chart.setScaleYEnabled(false);
-        chart.setPinchZoom(true);
+        chartEntry.setScaleYEnabled(false);
+        chartEntry.setPinchZoom(true);
 
-       // barData.setDrawValues(false);
-        YAxis yAxis = chart.getAxisLeft();
+        // barData.setDrawValues(false);
+        YAxis yAxis = chartEntry.getAxisLeft();
         yAxis.setDrawGridLines(false);
 
         // Pushes the graph down to 0
@@ -114,14 +132,15 @@ public class ProgressFragment extends Fragment  {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
 
-        chart.setNoDataText("There is no data available.");
+        chartEntry.setNoDataText("There is no data available.");
 
         //CustomMarkerView mv = new CustomMarkerView (getActivity(), R.layout.fragment_progress);
         //chart.setMarkerView(mv);
 
-        chart.animateY(2000);
-        chart.invalidate();
-        return v;
+        chartEntry.animateY(2000);
+        chartEntry.invalidate();
+
     }
+
 
 }

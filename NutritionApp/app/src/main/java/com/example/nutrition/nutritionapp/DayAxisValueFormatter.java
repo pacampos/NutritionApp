@@ -68,7 +68,8 @@ public class DayAxisValueFormatter implements AxisValueFormatter
                     break;
             }
 
-            return dayOfMonth == 0 ? "" : dayOfMonth + appendix + " " + monthName;
+            return dayOfMonth == 0 ? "" : dayOfMonth
+                    + " " + monthName;
         }
     }
 

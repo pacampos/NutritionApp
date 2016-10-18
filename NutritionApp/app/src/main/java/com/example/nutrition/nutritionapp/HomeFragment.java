@@ -61,6 +61,7 @@ public class HomeFragment extends Fragment {
         Button foodEntryButton = (Button) v.findViewById(R.id.foodDrinkEntrybutton);
         Button servingButton = (Button) v.findViewById(R.id.servingButton);
         Button notifyButton = (Button) v.findViewById(R.id.notifyButton);
+        Button logoutButton = (Button) v.findViewById(R.id.logoutButton);
         //Button creditButton = (Button) v.findViewById(R.id.CreditButton);
 
         ImageView hamburgerIcon = (ImageView) v.findViewById(R.id.hamburgerIcon);
@@ -73,6 +74,14 @@ public class HomeFragment extends Fragment {
         pyramid.setFourthPortion(dairyPortion/MAX_DAIRY);
         pyramid.setFifthPortion(meatPortion/MAX_MEAT);
         pyramid.invalidate();
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment progressFrament = new ProgressFragment();
+                replaceFragment(progressFrament);
+            }
+        });
 
         servingButton.setOnClickListener(new View.OnClickListener() {
             @Override

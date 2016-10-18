@@ -61,6 +61,7 @@ public class HomeFragment extends Fragment {
         Button foodEntryButton = (Button) v.findViewById(R.id.foodDrinkEntrybutton);
         Button servingButton = (Button) v.findViewById(R.id.servingButton);
         Button notifyButton = (Button) v.findViewById(R.id.notifyButton);
+        //Button creditButton = (Button) v.findViewById(R.id.CreditButton);
 
         ImageView hamburgerIcon = (ImageView) v.findViewById(R.id.hamburgerIcon);
         ImageView waterIcon = (ImageView) v.findViewById(R.id.waterIcon);
@@ -80,6 +81,14 @@ public class HomeFragment extends Fragment {
                 replaceFragment(servingFragment);
             }
         });
+
+//        creditButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Fragment creditFragment = new CreditFragment();
+//                replaceFragment(creditFragment);
+//            }
+//        });
 
         notifyButton.setOnClickListener(new View.OnClickListener() {
             @Override

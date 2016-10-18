@@ -121,6 +121,23 @@
     <string name="dairy_title">Dairy</string>
     <string name="meat_title">Meat</string>
     <string name="title">Enter your serving</string>
+
+    <!-- Credits Page !-->
+    <string name="credit_heading">Credits</string>
+    <string name="icon_credits">Icon made by Madebyoliver from www.flaticon.com</string>
+    <string name="developers">Developers:</string>
+    <string name="vishnu">Vishnu Venkateswaran</string>
+    <string name="phoenix">Phoenix Campos</string>
+    <string name="jimmy">Jimmy Hsu</string>
+    <string name="willa">Willa Zhao</string>
+    <string name="vita">Vita Shubin</string>
+    <string name="met">MET values were taken from ProCon.org</string>
+    <string name="pyramid">Pyramid information was taken from HealthPromotion.ie</string>
+    <string name="equation">Calories Burned Equations were taken from LIVESTRONG.com</string>
+
+    <!-- Credits Page !-->
+    <string name="weight_entry_heading">Weight Entry</string>
+
     <!-- General Strings !-->
     <string name="nextButtonText">Continue</string>
     <string name="startReachingText">Start reaching your goal!</string>

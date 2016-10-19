@@ -25,7 +25,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:weightSum="1">
 
@@ -108,15 +108,14 @@
             android:textColor="@color/colorPrimary"
             android:textStyle="normal|bold"
             android:textSize="24sp"
-            android:layout_height="25dp"
-            android:layout_weight="0.05" />
+            android:layout_height="wrap_content"
+            android:layout_weight="0.02" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="0.00"
             android:orientation="horizontal"
@@ -143,7 +142,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginBottom="180dp">
 
             <Button
                 android:id="@+id/recordButton"

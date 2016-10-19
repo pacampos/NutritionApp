@@ -77,17 +77,6 @@ public class ExerciseFragment extends Fragment {
             }
         });
 
-        manual_calorie_burned.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_DONE){
-                    calories = Double.valueOf(manual_calorie_burned.getText().toString());
-                    return true;
-                }
-                return false;
-            }
-        });
-
         durationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -111,7 +100,7 @@ public class ExerciseFragment extends Fragment {
                 ProfileModel profile= NutritionSingleton.getInstance().getCurrProfile();
                 DayModel day = NutritionSingleton.getInstance().getCurrDay();
 
-                if(manualEntry == false){
+                if(!manualEntry){
                     if(profile.getIsImperial()){
                         NutritionSingleton.getInstance().addExercise(new ExerciseModel(profile.getIsImperial(),duration,exerciseType,profile.getCurrWeightPounds()));
                         Toast.makeText(getActivity(), "Added Exercise Sucessfully", Toast.LENGTH_SHORT).show();
@@ -123,7 +112,7 @@ public class ExerciseFragment extends Fragment {
                     }
                 }
                 else{
-                        NutritionSingleton.getInstance().addExercise(new ExerciseModel(exerciseType, calories));
+                        NutritionSingleton.getInstance().addExercise(new ExerciseModel(exerciseType, Double.valueOf(manual_calorie_burned.getText().toString())));
                         Toast.makeText(getActivity(), "Added Exercise Sucessfully", Toast.LENGTH_SHORT).show();
                         manualEntry = false;
                 }

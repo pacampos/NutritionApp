@@ -7,38 +7,6 @@
     tools:context="com.example.nutrition.nutritionapp.HomeFragment">
 
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar9"
-        android:layout_width="match_parent"
-        android:layout_height="71dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
-    <Button
-        android:text="Notify!"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/notifyButton"
-        android:layout_gravity="center_horizontal" />
-
-
-    <Button
-        android:id="@+id/profileButton"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="@string/profileButton"
-        android:textColor="@color/white" />
-
-    <Button
-        android:id="@+id/logoutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="280dp"
-        android:background="@color/colorPrimary"
-        android:text="@string/logout_text"
-        android:textColor="@color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,7 +16,7 @@
         android:weightSum="1">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar8"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
@@ -90,7 +58,7 @@
             android:layout_height="40dp">
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/calorieRemain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

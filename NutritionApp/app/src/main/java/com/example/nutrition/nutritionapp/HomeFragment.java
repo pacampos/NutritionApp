@@ -6,15 +6,24 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.nutrition.nutritionapp.Model.DayModel;
 import com.firebase.client.Firebase;
@@ -87,6 +96,7 @@ public class HomeFragment extends Fragment {
         // Actual Drawer
         result= new DrawerBuilder()
                 .withActivity(getActivity())
+                .withActionBarDrawerToggle(true)
                 .withAccountHeader(headerResult)
                 .addDrawerItems(
                         item,
@@ -122,11 +132,28 @@ public class HomeFragment extends Fragment {
                 })
                 .build();
 
+        Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        final Drawable upArrow = getResources().getDrawable(R.drawable.ic_menu_2x);
+        upArrow.setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(upArrow);
+
+        toolbar.setNavigationOnClickListener(new Toolbar.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               result.openDrawer();
+            }
+        });
+       //
+        // result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
 
 
-
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        //result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+        // Calorie Remaining
+        TextView calorieRemain = (TextView) v.findViewById(R.id.calorieRemain);
+        int caloriesRemaining = (int) NutritionSingleton.getInstance().getCurrProfile().calcCaloriesBurnedNaturally() - (int) NutritionSingleton.getInstance().getCurrDay().calcTotalCaloriesAte();
+        calorieRemain.setText(String.valueOf(caloriesRemaining) + " calories remaining today!");
 
 
         pyramid = (PyramidView) v.findViewById(R.id.pyramid);
@@ -138,13 +165,10 @@ public class HomeFragment extends Fragment {
         dairyPortion = new Float(dayModel.getServingsDairy());
         meatPortion = new Float(dayModel.getServingsMeat());
 
-        Button profileButton = (Button) v.findViewById(R.id.profileButton);
         Button exerciseButton = (Button) v.findViewById(R.id.exerciseButton);
         Button waterEntryButton = (Button) v.findViewById(R.id.waterEntryButton);
         Button foodEntryButton = (Button) v.findViewById(R.id.foodDrinkEntrybutton);
         Button servingButton = (Button) v.findViewById(R.id.servingButton);
-        Button notifyButton = (Button) v.findViewById(R.id.notifyButton);
-        Button logoutButton = (Button) v.findViewById(R.id.logoutButton);
         //Button creditButton = (Button) v.findViewById(R.id.CreditButton);
 
         ImageView hamburgerIcon = (ImageView) v.findViewById(R.id.hamburgerIcon);
@@ -158,14 +182,6 @@ public class HomeFragment extends Fragment {
         pyramid.setFifthPortion(meatPortion/MAX_MEAT);
         pyramid.invalidate();
 
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment progressFrament = new ProgressFragment();
-                replaceFragment(progressFrament);
-            }
-        });
-
         servingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,27 +190,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-//        creditButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Fragment creditFragment = new CreditFragment();
-//                replaceFragment(creditFragment);
-//            }
-//        });
-
-        notifyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar sevendayalarm = Calendar.getInstance();
-                Intent intent = new Intent(getContext(), Receiver.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
-
-                AlarmManager am = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-
-//                am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,sevendayalarm.getTimeInMillis(),pendingIntent);
-                am.setRepeating(AlarmManager.RTC_WAKEUP,sevendayalarm.getTimeInMillis(), 5000,pendingIntent);
-            }
-        });
 
         hamburgerIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -252,14 +247,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), ProfileActivity.class);
-                startActivity(i);
-            }
-        });
-
         waterEntryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -290,7 +277,6 @@ public class HomeFragment extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
 
 
     

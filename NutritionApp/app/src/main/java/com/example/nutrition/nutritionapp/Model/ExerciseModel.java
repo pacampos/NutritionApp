@@ -15,9 +15,16 @@ public class ExerciseModel {
     public static final double exerciseTypeYoga = 2.0;
     public static final double exerciseTypeBiking = 3.0;
     public static final double exerciseTypeSwimming = 4.0;
+    public static final double exerciseTypeOther = 5.0;
+
 
 
     public ExerciseModel() {
+    }
+
+    public ExerciseModel(double exerciseType, double calories) {
+        this.calories= calories;
+        this.exerciseType = exerciseType;
     }
 
     public ExerciseModel(boolean isImperial, double minutes, double exerciseType, double weight) {
@@ -30,7 +37,7 @@ public class ExerciseModel {
         return calories;
     }
 
-    public void setCalories(int calories) {
+    public void setCalories(double calories) {
         this.calories = calories;
     }
 
@@ -75,6 +82,7 @@ public class ExerciseModel {
         {
             MET = 6.0;
         }
+
         double step3 = step1 * MET;
         calories = step3 * hours;
     }

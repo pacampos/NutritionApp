@@ -11,12 +11,13 @@
         android:layout_height="wrap_content"
         android:text="@string/exercise_title"
         android:textAlignment="center"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:layout_marginBottom="15dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="80dp"
         android:orientation="vertical"
         android:weightSum="1">
 
@@ -25,7 +26,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="1">
 
         <ImageView
             android:id="@+id/imageView7"
@@ -52,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             android:layout_weight="0.00"
             android:orientation="horizontal">
 
@@ -67,7 +69,7 @@
                 android:id="@+id/typeSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="1.32"
                 android:entries="@array/exerciseType_array" />
 
         </LinearLayout>
@@ -78,6 +80,7 @@
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="0.00"
             android:orientation="horizontal">
 
@@ -92,21 +95,60 @@
                 android:id="@+id/durationSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.21"
+                android:layout_weight="0.53"
                 android:entries="@array/duration_array" />
+
+        </LinearLayout>
+
+        <TextView
+            android:text="or "
+            android:layout_width="match_parent"
+            android:id="@+id/textView15"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="normal|bold"
+            android:textSize="24sp"
+            android:layout_height="25dp"
+            android:layout_weight="0.05" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.00"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:text="Calories Burned"
+                android:layout_weight="0.44" />
+
+            <EditText
+                android:layout_width="143dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/manual_calorie_burned" />
+
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.00"
+            android:layout_height="100dp"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/recordButton"
                 android:layout_width="200dp"
-                android:layout_height="wrap_content"
+                android:layout_height="28dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:background="@color/colorPrimary"
@@ -116,13 +158,13 @@
             <Button
                 android:id="@+id/journalButton"
                 android:layout_width="200dp"
-                android:layout_height="wrap_content"
+                android:layout_height="28dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:layout_weight="0.00"
                 android:background="@color/colorPrimary"
                 android:text="@string/exercise_journal"
                 android:textColor="@color/white" />
+
         </LinearLayout>
 
     </LinearLayout>

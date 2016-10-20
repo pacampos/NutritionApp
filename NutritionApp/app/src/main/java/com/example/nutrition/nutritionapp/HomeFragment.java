@@ -146,8 +146,6 @@ public class HomeFragment extends Fragment {
                result.openDrawer();
             }
         });
-       //
-        // result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
 
 
         // Calorie Remaining

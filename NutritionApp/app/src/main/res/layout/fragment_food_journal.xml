@@ -4,13 +4,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.nutrition.nutritionapp.FoodJournalFragment">
 
-
     <TextView
         android:text="@string/fjournal_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView18"
         android:layout_gravity="center_horizontal"
+
         android:textSize="25sp" />
 
     <TextView

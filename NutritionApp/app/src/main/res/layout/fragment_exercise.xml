@@ -4,22 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.nutrition.nutritionapp.ExerciseFragment">
-
-    <TextView
-        android:id="@+id/textView17"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/exercise_title"
-        android:textAlignment="center"
-        android:textSize="25sp"
-        android:layout_marginBottom="15dp"/>
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:orientation="vertical"
         android:weightSum="1">
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/exercise_title"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            />
 
     </LinearLayout>
 
@@ -34,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginLeft="140dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="100dp"
             android:layout_weight="0.00"
             app:srcCompat="@drawable/flag" />
 
@@ -44,7 +52,7 @@
             android:layout_height="61dp"
             android:layout_marginBottom="20dp"
             android:layout_marginRight="80dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="70dp"
             android:layout_weight="0.00"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/footprint123" />
@@ -54,7 +62,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="0.00"
             android:orientation="horizontal">
 
@@ -79,7 +88,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="0.00"
             android:orientation="horizontal">
@@ -116,13 +124,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:layout_marginBottom="10dp"
+
             android:layout_weight="0.00"
             android:orientation="horizontal"
             android:weightSum="1">
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/textView22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="10dp"

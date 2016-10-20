@@ -53,6 +53,7 @@ import java.util.TreeMap;
 public class ProgressFragment extends Fragment  {
     private BarChart chart;
     private BarChart chart2;
+    private BarChart chart3;
     private Drawer result;
 
     public ProgressFragment() {
@@ -144,11 +145,14 @@ public class ProgressFragment extends Fragment  {
         // BarChart
         chart = (BarChart) v.findViewById(R.id.chart);
         chart2 = (BarChart) v.findViewById(R.id.chart2);
+        chart3 = (BarChart) v.findViewById(R.id.chart3);
 
         List<BarEntry> entries = new ArrayList<>();
         List<BarEntry> entries2 = new ArrayList<>();
+        List<BarEntry> entries3 = new ArrayList<>();
         TreeMap<Integer, Integer> thingies = new TreeMap<>();
         TreeMap<Integer, Integer> sortedCalories = new TreeMap<>();
+        TreeMap<Integer,Integer> sortedWater = new TreeMap<>();
         HashMap<String, DayModel> dayMap = NutritionSingleton.getInstance().getCurrProfile().getDays();
         Set<String> dayKeys = dayMap.keySet();
         for(String key: dayKeys){
@@ -163,8 +167,10 @@ public class ProgressFragment extends Fragment  {
             int dayOfYear=today.get(Calendar.DAY_OF_YEAR);
             Double caloriesBurn=Double.valueOf(dayMap.get(key).calcTotalCaloriesBurned());
             Double caloriesConsumed = Double.valueOf(dayMap.get(key).calcTotalCaloriesAte());
+            Double waterDrank = Double.valueOf(dayMap.get(key).getWaterAmountDrank());
             thingies.put(dayOfYear, caloriesBurn.intValue());
             sortedCalories.put(dayOfYear, caloriesConsumed.intValue());
+            sortedWater.put(dayOfYear, waterDrank.intValue());
         }
 
         for (Map.Entry<Integer, Integer> entry : thingies.entrySet()) {
@@ -175,9 +181,12 @@ public class ProgressFragment extends Fragment  {
             entries2.add(new BarEntry(entry.getKey(), entry.getValue()));
         }
 
+        for (Map.Entry<Integer, Integer> entry : sortedWater.entrySet()) {
+            entries3.add(new BarEntry(entry.getKey(), entry.getValue()));
+        }
         addChartSettings(entries, chart);
         addChartSettings(entries2, chart2);
-
+        addChartSettings(entries3, chart3);
 
         return v;
     }

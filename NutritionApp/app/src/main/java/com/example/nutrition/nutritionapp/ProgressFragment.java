@@ -150,8 +150,8 @@ public class ProgressFragment extends Fragment  {
         List<BarEntry> entries = new ArrayList<>();
         List<BarEntry> entries2 = new ArrayList<>();
         List<BarEntry> entries3 = new ArrayList<>();
-        TreeMap<Integer, Integer> thingies = new TreeMap<>();
-        TreeMap<Integer, Integer> sortedCalories = new TreeMap<>();
+        TreeMap<Integer, Integer> sortedCaloriesBurned = new TreeMap<>();
+        TreeMap<Integer, Integer> sortedCaloriesConsumed = new TreeMap<>();
         TreeMap<Integer,Integer> sortedWater = new TreeMap<>();
         HashMap<String, DayModel> dayMap = NutritionSingleton.getInstance().getCurrProfile().getDays();
         Set<String> dayKeys = dayMap.keySet();
@@ -168,16 +168,16 @@ public class ProgressFragment extends Fragment  {
             Double caloriesBurn=Double.valueOf(dayMap.get(key).calcTotalCaloriesBurned());
             Double caloriesConsumed = Double.valueOf(dayMap.get(key).calcTotalCaloriesAte());
             Double waterDrank = Double.valueOf(dayMap.get(key).getWaterAmountDrank());
-            thingies.put(dayOfYear, caloriesBurn.intValue());
-            sortedCalories.put(dayOfYear, caloriesConsumed.intValue());
+            sortedCaloriesBurned.put(dayOfYear, caloriesBurn.intValue());
+            sortedCaloriesConsumed.put(dayOfYear, caloriesConsumed.intValue());
             sortedWater.put(dayOfYear, waterDrank.intValue());
         }
 
-        for (Map.Entry<Integer, Integer> entry : thingies.entrySet()) {
+        for (Map.Entry<Integer, Integer> entry : sortedCaloriesBurned.entrySet()) {
             entries.add(new BarEntry(entry.getKey(), entry.getValue()));
         }
 
-        for(Map.Entry<Integer, Integer> entry : sortedCalories.entrySet()) {
+        for(Map.Entry<Integer, Integer> entry : sortedCaloriesConsumed.entrySet()) {
             entries2.add(new BarEntry(entry.getKey(), entry.getValue()));
         }
 

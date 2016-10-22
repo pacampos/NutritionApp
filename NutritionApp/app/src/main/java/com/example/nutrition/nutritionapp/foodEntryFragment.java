@@ -9,8 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,13 +29,17 @@ import com.example.nutrition.nutritionapp.fatservices.Response;
 import org.w3c.dom.Text;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class foodEntryFragment extends Fragment {
     public foodEntryFragment() {
         // Required empty public constructor
     }
-
+    private ExpandableListAdapter listAdapter;
+    private ExpandableListView expListView;
+    private HashMap<String, List<String>> listDataChild = new HashMap<>();
     private double OUNCE_TO_ML = 29.5735;
     private double OUNCE_TO_G = 28.3495;
     private double ML_TO_G = 1;
@@ -43,6 +50,7 @@ public class foodEntryFragment extends Fragment {
     String API_CONSUMER = "739bfa1b0dd3407882ac1b24c5be4167";
     String measurements [] = {"oz", "g", "ml"};
     int servingPos=0;
+    FoodService userFood;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,20 +60,7 @@ public class foodEntryFragment extends Fragment {
         Button foodEntryButton = (Button) v.findViewById(R.id.button_log_food);
         Button journalButton = (Button) v.findViewById(R.id.button_food_journal);
         final EditText editTextFoodName = (EditText) v.findViewById(R.id.search_bar_food);
-        final EditText editTextFoodAmount = (EditText) v.findViewById(R.id.editTextFoodEaten);
-        Spinner servingSpinner = (Spinner) v.findViewById(R.id.spinnerFoodMeasurements);
-
-        servingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                servingPos=position;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        expListView = (ExpandableListView) v.findViewById(R.id.foodList);
 
         journalButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,23 +75,14 @@ public class foodEntryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String foodName=editTextFoodName.getText().toString();
-                String foodAmount = editTextFoodAmount.getText().toString();
-                if(!foodName.isEmpty() && !foodAmount.isEmpty()){
+                if(!foodName.isEmpty()){
                     new MyTask().execute(foodName);
-                }
-
-                else if(foodName.isEmpty() && foodAmount.isEmpty()){
-                    editTextFoodName.setError("Please enter a food.");
-                    editTextFoodAmount.setError("Please enter an amount.");
                 }
 
                 else if(foodName.isEmpty()){
                     editTextFoodName.setError("Please enter a food.");
                 }
 
-                else{
-                    editTextFoodAmount.setError("Please enter an amount.");
-                }
             }
         });
 
@@ -108,6 +94,7 @@ public class foodEntryFragment extends Fragment {
 
         Food foodItem;
         CompactFood compactFood;
+        List<CompactFood> listFoods;
         // Runs in UI before background thread is called
         @Override
         protected void onPreExecute() {
@@ -121,14 +108,31 @@ public class foodEntryFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
             String query=params[0];
-            FoodService userFood= new FoodService(API_CONSUMER,API_SECRET);
-            Response<CompactFood> foods=userFood.searchFoods(query);
-            if(foods != null){
-                List<CompactFood> listFoods=foods.getResults();
-                 compactFood = listFoods.get(0);
-                foodItem=userFood.getFood(compactFood.getId());
-                return "results";
+            /* autheticated foodservice */
+            userFood= new FoodService(API_CONSUMER,API_SECRET);
+            /* if we received a valid foodservice, we look for the query */
+            if(userFood != null){
+                /* search for list of foods that match the query */
+                Response<CompactFood> foods=userFood.searchFoods(query);
+                if(foods != null){
+                    /* get the list of all foods that match the query */
+                    listFoods=foods.getResults();
+
+                    for (int i = 0; i < listFoods.size(); i++) {
+//                        long id = listFoods.get(i).getId();
+//                        Food food= userFood.getFood(id);
+//                        List<Serving> servings = food.getServings();
+//                        List<String> caloriesFood = new ArrayList<>();
+//                        for (int j = 0; j < servings.size(); j++) {
+//                            caloriesFood.add(String.valueOf(servings.get(j).getCalories()));
+//                        }
+
+                        listDataChild.put(listFoods.get(i).getName(), caloriesFood);
+                    }
+                    return "results";
+                }
             }
+
 
             return null;
         }
@@ -148,9 +152,12 @@ public class foodEntryFragment extends Fragment {
             if(foodItem!=null){
                 List<Serving> foodServingList=foodItem.getServings();
                 Serving serving=foodServingList.get(0);
-                String servingUnit=serving.getMetricServingUnit();
-                BigDecimal servingAmount = serving.getMetricServingAmount();
-
+                List<String> foodNames = new ArrayList<>();
+                for (CompactFood food : listFoods) {
+                    foodNames.add(food.getName());
+                }
+//                String[] foodArr = new String[foodNames.size()];
+//                foodArr = foodNames.toArray(foodArr);
 
                 /* once we find a serving unit, we have to convert it to unit the user selected
                 * ml to oz
@@ -161,12 +168,18 @@ public class foodEntryFragment extends Fragment {
                 * g to ml
                 * */
 
-//                if()
-//                String name=compactFood.getName();
-//                double calories=serving.getCalories().doubleValue();
-//                double servingNum = servings[servingPos];
-////                NutritionSingleton.getInstance().addFood(new FoodModel(name, calories, servingNum, 1.0));
-//                Toast.makeText(getActivity(), "New Food item was added.", Toast.LENGTH_SHORT).show();
+
+                String name=compactFood.getName();
+                double calories=serving.getCalories().doubleValue();
+               // NutritionSingleton.getInstance().addFood(new FoodModel(name, calories));
+                //Toast.makeText(getActivity(), "New Food item was added.", Toast.LENGTH_SHORT).show();
+
+                // Expandable list view
+
+
+                listAdapter = new ExpandableListAdapter(getContext(), foodNames, listDataChild);
+                expListView.setAdapter(listAdapter);
+
             }
 
 //
@@ -175,6 +188,18 @@ public class foodEntryFragment extends Fragment {
 
 
 
+    }
+    private class MyTask1 extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            return null;
+        }
+        // This runs in UI when background thread finishes
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute("result");
+        }
     }
     private void replaceFragment(Fragment fragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();

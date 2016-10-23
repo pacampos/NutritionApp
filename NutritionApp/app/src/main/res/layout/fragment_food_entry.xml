@@ -44,14 +44,32 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp" />
 
-            <EditText
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/search_bar_food" />
+                android:layout_height="match_parent">
 
-            <ExpandableListView
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/search_bar_food"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/button_log_food"
+                    android:layout_width="144dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="?attr/colorPrimary"
+                    android:text="Search Food"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
+
+            <ListView
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:id="@+id/foodList" />
@@ -63,18 +81,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp">
-
-                <Button
-                    android:id="@+id/button_log_food"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="?attr/colorPrimary"
-                    android:text="Search Food"
-                    android:textColor="@color/white"
-                    android:layout_weight="1"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp" />
 
                 <Button
                     android:id="@+id/button_food_journal"

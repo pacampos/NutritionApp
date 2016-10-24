@@ -68,7 +68,8 @@
                     android:layout_width="327dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:id="@+id/signup_email_container">
 
                     <TextView
                         android:id="@+id/textView3"
@@ -89,7 +90,8 @@
                     android:layout_width="331dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:id="@+id/signup_password_container">
 
                     <TextView
                         android:id="@+id/textView5"
@@ -113,7 +115,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
                     android:orientation="horizontal"
-                    android:weightSum="1">
+                    android:weightSum="1"
+                    android:id="@+id/signup_confirm_password_container">
 
                     <TextView
                         android:layout_width="wrap_content"

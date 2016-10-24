@@ -1,6 +1,7 @@
 package com.example.nutrition.nutritionapp;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -14,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -25,6 +27,8 @@ import java.util.regex.Pattern;
 
 
 public class signUpFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
+    public static String IS_NEW_ACCOUNT = "com.example.nutritionapp.is_new_account";
+
     public static String EMAIL = "com.example.nutritionapp.username";
     public static String PASSWORD = "com.example.nutritionapp.password";
     public static String NAME = "com.example.nutritionapp.name";
@@ -49,7 +53,18 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
     private String name;
     private boolean isImperial = false;
     private boolean gender = true;
+    private boolean isNewAccount = true;
 
+    signUpFragment.ReplaceFragmentInterface mReplaceFragment;
+    
+    public static signUpFragment newInstance(boolean isNewAccount) {
+
+        Bundle args = new Bundle();
+        args.putBoolean(IS_NEW_ACCOUNT, isNewAccount);
+        signUpFragment fragment = new signUpFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     public signUpFragment() {
         // Required empty public constructor
@@ -69,6 +84,11 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View v = inflater.inflate(R.layout.fragment_sign_up, container, false);
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            isNewAccount = bundle.getBoolean(IS_NEW_ACCOUNT, true);
+        }
 
         // Get references
         Button nextButton = (Button) v.findViewById(R.id.nextButton);
@@ -106,18 +126,28 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
             }
         });
 
+        if(!isNewAccount){
+            ((LinearLayout) v.findViewById(R.id.signup_email_container)).setVisibility(View.GONE);
+            ((LinearLayout) v.findViewById(R.id.signup_confirm_password_container)).setVisibility(View.GONE);
+            ((LinearLayout) v.findViewById(R.id.signup_password_container)).setVisibility(View.GONE);
+        }
+
+
+
         // User information
 
         // Name
         final EditText nameInput = (EditText) v.findViewById(R.id.nameInput);
 
+
         // Username
         final EditText usernameInput = (EditText) v.findViewById(R.id.usernameInput);
 
-
         // Password
         final EditText passInput = (EditText) v.findViewById(R.id.passwordInput);
+
         final EditText confirmPassInput = (EditText) v.findViewById(R.id.confirmPasswordEditText);
+
 
         // Gender
         final RadioButton maleButton = (RadioButton) v.findViewById(R.id.maleButton);
@@ -133,64 +163,104 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
         });
 
 
-        // Next button
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                name = nameInput.getText().toString();
-                email = usernameInput.getText().toString();
-                password = passInput.getText().toString();
-                confirmPassword = confirmPassInput.getText().toString();
-                if (maleButton.isChecked()) {
-                    gender = true;
-                } else {
-                    gender = false;
-                }
+        if(isNewAccount){
+            // Next button
+            nextButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    name = nameInput.getText().toString();
+                    email = usernameInput.getText().toString();
+                    password = passInput.getText().toString();
+                    confirmPassword = confirmPassInput.getText().toString();
+                    if (maleButton.isChecked()) {
+                        gender = true;
+                    } else {
+                        gender = false;
+                    }
 
-                age = getAge(_birthYear, _month, _day);
-                if (name.length() == 0 || email.length() == 0 || password.length() == 0 || confirmPassword.length() == 0|| dobInput.length() == 0 || clickedImagePosition == -1) {
-                    Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                }
+                    age = getAge(_birthYear, _month, _day);
+                    if (name.length() == 0 || email.length() == 0 || password.length() == 0 || confirmPassword.length() == 0|| dobInput.length() == 0 || clickedImagePosition == -1) {
+                        Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                    }
 
 //                else if(!isValidDate(date)){
 //                    Toast.makeText(getActivity(), "Invalid date format", Toast.LENGTH_SHORT).show();
 //                }
                 /* check if email is valid */
-                else if(!isValidEmail(email)){
+                    else if(!isValidEmail(email)){
 //                    Toast.makeText(getActivity(), "Please type in a valid email", Toast.LENGTH_SHORT).show();
-                    usernameInput.setError("Invalid format");
+                        usernameInput.setError("Invalid format");
 
-                }
+                    }
 
                 /* check if password is secure */
-                else if(!isValidPassword(password)){
+                    else if(!isValidPassword(password)){
 //                    Toast.makeText(getActivity(), "Password must be a minimum 8 characters with at" +
 //                            " least 1 Uppercase Alphabet, 1 Lowercase Alphabet and 1 Number", Toast.LENGTH_SHORT).show();
-                    passInput.setError("Password must be a minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet and 1 Number");
-                }
+                        passInput.setError("Password must be a minimum 8 characters with at least 1 Uppercase Alphabet, 1 Lowercase Alphabet and 1 Number");
+                    }
 
-                else if(!password.equals(confirmPassword)){
+                    else if(!password.equals(confirmPassword)){
 //                    Toast.makeText(getActivity(), "Your passwords do not match. Please try again.",Toast.LENGTH_SHORT).show();
-                    confirmPassInput.setError("Passwords do not match. Please try again.");
+                        confirmPassInput.setError("Passwords do not match. Please try again.");
+                    }
+                    else {
+                        Fragment fragment = new goalInformationFragment();
+                        Bundle data = new Bundle();
+                        data.putBoolean(IS_NEW_ACCOUNT, isNewAccount);
+                        data.putString(EMAIL, email);
+                        data.putString(PASSWORD, password);
+                        data.putString(NAME, name);
+                        data.putBoolean(GENDER, gender);
+                        data.putDouble(IMAGE_POS, clickedImagePosition);
+                        data.putDouble(BIRTH_DATE, _day);
+                        data.putDouble(BIRTH_MONTH, _month);
+                        data.putDouble(BIRTH_YEAR, _birthYear);
+                        data.putDouble(AGE, age);
+                        data.putBoolean(METRIC, isImperial);
+                        fragment.setArguments(data);
+                        mReplaceFragment.replaceFragment(fragment);
+                    }
                 }
-                else {
-                    Fragment fragment = new goalInformationFragment();
-                    Bundle data = new Bundle();
-                    data.putString(EMAIL, email);
-                    data.putString(PASSWORD, password);
-                    data.putString(NAME, name);
-                    data.putBoolean(GENDER, gender);
-                    data.putDouble(IMAGE_POS, clickedImagePosition);
-                    data.putDouble(BIRTH_DATE, _day);
-                    data.putDouble(BIRTH_MONTH, _month);
-                    data.putDouble(BIRTH_YEAR, _birthYear);
-                    data.putDouble(AGE, age);
-                    data.putBoolean(METRIC, isImperial);
-                    fragment.setArguments(data);
-                    replaceFragment(fragment);
+            });
+        }
+
+        else{
+            // Next button
+            nextButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    name = nameInput.getText().toString();
+                    if (maleButton.isChecked()) {
+                        gender = true;
+                    } else {
+                        gender = false;
+                    }
+
+                    age = getAge(_birthYear, _month, _day);
+                    if (name.length() == 0 ||  dobInput.length() == 0 || clickedImagePosition == -1) {
+                        Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                    }
+
+                    else {
+                        Fragment fragment = new goalInformationFragment();
+                        Bundle data = new Bundle();
+                        data.putBoolean(IS_NEW_ACCOUNT, isNewAccount);
+                        data.putString(NAME, name);
+                        data.putBoolean(GENDER, gender);
+                        data.putDouble(IMAGE_POS, clickedImagePosition);
+                        data.putDouble(BIRTH_DATE, _day);
+                        data.putDouble(BIRTH_MONTH, _month);
+                        data.putDouble(BIRTH_YEAR, _birthYear);
+                        data.putDouble(AGE, age);
+                        data.putBoolean(METRIC, isImperial);
+                        fragment.setArguments(data);
+                        mReplaceFragment.replaceFragment(fragment);
+                    }
                 }
-            }
-        });
+            });
+        }
+
 
         return v;
     }
@@ -217,13 +287,6 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
         }
 
         return age;
-    }
-
-    private void replaceFragment(Fragment fragment) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 
     public final static boolean isValidEmail(CharSequence target) {
@@ -255,6 +318,20 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
         matcher = pattern.matcher(date);
 
         return matcher.matches();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mReplaceFragment = (signUpFragment.ReplaceFragmentInterface) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnArticleSelectedListener");
+        }
+    }
+
+    public interface ReplaceFragmentInterface{
+        public void replaceFragment(Fragment fragment);
     }
 }
 

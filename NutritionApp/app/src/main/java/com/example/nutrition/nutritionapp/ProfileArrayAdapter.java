@@ -34,7 +34,7 @@ public class ProfileArrayAdapter extends ArrayAdapter {
         ImageView profileImg = (ImageView) convertView.findViewById(R.id.imageViewProfileList);
         TextView profileName = (TextView) convertView.findViewById(R.id.textViewProfileList);
         int imagePos = (int) item.getImagePos();
-        profileName.setText(profileName.getText());
+        profileName.setText(item.getName());
         profileImg.setImageResource(CheckableImageView.mOriginalIds[imagePos]);
 
         return convertView;

@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nutrition.nutritionapp.Model.DayModel;
+import com.example.nutrition.nutritionapp.Model.ProfileModel;
 import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -39,6 +40,8 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -77,22 +80,40 @@ public class HomeFragment extends Fragment {
         PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName(R.string.drawer_item_graphs);
         PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.drawer_item_credits);
         PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withName(R.string.drawer_item_logout);
+
+
+        ArrayList<IProfile<ProfileDrawerItem>> profiles= new ArrayList<>();
+        ArrayList<ProfileModel> profileModels = new ArrayList<>();
+        profileModels.add(NutritionSingleton.getInstance().getCurrProfile());
+        for(ProfileModel model: NutritionSingleton.getInstance().getAllProfiles()){
+            if(model.id != NutritionSingleton.getInstance().getCurrProfile().id){
+                profileModels.add(model);
+            }
+        }
+
+        for(ProfileModel model: profileModels){
+            profiles.add(new ProfileDrawerItem().withName(model.getName())
+                    .withIcon(getResources().getDrawable(CheckableImageView.mOriginalIds[(int) model.getImagePos()]))
+            .withIdentifier(model.id));
+
+        }
+
+
+
         // Create the AccountHeader
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(getActivity())
                 .withHeaderBackground(R.drawable.wallpaperandroid50)
-                .addProfiles(
-                        new ProfileDrawerItem()
-                                .withName(NutritionSingleton.getInstance().getCurrProfile().getName())
-                                .withIcon(getResources().getDrawable(CheckableImageView.mOriginalIds[(int) NutritionSingleton.getInstance().getCurrProfile().getImagePos()]))
-                )
+                .addProfiles(profiles.toArray(new IProfile[profiles.size()]))
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
+                        NutritionSingleton.getInstance().switchProfiles((int) profile.getIdentifier());
                         return false;
                     }
                 })
                 .build();
+
         // Actual Drawer
         result= new DrawerBuilder()
                 .withActivity(getActivity())

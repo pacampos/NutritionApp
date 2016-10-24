@@ -38,6 +38,7 @@ public class ProfileModel {
     private double thighMeasureCentimeter;
     private double armMeasureCentimeter;
     private double activityLevel;
+    public int id;
     /* this models everyday this specific user inputs info within a day */
     private HashMap<String,DayModel> days;
 

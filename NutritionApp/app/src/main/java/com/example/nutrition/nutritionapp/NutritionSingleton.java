@@ -80,6 +80,8 @@ public class NutritionSingleton {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             /* add all profiles to the profiles array */
                            profiles.add(dataSnapshot.getValue(ProfileModel.class));
+                            ProfileModel currModel = profiles.get(profiles.size()-1);
+                            currModel.id = profiles.size()-1;
                             long childrenCount = dataSnapshot.getChildrenCount();
                             int profileSize = profiles.size();
 
@@ -136,6 +138,7 @@ public class NutritionSingleton {
                 goalWeightKilos, dayBirth, monthBirth, yearBirth, waistMeasureCentimeter,
                 thighMeasureCentimeter, armMeasureCentimeter, activityLevel, isImperial);
         profiles.add(currProfile);
+        currProfile.id = profiles.size()-1;
 
         if (currUser != null) {
             mFirebaseDatabaseReference.child(USERS_CHILD).child(currUser).child(name).setValue(currProfile);
@@ -150,6 +153,7 @@ public class NutritionSingleton {
         currProfile = new ProfileModel(imagePos, name, age, heightInchesPart, heightFeetPart, gender, currWeightPounds,
                 goalWeightPounds, dayBirth, monthBirth, yearBirth, waistMeasureInches, thighMeasureInches, armMeasureInches, activityLevel, isImperial);
         profiles.add(currProfile);
+        currProfile.id = profiles.size()-1;
 
         currDay = currProfile.getDays().get(generateCurrDayString());
 

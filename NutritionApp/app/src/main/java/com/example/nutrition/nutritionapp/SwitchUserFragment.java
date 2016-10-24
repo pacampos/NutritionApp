@@ -1,5 +1,6 @@
 package com.example.nutrition.nutritionapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,7 +22,8 @@ import static android.R.attr.defaultValue;
 
 public class SwitchUserFragment extends Fragment {
     private Bundle bundle;
-    private int profilePos;
+    private int profilePos = 0;
+    signUpFragment.ReplaceFragmentInterface replaceFragmentInterface;
 
     public static String IMAGE_POS = "com.example.nutritionapp.image_pos";
 
@@ -46,6 +48,16 @@ public class SwitchUserFragment extends Fragment {
         Button loginButton = (Button) v.findViewById(R.id.loginButton1);
         loginButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
+        Button addUserButton = (Button) v.findViewById(R.id.addUserButton);
+
+        addUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signUpFragment signUpFragment = (com.example.nutrition.nutritionapp.signUpFragment) com.example.nutrition.nutritionapp.signUpFragment.newInstance(false);
+                replaceFragmentInterface.replaceFragment(signUpFragment);
+            }
+        });
+
         profileList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -64,5 +76,19 @@ public class SwitchUserFragment extends Fragment {
 
 
         return v;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            replaceFragmentInterface = (signUpFragment.ReplaceFragmentInterface) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnArticleSelectedListener");
+        }
+    }
+
+    public interface ReplaceFragmentInterface{
+        public void replaceFragment(Fragment fragment);
     }
 }

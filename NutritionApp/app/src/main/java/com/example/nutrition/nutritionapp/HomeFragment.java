@@ -58,6 +58,8 @@ public class HomeFragment extends Fragment {
     private float dairyPortion = 0f;
     private float meatPortion = 0f;
     private Drawer result;
+    private TextView calorieRemain;
+    private ProgressBar sweetsProgressBar;
 
 
     PyramidView pyramid;
@@ -73,6 +75,11 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
+
+        // Calorie Remaining
+        calorieRemain = (TextView) v.findViewById(R.id.calorieRemain);
+        setCaloriesNeeded(getCaloriesNeeded());
+
         // SIDE MENU
 
         // Drawer Items
@@ -81,7 +88,6 @@ public class HomeFragment extends Fragment {
         PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName(R.string.drawer_item_graphs);
         PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.drawer_item_credits);
         PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withName(R.string.drawer_item_logout);
-
 
         ArrayList<IProfile<ProfileDrawerItem>> profiles= new ArrayList<>();
         ArrayList<ProfileModel> profileModels = new ArrayList<>();
@@ -99,8 +105,6 @@ public class HomeFragment extends Fragment {
 
         }
 
-
-
         // Create the AccountHeader
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(getActivity())
@@ -110,6 +114,8 @@ public class HomeFragment extends Fragment {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
                         NutritionSingleton.getInstance().switchProfiles((int) profile.getIdentifier());
+                        setCaloriesNeeded(getCaloriesNeeded());
+                        setPyramid();
                         return false;
                     }
                 })
@@ -169,24 +175,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        ProgressBar sweetsProgressBar = (ProgressBar) v.findViewById(R.id.sweetsProgressBar);
-        sweetsProgressBar.setProgress((int) NutritionSingleton.getInstance().getCurrDay().getServingsSweets());
-
-
-        // Calorie Remaining
-        TextView calorieRemain = (TextView) v.findViewById(R.id.calorieRemain);
-        int caloriesRemaining = (int) NutritionSingleton.getInstance().getCurrProfile().calcCaloriesBurnedNaturally() - (int) NutritionSingleton.getInstance().getCurrDay().calcTotalCaloriesAte();
-        calorieRemain.setText(String.valueOf(caloriesRemaining) + " calories remaining today!");
-
+        sweetsProgressBar = (ProgressBar) v.findViewById(R.id.sweetsProgressBar);
+        setSweetsBar();
 
         pyramid = (PyramidView) v.findViewById(R.id.pyramid);
-
-        DayModel dayModel=NutritionSingleton.getInstance().getCurrDay();
-        grainsPortion = new Float(dayModel.getServingsGrains());
-        veggiePortion = new Float(dayModel.getServingsVeggie());
-        fruitPortion = new Float(dayModel.getServingsFruit());
-        dairyPortion = new Float(dayModel.getServingsDairy());
-        meatPortion = new Float(dayModel.getServingsMeat());
+        setPyramid();
 
         Button exerciseButton = (Button) v.findViewById(R.id.exerciseButton);
         Button waterEntryButton = (Button) v.findViewById(R.id.waterEntryButton);
@@ -197,13 +190,6 @@ public class HomeFragment extends Fragment {
         ImageView hamburgerIcon = (ImageView) v.findViewById(R.id.hamburgerIcon);
         ImageView waterIcon = (ImageView) v.findViewById(R.id.waterIcon);
         ImageView weightIcon = (ImageView) v.findViewById(R.id.weightIcon);
-
-        pyramid.setFirstPortion(grainsPortion/MAX_GRAINS);
-        pyramid.setSecondPortion(veggiePortion/MAX_VEGGIES);
-        pyramid.setThirdPortion(fruitPortion/MAX_FRUIT);
-        pyramid.setFourthPortion(dairyPortion/MAX_DAIRY);
-        pyramid.setFifthPortion(meatPortion/MAX_MEAT);
-        pyramid.invalidate();
 
         servingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -301,6 +287,32 @@ public class HomeFragment extends Fragment {
         transaction.commit();
     }
 
+    private int getCaloriesNeeded(){
+       return (int) NutritionSingleton.getInstance().getCurrProfile().calcCaloriesBurnedNaturally() - (int) NutritionSingleton.getInstance().getCurrDay().calcTotalCaloriesAte();
+    }
+
+    private void setCaloriesNeeded(int calories){
+        calorieRemain.setText(String.valueOf(calories) + " calories remaining today!");
+    }
+
+    private void setPyramid(){
+        DayModel dayModel=NutritionSingleton.getInstance().getCurrDay();
+        grainsPortion = new Float(dayModel.getServingsGrains());
+        veggiePortion = new Float(dayModel.getServingsVeggie());
+        fruitPortion = new Float(dayModel.getServingsFruit());
+        dairyPortion = new Float(dayModel.getServingsDairy());
+        meatPortion = new Float(dayModel.getServingsMeat());
+        pyramid.setFirstPortion(grainsPortion/MAX_GRAINS);
+        pyramid.setSecondPortion(veggiePortion/MAX_VEGGIES);
+        pyramid.setThirdPortion(fruitPortion/MAX_FRUIT);
+        pyramid.setFourthPortion(dairyPortion/MAX_DAIRY);
+        pyramid.setFifthPortion(meatPortion/MAX_MEAT);
+        pyramid.invalidate();
+    }
+
+    private void setSweetsBar(){
+        sweetsProgressBar.setProgress((int) NutritionSingleton.getInstance().getCurrDay().getServingsSweets());
+    }
 
     
 }

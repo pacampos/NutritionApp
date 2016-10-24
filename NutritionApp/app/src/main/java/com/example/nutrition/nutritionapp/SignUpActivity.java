@@ -130,7 +130,7 @@ public class SignUpActivity extends FragmentActivity implements signUpFragment.R
                             }
 
 
-                            Intent i = new Intent(SignUpActivity.this, ActivityHome.class);
+                            Intent i = new Intent(SignUpActivity.this, WeightEntryActivity.class);
                             Calendar sevendayalarm = Calendar.getInstance();
                             sevendayalarm.add(Calendar.HOUR_OF_DAY, 20);
                             Intent intent = new Intent(getApplicationContext(), Receiver.class);

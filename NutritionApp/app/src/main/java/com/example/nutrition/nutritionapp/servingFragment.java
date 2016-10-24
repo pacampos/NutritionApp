@@ -49,12 +49,14 @@ public class servingFragment extends Fragment {
         final TextView fruitsText = (TextView) v.findViewById(R.id.fruitsText);
         final TextView dairyText = (TextView) v.findViewById(R.id.dairyText);
         final TextView meatText = (TextView) v.findViewById(R.id.meatText);
+        final TextView sweetText = (TextView) v.findViewById(R.id.sweetText);
 
         final EditText grainEdit =(EditText) v.findViewById(R.id.grainsEdit);
         final EditText veggieEdit =(EditText) v.findViewById(R.id.veggieEdit);
         final EditText fruitsEdit = (EditText) v.findViewById(R.id.fruitsEdit);
         final EditText dairyEdit = (EditText) v.findViewById(R.id.dairyEdit);
         final EditText meatEdit = (EditText) v.findViewById(R.id.meatEdit);
+        final EditText sweetEdit = (EditText) v.findViewById(R.id.sweetEdit);
 
 
         grainsText.setOnClickListener(new View.OnClickListener() {
@@ -114,10 +116,14 @@ public class servingFragment extends Fragment {
                 if(meatEdit.getText().toString().length() > 0) {
                     singleton.updateMeat(Double.valueOf(meatEdit.getText().toString()));
                 }
-//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                transaction.replace(R.id.home_fragment_container, new HomeFragment());
-//                transaction.addToBackStack(null);
-//                transaction.commit();
+
+                if(sweetEdit.getText().toString().length() > 0){
+                    singleton.updateSweet(Double.valueOf(sweetEdit.getText().toString()));
+                }
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.home_fragment_container, new HomeFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 

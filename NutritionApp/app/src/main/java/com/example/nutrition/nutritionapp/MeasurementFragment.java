@@ -1,5 +1,9 @@
 package com.example.nutrition.nutritionapp;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 import static android.R.attr.defaultValue;
 
@@ -24,6 +30,8 @@ public class MeasurementFragment extends Fragment {
     private String waist;
     private String thigh;
     private Bundle bundle;
+
+    private signUpFragment.ReplaceFragmentInterface replaceFragmentInterface;
 
     public MeasurementFragment() {
         // Required empty public constructor
@@ -112,7 +120,39 @@ public class MeasurementFragment extends Fragment {
                     String email = bundle.getString(signUpFragment.EMAIL);
                     String password = bundle.getString(signUpFragment.PASSWORD);
 
-                    ((SignUpActivity) getActivity()).finishSignup(email, password, bundle);
+                    boolean isNewAccount = bundle.getBoolean(signUpFragment.IS_NEW_ACCOUNT);
+                    if(isNewAccount){
+                        ((SignUpActivity) getActivity()).finishSignup(email, password, bundle);
+                    }
+
+                    else{
+
+                        NutritionSingleton.getInstance().CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),
+                                bundle.getString(signUpFragment.NAME),
+                                bundle.getDouble(signUpFragment.AGE),
+                                bundle.getDouble(goalInformationFragment.HEIGHT),
+                                bundle.getBoolean(signUpFragment.GENDER),
+                                bundle.getDouble(goalInformationFragment.WEIGHT),
+                                bundle.getDouble(goalInformationFragment.GOAL),
+                                bundle.getDouble(signUpFragment.BIRTH_DATE),
+                                bundle.getDouble(signUpFragment.BIRTH_MONTH),
+                                bundle.getDouble(signUpFragment.BIRTH_YEAR),
+                                bundle.getDouble(MeasurementFragment.WAIST),
+                                bundle.getDouble(MeasurementFragment.THIGH),
+                                bundle.getDouble(MeasurementFragment.ARM),
+                                bundle.getDouble(goalInformationFragment.ACTIVITY),
+                                bundle.getBoolean(signUpFragment.METRIC));
+
+                        Calendar sevendayalarm = Calendar.getInstance();
+                        sevendayalarm.add(Calendar.HOUR_OF_DAY, 20);
+                        Intent intent = new Intent(getContext(), Receiver.class);
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 1, intent, 0);
+                        AlarmManager am = (AlarmManager)getContext().getSystemService(Context.ALARM_SERVICE);
+                        am.setRepeating(AlarmManager.RTC_WAKEUP,sevendayalarm.getTimeInMillis(), 1000*60*24*10,pendingIntent);
+                        replaceFragmentInterface.replaceFragment(new SwitchUserFragment());
+
+                    }
+
                 }
 
 
@@ -122,5 +162,17 @@ public class MeasurementFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            replaceFragmentInterface = (signUpFragment.ReplaceFragmentInterface) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnArticleSelectedListener");
+        }
+    }
 
+    public interface ReplaceFragmentInterface{
+        public void replaceFragment(Fragment fragment);
+    }
 }

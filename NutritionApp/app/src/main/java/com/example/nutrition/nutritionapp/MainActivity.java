@@ -16,7 +16,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements signUpFragment.ReplaceFragmentInterface{
     private static final String TAG = "MainActivity.";
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -90,9 +90,7 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(MainActivity.this, "Signed In", Toast.LENGTH_SHORT).show();
                             mAuth = FirebaseAuth.getInstance();
-                            Intent i = new Intent(MainActivity.this, ActivityHome.class);
-                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            NutritionSingleton.getInstance().SetUser(mAuth.getCurrentUser(), i, getApplicationContext());
+                            NutritionSingleton.getInstance().SetUser(mAuth.getCurrentUser(), MainActivity.this);
                         }
                     }
                 });
@@ -100,4 +98,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void replaceFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.welcome_fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 }

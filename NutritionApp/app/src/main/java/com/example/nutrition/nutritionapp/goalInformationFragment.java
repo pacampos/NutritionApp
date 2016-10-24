@@ -1,5 +1,6 @@
 package com.example.nutrition.nutritionapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -30,6 +31,8 @@ public class goalInformationFragment extends Fragment {
     private String goalWeight;
     private int activityLevelFactor;
     private Bundle bundle;
+
+    signUpFragment.ReplaceFragmentInterface replaceFragmentInterface;
 
     public goalInformationFragment() {
         // Required empty public constructor
@@ -112,7 +115,7 @@ public class goalInformationFragment extends Fragment {
                     bundle.putDouble(GOAL, Double.parseDouble(goalWeight));
                     bundle.putDouble(ACTIVITY, activityLevelFactor);
                     fragment.setArguments(bundle);
-                    replaceFragment(fragment);
+                    replaceFragmentInterface.replaceFragment(fragment);
                 }
             }
         });
@@ -136,5 +139,13 @@ public class goalInformationFragment extends Fragment {
         return matcher.matches();
     }
 
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            replaceFragmentInterface = (signUpFragment.ReplaceFragmentInterface) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnArticleSelectedListener");
+        }
+    }
 }

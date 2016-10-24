@@ -26,6 +26,7 @@ public class DayModel {
     private double servingsFruit;
     private double servingsDairy;
     private double servingsMeat;
+    private double servingsSweets;
 
 
     public DayModel() {
@@ -37,6 +38,7 @@ public class DayModel {
         servingsFruit=0.0;
         servingsDairy=0.0;
         servingsMeat=0.0;
+        servingsSweets=0.0;
     }
 
     public void addFood(FoodModel food) {
@@ -185,4 +187,15 @@ public class DayModel {
         setServingsMeat(getServingsMeat()+addition);
     }
 
+    public double getServingsSweets() {
+        return servingsSweets;
+    }
+
+    public void setServingsSweets(double servingsSweets) {
+        this.servingsSweets = servingsSweets;
+    }
+
+    public void addServingsSweet(double addition){
+        setServingsSweets(getServingsSweets()+addition);
+    }
 }

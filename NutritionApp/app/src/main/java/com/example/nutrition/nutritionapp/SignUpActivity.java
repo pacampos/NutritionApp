@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Calendar;
 
-public class SignUpActivity extends FragmentActivity {
+public class SignUpActivity extends FragmentActivity implements signUpFragment.ReplaceFragmentInterface {
     private static String TAG = "SignupActivity.";
     /* firebase auth instance variables */
     private FirebaseAuth mAuth;
@@ -93,22 +93,42 @@ public class SignUpActivity extends FragmentActivity {
                         } else {
                             Toast.makeText(SignUpActivity.this, "Signed In", Toast.LENGTH_SHORT).show();
                             NutritionSingleton.getInstance().CreateNewAccount(mAuth.getCurrentUser().getUid());
+                            if(bundle.getBoolean(signUpFragment.METRIC)){
+                                NutritionSingleton.getInstance().CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),
+                                        bundle.getString(signUpFragment.NAME),
+                                        bundle.getDouble(signUpFragment.AGE),
+                                        bundle.getDouble(goalInformationFragment.HEIGHT),
+                                        bundle.getBoolean(signUpFragment.GENDER),
+                                        bundle.getDouble(goalInformationFragment.WEIGHT),
+                                        bundle.getDouble(goalInformationFragment.GOAL),
+                                        bundle.getDouble(signUpFragment.BIRTH_DATE),
+                                        bundle.getDouble(signUpFragment.BIRTH_MONTH),
+                                        bundle.getDouble(signUpFragment.BIRTH_YEAR),
+                                        bundle.getDouble(MeasurementFragment.WAIST),
+                                        bundle.getDouble(MeasurementFragment.THIGH),
+                                        bundle.getDouble(MeasurementFragment.ARM),
+                                        bundle.getDouble(goalInformationFragment.ACTIVITY),
+                                        bundle.getBoolean(signUpFragment.METRIC));
+                            }
 
-                            NutritionSingleton.getInstance().CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),
-                                    bundle.getString(signUpFragment.NAME),
-                                    bundle.getDouble(signUpFragment.AGE),
-                                    bundle.getDouble(goalInformationFragment.HEIGHT),
-                                    bundle.getBoolean(signUpFragment.GENDER),
-                                    bundle.getDouble(goalInformationFragment.WEIGHT),
-                                    bundle.getDouble(goalInformationFragment.GOAL),
-                                    bundle.getDouble(signUpFragment.BIRTH_DATE),
-                                    bundle.getDouble(signUpFragment.BIRTH_MONTH),
-                                    bundle.getDouble(signUpFragment.BIRTH_YEAR),
-                                    bundle.getDouble(MeasurementFragment.WAIST),
-                                    bundle.getDouble(MeasurementFragment.THIGH),
-                                    bundle.getDouble(MeasurementFragment.ARM),
-                                    bundle.getDouble(goalInformationFragment.ACTIVITY),
-                                    bundle.getBoolean(signUpFragment.METRIC));
+                            else{
+                                NutritionSingleton.getInstance().CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),
+                                        bundle.getString(signUpFragment.NAME),
+                                        bundle.getDouble(signUpFragment.AGE),
+                                        bundle.getDouble(goalInformationFragment.HEIGHT),
+                                        0.0,
+                                        bundle.getBoolean(signUpFragment.GENDER),
+                                        bundle.getDouble(goalInformationFragment.WEIGHT),
+                                        bundle.getDouble(goalInformationFragment.GOAL),bundle.getDouble(signUpFragment.BIRTH_DATE),
+                                        bundle.getDouble(signUpFragment.BIRTH_MONTH),
+                                        bundle.getDouble(signUpFragment.BIRTH_YEAR),
+                                        bundle.getDouble(MeasurementFragment.WAIST),
+                                        bundle.getDouble(MeasurementFragment.THIGH),
+                                        bundle.getDouble(MeasurementFragment.ARM),
+                                        bundle.getDouble(goalInformationFragment.ACTIVITY),
+                                        bundle.getBoolean(signUpFragment.METRIC));
+                            }
+
 
                             Intent i = new Intent(SignUpActivity.this, ActivityHome.class);
                             Calendar sevendayalarm = Calendar.getInstance();
@@ -125,4 +145,11 @@ public class SignUpActivity extends FragmentActivity {
                 });
     }
 
+    @Override
+    public void replaceFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 }

@@ -69,52 +69,35 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:paddingLeft="100dp"
-            android:paddingRight="100dp">
+            android:paddingRight="100dp"
+            android:weightSum="1">
 
-            <Button
-
-                android:id="@+id/button4"
+            <ProgressBar
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:progressDrawable="@drawable/horizontal_progress_drawable_blue"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/doughnut" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/doughnut" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/doughnut" />
+                android:id="@+id/sweetsProgressBar"
+                android:visibility="visible"
+                android:max="3"
+                android:progress="0"
+                android:indeterminate="false"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.53" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp">
+            android:layout_height="wrap_content">
 
-            <Button
+            <TextView
+                android:text="Sweets Bar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="120dp"
-                android:layout_marginRight="120dp"
-                android:fontFamily="sans-serif-medium"
-                android:minHeight="25dp"
-                android:minWidth="0dp"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="10.5sp"
-                tools:text="I ate no donuts!" />
+                android:id="@+id/textView12"
+                android:gravity="center_horizontal"
+                android:padding="10dp" />
         </LinearLayout>
 
         <LinearLayout

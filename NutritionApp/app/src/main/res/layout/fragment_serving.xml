@@ -137,6 +137,28 @@
                 android:inputType="numberDecimal" />
         </LinearLayout>
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:text="@string/sweet_title"
+                android:layout_width="163dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/sweetText" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/sweetEdit"
+                android:layout_weight="1"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+
         <Button
             android:text="Submit"
             android:layout_width="match_parent"

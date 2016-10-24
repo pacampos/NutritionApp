@@ -277,6 +277,14 @@ public class NutritionSingleton {
                 child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).updateChildren(updateChildren);
     }
 
+    public void updateSweet(double sweet){
+        currDay.addServingsSweet(sweet);
+        Map<String,Object> updateChildren=new HashMap<>();
+        updateChildren.put("servingsSweet", currDay.getServingsSweets());
+        mFirebaseDatabaseReference.child(USERS_CHILD).
+                child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).updateChildren(updateChildren);
+    }
+
     public void updateCurrWeight(double weight){
         if(currProfile.getIsImperial()){
             currProfile.setCurrWeightPounds(weight);

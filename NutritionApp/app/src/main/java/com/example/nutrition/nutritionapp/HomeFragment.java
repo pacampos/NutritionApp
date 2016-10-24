@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -167,6 +168,9 @@ public class HomeFragment extends Fragment {
                result.openDrawer();
             }
         });
+
+        ProgressBar sweetsProgressBar = (ProgressBar) v.findViewById(R.id.sweetsProgressBar);
+        sweetsProgressBar.setProgress((int) NutritionSingleton.getInstance().getCurrDay().getServingsSweets());
 
 
         // Calorie Remaining

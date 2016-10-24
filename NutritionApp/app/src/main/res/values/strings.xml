@@ -121,6 +121,7 @@
     <string name="fruits_title">Fruits</string>
     <string name="dairy_title">Dairy</string>
     <string name="meat_title">Meat</string>
+    <string name="sweet_title">Sweet</string>
     <string name="title">Enter your serving</string>
 
     <!-- Credits Page !-->

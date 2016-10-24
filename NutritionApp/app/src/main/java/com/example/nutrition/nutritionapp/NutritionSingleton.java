@@ -1,9 +1,13 @@
 package com.example.nutrition.nutritionapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 
-import com.example.nutrition.nutritionapp.Model.AccountModel;
 import com.example.nutrition.nutritionapp.Model.DayModel;
 import com.example.nutrition.nutritionapp.Model.ExerciseModel;
 import com.example.nutrition.nutritionapp.Model.FoodModel;
@@ -15,12 +19,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,8 +33,8 @@ public class NutritionSingleton {
     private static NutritionSingleton mInstance = null;
     private static String USERS_CHILD = "users";
     private String currUser = null;
-    private AccountModel currAccount;
     private ProfileModel currProfile;
+    private ArrayList<ProfileModel>  profiles;
     private DayModel currDay;
 
     // Firebase instance variables
@@ -41,6 +44,7 @@ public class NutritionSingleton {
     private NutritionSingleton() {
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        profiles = new ArrayList<>();
     }
 
     public static NutritionSingleton getInstance() {
@@ -54,43 +58,50 @@ public class NutritionSingleton {
         return mUser;
     }
 
-    void SetUser(FirebaseUser user, final Intent intent, final Context context) {
+    void SetUser(FirebaseUser user, final Context context) {
+        /* set the firebase user given to use by the auth object */
         mUser = user;
+        /* use this user's uid as the unique recognizer for the user */
         currUser = mUser.getUid();
+
+        /* we get the children of current user, which are all the profiles */
         final DatabaseReference ref = mFirebaseDatabaseReference.child(USERS_CHILD).child(mUser.getUid());
 
+        /* once we have the reference to this point in the database, we get access to all the children of the user */
         ValueEventListener valueEventListener =new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String name = null;
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     name = snapshot.getKey();
                     final DatabaseReference profileRef = ref.child(name);
                     profileRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            currProfile = dataSnapshot.getValue(ProfileModel.class);
-                                /*
-                                we use java date to find out what day it is,
-                                if it's a day not in the database, we create a new date and add that to the profile
-                                else, we create a new day, to begin appending water, exercise, and food to it
-                             */
-                            currDay = currProfile.getDays().get(generateCurrDayString());
-                            if(currDay == null){
-                                currDay = new DayModel();
-                                NutritionSingleton.getInstance().addDay(currDay);
+                            /* add all profiles to the profiles array */
+                           profiles.add(dataSnapshot.getValue(ProfileModel.class));
+                            long childrenCount = dataSnapshot.getChildrenCount();
+                            int profileSize = profiles.size();
 
+                            if(childrenCount/23 == profileSize){
+                                /* start the fragment that switches profiles */
+
+                                AppCompatActivity beforeLogin = (AppCompatActivity) context;
+                                //get manager
+                                FragmentManager fm = beforeLogin.getSupportFragmentManager();
+
+                                SwitchUserFragment f = new SwitchUserFragment(); // instantiate switch profile Fragment
+                                // create transaction
+                                FragmentTransaction ft = fm.beginTransaction();
+                                ft.replace(R.id.welcome_fragment_container, f);
+                                ft.commit();
+
+                                profileRef.removeEventListener(this);
                             }
-
-
-                            context.startActivity(intent);
-                            profileRef.removeEventListener(this);
-
                         }
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-
                         }
                     });
 
@@ -101,7 +112,6 @@ public class NutritionSingleton {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         };
 
@@ -114,9 +124,6 @@ public class NutritionSingleton {
      *                 several users
      */
     public void CreateNewAccount(String username) {
-        // TODO: figure out if we actually need to keep track of an account model or if the database does enough of that on its own
-        AccountModel newAccount = new AccountModel(username);
-        currAccount = newAccount;
         currUser = username;
         mFirebaseDatabaseReference.child(USERS_CHILD).child(currUser);
     }
@@ -128,9 +135,7 @@ public class NutritionSingleton {
         currProfile = new ProfileModel(imagePos, name, age, heightCentimeters, gender, currWeightKilos,
                 goalWeightKilos, dayBirth, monthBirth, yearBirth, waistMeasureCentimeter,
                 thighMeasureCentimeter, armMeasureCentimeter, activityLevel, isImperial);
-
-        currAccount.addUserProfile(currProfile);
-
+        profiles.add(currProfile);
 
         if (currUser != null) {
             mFirebaseDatabaseReference.child(USERS_CHILD).child(currUser).child(name).setValue(currProfile);
@@ -144,8 +149,8 @@ public class NutritionSingleton {
 
         currProfile = new ProfileModel(imagePos, name, age, heightInchesPart, heightFeetPart, gender, currWeightPounds,
                 goalWeightPounds, dayBirth, monthBirth, yearBirth, waistMeasureInches, thighMeasureInches, armMeasureInches, activityLevel, isImperial);
+        profiles.add(currProfile);
 
-        currAccount.addUserProfile(currProfile);
         currDay = currProfile.getDays().get(generateCurrDayString());
 
         if (currUser != null) {
@@ -153,12 +158,18 @@ public class NutritionSingleton {
         }
     }
 
-    public AccountModel getCurrAccount() {
-        return currAccount;
-    }
-
-    public void setCurrAccount(AccountModel currAccount) {
-        this.currAccount = currAccount;
+    /*
+        switches profiles by getting the position of the profiles in the listview the user has clicked
+     */
+    public void switchProfiles(int position){
+        if(position < profiles.size()){
+            currProfile = profiles.get(position);
+            currDay = currProfile.getDays().get(generateCurrDayString());
+            if(currDay == null){
+                currDay = new DayModel();
+                NutritionSingleton.getInstance().addDay(currDay);
+            }
+        }
     }
 
     public ProfileModel getCurrProfile() {
@@ -168,6 +179,8 @@ public class NutritionSingleton {
     public void setCurrProfile(ProfileModel currProfile) {
         this.currProfile = currProfile;
     }
+
+    public ArrayList<ProfileModel> getAllProfiles() {return profiles;}
 
     public DayModel getCurrDay() {
         return currDay;

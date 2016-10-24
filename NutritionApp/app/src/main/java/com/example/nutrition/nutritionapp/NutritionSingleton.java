@@ -202,7 +202,7 @@ public class NutritionSingleton {
     }
 
     public void addFood(FoodModel food){
-        if(currDay.getFoods() == null || currDay.getFoods().isEmpty()){
+        if(currDay.getFoods() == null){
             currDay.setFoods(new ArrayList<FoodModel>());
         }
         Map<String,Object> updateChildren=new HashMap<>();

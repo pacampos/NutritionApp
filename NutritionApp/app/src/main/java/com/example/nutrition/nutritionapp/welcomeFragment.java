@@ -47,7 +47,7 @@ public class welcomeFragment extends Fragment {
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).signIn("anvenkat@usc.edu", "Testpassword1");
+                ((MainActivity) getActivity()).signIn("popolomacolo@gmail.com", "Testpassword1");
             }
         });
 

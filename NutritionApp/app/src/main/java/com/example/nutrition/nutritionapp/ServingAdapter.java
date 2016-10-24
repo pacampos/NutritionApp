@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Checkable;
 import android.widget.TextView;
 import com.example.nutrition.nutritionapp.Model.Serving;
 
@@ -33,7 +34,7 @@ public class ServingAdapter extends ArrayAdapter<Serving> {
             TextView tvExercise = (TextView) convertView.findViewById(R.id.tvName);
             TextView tvCalories = (TextView) convertView.findViewById(R.id.tvCalories);
             // Populate the data into the template view using the data object
-            String calories = String.valueOf(serving.getCalories()) + " Calories";
+            String calories = String.valueOf(serving.getCalories());
 
             tvExercise.setText(serving.getServingDescription());
             tvCalories.setText(calories);

@@ -123,6 +123,7 @@
     <string name="meat_title">Meat</string>
     <string name="sweet_title">Sweet</string>
     <string name="title">Enter your serving</string>
+    <string name="servings_enter_button">Submit</string>
 
     <!-- Credits Page !-->
     <string name="credit_heading">Credits</string>
@@ -164,4 +165,7 @@
     <string name="drawer_item_credits">Credits</string>
 
     <string name="selectUser">Select User</string>
+
+    <!-- Food Calories Selection Page -->
+    <string name="select_calorie_serving_type">Serving Type</string>
 </resources>

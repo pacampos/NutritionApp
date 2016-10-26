@@ -5,13 +5,11 @@
     tools:context="com.example.nutrition.nutritionapp.servingFragment"
     android:id="@+id/rl">
 
-
-
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal">
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar12"
             android:layout_width="match_parent"
@@ -38,12 +36,15 @@
 
             <TextView
                 android:text="@string/grains_title"
-                android:layout_width="163dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/grainsText" />
+            android:layout_height="match_parent"
+                android:layout_width="0dp"
+            android:id="@+id/grainsText"
+            android:layout_weight="1"
+                android:gravity="center_vertical"
+               />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:id="@+id/grainsEdit"
@@ -60,13 +61,16 @@
 
             <TextView
                 android:text="@string/veggies_title"
-                android:layout_width="163dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/veggiesText" />
+                android:layout_height="match_parent"
+                android:id="@+id/veggiesText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                />
 
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:inputType="numberDecimal"
                 android:ems="10"
                 android:id="@+id/veggieEdit"
@@ -82,12 +86,15 @@
 
             <TextView
                 android:text="@string/fruits_title"
-                android:layout_width="163dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/fruitsText" />
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:id="@+id/fruitsText"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+               />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:id="@+id/fruitsEdit"
@@ -103,12 +110,15 @@
 
             <TextView
                 android:text="@string/dairy_title"
-                android:layout_width="163dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/dairyText" />
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:id="@+id/dairyText"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:id="@+id/dairyEdit"
@@ -124,17 +134,21 @@
 
             <TextView
                 android:text="@string/meat_title"
-                android:layout_width="163dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/meatText" />
+                android:layout_height="match_parent"
+                android:id="@+id/meatText"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:gravity="center_vertical"
+                />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:id="@+id/meatEdit"
                 android:layout_weight="1"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                tools:ignore="LabelFor" />
         </LinearLayout>
 
         <LinearLayout
@@ -146,12 +160,15 @@
 
             <TextView
                 android:text="@string/sweet_title"
-                android:layout_width="163dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/sweetText" />
+                android:layout_height="match_parent"
+                android:id="@+id/sweetText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+               />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:id="@+id/sweetEdit"
@@ -160,8 +177,8 @@
         </LinearLayout>
 
         <Button
-            android:text="Submit"
-            android:layout_width="match_parent"
+            android:text="@string/servings_enter_button"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:id="@+id/enterButton" />
 

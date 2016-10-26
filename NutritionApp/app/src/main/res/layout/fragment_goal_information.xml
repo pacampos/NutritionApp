@@ -44,17 +44,19 @@
 
             <TextView
                 android:id="@+id/currentWeightLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
-                android:text="@string/weight_text_metric" />
+                android:text="@string/weight_text_metric"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
 
             <EditText
                 android:id="@+id/weightInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:layout_weight="0.37"
+                android:layout_weight="1"
                 android:inputType="number" />
         </LinearLayout>
 
@@ -62,21 +64,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_weight="1">
 
             <TextView
                 android:id="@+id/currentHeightLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
-                android:text="@string/height_text_metric" />
+                android:text="@string/height_text_metric"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
 
             <EditText
                 android:id="@+id/heightInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:layout_weight="0.37"
+                android:layout_weight="1"
                 android:inputType="number" />
         </LinearLayout>
 
@@ -88,17 +93,19 @@
 
             <TextView
                 android:id="@+id/goalWeightLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
-                android:text="@string/goalWeight_text_metric" />
+                android:text="@string/goalWeight_text_metric"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
 
             <EditText
                 android:id="@+id/goalWeightInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:layout_weight="0.37"
+                android:layout_weight="1"
                 android:inputType="number" />
         </LinearLayout>
 

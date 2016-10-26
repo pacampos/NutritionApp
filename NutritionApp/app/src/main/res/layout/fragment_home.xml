@@ -7,10 +7,9 @@
     tools:context="com.example.nutrition.nutritionapp.HomeFragment">
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="544dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center_horizontal|top"
         android:orientation="vertical"
         android:weightSum="1">
@@ -41,16 +40,22 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="367dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="1"
-            android:layout_marginLeft="110dp">
+            android:gravity="center_horizontal">
 
-            <com.example.nutrition.nutritionapp.PyramidView
-                android:layout_width="106dp"
-                android:id="@+id/pyramid"
-                android:layout_height="150dp"
-                android:layout_weight="0.09" />
+            <LinearLayout
+                android:layout_width="111dp"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <com.example.nutrition.nutritionapp.PyramidView
+                    android:layout_width="106dp"
+                    android:id="@+id/pyramid"
+                    android:layout_height="150dp"
+                    android:layout_marginRight="100dp" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -70,21 +75,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="100dp"
-            android:paddingRight="100dp"
-            android:weightSum="1">
+            android:gravity="center_horizontal">
 
             <ProgressBar
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:progressDrawable="@drawable/horizontal_progress_drawable_blue"
-                android:layout_width="match_parent"
+                android:layout_width="180dp"
                 android:id="@+id/sweetsProgressBar"
                 android:visibility="visible"
                 android:max="3"
                 android:progress="0"
                 android:indeterminate="false"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.53" />
+                android:layout_weight="0"
+                android:elevation="12dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -106,8 +110,8 @@
             android:layout_marginTop="15dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:paddingLeft="70dp"
-            android:paddingRight="70dp">
+            android:paddingLeft="0dp"
+            android:paddingRight="30dp">
 
             <ImageView
                 android:layout_width="42dp"
@@ -119,15 +123,14 @@
 
             <Button
                 android:id="@+id/foodDrinkEntrybutton"
-                android:layout_width="96dp"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
                 android:background="#52b7bd"
                 android:minHeight="25dp"
                 android:minWidth="0dp"
                 android:text="Food and Drink Entry"
                 android:textColor="@color/white"
-                android:layout_weight="0.61"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:layout_width="180dp" />
 
         </LinearLayout>
 
@@ -137,8 +140,8 @@
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:paddingLeft="70dp"
-            android:paddingRight="70dp">
+            android:paddingLeft="0dp"
+            android:paddingRight="30dp">
 
             <ImageView
                 android:layout_width="42dp"
@@ -150,15 +153,14 @@
 
             <Button
                 android:id="@+id/waterEntryButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
                 android:background="#52b7bd"
                 android:minHeight="25dp"
                 android:minWidth="0dp"
                 android:text="Water Entry"
                 android:textColor="@color/white"
-                android:layout_width="155dp" />
+                android:layout_width="180dp" />
 
         </LinearLayout>
 
@@ -167,8 +169,8 @@
             android:layout_height="30dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:paddingLeft="70dp"
-            android:paddingRight="70dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="30dp"
             android:layout_marginTop="10dp">
 
             <ImageView
@@ -181,15 +183,14 @@
 
             <Button
                 android:id="@+id/servingButton"
-                android:layout_width="180dp"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
                 android:background="#52b7bd"
                 android:minHeight="25dp"
                 android:minWidth="0dp"
                 android:text="Serving"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:layout_width="180dp" />
 
         </LinearLayout>
 
@@ -199,8 +200,7 @@
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:paddingLeft="70dp"
-            android:paddingRight="70dp">
+            android:paddingRight="30dp">
 
             <ImageView
                 android:layout_width="42dp"

@@ -33,16 +33,17 @@
 
             <TextView
                 android:id="@+id/textView22"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:text="@string/username_text" />
+                android:text="@string/username_text"
+                android:gravity="center_vertical" />
 
             <EditText
                 android:id="@+id/usernameInput1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="40dp"
                 android:layout_weight="1"
@@ -58,16 +59,17 @@
 
             <TextView
                 android:id="@+id/textView23"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:text="@string/password_text" />
+                android:text="@string/password_text"
+                android:gravity="center_vertical" />
 
             <EditText
                 android:id="@+id/passwordInput1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="40dp"
                 android:layout_weight="1"

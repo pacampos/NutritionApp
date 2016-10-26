@@ -116,6 +116,7 @@ public class HomeFragment extends Fragment {
                         NutritionSingleton.getInstance().switchProfiles((int) profile.getIdentifier());
                         setCaloriesNeeded(getCaloriesNeeded());
                         setPyramid();
+                        setSweetsBar();
                         return false;
                     }
                 })

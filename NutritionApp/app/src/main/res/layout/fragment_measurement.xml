@@ -20,7 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal|top"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
 
             <ImageView
                 android:id="@+id/secondPine"
@@ -53,14 +55,16 @@
 
                 <TextView
                     android:id="@+id/armTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
-                    android:text="@string/arm_text_metric" />
+                    android:text="@string/arm_text_metric"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical" />
 
                 <EditText
                     android:id="@+id/armInput"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
@@ -78,14 +82,16 @@
 
                 <TextView
                     android:id="@+id/waistTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
-                    android:text="@string/waist_text_metric" />
+                    android:text="@string/waist_text_metric"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical" />
 
                 <EditText
                     android:id="@+id/waistInput"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
@@ -102,15 +108,17 @@
 
                 <TextView
                     android:id="@+id/thighTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
-                    android:text="@string/thigh_text_metric" />
+                    android:text="@string/thigh_text_metric"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1" />
 
                 <EditText
                     android:id="@+id/thighInput"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:ems="10"
@@ -119,12 +127,12 @@
 
             <Button
                 android:id="@+id/goToButton"
-                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:text="@string/nextButtonText"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:layout_width="180dp" />
 
         </LinearLayout>
     </RelativeLayout>

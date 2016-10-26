@@ -70,7 +70,7 @@ public class CalorieSelectionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (portionInput.length() > 0) {
-                    int portion = Integer.parseInt(portionInput.getText().toString());
+                    double portion = Double.parseDouble(portionInput.getText().toString());
                     double calories = Double.parseDouble(String.valueOf(foodServingList.get(listPosition).getCalories()));
                     double result = portion * calories;
                     FoodModel food = new FoodModel(listFoods.get(position).getName(), result);

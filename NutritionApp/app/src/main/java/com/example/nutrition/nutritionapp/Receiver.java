@@ -18,7 +18,7 @@ import android.support.v4.app.NotificationCompat;
 public class Receiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent newIntent = new Intent(context, ProfileActivity.class);
+        Intent newIntent = new Intent(context, WeightEntryActivity.class);
         long[] pattern = {0, 300, 0};
         PendingIntent pi = PendingIntent.getActivity(context, 0, newIntent, 0);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)

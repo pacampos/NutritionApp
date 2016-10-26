@@ -1,6 +1,7 @@
 package com.example.nutrition.nutritionapp;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -59,6 +60,12 @@ public class NutritionSingleton {
     }
 
     void SetUser(FirebaseUser user, final Context context) {
+        final ProgressDialog progress=new ProgressDialog(context);
+        progress.setMessage("Retrieving Profile");
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.setIndeterminate(true);
+        progress.show();
+
         /* set the firebase user given to use by the auth object */
         mUser = user;
         /* use this user's uid as the unique recognizer for the user */
@@ -86,6 +93,7 @@ public class NutritionSingleton {
                             int profileSize = profiles.size();
 
                             if(childrenCount/23 == profileSize){
+                                progress.hide();
                                 /* start the fragment that switches profiles */
 
                                 AppCompatActivity beforeLogin = (AppCompatActivity) context;

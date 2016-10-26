@@ -1,5 +1,6 @@
 package com.example.nutrition.nutritionapp;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -102,6 +103,16 @@ public class CalorieSelectionFragment extends Fragment {
     private class MyTask extends AsyncTask<String, Integer, String> {
         Food foodItem;
         CompactFood compactFood;
+        ProgressDialog progress;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress=new ProgressDialog(getContext());
+            progress.setMessage("Retrieving Serving Data...");
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progress.show();
+        }
 
         @Override
         protected String doInBackground(String... params) {
@@ -127,6 +138,7 @@ public class CalorieSelectionFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute("result");
+            progress.hide();
             if(foodItem!=null){
                 foodServingList=foodItem.getServings();
                 if (!foodServingList.isEmpty() || foodServingList != null) {

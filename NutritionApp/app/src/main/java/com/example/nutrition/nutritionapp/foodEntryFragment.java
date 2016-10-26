@@ -1,5 +1,6 @@
 package com.example.nutrition.nutritionapp;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcel;
@@ -97,12 +98,17 @@ public class foodEntryFragment extends Fragment {
         CompactFood compactFood;
         List<CompactFood> listFoods;
         Response<CompactFood> foods;
+        ProgressDialog progress;
         // Runs in UI before background thread is called
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
             // Do something like display a progress bar
+            progress=new ProgressDialog(getContext());
+            progress.setMessage("Searching for foods...");
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progress.show();
         }
 
 
@@ -126,18 +132,12 @@ public class foodEntryFragment extends Fragment {
             return null;
         }
 
-        // This is called from background thread but runs in UI
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-
-            // Do things like update the progress bar
-        }
-
         // This runs in UI when background thread finishes
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute("result");
+
+            progress.hide();
             if(listFoods!=null){
                 List<String> foodNames = new ArrayList<>();
                 for (CompactFood food : listFoods) {

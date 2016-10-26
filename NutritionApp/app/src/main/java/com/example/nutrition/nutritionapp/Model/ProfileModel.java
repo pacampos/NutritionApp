@@ -95,6 +95,7 @@ public class ProfileModel {
 
     public double calcCaloriesBurnedNaturally() {
         double DCE = 0;
+        /* this is for the male calculation */
         if (gender == true) {
             if (!isImperial) {
                 DCE = ACTIVITY_LEVEL[(int) activityLevel] * ((13.75 * currWeightKilos) + (5 * heightCentimeters) - (6.76 * age) + 66);
@@ -104,7 +105,9 @@ public class ProfileModel {
                 DCE = ACTIVITY_LEVEL[(int) activityLevel] * ((6.25 * currWeightPounds) + (12.7 * totalHeightInches) - (6.76 * age) + 66);
             }
 
-        } else {
+        }
+        /* this is for the femaale calculation */
+        else {
             if (!isImperial) {
                 DCE = ACTIVITY_LEVEL[(int) activityLevel] * ((9.56 * currWeightKilos) + (1.85 * heightCentimeters) - (4.68 * age) + 655);
             } else {

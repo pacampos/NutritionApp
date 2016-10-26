@@ -2,6 +2,7 @@ package com.example.nutrition.nutritionapp;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -77,11 +78,12 @@ public class SignUpActivity extends FragmentActivity implements signUpFragment.R
         }
     }
 
-    public void finishSignup(String email, String password, final Bundle bundle) {
+    public void finishSignup(String email, String password, final Bundle bundle, final ProgressDialog progress) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        progress.hide();
                         Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
 
                         // If sign in fails, display a message to the user. If sign in succeeds
@@ -109,6 +111,8 @@ public class SignUpActivity extends FragmentActivity implements signUpFragment.R
                                         bundle.getDouble(MeasurementFragment.ARM),
                                         bundle.getDouble(goalInformationFragment.ACTIVITY),
                                         bundle.getBoolean(signUpFragment.METRIC));
+
+                                NutritionSingleton.getInstance().switchProfiles(0);
                             }
 
                             else{
@@ -127,10 +131,9 @@ public class SignUpActivity extends FragmentActivity implements signUpFragment.R
                                         bundle.getDouble(MeasurementFragment.ARM),
                                         bundle.getDouble(goalInformationFragment.ACTIVITY),
                                         bundle.getBoolean(signUpFragment.METRIC));
+                                NutritionSingleton.getInstance().switchProfiles(0);
                             }
 
-
-                            Intent i = new Intent(SignUpActivity.this, WeightEntryActivity.class);
                             Calendar sevendayalarm = Calendar.getInstance();
                             sevendayalarm.add(Calendar.HOUR_OF_DAY, 20);
                             Intent intent = new Intent(getApplicationContext(), Receiver.class);
@@ -138,7 +141,7 @@ public class SignUpActivity extends FragmentActivity implements signUpFragment.R
 
                             AlarmManager am = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
                             am.setRepeating(AlarmManager.RTC_WAKEUP,sevendayalarm.getTimeInMillis(), 1000*60*24*10,pendingIntent);
-                            startActivity(i);
+                            startActivity(new Intent(SignUpActivity.this, ActivityHome.class));
                         }
 
                     }

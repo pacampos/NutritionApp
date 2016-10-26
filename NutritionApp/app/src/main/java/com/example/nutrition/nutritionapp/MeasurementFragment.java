@@ -2,6 +2,7 @@ package com.example.nutrition.nutritionapp;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -122,7 +123,11 @@ public class MeasurementFragment extends Fragment {
 
                     boolean isNewAccount = bundle.getBoolean(signUpFragment.IS_NEW_ACCOUNT);
                     if(isNewAccount){
-                        ((SignUpActivity) getActivity()).finishSignup(email, password, bundle);
+                        ProgressDialog progress=new ProgressDialog(getContext());
+                        progress.setMessage("Finishing signup...");
+                        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        progress.show();
+                        ((SignUpActivity) getActivity()).finishSignup(email, password, bundle, progress);
                     }
 
                     else{

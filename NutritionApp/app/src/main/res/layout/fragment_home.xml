@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme" />
+            android:theme="?attr/actionBarTheme"
+            app:titleTextColor="@color/material_drawer_header_selection_text" />
 
         <LinearLayout
             android:layout_width="match_parent"

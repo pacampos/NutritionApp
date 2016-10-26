@@ -24,7 +24,19 @@ public class servingFragment extends Fragment {
     private FrameLayout mRelativeLayout;
     private PopupWindow mPopupWindow;
     private TextView tv;
+    protected TextView grainsText;
+    protected TextView veggiesText;
+    protected TextView fruitsText;
+    protected TextView dairyText;
+    protected TextView meatText;
+    protected TextView sweetText;
 
+    protected EditText grainEdit;
+    protected EditText fruitsEdit;
+    protected EditText dairyEdit;
+    protected EditText meatEdit;
+    protected EditText sweetEdit;
+    protected EditText veggieEdit;
 
     public interface OnServingsEnteredListener{
         public void onServingsEntered(float grainsPercent, float veggiesPercent, float fruitsPercent,
@@ -44,49 +56,79 @@ public class servingFragment extends Fragment {
         Button enterButton = (Button) v.findViewById(R.id.enterButton);
         mRelativeLayout = (FrameLayout) v.findViewById(R.id.rl);
 
-        final TextView grainsText = (TextView) v.findViewById(R.id.grainsText);
-        final TextView veggiesText = (TextView) v.findViewById(R.id.veggiesText);
-        final TextView fruitsText = (TextView) v.findViewById(R.id.fruitsText);
-        final TextView dairyText = (TextView) v.findViewById(R.id.dairyText);
-        final TextView meatText = (TextView) v.findViewById(R.id.meatText);
-        final TextView sweetText = (TextView) v.findViewById(R.id.sweetText);
+        grainsText = (TextView) v.findViewById(R.id.grainsText);
+        veggiesText = (TextView) v.findViewById(R.id.veggiesText);
+        fruitsText = (TextView) v.findViewById(R.id.fruitsText);
+        dairyText = (TextView) v.findViewById(R.id.dairyText);
+        meatText = (TextView) v.findViewById(R.id.meatText);
+        sweetText = (TextView) v.findViewById(R.id.sweetText);
 
-        final EditText grainEdit =(EditText) v.findViewById(R.id.grainsEdit);
-        final EditText veggieEdit =(EditText) v.findViewById(R.id.veggieEdit);
-        final EditText fruitsEdit = (EditText) v.findViewById(R.id.fruitsEdit);
-        final EditText dairyEdit = (EditText) v.findViewById(R.id.dairyEdit);
-        final EditText meatEdit = (EditText) v.findViewById(R.id.meatEdit);
-        final EditText sweetEdit = (EditText) v.findViewById(R.id.sweetEdit);
-
+        grainEdit =(EditText) v.findViewById(R.id.grainsEdit);
+        veggieEdit =(EditText) v.findViewById(R.id.veggieEdit);
+        fruitsEdit = (EditText) v.findViewById(R.id.fruitsEdit);
+        dairyEdit = (EditText) v.findViewById(R.id.dairyEdit);
+        meatEdit = (EditText) v.findViewById(R.id.meatEdit);
+        sweetEdit = (EditText) v.findViewById(R.id.sweetEdit);
+        
 
         grainsText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createView(0);
+                grainsText.setClickable(false);
+                veggiesText.setClickable(false);
+                fruitsText.setClickable(false);
+                dairyText.setClickable(false);
+                meatText.setClickable(false);
+                sweetText.setClickable(false);
             }
         });
         veggiesText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createView(1);
+                grainsText.setClickable(false);
+                veggiesText.setClickable(false);
+                fruitsText.setClickable(false);
+                dairyText.setClickable(false);
+                meatText.setClickable(false);
+                sweetText.setClickable(false);
             }
         });
         fruitsText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createView(2);
+                grainsText.setClickable(false);
+                veggiesText.setClickable(false);
+                fruitsText.setClickable(false);
+                dairyText.setClickable(false);
+                meatText.setClickable(false);
+                sweetText.setClickable(false);
             }
         });
         dairyText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createView(3);
+                grainsText.setClickable(false);
+                veggiesText.setClickable(false);
+                fruitsText.setClickable(false);
+                dairyText.setClickable(false);
+                meatText.setClickable(false);
+                sweetText.setClickable(false);
             }
         });
         meatText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createView(4);
+                grainsText.setClickable(false);
+                veggiesText.setClickable(false);
+                fruitsText.setClickable(false);
+                dairyText.setClickable(false);
+                meatText.setClickable(false);
+                sweetText.setClickable(false);
             }
         });
 
@@ -162,6 +204,12 @@ public class servingFragment extends Fragment {
             public void onClick(View view) {
                 // Dismiss the popup window
                 mPopupWindow.dismiss();
+                grainsText.setClickable(true);
+                veggiesText.setClickable(true);
+                fruitsText.setClickable(true);
+                dairyText.setClickable(true);
+                meatText.setClickable(true);
+                sweetText.setClickable(true);
             }
         });
 

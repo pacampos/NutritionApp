@@ -11,10 +11,12 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,15 +55,36 @@ public class goalInformationFragment extends Fragment {
         // get references
         final EditText weightInput = (EditText) v.findViewById(R.id.weightInput);
         final TextView weightTextView = (TextView) v.findViewById(R.id.currentWeightLabel);
-        final EditText heightInput = (EditText) v.findViewById(R.id.heightInput);
+        final NumberPicker heightInput = (NumberPicker) v.findViewById(R.id.numberPicker);
         final TextView heightTextView = (TextView) v.findViewById(R.id.currentHeightLabel);
         final EditText goalWeightInput = (EditText) v.findViewById(R.id.goalWeightInput);
         final TextView goalWeightTextView = (TextView) v.findViewById(R.id.goalWeightLabel);
+
+        // Create array for feet and inches
+        final ArrayList<CharSequence> heightArray = new ArrayList<CharSequence>();
+        for (int index = 3; index < 7; index++) {
+            for (int index1 = 0; index1 < 12; index1++) {
+                heightArray.add(index + "." + index1 + "\"");
+                if (index == 6 && index1 == 4) {
+                    break;
+                }
+            }
+        }
 
         if(isImperial == true){
             weightTextView.setText(R.string.weight_text_imperial);
             heightTextView.setText(R.string.height_text_imperial);
             goalWeightTextView.setText(R.string.goalWeight_text_imperial);
+            String [] stringArray = new String[heightArray.size()];
+            for (int i = 0; i < heightArray.size(); i++) {
+                stringArray[i] = heightArray.get(i).toString();
+            }
+            heightInput.setMinValue(0);
+            heightInput.setMaxValue(7);
+            heightInput.setDisplayedValues(stringArray);
+        } else {
+            heightInput.setMinValue(140);
+            heightInput.setMaxValue(216);
         }
 
         ImageView icon = (ImageView) v.findViewById(R.id.iconImage);
@@ -90,7 +113,7 @@ public class goalInformationFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 weight = weightInput.getText().toString();
-                height = heightInput.getText().toString();
+                //height = heightInput.getText().toString();
                 goalWeight = goalWeightInput.getText().toString();
 
                 if (weight.length() == 0 || height.length() == 0 || goalWeight.length() == 0) {
@@ -101,7 +124,7 @@ public class goalInformationFragment extends Fragment {
                     weightInput.setError("Please enter a valid weight.");
                 }
                 else if(!isNumeric(height)){
-                    heightInput.setError("Please enter a valid height.");
+                   // heightInput.setError("Please enter a valid height.");
                 }
 
                 else if(!isNumeric(goalWeight)){

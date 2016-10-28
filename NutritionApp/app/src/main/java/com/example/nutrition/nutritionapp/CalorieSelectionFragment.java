@@ -39,7 +39,6 @@ public class CalorieSelectionFragment extends Fragment {
     private EditText portionInput;
     private List<CompactFood> listFoods;
     private List<Serving> foodServingList;
-    private int listPosition;
 
     public CalorieSelectionFragment() {
         // Required empty public constructor
@@ -54,7 +53,7 @@ public class CalorieSelectionFragment extends Fragment {
 
         calorieList = (ListView) v.findViewById(R.id.calorieList);
         portionInput = (EditText) v.findViewById(R.id.editPortion);
-        Button submitButton = (Button) v.findViewById(R.id.submitCalories);
+        final Button submitButton = (Button) v.findViewById(R.id.submitCalories);
 
         new MyTask().execute(foodName);
         calorieList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -62,7 +61,7 @@ public class CalorieSelectionFragment extends Fragment {
         calorieList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                listPosition = position;
+                submitButton.setTag(position);
             }
         });
 
@@ -72,7 +71,7 @@ public class CalorieSelectionFragment extends Fragment {
             public void onClick(View v) {
                 if (portionInput.length() > 0) {
                     double portion = Double.parseDouble(portionInput.getText().toString());
-                    double calories = Double.parseDouble(String.valueOf(foodServingList.get(listPosition).getCalories()));
+                    double calories = Double.parseDouble(String.valueOf(foodServingList.get((Integer)v.getTag()).getCalories()));
                     double result = portion * calories;
                     FoodModel food = new FoodModel(listFoods.get(position).getName(), result);
                     NutritionSingleton.getInstance().addFood(food);
@@ -84,14 +83,6 @@ public class CalorieSelectionFragment extends Fragment {
             }
         });
 
-        calorieList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
-        calorieList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
 
         return v;
     }

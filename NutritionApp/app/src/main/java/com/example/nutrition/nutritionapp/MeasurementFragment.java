@@ -43,7 +43,7 @@ public class MeasurementFragment extends Fragment {
                              Bundle savedInstanceState) {
         bundle = this.getArguments();
 
-        boolean isImperial = bundle.getBoolean(signUpFragment.METRIC);
+        final boolean isImperial = bundle.getBoolean(signUpFragment.METRIC);
         // Inflate the layout for this fragment
         final View v = inflater.inflate(R.layout.fragment_measurement, container, false);
 
@@ -72,7 +72,6 @@ public class MeasurementFragment extends Fragment {
         icon.setImageResource(CheckableImageView.mOriginalIds[(int) imagePos]);
 
         singleton = NutritionSingleton.getInstance();
-
 
         goToButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,30 +130,59 @@ public class MeasurementFragment extends Fragment {
                     }
 
                     else{
+                        if(isImperial){
+                            NutritionSingleton.getInstance().CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),
+                                    bundle.getString(signUpFragment.NAME),
+                                    bundle.getDouble(signUpFragment.AGE),
+                                    bundle.getDouble(goalInformationFragment.IMPERIAL_HEIGHT_INCHES),
+                                    bundle.getDouble(goalInformationFragment.IMPERIAL_HEIGHT_FEET),
+                                    bundle.getBoolean(signUpFragment.GENDER),
+                                    bundle.getDouble(goalInformationFragment.WEIGHT),
+                                    bundle.getDouble(goalInformationFragment.GOAL),
+                                    bundle.getDouble(signUpFragment.BIRTH_DATE),
+                                    bundle.getDouble(signUpFragment.BIRTH_MONTH),
+                                    bundle.getDouble(signUpFragment.BIRTH_YEAR),
+                                    bundle.getDouble(MeasurementFragment.WAIST),
+                                    bundle.getDouble(MeasurementFragment.THIGH),
+                                    bundle.getDouble(MeasurementFragment.ARM),
+                                    bundle.getDouble(goalInformationFragment.ACTIVITY),
+                                    bundle.getBoolean(signUpFragment.METRIC));
 
-                        NutritionSingleton.getInstance().CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),
-                                bundle.getString(signUpFragment.NAME),
-                                bundle.getDouble(signUpFragment.AGE),
-                                bundle.getDouble(goalInformationFragment.HEIGHT),
-                                bundle.getBoolean(signUpFragment.GENDER),
-                                bundle.getDouble(goalInformationFragment.WEIGHT),
-                                bundle.getDouble(goalInformationFragment.GOAL),
-                                bundle.getDouble(signUpFragment.BIRTH_DATE),
-                                bundle.getDouble(signUpFragment.BIRTH_MONTH),
-                                bundle.getDouble(signUpFragment.BIRTH_YEAR),
-                                bundle.getDouble(MeasurementFragment.WAIST),
-                                bundle.getDouble(MeasurementFragment.THIGH),
-                                bundle.getDouble(MeasurementFragment.ARM),
-                                bundle.getDouble(goalInformationFragment.ACTIVITY),
-                                bundle.getBoolean(signUpFragment.METRIC));
+                            Calendar sevendayalarm = Calendar.getInstance();
+                            sevendayalarm.add(Calendar.HOUR_OF_DAY, 20);
+                            Intent intent = new Intent(getContext(), Receiver.class);
+                            PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 1, intent, 0);
+                            AlarmManager am = (AlarmManager)getContext().getSystemService(Context.ALARM_SERVICE);
+                            am.setRepeating(AlarmManager.RTC_WAKEUP,sevendayalarm.getTimeInMillis(), 1000*60*24*10,pendingIntent);
+                            replaceFragmentInterface.replaceFragment(new SwitchUserFragment());
+                        }
 
-                        Calendar sevendayalarm = Calendar.getInstance();
-                        sevendayalarm.add(Calendar.HOUR_OF_DAY, 20);
-                        Intent intent = new Intent(getContext(), Receiver.class);
-                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 1, intent, 0);
-                        AlarmManager am = (AlarmManager)getContext().getSystemService(Context.ALARM_SERVICE);
-                        am.setRepeating(AlarmManager.RTC_WAKEUP,sevendayalarm.getTimeInMillis(), 1000*60*24*10,pendingIntent);
-                        replaceFragmentInterface.replaceFragment(new SwitchUserFragment());
+                        else{
+                            NutritionSingleton.getInstance().CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),
+                                    bundle.getString(signUpFragment.NAME),
+                                    bundle.getDouble(signUpFragment.AGE),
+                                    bundle.getDouble(goalInformationFragment.HEIGHT),
+                                    bundle.getBoolean(signUpFragment.GENDER),
+                                    bundle.getDouble(goalInformationFragment.WEIGHT),
+                                    bundle.getDouble(goalInformationFragment.GOAL),
+                                    bundle.getDouble(signUpFragment.BIRTH_DATE),
+                                    bundle.getDouble(signUpFragment.BIRTH_MONTH),
+                                    bundle.getDouble(signUpFragment.BIRTH_YEAR),
+                                    bundle.getDouble(MeasurementFragment.WAIST),
+                                    bundle.getDouble(MeasurementFragment.THIGH),
+                                    bundle.getDouble(MeasurementFragment.ARM),
+                                    bundle.getDouble(goalInformationFragment.ACTIVITY),
+                                    bundle.getBoolean(signUpFragment.METRIC));
+
+                            Calendar sevendayalarm = Calendar.getInstance();
+                            sevendayalarm.add(Calendar.HOUR_OF_DAY, 20);
+                            Intent intent = new Intent(getContext(), Receiver.class);
+                            PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 1, intent, 0);
+                            AlarmManager am = (AlarmManager)getContext().getSystemService(Context.ALARM_SERVICE);
+                            am.setRepeating(AlarmManager.RTC_WAKEUP,sevendayalarm.getTimeInMillis(), 1000*60*24*10,pendingIntent);
+                            replaceFragmentInterface.replaceFragment(new SwitchUserFragment());
+                        }
+
 
                     }
 

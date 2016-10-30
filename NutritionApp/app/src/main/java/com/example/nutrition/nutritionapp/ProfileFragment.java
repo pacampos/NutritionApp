@@ -53,6 +53,9 @@ public class ProfileFragment extends Fragment {
         final EditText currWeightEditText = (EditText) v.findViewById(R.id.editCurrentWeightEditText);
         final EditText currHeightEditText = (EditText) v.findViewById(R.id.editCurrentHeightEditText);
         final EditText goalWeightEditText = (EditText) v.findViewById(R.id.editGoalWeightEditText);
+        final EditText currHeightFeetEditText = (EditText) v.findViewById(R.id.profileHeightFeetEditText);
+        final EditText currHeightInchesEditText = (EditText) v.findViewById(R.id.profileHeightInchesEditText);
+        final LinearLayout currHeightImperialLayout = (LinearLayout) v.findViewById(R.id.profileHeightLayout);
 
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,8 +65,17 @@ public class ProfileFragment extends Fragment {
                     currentWeight.setVisibility(View.INVISIBLE);
                     targetWeight.setVisibility(View.INVISIBLE);
 
-                    currHeightEditText.setVisibility(View.VISIBLE);
-                    currHeightEditText.setText(height.getText().toString());
+                    if(singleton.getCurrProfile().getIsImperial()){
+                        currHeightImperialLayout.setVisibility(View.VISIBLE);
+                        currHeightFeetEditText.setText(String.valueOf((int) singleton.getCurrProfile().getHeightFeetPart()));
+                        currHeightInchesEditText.setText(String.valueOf((int) singleton.getCurrProfile().getHeightInchesPart()));
+                    }
+
+                    else{
+                        currHeightEditText.setVisibility(View.VISIBLE);
+                        currHeightEditText.setText(height.getText().toString());
+                    }
+
                     currWeightEditText.setVisibility(View.VISIBLE);
                     currWeightEditText.setText(currentWeight.getText().toString());
                     goalWeightEditText.setVisibility(View.VISIBLE);
@@ -83,25 +95,48 @@ public class ProfileFragment extends Fragment {
 
                 else{
                     if(currWeightEditText.getText().toString().length() > 0 &&
-                            currHeightEditText.getText().toString().length() > 0 &&
+                            (currHeightEditText.getText().toString().length() > 0 ||
+                                    (currHeightFeetEditText.getText().toString().length() >0
+                                            && currHeightInchesEditText.getText().toString().length() > 0 )) &&
                             goalWeightEditText.getText().toString().length() >0){
                         isEditMode=!isEditMode;
 
-                        String currHeight=currHeightEditText.getText().toString();
+                        String currHeight = null;
+                        String currHeightFeet = null;
+                        String currHeightInches = null;
+
+                        if(singleton.getCurrProfile().getIsImperial()){
+                            currHeightFeet = currHeightFeetEditText.getText().toString();
+                            currHeightInches = currHeightInchesEditText.getText().toString();
+                        }
+
+                        else{
+                            currHeight=currHeightEditText.getText().toString();
+                        }
+
                         String currWeight= currWeightEditText.getText().toString();
                         String goalWeight=goalWeightEditText.getText().toString();
 
                         NutritionSingleton singleton=NutritionSingleton.getInstance();
 
-                        Double doubleCurrHeight=new Double(currHeight);
+                        Double doubleCurrHeight = 0.0;
+                        Double doubleCurrHeightInches = 0.0;
+                        Double doubleCurrHeightFeet = 0.0;
+                        if(singleton.getCurrProfile().getIsImperial()){
+                            doubleCurrHeightInches=new Double(currHeightInches);
+                            doubleCurrHeightFeet = new Double(currHeightFeet);
+                        }
+
+                        else{
+                            doubleCurrHeight=new Double(currHeight);
+                        }
+
                         Double doubleCurrWeight=new Double(currWeight);
                         Double doubleGoalWeight=new Double(goalWeight);
 
                         if(singleton.getCurrProfile().getIsImperial()){
 
-                            if(singleton.getCurrProfile().getHeightInchesPart() != doubleCurrHeight ){
-                                singleton.updateCurrHeight(doubleCurrHeight);
-                            }
+                            singleton.updateCurrHeight(doubleCurrHeightFeet, doubleCurrHeightInches);
 
                             if(singleton.getCurrProfile().getCurrWeightPounds() != doubleCurrWeight){
                                 singleton.updateCurrWeight(doubleCurrWeight);
@@ -126,7 +161,14 @@ public class ProfileFragment extends Fragment {
                             }
                         }
 
-                        height.setText(currHeight);
+                        if(singleton.getCurrProfile().getIsImperial()){
+                            height.setText(String.valueOf(doubleCurrHeightFeet.intValue())+"'"+String.valueOf(doubleCurrHeightInches.intValue()));
+                        }
+
+                        else{
+                            height.setText(currHeight);
+                        }
+
                         currentWeight.setText(currWeight);
                         targetWeight.setText(goalWeight);
 
@@ -138,6 +180,7 @@ public class ProfileFragment extends Fragment {
                         targetWeight.setVisibility(View.VISIBLE);
 
                         currHeightEditText.setVisibility(View.INVISIBLE);
+                        currHeightImperialLayout.setVisibility(View.INVISIBLE);
                         currWeightEditText.setVisibility(View.INVISIBLE);
                         goalWeightEditText.setVisibility(View.INVISIBLE);
 
@@ -167,9 +210,18 @@ public class ProfileFragment extends Fragment {
         collapsingToolbar.setExpandedTitleTextAppearance(R.style.expandedappbar);
         collapsingToolbar.setCollapsedTitleTextAppearance(R.style.collapsedappbar);
         nameProfile.setText(model.getName());
-        height.setText(String.valueOf(model.getHeightCentimeters()));
-        currentWeight.setText(String.valueOf(model.getCurrWeightKilos()));
-        targetWeight.setText(String.valueOf(model.getGoalWeightKilos()));
+        if(model.getIsImperial()){
+            height.setText(String.valueOf((int) model.getHeightFeetPart())+"'"+String.valueOf((int) model.getHeightInchesPart()));
+            currentWeight.setText(String.valueOf(model.getCurrWeightPounds()));
+            targetWeight.setText(String.valueOf(model.getGoalWeightPounds()));
+        }
+
+        else{
+            height.setText(String.valueOf(model.getHeightCentimeters()));
+            currentWeight.setText(String.valueOf(model.getCurrWeightKilos()));
+            targetWeight.setText(String.valueOf(model.getGoalWeightKilos()));
+        }
+
         icon.setImageResource(CheckableImageView.mOriginalIds[(int) model.getImagePos()]);
         bmi.setText(String.valueOf((int) model.calculateBMI()));
         calorieCount.setText(String.valueOf((int) model.calcCaloriesBurnedNaturally()));

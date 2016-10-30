@@ -46,7 +46,6 @@
                 android:id="@+id/currentWeightLabel"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
                 android:text="@string/weight_text_metric"
                 android:layout_weight="1"
                 android:gravity="center_vertical" />
@@ -65,13 +64,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:orientation="horizontal"
-            android:layout_weight="1">
+            android:id="@+id/metricHeightLayout">
 
             <TextView
                 android:id="@+id/currentHeightLabel"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
                 android:text="@string/height_text_metric"
                 android:layout_weight="1"
                 android:gravity="center_vertical" />
@@ -86,6 +84,42 @@
         </LinearLayout>
 
         <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/imperialHeightLayout"
+            android:visibility="gone">
+
+            <TextView
+                android:text="@string/height_text_imperial"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/textView20"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/heightFeetImperialEditText"
+                android:layout_weight=".55"
+                android:hint="feet" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/heightInchesImperialEditText"
+                android:layout_weight=".55"
+                android:hint="inches" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -95,7 +129,6 @@
                 android:id="@+id/goalWeightLabel"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
                 android:text="@string/goalWeight_text_metric"
                 android:layout_weight="1"
                 android:gravity="center_vertical" />

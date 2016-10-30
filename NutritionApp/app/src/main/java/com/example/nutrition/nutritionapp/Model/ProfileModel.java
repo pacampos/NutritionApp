@@ -66,8 +66,6 @@ public class ProfileModel {
         this.activityLevel = activityLevel;
         this.isImperial=isImperial;
         days=new HashMap<>();
-        days.put("first test",new DayModel());
-        days.put("second test",new DayModel());
     }
 
     public ProfileModel(double imagePos, String name, double age, double heightCentimeters,
@@ -90,7 +88,6 @@ public class ProfileModel {
         this.activityLevel = activityLevel;
         this.isImperial=isImperial;
         days=new HashMap<>();
-        addDay(new DayModel());
     }
 
     public double calcCaloriesBurnedNaturally() {
@@ -147,7 +144,7 @@ public class ProfileModel {
         return heightInchesPart;
     }
 
-    private void setHeightInchesPart(double heightInchesPart) {
+    public void setHeightInchesPart(double heightInchesPart) {
         this.heightInchesPart = heightInchesPart;
     }
 
@@ -155,7 +152,7 @@ public class ProfileModel {
         return heightFeetPart;
     }
 
-    private void setHeightFeetPart(double heightFeetPart) {
+    public void setHeightFeetPart(double heightFeetPart) {
         this.heightFeetPart = heightFeetPart;
     }
 
@@ -225,7 +222,15 @@ public class ProfileModel {
     }
 
     public double calculateBMI() {
-        return  (currWeightKilos / ((heightCentimeters/100) * (heightCentimeters/100)));
+        double heightInInches = (heightFeetPart*12)+heightInchesPart;
+        if(isImperial){
+            return (currWeightPounds * 703)/ (heightInInches*heightInInches);
+        }
+
+        else{
+            return  (currWeightKilos / ((heightCentimeters/100) * (heightCentimeters/100)));
+        }
+
     }
 //
 //    /* update to create acceptable ranges for the BMI */

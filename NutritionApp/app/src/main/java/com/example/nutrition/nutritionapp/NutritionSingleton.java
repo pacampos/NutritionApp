@@ -163,8 +163,6 @@ public class NutritionSingleton {
         profiles.add(currProfile);
         currProfile.id = profiles.size()-1;
 
-        currDay = currProfile.getDays().get(generateCurrDayString());
-
         if (currUser != null) {
             mFirebaseDatabaseReference.child(USERS_CHILD).child(currUser).child(name).setValue(currProfile);
         }
@@ -330,20 +328,24 @@ public class NutritionSingleton {
     }
 
     public void updateCurrHeight(double height){
-        if(currProfile.getIsImperial()){
-            currProfile.setHeightCentimeters(height);
-            Map<String,Object> updateChildren=new HashMap<>();
-            updateChildren.put("heightInchesPart", currProfile.getHeightInchesPart());
-            mFirebaseDatabaseReference.child(USERS_CHILD).
-                    child(currUser).child(currProfile.getName()).updateChildren(updateChildren);
-        }
-
-        else{
             currProfile.setHeightCentimeters(height);
             Map<String,Object> updateChildren=new HashMap<>();
             updateChildren.put("heightCentimeters", currProfile.getHeightCentimeters());
             mFirebaseDatabaseReference.child(USERS_CHILD).
                     child(currUser).child(currProfile.getName()).updateChildren(updateChildren);
-        }
+    }
+
+    public void updateCurrHeight(double heightFeet, double heightInches){
+        currProfile.setHeightInchesPart(heightInches);
+        Map<String,Object> updateChildren=new HashMap<>();
+        updateChildren.put("heightInchesPart", currProfile.getHeightInchesPart());
+        mFirebaseDatabaseReference.child(USERS_CHILD).
+                child(currUser).child(currProfile.getName()).updateChildren(updateChildren);
+
+        currProfile.setHeightFeetPart(heightFeet);
+        Map<String,Object> updateChildren1=new HashMap<>();
+        updateChildren.put("heightFeetPart", currProfile.getHeightFeetPart());
+        mFirebaseDatabaseReference.child(USERS_CHILD).
+                child(currUser).child(currProfile.getName()).updateChildren(updateChildren1);
     }
 }

@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,11 +24,15 @@ import static android.R.attr.defaultValue;
 public class goalInformationFragment extends Fragment {
     public static String WEIGHT = "com.example.nutritionapp.weight";
     public static String HEIGHT = "com.example.nutritionapp.height";
+    public static String IMPERIAL_HEIGHT_INCHES = "com.example.nutritionapp.height_inches";
+    public static String IMPERIAL_HEIGHT_FEET = "com.example.nutritionapp.height_feet";
     public static String GOAL = "com.example.nutritionapp.goal";
     public static String ACTIVITY = "com.example.nutritionapp.activity";
     public static String IMAGE_POS = "com.example.nutritionapp.image_pos";
     private String weight;
     private String height;
+    private String heightInches;
+    private String heightFeet;
     private String goalWeight;
     private int activityLevelFactor;
     private Bundle bundle;
@@ -54,14 +59,18 @@ public class goalInformationFragment extends Fragment {
         final EditText weightInput = (EditText) v.findViewById(R.id.weightInput);
         final TextView weightTextView = (TextView) v.findViewById(R.id.currentWeightLabel);
         final EditText heightInput = (EditText) v.findViewById(R.id.heightInput);
-        final TextView heightTextView = (TextView) v.findViewById(R.id.currentHeightLabel);
+        final EditText heightInputFeet = (EditText) v.findViewById(R.id.heightFeetImperialEditText);
+        final EditText heightInputInches = (EditText) v.findViewById(R.id.heightInchesImperialEditText);
         final EditText goalWeightInput = (EditText) v.findViewById(R.id.goalWeightInput);
         final TextView goalWeightTextView = (TextView) v.findViewById(R.id.goalWeightLabel);
+        LinearLayout heightImperialLayout = (LinearLayout) v.findViewById(R.id.imperialHeightLayout);
+        LinearLayout heightMetricLayout = (LinearLayout) v.findViewById(R.id.metricHeightLayout);
 
         if(isImperial == true){
             weightTextView.setText(R.string.weight_text_imperial);
-            heightTextView.setText(R.string.height_text_imperial);
             goalWeightTextView.setText(R.string.goalWeight_text_imperial);
+            heightImperialLayout.setVisibility(View.VISIBLE);
+            heightMetricLayout.setVisibility(View.GONE);
         }
 
         ImageView icon = (ImageView) v.findViewById(R.id.iconImage);
@@ -86,39 +95,81 @@ public class goalInformationFragment extends Fragment {
 
 
         Button continueButton = (Button) v.findViewById(R.id.continueButton);
-        continueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                weight = weightInput.getText().toString();
-                height = heightInput.getText().toString();
-                goalWeight = goalWeightInput.getText().toString();
+        if(isImperial){
+            continueButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    weight = weightInput.getText().toString();
+//                    height = heightInput.getText().toString();
+                    heightInches = heightInputInches.getText().toString();
+                    heightFeet = heightInputFeet.getText().toString();
+                    goalWeight = goalWeightInput.getText().toString();
 
-                if (weight.length() == 0 || height.length() == 0 || goalWeight.length() == 0) {
-                    Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                }
+                    if (weight.length() == 0 || heightInches.length() == 0 || heightFeet.length() == 0 || goalWeight.length() == 0) {
+                        Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                    }
 
-                else if(!isNumeric(weight)){
-                    weightInput.setError("Please enter a valid weight.");
-                }
-                else if(!isNumeric(height)){
-                    heightInput.setError("Please enter a valid height.");
-                }
+                    else if(!isNumeric(weight)){
+                        weightInput.setError("Please enter a valid weight.");
+                    }
+                    else if(!isNumeric(heightInches) && !isNumeric(heightFeet)){
+                        heightInput.setError("Please enter a valid height.");
+                    }
 
-                else if(!isNumeric(goalWeight)){
-                    goalWeightInput.setError("Please enter a valid weight.");
-                }
+                    else if(!isNumeric(goalWeight)){
+                        goalWeightInput.setError("Please enter a valid weight.");
+                    }
 
-                else {
-                    Fragment fragment = new MeasurementFragment();
-                    bundle.putDouble(WEIGHT, Double.parseDouble(weight));
-                    bundle.putDouble(HEIGHT, Double.parseDouble(height));
-                    bundle.putDouble(GOAL, Double.parseDouble(goalWeight));
-                    bundle.putDouble(ACTIVITY, activityLevelFactor);
-                    fragment.setArguments(bundle);
-                    replaceFragmentInterface.replaceFragment(fragment);
+                    else {
+                        Fragment fragment = new MeasurementFragment();
+                        bundle.putDouble(WEIGHT, Double.parseDouble(weight));
+                        bundle.putDouble(IMPERIAL_HEIGHT_INCHES, Double.parseDouble(heightInches));
+                        bundle.putDouble(IMPERIAL_HEIGHT_FEET, Double.parseDouble(heightFeet));
+                        bundle.putDouble(GOAL, Double.parseDouble(goalWeight));
+                        bundle.putDouble(ACTIVITY, activityLevelFactor);
+                        fragment.setArguments(bundle);
+                        replaceFragmentInterface.replaceFragment(fragment);
+                    }
                 }
-            }
-        });
+            });
+        }
+
+        else{
+            continueButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    weight = weightInput.getText().toString();
+                    height = heightInput.getText().toString();
+                    goalWeight = goalWeightInput.getText().toString();
+
+                    if (weight.length() == 0 || height.length() == 0 || goalWeight.length() == 0) {
+                        Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                    }
+
+                    else if(!isNumeric(weight)){
+                        weightInput.setError("Please enter a valid weight.");
+                    }
+                    else if(!isNumeric(height)){
+                        heightInput.setError("Please enter a valid height.");
+                    }
+
+                    else if(!isNumeric(goalWeight)){
+                        goalWeightInput.setError("Please enter a valid weight.");
+                    }
+
+                    else {
+                        Fragment fragment = new MeasurementFragment();
+                        bundle.putDouble(WEIGHT, Double.parseDouble(weight));
+                        bundle.putDouble(HEIGHT, Double.parseDouble(height));
+                        bundle.putDouble(GOAL, Double.parseDouble(goalWeight));
+                        bundle.putDouble(ACTIVITY, activityLevelFactor);
+                        fragment.setArguments(bundle);
+                        replaceFragmentInterface.replaceFragment(fragment);
+                    }
+                }
+            });
+        }
+
         return v;
     }
 

@@ -92,8 +92,28 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editCurrentHeightEditText"
                 android:layout_marginLeft="50dp"
-                android:visibility="invisible"
+                android:visibility="gone"
                 android:inputType="number" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:visibility="gone"
+                android:id="@+id/profileHeightLayout"
+                android:orientation="horizontal"
+                android:layout_toEndOf="@id/ivContactItem2">
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/profileHeightFeetEditText"/>
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/profileHeightInchesEditText"/>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/profileCurrentHeightLabel"

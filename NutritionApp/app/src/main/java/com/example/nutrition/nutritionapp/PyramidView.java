@@ -436,47 +436,47 @@ public class PyramidView extends View {
 
     private void drawGrainImage(Canvas canvas){
         Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
-        float left = getLeft()+dpToPixels(pyramidThickness*12);
-        float top =  (heightOfTriangle-dpToPixels(pyramidThickness*20));
+        float left = getLeft()+(getWidth()/20);
+        float top =  (heightOfTriangle-dpToPixels(pyramidThickness*15));
         Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.toast);
 
-        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, 100, 100, false), left, top, mPaint);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, (3*getWidth())/20, (3*getWidth())/20, false), left, top, mPaint);
     }
 
     private void drawVeggieImage(Canvas canvas){
         Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
-        float left = getLeft()+(getWidth()/5)+dpToPixels(pyramidThickness*12);
+        float left = getLeft()+(getWidth()/5);
         float top =  (heightOfTriangle-dpToPixels(pyramidThickness*20));
         Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.tomato);
 
-        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, 100, 100, false), left, top, mPaint);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, (5*getWidth())/20, (5*getWidth())/20, false), left, top, mPaint);
     }
 
     private void drawFruitImage(Canvas canvas){
         Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
-        float left = getLeft()+(2*(getWidth()/5))+dpToPixels(pyramidThickness*10) ;
+        float left = getLeft()+(2*(getWidth()/5));
         float top =  (heightOfTriangle-dpToPixels(pyramidThickness*20));
         Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.pineapple);
 
-        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, 100, 100, false), left, top, mPaint);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, (5*getWidth())/20, (5*getWidth())/20, false), left, top, mPaint);
     }
 
     private void drawMeatImage(Canvas canvas){
         Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
-        float left = getLeft()+(4*(getWidth()/5))+dpToPixels(pyramidThickness*6) ;
-        float top =  (heightOfTriangle-dpToPixels(pyramidThickness*20));
+        float left = getLeft()+(4*(getWidth()/5));
+        float top =  (heightOfTriangle-dpToPixels(pyramidThickness*15));
         Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.turkey);
 
-        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, 100, 100, false), left, top, mPaint);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, (3*getWidth())/20, (3*getWidth())/20, false), left, top, mPaint);
     }
 
     private void drawDairyImage(Canvas canvas){
         Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
-        float left = getLeft()+(3*(getWidth()/5))+dpToPixels(pyramidThickness*8) ;
-        float top =  (heightOfTriangle-dpToPixels(pyramidThickness*20));
+        float left = getLeft()+(3*(getWidth()/5));
+        float top =  (heightOfTriangle-dpToPixels(pyramidThickness*15));
         Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.milk);
 
-        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, 100, 100, false), left, top, mPaint);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, getWidth()/6, getWidth()/6, false), left, top, mPaint);
     }
 
     private void drawFirstPercent(Canvas canvas){

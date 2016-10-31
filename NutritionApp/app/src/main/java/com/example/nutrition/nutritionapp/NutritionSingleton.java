@@ -299,6 +299,14 @@ public class NutritionSingleton {
                 child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).updateChildren(updateChildren);
     }
 
+    public void updateTodayWeight(double weight){
+        currDay.setCurrentWeight(weight);
+        Map<String,Object> updateChildren=new HashMap<>();
+        updateChildren.put("currentWeight", currDay.getServingsDairy());
+        mFirebaseDatabaseReference.child(USERS_CHILD).
+                child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).updateChildren(updateChildren);
+    }
+
     public void updateCurrWeight(double weight){
         if(currProfile.getIsImperial()){
             currProfile.setCurrWeightPounds(weight);
@@ -324,6 +332,7 @@ public class NutritionSingleton {
             updateChildren.put("goalWeightPounds", currProfile.getGoalWeightPounds());
             mFirebaseDatabaseReference.child(USERS_CHILD).
                     child(currUser).child(currProfile.getName()).updateChildren(updateChildren);
+
         }
 
         else{
@@ -333,6 +342,8 @@ public class NutritionSingleton {
             mFirebaseDatabaseReference.child(USERS_CHILD).
                     child(currUser).child(currProfile.getName()).updateChildren(updateChildren);
         }
+
+        updateCurrWeight(weight);
     }
 
     public void updateCurrHeight(double height){

@@ -54,6 +54,7 @@ public class ProgressFragment extends Fragment  {
     private BarChart chart;
     private BarChart chart2;
     private BarChart chart3;
+    private BarChart chart4;
     private Drawer result;
 
     public ProgressFragment() {
@@ -146,13 +147,17 @@ public class ProgressFragment extends Fragment  {
         chart = (BarChart) v.findViewById(R.id.chart);
         chart2 = (BarChart) v.findViewById(R.id.chart2);
         chart3 = (BarChart) v.findViewById(R.id.chart3);
+        chart4 = (BarChart) v.findViewById(R.id.chart4);
 
         List<BarEntry> entries = new ArrayList<>();
         List<BarEntry> entries2 = new ArrayList<>();
         List<BarEntry> entries3 = new ArrayList<>();
+        List<BarEntry> entries4 = new ArrayList<>();
+
         TreeMap<Integer, Integer> sortedCaloriesBurned = new TreeMap<>();
         TreeMap<Integer, Integer> sortedCaloriesConsumed = new TreeMap<>();
         TreeMap<Integer,Integer> sortedWater = new TreeMap<>();
+        TreeMap<Integer, Integer> sortedWeight = new TreeMap<>();
         HashMap<String, DayModel> dayMap = NutritionSingleton.getInstance().getCurrProfile().getDays();
         Set<String> dayKeys = dayMap.keySet();
         for(String key: dayKeys){
@@ -168,9 +173,11 @@ public class ProgressFragment extends Fragment  {
             Double caloriesBurn=Double.valueOf(dayMap.get(key).calcTotalCaloriesBurned());
             Double caloriesConsumed = Double.valueOf(dayMap.get(key).calcTotalCaloriesAte());
             Double waterDrank = Double.valueOf(dayMap.get(key).getWaterAmountDrank());
+            Double weight = Double.valueOf(dayMap.get(key).getCurrentWeight());
             sortedCaloriesBurned.put(dayOfYear, caloriesBurn.intValue());
             sortedCaloriesConsumed.put(dayOfYear, caloriesConsumed.intValue());
             sortedWater.put(dayOfYear, waterDrank.intValue());
+            sortedWeight.put(dayOfYear, weight.intValue());
         }
 
         for (Map.Entry<Integer, Integer> entry : sortedCaloriesBurned.entrySet()) {
@@ -184,9 +191,13 @@ public class ProgressFragment extends Fragment  {
         for (Map.Entry<Integer, Integer> entry : sortedWater.entrySet()) {
             entries3.add(new BarEntry(entry.getKey(), entry.getValue()));
         }
+        for (Map.Entry<Integer, Integer> entry : sortedWeight.entrySet()) {
+            entries4.add(new BarEntry(entry.getKey(), entry.getValue()));
+        }
         addChartSettings(entries, chart);
         addChartSettings(entries2, chart2);
         addChartSettings(entries3, chart3);
+        addChartSettings(entries4, chart4);
 
         return v;
     }

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nutrition.nutritionapp.waterEntryFragment">
+    tools:context="com.fearnot.snapp.waterEntryFragment">
 
 
     <LinearLayout
@@ -46,7 +46,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="270dp" />
 
-            <com.example.nutrition.nutritionapp.WaveView
+            <com.fearnot.snapp.WaveView
                 android:id="@+id/wave"
                 android:layout_width="95dp"
                 android:layout_height="190dp"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.nutrition.nutritionapp">
+    package="com.fearnot.snapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.fearnot.snapp.MainActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation">
             <intent-filter>
@@ -23,24 +23,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignUpActivity"
+            android:name="com.fearnot.snapp.SignUpActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation"/>
         <activity
-            android:name=".ProfileActivity"
+            android:name="com.fearnot.snapp.ProfileActivity"
             android:label="@string/title_activity_profile"
             android:screenOrientation="portrait"
             android:configChanges="orientation"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ActivityHome"
+        <activity android:name="com.fearnot.snapp.ActivityHome"
             android:screenOrientation="portrait"
             android:configChanges="orientation"/>
-        <activity android:name=".ProgressActivity"
+        <activity android:name="com.fearnot.snapp.ProgressActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation"/>
 
         <receiver
-            android:name=".Receiver"
+            android:name="com.fearnot.snapp.Receiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -48,10 +48,10 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".FoodActivity"
+        <activity android:name="com.fearnot.snapp.FoodActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation"/>
-        <activity android:name=".WeightEntryActivity"
+        <activity android:name="com.fearnot.snapp.WeightEntryActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation"></activity>
     </application>

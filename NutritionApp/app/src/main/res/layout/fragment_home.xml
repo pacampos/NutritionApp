@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nutrition.nutritionapp.HomeFragment">
+    tools:context="com.fearnot.snapp.HomeFragment">
 
 
     <LinearLayout
@@ -55,7 +55,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp">
 
-                <com.example.nutrition.nutritionapp.PyramidView
+                <com.fearnot.snapp.PyramidView
                     android:id="@+id/pyramid"
                     android:layout_marginRight="0dp"
                     android:layout_width="match_parent"

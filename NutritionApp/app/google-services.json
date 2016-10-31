@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "1047718521275",
-    "firebase_url": "https://nutrition-app-a7151.firebaseio.com",
-    "project_id": "nutrition-app-a7151",
-    "storage_bucket": "nutrition-app-a7151.appspot.com"
+    "project_number": "585333504426",
+    "firebase_url": "https://snapp-3ec04.firebaseio.com",
+    "project_id": "snapp-3ec04",
+    "storage_bucket": "snapp-3ec04.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1047718521275:android:04c8eaaf1f7befd6",
+        "mobilesdk_app_id": "1:585333504426:android:13882a88796d511e",
         "android_client_info": {
-          "package_name": "com.example.nutrition.nutritionapp"
+          "package_name": "com.fearnot.snapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1047718521275-gfclgbd74dbfju17sujmno6s5cca1jeb.apps.googleusercontent.com",
+          "client_id": "585333504426-h4aacfo77e0lagc3964i4mm8h67a6qnt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCkGjpPaYuy2i3xwkzOLA6GV6yScVONLxU"
+          "current_key": "AIzaSyAwxh5EFy8b_H_siEyGJ8y_GvKPPUfHIWg"
         }
       ],
       "services": {

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nutrition.nutritionapp.welcomeFragment">
+    tools:context="com.fearnot.snapp.welcomeFragment">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar6"
@@ -12,10 +12,6 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <Button
             android:text="Test login"
             android:layout_width="wrap_content"
@@ -23,68 +19,67 @@
             android:id="@+id/testButton"
             android:layout_weight="1" />
 
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/testButton"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/signupText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="69dp"
+            android:text="@string/welcome_text"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:id="@+id/signupButton"
+            android:layout_width="237dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/loginText"
+            android:layout_below="@+id/signupText"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="17dp"
+            android:text="@string/signup_text"
+            android:textColor="@color/white" />
+
         <LinearLayout
-            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/loginButton"
-            android:orientation="vertical">
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/testButton"
+            android:layout_marginTop="78dp"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
 
             <TextView
-                android:id="@+id/signupText"
+                android:id="@+id/loginText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="69dp"
-                android:text="@string/welcome_text"
-                android:textAlignment="center"
-                android:textSize="25sp"
-                android:layout_gravity="center_horizontal" />
+                android:layout_alignBottom="@+id/loginButton"
+                android:layout_alignParentStart="true"
+                android:text="@string/alternatelogin_text" />
 
             <Button
-                android:id="@+id/signupButton"
-                android:layout_width="237dp"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/loginText"
-                android:layout_below="@+id/signupText"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="17dp"
-                android:text="@string/signup_text"
-                android:textColor="@color/white" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/testButton"
-                android:layout_marginTop="78dp"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    android:id="@+id/loginText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/loginButton"
-                    android:layout_alignParentStart="true"
-                    android:text="@string/alternatelogin_text" />
-
-                <Button
-                    android:id="@+id/loginButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="33dp"
-                    android:layout_alignEnd="@+id/testButton"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="68dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="@string/login_text"
-                    android:textColor="@color/white"
-                    android:textSize="10dp" />
-
-            </LinearLayout>
+                android:id="@+id/loginButton"
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:layout_alignEnd="@+id/testButton"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="68dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/login_text"
+                android:textColor="@color/white"
+                android:textSize="10dp" />
 
         </LinearLayout>
-    </RelativeLayout>
+
+    </LinearLayout>
 
 </FrameLayout>

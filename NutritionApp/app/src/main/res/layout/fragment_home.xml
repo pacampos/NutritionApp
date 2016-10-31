@@ -43,20 +43,144 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal">
+            android:layout_height="203dp"
+            android:gravity="center_horizontal"
+            android:weightSum="1">
 
             <LinearLayout
-                android:layout_width="111dp"
                 android:layout_height="wrap_content"
-                android:weightSum="1">
+                android:weightSum="1"
+                android:layout_weight="0"
+                android:layout_width="200dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
 
                 <com.example.nutrition.nutritionapp.PyramidView
-                    android:layout_width="106dp"
                     android:id="@+id/pyramid"
-                    android:layout_height="150dp"
-                    android:layout_marginRight="100dp" />
+                    android:layout_marginRight="0dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="214dp" />
             </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Grains:"
+                        android:textSize="14sp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:text="0"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/grainTextView"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Veggies:"
+                        android:textSize="14sp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:text="0"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/veggiesTextView"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Fruits:"
+                        android:textSize="14sp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:text="0"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/fruitsTextView"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Dairy:"
+                        android:textSize="14sp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:text="0"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dairyTextView"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Meat: "
+                        android:textSize="14sp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:text="0"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/meatTextView"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout

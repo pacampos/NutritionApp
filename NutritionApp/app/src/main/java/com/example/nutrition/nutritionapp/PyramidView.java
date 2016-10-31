@@ -1,6 +1,8 @@
 package com.example.nutrition.nutritionapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -58,11 +60,18 @@ public class PyramidView extends View {
             drawFifthSection(canvas);
         }
 
-        drawFirstPercent(canvas);
-        drawSecondPercent(canvas);
-        drawThirdPercent(canvas);
-        drawFourthPercent(canvas);
-        drawFifthPercent(canvas);
+
+
+        drawFirstLabel(canvas);
+        drawSecondLabel(canvas);
+        drawThirdLabel(canvas);
+        drawFourthLabel(canvas);
+        drawFifthLabel(canvas);
+        drawGrainImage(canvas);
+        drawVeggieImage(canvas);
+        drawFruitImage(canvas);
+        drawDairyImage(canvas);
+        drawMeatImage(canvas);
     }
 
     private void drawOuterTriangle(Canvas canvas){
@@ -329,6 +338,147 @@ public class PyramidView extends View {
         canvas.drawPath(path,mPaint);
     }
 
+
+    private void drawFirstLabel(Canvas canvas){
+        Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
+        mPaint.setColor(Color.argb(255,255,165,0));
+        mPaint.setStyle(Paint.Style.FILL);
+        Path path = new Path();
+
+        float left = getLeft()+dpToPixels(pyramidThickness);
+        float right = getLeft()+(getWidth()/5);
+        float top =  (heightOfTriangle+dpToPixels(pyramidThickness*2));
+        float bottom = (heightOfTriangle+dpToPixels(pyramidThickness*15));
+        canvas.drawRect(left, top, right, bottom, mPaint);
+
+        left = getLeft()+dpToPixels(pyramidThickness*2);
+        top = (heightOfTriangle+dpToPixels(pyramidThickness*10));
+        mPaint.setColor(Color.WHITE);
+        mPaint.setTextSize(dpToPixels(9));
+        canvas.drawText("GRAINS", left,top, mPaint);
+    }
+
+    private void drawSecondLabel(Canvas canvas){
+        Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
+        mPaint.setColor(Color.GREEN);
+        mPaint.setStyle(Paint.Style.FILL);
+        Path path = new Path();
+
+        float left = getLeft()+(getWidth()/5)+dpToPixels(pyramidThickness);
+        float right = getLeft()+(2*(getWidth()/5));
+        float top =  (heightOfTriangle+dpToPixels(pyramidThickness*2));
+        float bottom = (heightOfTriangle+dpToPixels(pyramidThickness*15));
+        canvas.drawRect(left, top, right, bottom, mPaint);
+
+        left = getLeft()+(getWidth()/5)+dpToPixels(pyramidThickness*2);
+        top = (heightOfTriangle+dpToPixels(pyramidThickness*10));
+        mPaint.setColor(Color.WHITE);
+        mPaint.setTextSize(dpToPixels(9));
+        canvas.drawText("VEGGIES", left,top, mPaint);
+    }
+
+    private void drawThirdLabel(Canvas canvas){
+        Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
+        mPaint.setColor(Color.RED);
+        mPaint.setStyle(Paint.Style.FILL);
+        Path path = new Path();
+
+        float left = getLeft()+(2*(getWidth()/5))+dpToPixels(pyramidThickness);
+        float right = getLeft()+(3*(getWidth()/5));
+        float top =  (heightOfTriangle+dpToPixels(pyramidThickness*2));
+        float bottom = (heightOfTriangle+dpToPixels(pyramidThickness*15));
+        canvas.drawRect(left, top, right, bottom, mPaint);
+
+        left = getLeft()+(2*(getWidth()/5))+dpToPixels(pyramidThickness*3) ;
+        top = (heightOfTriangle+dpToPixels(pyramidThickness*10));
+        mPaint.setColor(Color.WHITE);
+        mPaint.setTextSize(dpToPixels(9));
+        canvas.drawText("FRUITS", left,top, mPaint);
+    }
+
+    private void drawFourthLabel(Canvas canvas){
+        Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
+        mPaint.setColor(Color.BLUE);
+        mPaint.setStyle(Paint.Style.FILL);
+        Path path = new Path();
+
+        float left = getLeft()+(3*(getWidth()/5))+dpToPixels(pyramidThickness);
+        float right = getLeft()+(4*(getWidth()/5));
+        float top =  (heightOfTriangle+dpToPixels(pyramidThickness*2));
+        float bottom = (heightOfTriangle+dpToPixels(pyramidThickness*15));
+        canvas.drawRect(left, top, right, bottom, mPaint);
+
+        left = getLeft()+(3*(getWidth()/5))+dpToPixels(pyramidThickness*4) ;
+        top = (heightOfTriangle+dpToPixels(pyramidThickness*10));
+        mPaint.setColor(Color.WHITE);
+        mPaint.setTextSize(dpToPixels(9));
+        canvas.drawText("DAIRY", left,top, mPaint);
+    }
+
+    private void drawFifthLabel(Canvas canvas){
+        Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
+        mPaint.setColor(Color.argb(255,75,0,130));
+        mPaint.setStyle(Paint.Style.FILL);
+        Path path = new Path();
+
+        float left = getLeft()+(4*(getWidth()/5))+dpToPixels(pyramidThickness);
+        float right = getLeft()+(5*(getWidth()/5));
+        float top =  (heightOfTriangle+dpToPixels(pyramidThickness*2));
+        float bottom = (heightOfTriangle+dpToPixels(pyramidThickness*15));
+        canvas.drawRect(left, top, right, bottom, mPaint);
+
+        left = getLeft()+(4*(getWidth()/5))+dpToPixels(pyramidThickness*4) ;
+        top = (heightOfTriangle+dpToPixels(pyramidThickness*10));
+        mPaint.setColor(Color.WHITE);
+        mPaint.setTextSize(dpToPixels(9));
+        canvas.drawText("MEAT", left,top, mPaint);
+    }
+
+    private void drawGrainImage(Canvas canvas){
+        Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
+        float left = getLeft()+dpToPixels(pyramidThickness*12);
+        float top =  (heightOfTriangle-dpToPixels(pyramidThickness*20));
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.toast);
+
+        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, 100, 100, false), left, top, mPaint);
+    }
+
+    private void drawVeggieImage(Canvas canvas){
+        Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
+        float left = getLeft()+(getWidth()/5)+dpToPixels(pyramidThickness*12);
+        float top =  (heightOfTriangle-dpToPixels(pyramidThickness*20));
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.tomato);
+
+        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, 100, 100, false), left, top, mPaint);
+    }
+
+    private void drawFruitImage(Canvas canvas){
+        Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
+        float left = getLeft()+(2*(getWidth()/5))+dpToPixels(pyramidThickness*10) ;
+        float top =  (heightOfTriangle-dpToPixels(pyramidThickness*20));
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.pineapple);
+
+        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, 100, 100, false), left, top, mPaint);
+    }
+
+    private void drawMeatImage(Canvas canvas){
+        Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
+        float left = getLeft()+(4*(getWidth()/5))+dpToPixels(pyramidThickness*6) ;
+        float top =  (heightOfTriangle-dpToPixels(pyramidThickness*20));
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.turkey);
+
+        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, 100, 100, false), left, top, mPaint);
+    }
+
+    private void drawDairyImage(Canvas canvas){
+        Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
+        float left = getLeft()+(3*(getWidth()/5))+dpToPixels(pyramidThickness*8) ;
+        float top =  (heightOfTriangle-dpToPixels(pyramidThickness*20));
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.milk);
+
+        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, 100, 100, false), left, top, mPaint);
+    }
+
     private void drawFirstPercent(Canvas canvas){
         Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
         mPaint.setColor(Color.BLACK);
@@ -412,25 +562,24 @@ public class PyramidView extends View {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, dm);
     }
 
-
     public void setFirstPortion(float firstPortion) {
         this.firstPortion = firstPortion;
     }
 
     public void setSecondPortion(float secondPortion) {
-            this.secondPortion = secondPortion;
+        this.secondPortion = secondPortion;
     }
 
     public void setThirdPortion(float thirdPortion) {
-            this.thirdPortion = thirdPortion;
+        this.thirdPortion = thirdPortion;
     }
 
     public void setFourthPortion(float fourthPortion) {
-            this.fourthPortion = fourthPortion;
+        this.fourthPortion = fourthPortion;
     }
 
     public void setFifthPortion(float fifthPortion) {
-            this.fifthPortion = fifthPortion;
+        this.fifthPortion = fifthPortion;
     }
 
     private float findXOnLine(float startPointX, float startPointY, float endPointX, float endPointY, float knownYCoord ){

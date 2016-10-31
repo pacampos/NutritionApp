@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -60,6 +62,11 @@ public class HomeFragment extends Fragment {
     private Drawer result;
     private TextView calorieRemain;
     private ProgressBar sweetsProgressBar;
+    private TextView grainsTextView;
+    private TextView fruitsTextView;
+    private TextView veggiesTextView;
+    private TextView dairyTextView;
+    private TextView meatTextView;
 
 
     PyramidView pyramid;
@@ -74,7 +81,11 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-
+        grainsTextView = (TextView) v.findViewById(R.id.grainTextView);
+        fruitsTextView = (TextView) v.findViewById(R.id.fruitsTextView);
+        veggiesTextView = (TextView) v.findViewById(R.id.veggiesTextView);
+        dairyTextView = (TextView) v.findViewById(R.id.dairyTextView);
+        meatTextView = (TextView) v.findViewById(R.id.meatTextView);
 
         // Calorie Remaining
         calorieRemain = (TextView) v.findViewById(R.id.calorieRemain);
@@ -303,11 +314,43 @@ public class HomeFragment extends Fragment {
         fruitPortion = new Float(dayModel.getServingsFruit());
         dairyPortion = new Float(dayModel.getServingsDairy());
         meatPortion = new Float(dayModel.getServingsMeat());
-        pyramid.setFirstPortion(grainsPortion/MAX_GRAINS);
-        pyramid.setSecondPortion(veggiePortion/MAX_VEGGIES);
-        pyramid.setThirdPortion(fruitPortion/MAX_FRUIT);
-        pyramid.setFourthPortion(dairyPortion/MAX_DAIRY);
-        pyramid.setFifthPortion(meatPortion/MAX_MEAT);
+
+        float grainsPercentage = grainsPortion/MAX_GRAINS;
+        float veggiePercentage = veggiePortion/MAX_VEGGIES;
+        float fruitsPercentage = fruitPortion/MAX_FRUIT;
+        float dairyPercentage = dairyPortion/MAX_DAIRY;
+        float meatPercentage = meatPortion/MAX_MEAT;
+
+        if(grainsPercentage > 1){
+            grainsTextView.setTextColor(Color.RED);
+        }
+
+        if(veggiePercentage > 1){
+            veggiesTextView.setTextColor(Color.RED);
+        }
+
+        if(fruitsPercentage > 1){
+            fruitsTextView.setTextColor(Color.RED);
+        }
+
+        if(dairyPercentage > 1){
+            dairyTextView.setTextColor(Color.RED);
+        }
+
+        if(meatPercentage > 1){
+            meatTextView.setTextColor(Color.RED);
+        }
+        grainsTextView.setText(String.valueOf((int) (grainsPercentage*100))+"%");
+        veggiesTextView.setText(String.valueOf((int) (veggiePercentage*100))+"%");
+        fruitsTextView.setText(String.valueOf((int) (fruitsPercentage*100))+"%");
+        dairyTextView.setText(String.valueOf((int) (dairyPercentage*100))+"%");
+        meatTextView.setText(String.valueOf((int) (meatPercentage*100))+"%");
+
+        pyramid.setFirstPortion(grainsPercentage);
+        pyramid.setSecondPortion(veggiePercentage);
+        pyramid.setThirdPortion(fruitsPercentage);
+        pyramid.setFourthPortion(dairyPercentage);
+        pyramid.setFifthPortion(meatPercentage);
         pyramid.invalidate();
     }
 

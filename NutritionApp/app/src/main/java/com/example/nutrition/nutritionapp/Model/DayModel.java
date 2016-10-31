@@ -27,6 +27,7 @@ public class DayModel {
     private double servingsDairy;
     private double servingsMeat;
     private double servingsSweets;
+    private double currentWeight;
 
 
     public DayModel() {
@@ -39,6 +40,7 @@ public class DayModel {
         servingsDairy=0.0;
         servingsMeat=0.0;
         servingsSweets=0.0;
+        currentWeight = 0.0;
     }
 
     public void addFood(FoodModel food) {
@@ -197,5 +199,13 @@ public class DayModel {
 
     public void addServingsSweet(double addition){
         setServingsSweets(getServingsSweets()+addition);
+    }
+
+    public double getCurrentWeight() {
+        return currentWeight;
+    }
+
+    public void setCurrentWeight(double currentWeight) {
+        this.currentWeight = currentWeight;
     }
 }

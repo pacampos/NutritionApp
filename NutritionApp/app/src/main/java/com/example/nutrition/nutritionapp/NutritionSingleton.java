@@ -209,6 +209,14 @@ public class NutritionSingleton {
 
     public void addDay(DayModel day){
         currProfile.getDays().put(generateCurrDayString(), currDay);
+        if(currProfile.getIsImperial()){
+            currDay.setCurrentWeight(currProfile.getCurrWeightPounds());
+        }
+
+        else{
+            currDay.setCurrentWeight(currProfile.getCurrWeightKilos());
+        }
+
         mFirebaseDatabaseReference.child(USERS_CHILD).child(currUser).child(currProfile.getName()).child("days").child(generateCurrDayString()).setValue(currDay);
     }
 

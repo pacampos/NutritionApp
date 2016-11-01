@@ -1,16 +1,14 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.fearnot.snapp.waterEntryFragment">
 
 
     <LinearLayout
+        android:orientation="vertical"
+        android:weightSum="1"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="1">
+        tools:context="com.fearnot.snapp.waterEntryFragment">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/waterEntryToolbar"
@@ -89,7 +87,7 @@
             android:paddingTop="20dp">
 
             <EditText
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
@@ -106,4 +104,3 @@
         </LinearLayout>
 
     </LinearLayout>
-</FrameLayout>

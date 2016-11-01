@@ -1,16 +1,11 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.fearnot.snapp.goalInformationFragment">
 
     <LinearLayout
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="529dp"
-        android:layout_gravity="left|top"
-        android:background="#ffffff"
-        android:backgroundTint="#ffffff"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        tools:context="com.fearnot.snapp.goalInformationFragment">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar4"
@@ -39,7 +34,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:orientation="horizontal">
 
             <TextView
@@ -54,15 +50,16 @@
                 android:id="@+id/weightInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                android:inputType="number" />
+                android:inputType="number"
+                tools:ignore="LabelFor" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:orientation="horizontal"
             android:id="@+id/metricHeightLayout">
 
@@ -78,16 +75,17 @@
                 android:id="@+id/heightInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                android:inputType="number" />
+                android:inputType="number"
+                tools:ignore="LabelFor" />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:id="@+id/imperialHeightLayout"
             android:visibility="gone">
 
@@ -122,7 +120,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:orientation="horizontal">
 
             <TextView
@@ -137,9 +136,9 @@
                 android:id="@+id/goalWeightInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                android:inputType="number" />
+                android:inputType="number"
+                tools:ignore="LabelFor" />
         </LinearLayout>
 
         <TextView
@@ -170,7 +169,6 @@
             android:layout_marginRight="70dp"
             android:entries="@array/activityLevel_array"
             android:prompt="@string/spinner_title" />
-        />
 
         <Button
             android:id="@+id/continueButton"
@@ -178,10 +176,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
             android:background="#52b7bd"
-            android:onClick="jumpToPage"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:text="@string/startReachingText"
             android:textColor="#ffffff" />
     </LinearLayout>
-</FrameLayout>

@@ -1,31 +1,25 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.fearnot.snapp.welcomeFragment">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
-
-    <LinearLayout
+ <LinearLayout
         android:id="@+id/layout"
+        android:layout_above="@+id/testButton"
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/testButton"
-        android:orientation="vertical">
+        tools:context="com.fearnot.snapp.welcomeFragment">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
 
         <TextView
             android:id="@+id/signupText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="69dp"
             android:text="@string/welcome_text"
             android:textAlignment="center"
             android:textSize="25sp"
@@ -35,8 +29,6 @@
             android:id="@+id/signupButton"
             android:layout_width="237dp"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/loginText"
-            android:layout_below="@+id/signupText"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="17dp"
             android:text="@string/signup_text"
@@ -74,5 +66,3 @@
         </LinearLayout>
 
     </LinearLayout>
-
-</FrameLayout>

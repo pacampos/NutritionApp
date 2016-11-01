@@ -1,19 +1,12 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.fearnot.snapp.foodEntryFragment">
-
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <LinearLayout
+            android:orientation="vertical"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
+            tools:context="com.fearnot.snapp.foodEntryFragment"
             >
             <android.support.v7.widget.Toolbar
                 android:id="@+id/foodEntryToolbar"
@@ -31,7 +24,8 @@
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="20dp"
                 android:textAlignment="center"
-                app:srcCompat="@drawable/food_entry_plate" />
+                app:srcCompat="@drawable/food_entry_plate"
+                android:contentDescription="Plate of a T-Bone Steak"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -47,10 +41,10 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <EditText
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
@@ -84,7 +78,7 @@
 
                 <Button
                     android:id="@+id/button_food_journal"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="?attr/colorPrimary"
@@ -95,6 +89,3 @@
                     android:layout_marginLeft="10dp" />
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
-
-</FrameLayout>

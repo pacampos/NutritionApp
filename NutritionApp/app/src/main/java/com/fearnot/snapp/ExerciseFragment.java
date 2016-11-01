@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class ExerciseFragment extends Fragment {
         Button journalButton = (Button) v.findViewById(R.id.journalButton);
         final EditText manual_calorie_burned = (EditText) v.findViewById(R.id.manual_calorie_burned);
         final Spinner durationSpinner = (Spinner) v.findViewById(R.id.durationSpinner);
+        final LinearLayout manualEntryLayout = (LinearLayout) v.findViewById(R.id.exerciseManualEntryEditText);
 
         manual_calorie_burned.setEnabled(false);
 
@@ -67,11 +69,13 @@ public class ExerciseFragment extends Fragment {
                     manualEntry = false;
                     manual_calorie_burned.setEnabled(false);
                     durationSpinner.setEnabled(true);
+                    manualEntryLayout.setVisibility(View.GONE);
                 }
                 else{
                     manualEntry = true;
                     manual_calorie_burned.setEnabled(true);
                     durationSpinner.setEnabled(false);
+                    manualEntryLayout.setVisibility(View.VISIBLE);
                 }
             }
 

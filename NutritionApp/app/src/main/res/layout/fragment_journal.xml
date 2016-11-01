@@ -37,20 +37,25 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_marginTop="100dp"
-        android:layout_height="200dp">
+        android:layout_height="200dp"
+        android:baselineAligned="false">
 
         <ListView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/exerciseList"
             android:layout_marginTop="10dp" />
 
     </LinearLayout>
-    <com.github.mikephil.charting.charts.BarChart
+    <LinearLayout
         android:layout_width="match_parent"
-        android:id="@+id/exerciseChart"
-        android:layout_marginTop="210dp"
-        android:layout_height="340dp" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <com.github.mikephil.charting.charts.BarChart
+            android:layout_width="match_parent"
+            android:id="@+id/exerciseChart"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
  </LinearLayout>

@@ -1,14 +1,11 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.fearnot.snapp.SelectFoodAmountFragment">
-
-    <LinearLayout
+ <LinearLayout
         android:orientation="vertical"
+        android:weightSum="1"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="1">
+        tools:context="com.fearnot.snapp.SelectFoodAmountFragment">
 
         <TextView
             android:text="TextView"
@@ -36,5 +33,3 @@
             android:layout_height="wrap_content"
             android:id="@+id/enterFoodAmountButton" />
     </LinearLayout>
-
-</FrameLayout>

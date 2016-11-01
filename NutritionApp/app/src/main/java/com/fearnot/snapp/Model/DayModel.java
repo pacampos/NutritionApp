@@ -164,6 +164,14 @@ public class DayModel {
         this.servingsMeat = servingsMeat;
     }
 
+    public double getServingsSweets() {
+        return servingsSweets;
+    }
+
+    public void setServingsSweets(double servingsSweets) {
+        this.servingsSweets = servingsSweets;
+    }
+
     public void addServingsGrains(double addition){
         setServingsGrains(getServingsGrains()+addition);
     }
@@ -182,14 +190,6 @@ public class DayModel {
 
     public void addServingsMeat(double addition){
         setServingsMeat(getServingsMeat()+addition);
-    }
-
-    public double getServingsSweets() {
-        return servingsSweets;
-    }
-
-    public void setServingsSweets(double servingsSweets) {
-        this.servingsSweets = servingsSweets;
     }
 
     public void addServingsSweet(double addition){

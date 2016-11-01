@@ -3,6 +3,8 @@ package com.fearnot.snapp;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,10 @@ public class ExerciseFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_exercise, container, false);
+
+        Toolbar toolbar = (Toolbar) v.findViewById(R.id.exerciseEntryToolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Exercise Entry");
 
         // Get references
         final Spinner typeSpinner = (Spinner) v.findViewById(R.id.typeSpinner);

@@ -43,7 +43,6 @@ public class NutritionSingleton {
     public ProgressDialog progress;
 
     private NutritionSingleton() {
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
         profiles = new ArrayList<>();
     }
@@ -95,7 +94,7 @@ public class NutritionSingleton {
                             int profileSize = profiles.size();
 
                             if(childrenCount/23 == profileSize){
-                                progress.hide();
+                                progress.dismiss();
                                 /* start the fragment that switches profiles */
 
                                 AppCompatActivity beforeLogin = (AppCompatActivity) progressContext;
@@ -200,6 +199,14 @@ public class NutritionSingleton {
 
     public void setCurrDay(DayModel currDay) {
         this.currDay = currDay;
+    }
+
+    public void setmUser(FirebaseUser mUser) {
+        this.mUser = mUser;
+    }
+
+    public void setCurrUser(String currUser) {
+        this.currUser = currUser;
     }
 
     public String generateCurrDayString(){

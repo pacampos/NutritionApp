@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +51,9 @@ public class foodEntryFragment extends Fragment {
         Button journalButton = (Button) v.findViewById(R.id.button_food_journal);
         final EditText editTextFoodName = (EditText) v.findViewById(R.id.search_bar_food);
         foodList = (ListView) v.findViewById(R.id.foodList);
+        Toolbar toolbar = (Toolbar) v.findViewById(R.id.foodEntryToolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Food and Drink Entry");
 
         journalButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +129,7 @@ public class foodEntryFragment extends Fragment {
         protected void onPostExecute(String result) {
             super.onPostExecute("result");
 
-            progress.hide();
+            progress.dismiss();
             if(listFoods!=null){
                 List<String> foodNames = new ArrayList<>();
                 for (CompactFood food : listFoods) {

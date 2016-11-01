@@ -119,9 +119,10 @@ public class ProgressFragment extends Fragment  {
                 })
                 .build();
 
-        Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar2);
+        Toolbar toolbar = (Toolbar) v.findViewById(R.id.progressToolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Progress");
 
         final Drawable upArrow = getResources().getDrawable(R.drawable.ic_menu_2x);
         upArrow.setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);

@@ -1,14 +1,11 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.fearnot.snapp.JournalFragment">
-
-
-    <LinearLayout
+ <LinearLayout
         android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context="com.fearnot.snapp.JournalFragment">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar12"
             android:layout_width="match_parent"
@@ -36,7 +33,6 @@
             android:text="@string/today_calories"
             android:layout_gravity="center_horizontal"
              />
-    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -57,5 +53,4 @@
         android:id="@+id/exerciseChart"
         android:layout_marginTop="210dp"
         android:layout_height="340dp" />
-
-</FrameLayout>
+ </LinearLayout>

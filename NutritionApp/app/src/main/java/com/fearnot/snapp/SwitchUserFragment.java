@@ -36,6 +36,7 @@ public class SwitchUserFragment extends Fragment {
 
         ListView profileList = (ListView)  v.findViewById(R.id.profilesListView);
         profileList.setAdapter(itemsAdapter);
+        itemsAdapter.notifyDataSetChanged();
 
         //get references
         Button loginButton = (Button) v.findViewById(R.id.loginButton1);

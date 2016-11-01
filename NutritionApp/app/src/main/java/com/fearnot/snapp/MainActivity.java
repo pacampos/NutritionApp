@@ -88,8 +88,8 @@ public class MainActivity extends AppCompatActivity implements signUpFragment.Re
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
-                            Toast.makeText(MainActivity.this, "Could not sign in",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Could not sign in, make sure all your info is correct and try again.",
+                                    Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(MainActivity.this, "Signed In", Toast.LENGTH_SHORT).show();
                             mAuth = FirebaseAuth.getInstance();

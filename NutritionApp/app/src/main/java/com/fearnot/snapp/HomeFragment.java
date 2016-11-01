@@ -153,6 +153,13 @@ public class HomeFragment extends Fragment {
                             // logout
                             FirebaseAuth.getInstance().signOut();
                             Intent i = new Intent(getActivity(), MainActivity.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            NutritionSingleton.getInstance().setCurrProfile(null);
+                            NutritionSingleton.getInstance().setCurrDay(null);
+                            ArrayList<ProfileModel> profiles = NutritionSingleton.getInstance().getAllProfiles();
+                            profiles.clear();
+                            NutritionSingleton.getInstance().setCurrUser(null);
+                            NutritionSingleton.getInstance().setmUser(null);
                             startActivity(i);
                         }
                         return true;
@@ -163,6 +170,7 @@ public class HomeFragment extends Fragment {
         Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Home");
 
         final Drawable upArrow = getResources().getDrawable(R.drawable.ic_menu_2x);
         upArrow.setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);

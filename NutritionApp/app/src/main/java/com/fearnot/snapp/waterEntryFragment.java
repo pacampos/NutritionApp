@@ -3,6 +3,8 @@ package com.fearnot.snapp;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +39,10 @@ public class waterEntryFragment extends Fragment {
         DayModel currDay = NutritionSingleton.getInstance().getCurrDay();
         double water= currDay.getWaterAmountDrank();
         waterDrankTextView.setText(String.valueOf(water));
+
+        Toolbar toolbar = (Toolbar) v.findViewById(R.id.waterEntryToolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Water Entry");
 
         waveView = (WaveView) v.findViewById(R.id.wave);
         double initWater = NutritionSingleton.getInstance().getCurrDay().getWaterAmountDrank();

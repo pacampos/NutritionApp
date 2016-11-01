@@ -5,12 +5,13 @@
     android:layout_height="match_parent"
     tools:context="com.fearnot.snapp.ExerciseFragment">
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar1"
+        android:id="@+id/exerciseEntryToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:theme="?attr/actionBarTheme"
+        app:titleTextColor="@color/material_drawer_header_selection_text"/>
 
 
     <LinearLayout

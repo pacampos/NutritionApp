@@ -46,12 +46,12 @@ public class welcomeFragment extends Fragment {
             }
         });
 
-        testButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) getActivity()).signIn("popolomacolo@gmail.com", "Testpassword1", getActivity());
-            }
-        });
+//        testButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ((MainActivity) getActivity()).signIn("popolomacolo@gmail.com", "Testpassword1");
+//            }
+//        });
 
 
         return v;

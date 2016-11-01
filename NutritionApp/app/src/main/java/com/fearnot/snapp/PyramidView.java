@@ -1,6 +1,7 @@
 package com.fearnot.snapp;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -440,45 +441,47 @@ public class PyramidView extends View {
         Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
         float left = getLeft()+(getWidth()/20);
         float top =  (heightOfTriangle-dpToPixels(pyramidThickness*15));
-        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.toast);
+//        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.toast);
 
-        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, (3*getWidth())/20, (3*getWidth())/20, false), left, top, mPaint);
+        canvas.drawBitmap(decodeSampledBitmapFromResource(getResources(), R.drawable.toast,
+        (int) (3*getWidth())/20, (int)(3*getWidth())/20) , left, top, mPaint);
     }
 
     private void drawVeggieImage(Canvas canvas){
         Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
         float left = getLeft()+(getWidth()/5);
-        float top =  (heightOfTriangle-dpToPixels(pyramidThickness*20));
-        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.tomato);
+        float top =  (heightOfTriangle-dpToPixels(pyramidThickness*15));
+//        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.tomato);
 
-        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, (5*getWidth())/20, (5*getWidth())/20, false), left, top, mPaint);
+        canvas.drawBitmap(decodeSampledBitmapFromResource(getResources(),
+                R.drawable.tomato, (int) (3*getWidth())/20, (int) (3*getWidth())/20), left, top, mPaint);
     }
 
     private void drawFruitImage(Canvas canvas){
         Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
         float left = getLeft()+(2*(getWidth()/5));
-        float top =  (heightOfTriangle-dpToPixels(pyramidThickness*20));
-        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.pineapple);
+        float top =  (heightOfTriangle-dpToPixels(pyramidThickness*15));
 
-        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, (5*getWidth())/20, (5*getWidth())/20, false), left, top, mPaint);
+        canvas.drawBitmap(decodeSampledBitmapFromResource(getResources(),
+                R.drawable.pineapple, (int) (15*getWidth())/80, (int) (15*getWidth())/80), left, top, mPaint);
     }
 
     private void drawMeatImage(Canvas canvas){
         Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
         float left = getLeft()+(4*(getWidth()/5));
         float top =  (heightOfTriangle-dpToPixels(pyramidThickness*15));
-        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.turkey);
 
-        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, (3*getWidth())/20, (3*getWidth())/20, false), left, top, mPaint);
+        canvas.drawBitmap(decodeSampledBitmapFromResource(getResources(),
+                R.drawable.turkey, (int) (3*getWidth())/20, (int) (3*getWidth())/20), left, top, mPaint);
     }
 
     private void drawDairyImage(Canvas canvas){
         Float heightOfTriangle = new Float(getTop()+(getWidth()/2)*(Math.sqrt(3)));
         float left = getLeft()+(3*(getWidth()/5));
         float top =  (heightOfTriangle-dpToPixels(pyramidThickness*15));
-        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.milk);
 
-        canvas.drawBitmap(Bitmap.createScaledBitmap(largeIcon, getWidth()/6, getWidth()/6, false), left, top, mPaint);
+        canvas.drawBitmap( decodeSampledBitmapFromResource(getResources(),
+                R.drawable.milk, (int) (3*getWidth())/20, (int) (3*getWidth())/20), left, top, mPaint);
     }
 
     private void drawFirstPercent(Canvas canvas){
@@ -587,6 +590,45 @@ public class PyramidView extends View {
     private float findXOnLine(float startPointX, float startPointY, float endPointX, float endPointY, float knownYCoord ){
         float slope = (endPointY-startPointY)/(endPointX-startPointX);
         return (knownYCoord-startPointY+slope*startPointX)/slope;
+    }
+
+    public static int calculateInSampleSize(
+            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) >= reqHeight
+                    && (halfWidth / inSampleSize) >= reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
+    }
+
+    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
+                                                         int reqWidth, int reqHeight) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(res, resId, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(res, resId, options);
     }
 
 }

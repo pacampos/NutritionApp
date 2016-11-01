@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.fearnot.snapp.ProgressFragment">
 
 
@@ -15,12 +16,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar2"
+                android:id="@+id/progressToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/colorPrimary"
                 android:minHeight="?attr/actionBarSize"
-                android:theme="?attr/actionBarTheme" />
+                android:theme="?attr/actionBarTheme"
+                app:titleTextColor="@color/material_drawer_header_selection_text"/>
             <TextView
                 android:text="Exercise Graph"
                 android:layout_width="match_parent"

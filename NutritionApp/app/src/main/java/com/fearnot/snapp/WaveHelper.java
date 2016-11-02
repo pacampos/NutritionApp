@@ -3,12 +3,15 @@ package com.fearnot.snapp;
 /**
  * Created by vishnuvenkateswaran on 10/7/16.
  */
+
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
+
+import com.fearnot.snapp.Views.WaveView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +25,12 @@ public class WaveHelper {
 
     public WaveHelper(WaveView waveView, float currentWater) {
         mWaveView = waveView;
-        this.currentWater=currentWater;
-       initAnimation();
+        this.currentWater = currentWater;
+        initAnimation();
     }
 
     public void start() {
-        if(currentWater > 0f){
+        if (currentWater > 0f) {
             mWaveView.setShowWave(true);
             if (mAnimatorSet != null) {
                 mAnimatorSet.start();
@@ -37,9 +40,9 @@ public class WaveHelper {
 
     }
 
-    public void initAnimation(){
+    public void initAnimation() {
 
-        if(currentWater > 0f){
+        if (currentWater > 0f) {
             List<Animator> animators = new ArrayList<>();
             // horizontal animation.
             // wave waves infinitely.
@@ -63,7 +66,7 @@ public class WaveHelper {
             // vertical animation.
             // water level increases from 0 to center of WaveView
             ObjectAnimator waterLevelAnim = ObjectAnimator.ofFloat(
-                    mWaveView, "waterLevelRatio", currentWater/MAX_WATER, currentWater/MAX_WATER);
+                    mWaveView, "waterLevelRatio", currentWater / MAX_WATER, currentWater / MAX_WATER);
             waterLevelAnim.setDuration(0);
             waterLevelAnim.setInterpolator(new DecelerateInterpolator());
             animators.add(waterLevelAnim);
@@ -73,8 +76,8 @@ public class WaveHelper {
         }
     }
 
-    public void growWave(float amountFinal){
-        if(currentWater < 64f) {
+    public void growWave(float amountFinal) {
+        if (currentWater < 64f) {
             List<Animator> animators = new ArrayList<>();
 
             // horizontal animation.
@@ -111,7 +114,6 @@ public class WaveHelper {
             mAnimatorSet.playTogether(animators);
         }
     }
-
 
 
     public void cancel() {

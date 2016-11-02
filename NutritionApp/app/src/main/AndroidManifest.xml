@@ -23,19 +23,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.fearnot.snapp.SignUpActivity"
+            android:name="com.fearnot.snapp.Activities.SignUpActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation"/>
         <activity
-            android:name="com.fearnot.snapp.ProfileActivity"
+            android:name="com.fearnot.snapp.Activities.ProfileActivity"
             android:label="@string/title_activity_profile"
             android:screenOrientation="portrait"
             android:configChanges="orientation"
             android:theme="@style/AppTheme" />
-        <activity android:name="com.fearnot.snapp.ActivityHome"
+        <activity android:name="com.fearnot.snapp.Activities.ActivityHome"
             android:screenOrientation="portrait"
             android:configChanges="orientation"/>
-        <activity android:name="com.fearnot.snapp.ProgressActivity"
+        <activity android:name="com.fearnot.snapp.Activities.ProgressActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation"/>
 
@@ -48,10 +48,10 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name="com.fearnot.snapp.FoodActivity"
+        <activity android:name="com.fearnot.snapp.Activities.FoodActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation"/>
-        <activity android:name="com.fearnot.snapp.WeightEntryActivity"
+        <activity android:name="com.fearnot.snapp.Activities.WeightEntryActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation"></activity>
     </application>

@@ -8,7 +8,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context="com.fearnot.snapp.HomeFragment">
+        tools:context="com.fearnot.snapp.Fragments.HomeFragment">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -52,7 +52,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp">
 
-                <com.fearnot.snapp.PyramidView
+                <com.fearnot.snapp.Views.PyramidView
                     android:id="@+id/pyramid"
                     android:layout_width="match_parent"
                     android:layout_height="214dp" />

@@ -6,7 +6,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="com.fearnot.snapp.foodEntryFragment"
+            tools:context="com.fearnot.snapp.Fragments.foodEntryFragment"
             >
             <android.support.v7.widget.Toolbar
                 android:id="@+id/foodEntryToolbar"

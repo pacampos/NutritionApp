@@ -5,29 +5,28 @@ package com.fearnot.snapp.Model;
  * amount of calories you would burn for a specific amount of time.
  */
 public class ExerciseModel {
-    private double calories;
-    private double minutes;
-    private double exerciseType;
     public static final double exerciseTypeWalking = 0.0;
     public static final double exerciseTypeRunning = 1.0;
     public static final double exerciseTypeYoga = 2.0;
     public static final double exerciseTypeBiking = 3.0;
     public static final double exerciseTypeSwimming = 4.0;
     public static final double exerciseTypeOther = 5.0;
-
+    private double calories;
+    private double minutes;
+    private double exerciseType;
 
 
     public ExerciseModel() {
     }
 
     public ExerciseModel(double exerciseType, double calories) {
-        this.calories= calories;
+        this.calories = calories;
         this.exerciseType = exerciseType;
     }
 
     public ExerciseModel(boolean isImperial, double minutes, double exerciseType, double weight) {
         this.minutes = minutes;
-        this.exerciseType=exerciseType;
+        this.exerciseType = exerciseType;
         calcCaloriesBurned(isImperial, exerciseType, minutes, weight);
     }
 

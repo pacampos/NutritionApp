@@ -32,198 +32,222 @@ import java.util.List;
  * @version 1.0
  */
 public class ServingUtility {
-	
-	/**
-	 * Returns food nutrient values according to serving sizes
-	 * 
-	 * @param json			json object representing nutritional information of the food
-	 * @return				food nutrient values according to serving sizes
-	 */
-	public static Serving parseServingFromJSONObject(JSONObject json) {
-		Serving serving = new Serving();
 
-		try {
-			Long servingId = Long.parseLong(json.getString("serving_id"));
-			serving.setServingId(servingId);
-		} catch(Exception ignore) {}
+    /**
+     * Returns food nutrient values according to serving sizes
+     *
+     * @param json json object representing nutritional information of the food
+     * @return food nutrient values according to serving sizes
+     */
+    public static Serving parseServingFromJSONObject(JSONObject json) {
+        Serving serving = new Serving();
 
-		try {
-			String servingDescription = json.getString("serving_description");
-			serving.setServingDescription(servingDescription);			
-		} catch(Exception ignore) {}
+        try {
+            Long servingId = Long.parseLong(json.getString("serving_id"));
+            serving.setServingId(servingId);
+        } catch (Exception ignore) {
+        }
 
-		try {
-			String servingUrl = json.getString("serving_url");
-			serving.setServingUrl(servingUrl);
-		} catch(Exception ignore) {}
+        try {
+            String servingDescription = json.getString("serving_description");
+            serving.setServingDescription(servingDescription);
+        } catch (Exception ignore) {
+        }
 
-		try {
-			String metricServingAmountString = json.getString("metric_serving_amount");
-			BigDecimal metricServingAmount = new BigDecimal(metricServingAmountString);
+        try {
+            String servingUrl = json.getString("serving_url");
+            serving.setServingUrl(servingUrl);
+        } catch (Exception ignore) {
+        }
 
-			serving.setMetricServingAmount(metricServingAmount);
-		} catch(Exception ignore) {}
-		
-		try {
-			String metricServingUnit = json.getString("metric_serving_unit");			
-			serving.setMetricServingUnit(metricServingUnit);
-		} catch(Exception ignore) {}
-		
-		try {
-			String numberOfUnitsString = json.getString("number_of_units");
-			BigDecimal numberOfUnits = new BigDecimal(numberOfUnitsString);
+        try {
+            String metricServingAmountString = json.getString("metric_serving_amount");
+            BigDecimal metricServingAmount = new BigDecimal(metricServingAmountString);
 
-			serving.setNumberOfUnits(numberOfUnits);
-		} catch(Exception ignore) {}
-		
-		try {
-			String measurementDescription = json.getString("measurement_description");			
-			serving.setMeasurementDescription(measurementDescription);
-		} catch(Exception ignore) {}
-		
-		try {
-			String caloriesString = json.getString("calories");
-			BigDecimal calories = new BigDecimal(caloriesString);
+            serving.setMetricServingAmount(metricServingAmount);
+        } catch (Exception ignore) {
+        }
 
-			serving.setCalories(calories);
-		} catch(Exception ignore) {}
-		
-		try {
-			String carbohydrateString = json.getString("carbohydrate");
-			BigDecimal carbohydrate = new BigDecimal(carbohydrateString);
+        try {
+            String metricServingUnit = json.getString("metric_serving_unit");
+            serving.setMetricServingUnit(metricServingUnit);
+        } catch (Exception ignore) {
+        }
 
-			serving.setCarbohydrate(carbohydrate);
-		} catch(Exception ignore) {}
-		
-		try {
-			String proteinString = json.getString("protein");
-			BigDecimal protein = new BigDecimal(proteinString);
+        try {
+            String numberOfUnitsString = json.getString("number_of_units");
+            BigDecimal numberOfUnits = new BigDecimal(numberOfUnitsString);
 
-			serving.setProtein(protein);
-		} catch(Exception ignore) {}
-		
-		try {
-			String fatString = json.getString("fat");
-			BigDecimal fat = new BigDecimal(fatString);
+            serving.setNumberOfUnits(numberOfUnits);
+        } catch (Exception ignore) {
+        }
 
-			serving.setFat(fat);
-		} catch(Exception ignore) {}
-		
-		try {
-			String saturatedFatString = json.getString("saturated_fat");
-			BigDecimal saturatedFat = new BigDecimal(saturatedFatString);
+        try {
+            String measurementDescription = json.getString("measurement_description");
+            serving.setMeasurementDescription(measurementDescription);
+        } catch (Exception ignore) {
+        }
 
-			serving.setSaturatedFat(saturatedFat);
-		} catch(Exception ignore) {}
-		
-		try {
-			String polyunsaturatedFatString = json.getString("polyunsaturated_fat");
-			BigDecimal polyunsaturatedFat = new BigDecimal(polyunsaturatedFatString);
+        try {
+            String caloriesString = json.getString("calories");
+            BigDecimal calories = new BigDecimal(caloriesString);
 
-			serving.setPolyunsaturatedFat(polyunsaturatedFat);
-		} catch(Exception ignore) {}
-		
-		try {
-			String monounsaturatedFatString = json.getString("monounsaturated_fat");
-			BigDecimal monounsaturatedFat = new BigDecimal(monounsaturatedFatString);
+            serving.setCalories(calories);
+        } catch (Exception ignore) {
+        }
 
-			serving.setMonounsaturatedFat(monounsaturatedFat);
-		} catch(Exception ignore) {}
-		
-		try {
-			String transFatString = json.getString("trans_fat");
-			BigDecimal transFat = new BigDecimal(transFatString);
+        try {
+            String carbohydrateString = json.getString("carbohydrate");
+            BigDecimal carbohydrate = new BigDecimal(carbohydrateString);
 
-			serving.setTransFat(transFat);
-		} catch(Exception ignore) {}
-		
-		try {
-			String cholesterolString = json.getString("cholesterol");
-			BigDecimal cholesterol = new BigDecimal(cholesterolString);
+            serving.setCarbohydrate(carbohydrate);
+        } catch (Exception ignore) {
+        }
 
-			serving.setCholesterol(cholesterol);
-		} catch(Exception ignore) {}
+        try {
+            String proteinString = json.getString("protein");
+            BigDecimal protein = new BigDecimal(proteinString);
 
-		try {
-			String sodiumString = json.getString("sodium");
-			BigDecimal sodium = new BigDecimal(sodiumString);
+            serving.setProtein(protein);
+        } catch (Exception ignore) {
+        }
 
-			serving.setSodium(sodium);
-		} catch(Exception ignore) {}
+        try {
+            String fatString = json.getString("fat");
+            BigDecimal fat = new BigDecimal(fatString);
 
-		try {
-			String potassiumString = json.getString("potassium");
-			BigDecimal potassium = new BigDecimal(potassiumString);
+            serving.setFat(fat);
+        } catch (Exception ignore) {
+        }
 
-			serving.setPotassium(potassium);
-		} catch(Exception ignore) {}
+        try {
+            String saturatedFatString = json.getString("saturated_fat");
+            BigDecimal saturatedFat = new BigDecimal(saturatedFatString);
 
-		try {
-			String fiberString = json.getString("fiber");
-			BigDecimal fiber = new BigDecimal(fiberString);
+            serving.setSaturatedFat(saturatedFat);
+        } catch (Exception ignore) {
+        }
 
-			serving.setFiber(fiber);
-		} catch(Exception ignore) {}
+        try {
+            String polyunsaturatedFatString = json.getString("polyunsaturated_fat");
+            BigDecimal polyunsaturatedFat = new BigDecimal(polyunsaturatedFatString);
 
-		try {
-			String sugarString = json.getString("sugar");
-			BigDecimal sugar = new BigDecimal(sugarString);
+            serving.setPolyunsaturatedFat(polyunsaturatedFat);
+        } catch (Exception ignore) {
+        }
 
-			serving.setSugar(sugar);
-		} catch(Exception ignore) {}
+        try {
+            String monounsaturatedFatString = json.getString("monounsaturated_fat");
+            BigDecimal monounsaturatedFat = new BigDecimal(monounsaturatedFatString);
 
-		try {
-			String vitaminAString = json.getString("vitamin_a");
-			BigDecimal vitaminA = new BigDecimal(vitaminAString);
+            serving.setMonounsaturatedFat(monounsaturatedFat);
+        } catch (Exception ignore) {
+        }
 
-			serving.setVitaminA(vitaminA);
-		} catch(Exception ignore) {}
+        try {
+            String transFatString = json.getString("trans_fat");
+            BigDecimal transFat = new BigDecimal(transFatString);
 
-		try {
-			String vitaminCString = json.getString("vitamin_c");
-			BigDecimal vitaminC = new BigDecimal(vitaminCString);
+            serving.setTransFat(transFat);
+        } catch (Exception ignore) {
+        }
 
-			serving.setVitaminC(vitaminC);
-		} catch(Exception ignore) {}
+        try {
+            String cholesterolString = json.getString("cholesterol");
+            BigDecimal cholesterol = new BigDecimal(cholesterolString);
 
-		try {
-			String calciumString = json.getString("calcium");
-			BigDecimal calcium = new BigDecimal(calciumString);
+            serving.setCholesterol(cholesterol);
+        } catch (Exception ignore) {
+        }
 
-			serving.setCalcium(calcium);
-		} catch(Exception ignore) {}
+        try {
+            String sodiumString = json.getString("sodium");
+            BigDecimal sodium = new BigDecimal(sodiumString);
 
-		try {
-			String ironString = json.getString("iron");
-			BigDecimal iron = new BigDecimal(ironString);
+            serving.setSodium(sodium);
+        } catch (Exception ignore) {
+        }
 
-			serving.setIron(iron);
-		} catch(Exception ignore) {}
-		
-		return serving;
-	}
-	
-	/**
-	 * Returns a list of food nutrient values according to different serving sizes
-	 * 
-	 * @param array			json array representing a list of nutrient values according to different serving sizes for a food
-	 * @return				list of food nutrient values according to different serving sizes
-	 */
-	public static List<Serving> parseServingsFromJSONArray(JSONArray array) {
-		List<Serving> servings = new ArrayList<Serving>();
-		
-		for(int i = 0; i < array.length(); i++) {
-			JSONObject obj = null;
-			try {
-				obj = array.getJSONObject(i);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-			Serving serving = parseServingFromJSONObject(obj);
-			servings.add(serving);
-		}			
-		
-		return servings;
-	}
+        try {
+            String potassiumString = json.getString("potassium");
+            BigDecimal potassium = new BigDecimal(potassiumString);
+
+            serving.setPotassium(potassium);
+        } catch (Exception ignore) {
+        }
+
+        try {
+            String fiberString = json.getString("fiber");
+            BigDecimal fiber = new BigDecimal(fiberString);
+
+            serving.setFiber(fiber);
+        } catch (Exception ignore) {
+        }
+
+        try {
+            String sugarString = json.getString("sugar");
+            BigDecimal sugar = new BigDecimal(sugarString);
+
+            serving.setSugar(sugar);
+        } catch (Exception ignore) {
+        }
+
+        try {
+            String vitaminAString = json.getString("vitamin_a");
+            BigDecimal vitaminA = new BigDecimal(vitaminAString);
+
+            serving.setVitaminA(vitaminA);
+        } catch (Exception ignore) {
+        }
+
+        try {
+            String vitaminCString = json.getString("vitamin_c");
+            BigDecimal vitaminC = new BigDecimal(vitaminCString);
+
+            serving.setVitaminC(vitaminC);
+        } catch (Exception ignore) {
+        }
+
+        try {
+            String calciumString = json.getString("calcium");
+            BigDecimal calcium = new BigDecimal(calciumString);
+
+            serving.setCalcium(calcium);
+        } catch (Exception ignore) {
+        }
+
+        try {
+            String ironString = json.getString("iron");
+            BigDecimal iron = new BigDecimal(ironString);
+
+            serving.setIron(iron);
+        } catch (Exception ignore) {
+        }
+
+        return serving;
+    }
+
+    /**
+     * Returns a list of food nutrient values according to different serving sizes
+     *
+     * @param array json array representing a list of nutrient values according to different serving sizes for a food
+     * @return list of food nutrient values according to different serving sizes
+     */
+    public static List<Serving> parseServingsFromJSONArray(JSONArray array) {
+        List<Serving> servings = new ArrayList<Serving>();
+
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject obj = null;
+            try {
+                obj = array.getJSONObject(i);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Serving serving = parseServingFromJSONObject(obj);
+            servings.add(serving);
+        }
+
+        return servings;
+    }
 
 }

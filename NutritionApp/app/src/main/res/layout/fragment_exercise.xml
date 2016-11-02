@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fearnot.snapp.ExerciseFragment">
+    tools:context="com.fearnot.snapp.Fragments.ExerciseFragment">
     <android.support.v7.widget.Toolbar
         android:id="@+id/exerciseEntryToolbar"
         android:layout_width="match_parent"

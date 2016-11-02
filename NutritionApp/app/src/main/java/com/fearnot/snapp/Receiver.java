@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
-import com.fearnot.snapp.R;
+import com.fearnot.snapp.Activities.WeightEntryActivity;
 
 /**
  * Created by phoenixcampos01 on 10/8/16.

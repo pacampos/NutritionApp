@@ -21,47 +21,51 @@ package com.fearnot.snapp.Model;/*
  * @version 1.0
  */
 public class Category {
-	
-	/** Name of the com.example.nutrition.nutritionapp.Model.Category */
-	private String name;
 
-	/** URL for the com.example.nutrition.nutritionapp.Model.Category */
-	private String url;
+    /**
+     * Name of the com.example.nutrition.nutritionapp.Model.Category
+     */
+    private String name;
 
-	/**
-	 * Returns the name of the category
-	 * 
-	 * @return		name of the category
-	 */
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * Sets the name of the category
-	 * 
-	 * @param		name the name of the category
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * URL for the com.example.nutrition.nutritionapp.Model.Category
+     */
+    private String url;
 
-	/**
-	 * Returns the URL for the category
-	 * 
-	 * @return		URL for the category
-	 */
-	public String getUrl() {
-		return url;
-	}
-	
-	/**
-	 * Sets the URL for the category
-	 * 
-	 * @param		url the URL for the category
-	 */
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    /**
+     * Returns the name of the category
+     *
+     * @return name of the category
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the name of the category
+     *
+     * @param        name the name of the category
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Returns the URL for the category
+     *
+     * @return URL for the category
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * Sets the URL for the category
+     *
+     * @param        url the URL for the category
+     */
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
 }

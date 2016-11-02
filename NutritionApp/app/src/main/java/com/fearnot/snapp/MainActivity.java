@@ -10,18 +10,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.fearnot.snapp.R;
+import com.fearnot.snapp.Fragments.welcomeFragment;
+import com.fearnot.snapp.Interfaces.ReplaceFragmentInterface;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements signUpFragment.ReplaceFragmentInterface{
+public class MainActivity extends AppCompatActivity implements ReplaceFragmentInterface {
     private static final String TAG = "MainActivity.";
+    public Context fragmentContext;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    public Context fragmentContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

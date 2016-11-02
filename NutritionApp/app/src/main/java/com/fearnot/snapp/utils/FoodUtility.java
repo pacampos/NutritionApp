@@ -34,156 +34,156 @@ import java.util.List;
  */
 public class FoodUtility {
 
-	/**
-	 * Returns detailed information about the food
-	 * 
-	 * @param json			json object representing of the food
-	 * @return				detailed information about the food
-	 */
-	public static Food parseFoodFromJSONObject(JSONObject json) {
-		String name = null;
-		try {
-			name = json.getString("food_name");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		String url = null;
-		try {
-			url = json.getString("food_url");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		String type = null;
-		try {
-			type = json.getString("food_type");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		Long id = null;
-		try {
-			id = Long.parseLong(json.getString("food_id"));
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		String brandName = "";
-		
-		try {
-			brandName = json.getString("brand_name");
-		} catch(Exception ignore) {
-		}
+    /**
+     * Returns detailed information about the food
+     *
+     * @param json json object representing of the food
+     * @return detailed information about the food
+     */
+    public static Food parseFoodFromJSONObject(JSONObject json) {
+        String name = null;
+        try {
+            name = json.getString("food_name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String url = null;
+        try {
+            url = json.getString("food_url");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String type = null;
+        try {
+            type = json.getString("food_type");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Long id = null;
+        try {
+            id = Long.parseLong(json.getString("food_id"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String brandName = "";
 
-		JSONObject servingsObj = null;
-		try {
-			servingsObj = json.getJSONObject("servings");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+        try {
+            brandName = json.getString("brand_name");
+        } catch (Exception ignore) {
+        }
 
-		JSONArray array = null;
-		List<Serving> servings = new ArrayList<Serving>();
-		
-		try {
-			array = servingsObj.getJSONArray("serving");
-			servings = ServingUtility.parseServingsFromJSONArray(array);
-		} catch(Exception ignore) {
-			System.out.println("Servings not found");
-			array = null;
-		}
-		
-		if(array == null) {
-			try {
-				JSONObject servingObj = servingsObj.getJSONObject("serving");
-				Serving serving = ServingUtility.parseServingFromJSONObject(servingObj);
-				servings.add(serving);
-			} catch(Exception ignore) {
-				System.out.println("com.example.nutrition.nutritionapp.Model.Serving not found");
-			}
-		}
+        JSONObject servingsObj = null;
+        try {
+            servingsObj = json.getJSONObject("servings");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-		Food food = new Food();
-		
-		food.setName(name);
-		food.setUrl(url);
-		food.setType(type);
-		food.setId(id);
-		food.setBrandName(brandName);
-		food.setServings(servings);
-		
-		return food;
-	}
-	
-	/**
-	 * Returns information about the compact food
-	 * 
-	 * @param json			json object representing of the food
-	 * @return				compact food object from the json
-	 */
-	public static CompactFood parseCompactFoodFromJSONObject(JSONObject json) {
+        JSONArray array = null;
+        List<Serving> servings = new ArrayList<Serving>();
 
-		String name = null;
-		try {
-			name = json.getString("food_name");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		String url = null;
-		try {
-			url = json.getString("food_url");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		String type = null;
-		try {
-			type = json.getString("food_type");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		String description = null;
-		try {
-			description = json.getString("food_description");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		Long id = null;
-		try {
-			id = Long.parseLong(json.getString("food_id"));
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+        try {
+            array = servingsObj.getJSONArray("serving");
+            servings = ServingUtility.parseServingsFromJSONArray(array);
+        } catch (Exception ignore) {
+            System.out.println("Servings not found");
+            array = null;
+        }
 
-		CompactFood food = new CompactFood();
-		
-		food.setName(name);
-		food.setUrl(url);
-		food.setType(type);
-		food.setDescription(description);
-		food.setId(id);
-		
-		return food;
-	}
+        if (array == null) {
+            try {
+                JSONObject servingObj = servingsObj.getJSONObject("serving");
+                Serving serving = ServingUtility.parseServingFromJSONObject(servingObj);
+                servings.add(serving);
+            } catch (Exception ignore) {
+                System.out.println("com.example.nutrition.nutritionapp.Model.Serving not found");
+            }
+        }
 
-	/**
-	 * Returns a list of compact food items
-	 * 
-	 * @param array			json array representing a list of compact food
-	 * @return				list of compact food items
-	 */
-	public static List<CompactFood> parseCompactFoodListFromJSONArray(JSONArray array) {
-		List<CompactFood> foods = new ArrayList<CompactFood>();
-		
-		for(int i = 0; i < array.length(); i++) {
-			JSONObject obj = null;
-			try {
-				obj = array.getJSONObject(i);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
+        Food food = new Food();
 
-			CompactFood food = parseCompactFoodFromJSONObject(obj);
-			
-			foods.add(food);
-		}
-		
-		return foods;
-	}
+        food.setName(name);
+        food.setUrl(url);
+        food.setType(type);
+        food.setId(id);
+        food.setBrandName(brandName);
+        food.setServings(servings);
+
+        return food;
+    }
+
+    /**
+     * Returns information about the compact food
+     *
+     * @param json json object representing of the food
+     * @return compact food object from the json
+     */
+    public static CompactFood parseCompactFoodFromJSONObject(JSONObject json) {
+
+        String name = null;
+        try {
+            name = json.getString("food_name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String url = null;
+        try {
+            url = json.getString("food_url");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String type = null;
+        try {
+            type = json.getString("food_type");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String description = null;
+        try {
+            description = json.getString("food_description");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Long id = null;
+        try {
+            id = Long.parseLong(json.getString("food_id"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        CompactFood food = new CompactFood();
+
+        food.setName(name);
+        food.setUrl(url);
+        food.setType(type);
+        food.setDescription(description);
+        food.setId(id);
+
+        return food;
+    }
+
+    /**
+     * Returns a list of compact food items
+     *
+     * @param array json array representing a list of compact food
+     * @return list of compact food items
+     */
+    public static List<CompactFood> parseCompactFoodListFromJSONArray(JSONArray array) {
+        List<CompactFood> foods = new ArrayList<CompactFood>();
+
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject obj = null;
+            try {
+                obj = array.getJSONObject(i);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            CompactFood food = parseCompactFoodFromJSONObject(obj);
+
+            foods.add(food);
+        }
+
+        return foods;
+    }
 }

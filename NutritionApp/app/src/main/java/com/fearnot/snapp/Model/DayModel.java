@@ -26,15 +26,15 @@ public class DayModel {
 
 
     public DayModel() {
-        foods=new ArrayList<>();
-        exercises=new ArrayList<>();
-        waterAmountDrank=0.0;
-        servingsGrains=0.0;
-        servingsVeggie=0.0;
-        servingsFruit=0.0;
-        servingsDairy=0.0;
-        servingsMeat=0.0;
-        servingsSweets=0.0;
+        foods = new ArrayList<>();
+        exercises = new ArrayList<>();
+        waterAmountDrank = 0.0;
+        servingsGrains = 0.0;
+        servingsVeggie = 0.0;
+        servingsFruit = 0.0;
+        servingsDairy = 0.0;
+        servingsMeat = 0.0;
+        servingsSweets = 0.0;
         currentWeight = 0.0;
     }
 
@@ -72,12 +72,12 @@ public class DayModel {
         this.waterAmountDrank = waterAmountDrank;
     }
 
-    public void addWaterAmount(double waterAmount){
-        setWaterAmountDrank(getWaterAmountDrank()+waterAmount);
+    public void addWaterAmount(double waterAmount) {
+        setWaterAmountDrank(getWaterAmountDrank() + waterAmount);
     }
 
-    public void addEightOuncesWaterAmount(){
-        setWaterAmountDrank(getWaterAmountDrank()+8.0);
+    public void addEightOuncesWaterAmount() {
+        setWaterAmountDrank(getWaterAmountDrank() + 8.0);
     }
 
     /* remove food, remove exercise */
@@ -172,28 +172,28 @@ public class DayModel {
         this.servingsSweets = servingsSweets;
     }
 
-    public void addServingsGrains(double addition){
-        setServingsGrains(getServingsGrains()+addition);
+    public void addServingsGrains(double addition) {
+        setServingsGrains(getServingsGrains() + addition);
     }
 
-    public void addServingsVeggie(double addition){
-        setServingsVeggie(getServingsVeggie()+addition);
+    public void addServingsVeggie(double addition) {
+        setServingsVeggie(getServingsVeggie() + addition);
     }
 
-    public void addServingsFruit(double addition){
-        setServingsFruit(getServingsFruit()+addition);
+    public void addServingsFruit(double addition) {
+        setServingsFruit(getServingsFruit() + addition);
     }
 
-    public void addServingsDairy(double addition){
-        setServingsDairy(getServingsDairy()+addition);
+    public void addServingsDairy(double addition) {
+        setServingsDairy(getServingsDairy() + addition);
     }
 
-    public void addServingsMeat(double addition){
-        setServingsMeat(getServingsMeat()+addition);
+    public void addServingsMeat(double addition) {
+        setServingsMeat(getServingsMeat() + addition);
     }
 
-    public void addServingsSweet(double addition){
-        setServingsSweets(getServingsSweets()+addition);
+    public void addServingsSweet(double addition) {
+        setServingsSweets(getServingsSweets() + addition);
     }
 
     public double getCurrentWeight() {

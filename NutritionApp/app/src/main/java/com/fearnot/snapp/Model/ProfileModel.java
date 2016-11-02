@@ -13,6 +13,7 @@ public class ProfileModel {
     public static final double CENTIMETERS_TO_INCHES = 0.393701;
     public static final double POUNDS_TO_KILOS = 0.453592;
     public static final double[] ACTIVITY_LEVEL = {1.2, 1.55, 1.725};
+    public int id;
     private double imagePos;
     private String name;
     private double age;
@@ -35,9 +36,8 @@ public class ProfileModel {
     private double thighMeasureCentimeter;
     private double armMeasureCentimeter;
     private double activityLevel;
-    public int id;
     /* this models everyday this specific user inputs info within a day */
-    private HashMap<String,DayModel> days;
+    private HashMap<String, DayModel> days;
 
     public ProfileModel() {
     }
@@ -61,8 +61,8 @@ public class ProfileModel {
         this.thighMeasureInches = thighMeasureInches;
         this.armMeasureInches = armMeasureInches;
         this.activityLevel = activityLevel;
-        this.isImperial=isImperial;
-        days=new HashMap<>();
+        this.isImperial = isImperial;
+        days = new HashMap<>();
     }
 
     public ProfileModel(double imagePos, String name, double age, double heightCentimeters,
@@ -83,8 +83,8 @@ public class ProfileModel {
         this.thighMeasureCentimeter = thighMeasureCentimeter;
         this.armMeasureCentimeter = armMeasureCentimeter;
         this.activityLevel = activityLevel;
-        this.isImperial=isImperial;
-        days=new HashMap<>();
+        this.isImperial = isImperial;
+        days = new HashMap<>();
     }
 
     public double calcCaloriesBurnedNaturally() {
@@ -206,26 +206,28 @@ public class ProfileModel {
 //        setCurrWeightPounds(kilosToPounds(getCurrWeightKilos()));
     }
 
-    public HashMap<String,DayModel> getDays() { return days; }
+    public HashMap<String, DayModel> getDays() {
+        return days;
+    }
 
-    public void setDays(HashMap<String,DayModel> days) { this.days = days; }
+    public void setDays(HashMap<String, DayModel> days) {
+        this.days = days;
+    }
 
-    public void addDay(DayModel dayModel){
+    public void addDay(DayModel dayModel) {
         // Setting the day which this day represents
-        Date today=new Date();
-        SimpleDateFormat format= new SimpleDateFormat("MMddyyyy");
+        Date today = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("MMddyyyy");
         String date = format.format(today);
-        days.put(date,dayModel);
+        days.put(date, dayModel);
     }
 
     public double calculateBMI() {
-        double heightInInches = (heightFeetPart*12)+heightInchesPart;
-        if(isImperial){
-            return (currWeightPounds * 703)/ (heightInInches*heightInInches);
-        }
-
-        else{
-            return  (currWeightKilos / ((heightCentimeters/100) * (heightCentimeters/100)));
+        double heightInInches = (heightFeetPart * 12) + heightInchesPart;
+        if (isImperial) {
+            return (currWeightPounds * 703) / (heightInInches * heightInInches);
+        } else {
+            return (currWeightKilos / ((heightCentimeters / 100) * (heightCentimeters / 100)));
         }
 
     }

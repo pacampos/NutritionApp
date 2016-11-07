@@ -69,7 +69,7 @@ public class CalorieSelectionFragment extends Fragment {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (portionInput.length() > 0) {
+                if (portionInput.length() > 0 && v.getTag() != null) {
                     double portion = Double.parseDouble(portionInput.getText().toString());
                     double calories = Double.parseDouble(String.valueOf(foodServingList.get((Integer) v.getTag()).getCalories()));
                     double result = portion * calories;

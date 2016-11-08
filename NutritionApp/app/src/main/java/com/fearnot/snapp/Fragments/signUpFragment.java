@@ -155,12 +155,20 @@ public class signUpFragment extends Fragment implements DatePickerDialog.OnDateS
         maleButton.setChecked(true);
 
         // Switch
-        Switch unitSwitch = (Switch) v.findViewById(R.id.unitSwitch);
+        final Switch unitSwitch = (Switch) v.findViewById(R.id.unitSwitch);
+        unitSwitch.setText("Metric Units");
         unitSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 isImperial = isChecked;
+                if (isChecked) {
+                    unitSwitch.setText("Imperial Units");
+                } else {
+                    unitSwitch.setText("Metric Units");
+                }
+
             }
+
         });
 
 

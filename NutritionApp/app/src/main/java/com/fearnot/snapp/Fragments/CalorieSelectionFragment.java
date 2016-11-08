@@ -66,14 +66,6 @@ public class CalorieSelectionFragment extends Fragment {
             }
         });
 
-        portionInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    hideKeyboard();
-                }
-            }
-        });
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,10 +88,6 @@ public class CalorieSelectionFragment extends Fragment {
     public void setFood(String foodName, int position) {
         this.foodName = foodName;
         this.position = position;
-    }
-    private void hideKeyboard() {
-        InputMethodManager imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(portionInput.getWindowToken(), 0);
     }
 
     @Override

@@ -1,17 +1,20 @@
 package com.fearnot.snapp.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fearnot.snapp.Adapters.FoodAdapter;
 import com.fearnot.snapp.DayAxisValueFormatter;
+import com.fearnot.snapp.Interfaces.ReplaceFragmentInterface;
 import com.fearnot.snapp.Model.DayModel;
 import com.fearnot.snapp.Model.FoodModel;
 import com.fearnot.snapp.NutritionSingleton;
@@ -36,9 +39,19 @@ import java.util.TreeMap;
 
 public class FoodJournalFragment extends Fragment {
     private BarChart chart;
-
+    private ReplaceFragmentInterface replaceFragmentInterface;
     public FoodJournalFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            replaceFragmentInterface = (ReplaceFragmentInterface) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnArticleSelectedListener");
+        }
     }
 
     @Override
@@ -49,6 +62,15 @@ public class FoodJournalFragment extends Fragment {
 
         // get references
         TextView dailyTotal = new TextView(getContext());
+
+        Button addMore = (Button) v.findViewById(R.id.addFoodButton);
+
+        addMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragmentInterface.replaceFragment(new foodEntryFragment());
+            }
+        });
 
         // Construct the data source
         ArrayList<FoodModel> arrayOfFoods = NutritionSingleton.getInstance().getCurrDay().getFoods();

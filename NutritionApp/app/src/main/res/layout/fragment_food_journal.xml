@@ -6,7 +6,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.fearnot.snapp.Fragments.FoodJournalFragment">
+        tools:context="com.fearnot.snapp.Fragments.FoodJournalFragment"
+        android:weightSum="1">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar12"
@@ -54,5 +55,12 @@
         <com.github.mikephil.charting.charts.BarChart
             android:layout_width="match_parent"
             android:id="@+id/consumedChart"
-            android:layout_height="match_parent" />
+            android:layout_height="177dp"
+            android:layout_weight="1.04" />
+
+        <Button
+            android:text="Add Another Item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/addFoodButton" />
     </LinearLayout>

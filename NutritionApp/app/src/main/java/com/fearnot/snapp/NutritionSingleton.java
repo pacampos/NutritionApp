@@ -361,4 +361,49 @@ public class NutritionSingleton {
         mFirebaseDatabaseReference.child(USERS_CHILD).
                 child(currUser).child(currProfile.getName()).updateChildren(updateChildren1);
     }
+    public void updateArm(double arm) {
+        if (currProfile.getIsImperial()) {
+            currProfile.setArmMeasureInches(arm);
+            Map<String, Object> updateChildren = new HashMap<>();
+            updateChildren.put("armInches", currProfile.getArmMeasureInches());
+            mFirebaseDatabaseReference.child(USERS_CHILD).
+                    child(currUser).child(currProfile.getName()).updateChildren(updateChildren);
+        } else {
+            currProfile.setArmMeasureCentimeter(arm);
+            Map<String, Object> updateChildren = new HashMap<>();
+            updateChildren.put("armCentimeters", currProfile.getArmMeasureCentimeter());
+            mFirebaseDatabaseReference.child(USERS_CHILD).
+                    child(currUser).child(currProfile.getName()).updateChildren(updateChildren);
+        }
+    }
+    public void updateWaist(double waist) {
+        if (currProfile.getIsImperial()) {
+            currProfile.setWaistMeasureInches(waist);
+            Map<String, Object> updateChildren = new HashMap<>();
+            updateChildren.put("waistInches", currProfile.getWaistMeasureInches());
+            mFirebaseDatabaseReference.child(USERS_CHILD).
+                    child(currUser).child(currProfile.getName()).updateChildren(updateChildren);
+        } else {
+            currProfile.setWaistMeasureCentimeter(waist);
+            Map<String, Object> updateChildren = new HashMap<>();
+            updateChildren.put("waistCentimeters", currProfile.getWaistMeasureCentimeter());
+            mFirebaseDatabaseReference.child(USERS_CHILD).
+                    child(currUser).child(currProfile.getName()).updateChildren(updateChildren);
+        }
+    }
+    public void updateThigh(double thigh) {
+        if (currProfile.getIsImperial()) {
+            currProfile.setThighMeasureInches(thigh);
+            Map<String, Object> updateChildren = new HashMap<>();
+            updateChildren.put("thighInches", currProfile.getThighMeasureInches());
+            mFirebaseDatabaseReference.child(USERS_CHILD).
+                    child(currUser).child(currProfile.getName()).updateChildren(updateChildren);
+        } else {
+            currProfile.setThighMeasureCentimeter(thigh);
+            Map<String, Object> updateChildren = new HashMap<>();
+            updateChildren.put("thighCentimeters", currProfile.getThighMeasureCentimeter());
+            mFirebaseDatabaseReference.child(USERS_CHILD).
+                    child(currUser).child(currProfile.getName()).updateChildren(updateChildren);
+        }
+    }
 }

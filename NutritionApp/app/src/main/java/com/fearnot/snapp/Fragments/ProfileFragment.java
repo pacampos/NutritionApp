@@ -33,18 +33,27 @@ public class ProfileFragment extends Fragment {
     private TextView currentWeight;
     private TextView targetWeight;
     private TextView calorieCount;
+    private TextView arm;
+    private TextView waist;
+    private TextView thigh;
     private TextView bmi;
     private ImageView icon;
     private TextView nameProfile;
     private TextView currentWeightLabel;
     private TextView currentHeightLabel;
     private TextView goalWeightLabel;
+    private TextView currentArmLabel;
+    private TextView currentWaistLabel;
+    private TextView currentThighLabel;
     private FloatingActionButton editButton;
     private EditText currWeightEditText;
     private EditText currHeightEditText;
     private EditText goalWeightEditText;
     private EditText currHeightFeetEditText;
     private EditText currHeightInchesEditText;
+    private EditText currentArmEditText;
+    private EditText currentWaistEditText;
+    private EditText currentThighEdiText;
     private LinearLayout currHeightImperialLayout;
 
     public ProfileFragment() {
@@ -63,6 +72,9 @@ public class ProfileFragment extends Fragment {
         currentWeight = (TextView) v.findViewById(R.id.currentWeight);
         targetWeight = (TextView) v.findViewById(R.id.targetWeight);
         calorieCount = (TextView) v.findViewById(R.id.calorieCount);
+        arm = (TextView) v.findViewById(R.id.arm);
+        waist = (TextView) v.findViewById(R.id.waist);
+        thigh = (TextView) v.findViewById(R.id.thigh);
         bmi = (TextView) v.findViewById(R.id.bmi);
         icon = (ImageView) v.findViewById(R.id.profileImage);
         nameProfile = (TextView) v.findViewById(R.id.nameProfile);
@@ -70,6 +82,9 @@ public class ProfileFragment extends Fragment {
         currentWeightLabel = (TextView) v.findViewById(R.id.profileCurrentWeightTextView);
         currentHeightLabel = (TextView) v.findViewById(R.id.profileCurrentHeightLabel);
         goalWeightLabel = (TextView) v.findViewById(R.id.profileGoalWeightTextView);
+        currentArmLabel = (TextView) v.findViewById(R.id.profileArmTextView);
+        currentWaistLabel = (TextView) v.findViewById(R.id.profileWaistTextView);
+        currentThighLabel = (TextView) v.findViewById(R.id.profileThighTextView);
 
         final NutritionSingleton singleton = NutritionSingleton.getInstance();
         editButton = (FloatingActionButton) v.findViewById(R.id.edit_fab);
@@ -78,7 +93,11 @@ public class ProfileFragment extends Fragment {
         goalWeightEditText = (EditText) v.findViewById(R.id.editGoalWeightEditText);
         currHeightFeetEditText = (EditText) v.findViewById(R.id.profileHeightFeetEditText);
         currHeightInchesEditText = (EditText) v.findViewById(R.id.profileHeightInchesEditText);
+        currentArmEditText = (EditText) v.findViewById(R.id.editArm);
+        currentWaistEditText = (EditText) v.findViewById(R.id.editWaist);
+        currentThighEdiText = (EditText) v.findViewById(R.id.editThigh);
         currHeightImperialLayout = (LinearLayout) v.findViewById(R.id.profileHeightLayout);
+
 
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,20 +106,35 @@ public class ProfileFragment extends Fragment {
                     height.setVisibility(View.INVISIBLE);
                     currentWeight.setVisibility(View.INVISIBLE);
                     targetWeight.setVisibility(View.INVISIBLE);
-
+                    arm.setVisibility(View.INVISIBLE);
+                    waist.setVisibility(View.INVISIBLE);
+                    thigh.setVisibility(View.INVISIBLE);
                     if (singleton.getCurrProfile().getIsImperial()) {
                         currHeightImperialLayout.setVisibility(View.VISIBLE);
                         currHeightFeetEditText.setText(String.valueOf((int) singleton.getCurrProfile().getHeightFeetPart()));
                         currHeightInchesEditText.setText(String.valueOf((int) singleton.getCurrProfile().getHeightInchesPart()));
+                        currentArmEditText.setText(String.valueOf((int) singleton.getCurrProfile().getArmMeasureInches()));
+                        currentWaistEditText.setText(String.valueOf((int) singleton.getCurrProfile().getWaistMeasureInches()));
+                        currentThighEdiText.setText(String.valueOf((int) singleton.getCurrProfile().getThighMeasureInches()));
+
                     } else {
                         currHeightEditText.setVisibility(View.VISIBLE);
                         currHeightEditText.setText(height.getText().toString());
+                        currentArmEditText.setText(String.valueOf((int) singleton.getCurrProfile().getArmMeasureCentimeter()));
+                        currentWaistEditText.setText(String.valueOf((int) singleton.getCurrProfile().getWaistMeasureCentimeter()));
+                        currentThighEdiText.setText(String.valueOf((int) singleton.getCurrProfile().getThighMeasureCentimeter()));
                     }
 
                     currWeightEditText.setVisibility(View.VISIBLE);
                     currWeightEditText.setText(currentWeight.getText().toString());
                     goalWeightEditText.setVisibility(View.VISIBLE);
                     goalWeightEditText.setText(targetWeight.getText().toString());
+                    currentArmEditText.setVisibility(View.VISIBLE);
+                    currentArmEditText.setText(arm.getText().toString());
+                    currentWaistEditText.setVisibility(View.VISIBLE);
+                    currentWaistEditText.setText(waist.getText().toString());
+                    currentThighEdiText.setVisibility(View.VISIBLE);
+                    currentThighEdiText.setText(thigh.getText().toString());
 
                     editButton.setImageResource(R.drawable.ic_done_white_24dp);
 
@@ -110,6 +144,9 @@ public class ProfileFragment extends Fragment {
                     currentHeightLabel.setLayoutParams(layoutParams);
                     currentWeightLabel.setLayoutParams(layoutParams);
                     goalWeightLabel.setLayoutParams(layoutParams);
+                    currentArmLabel.setLayoutParams(layoutParams);
+                    currentWaistLabel.setLayoutParams(layoutParams);
+                    currentThighLabel.setLayoutParams(layoutParams);
 
                     isEditMode = !isEditMode;
                 } else {
@@ -117,7 +154,8 @@ public class ProfileFragment extends Fragment {
                             (currHeightEditText.getText().toString().length() > 0 ||
                                     (currHeightFeetEditText.getText().toString().length() > 0
                                             && currHeightInchesEditText.getText().toString().length() > 0)) &&
-                            goalWeightEditText.getText().toString().length() > 0) {
+                            goalWeightEditText.getText().toString().length() > 0 && currentArmEditText.getText().toString().length() > 0
+                            && currentWaistEditText.getText().toString().length() > 0 && currentThighEdiText.getText().toString().length() > 0) {
                         isEditMode = !isEditMode;
 
                         String currHeight = null;
@@ -133,6 +171,9 @@ public class ProfileFragment extends Fragment {
 
                         String currWeight = currWeightEditText.getText().toString();
                         String goalWeight = goalWeightEditText.getText().toString();
+                        String currArm = currentArmEditText.getText().toString();
+                        String currWaist = currentWaistEditText.getText().toString();
+                        String currThigh = currentThighEdiText.getText().toString();
 
                         NutritionSingleton singleton = NutritionSingleton.getInstance();
 
@@ -148,6 +189,9 @@ public class ProfileFragment extends Fragment {
 
                         Double doubleCurrWeight = Double.valueOf(currWeight);
                         Double doubleGoalWeight = Double.valueOf(goalWeight);
+                        Double doubleCurrArm = Double.valueOf(currArm);
+                        Double doubleCurrWaist = Double.valueOf(currWaist);
+                        Double doubleCurrThigh = Double.valueOf(currThigh);
 
                         if (singleton.getCurrProfile().getIsImperial()) {
 
@@ -160,6 +204,17 @@ public class ProfileFragment extends Fragment {
                             if (singleton.getCurrProfile().getGoalWeightPounds() != doubleGoalWeight) {
                                 singleton.updateGoalWeight(doubleGoalWeight);
                             }
+
+                            if (singleton.getCurrProfile().getArmMeasureInches() != doubleCurrArm) {
+                                singleton.updateArm(doubleCurrArm);
+                            }
+                            if (singleton.getCurrProfile().getWaistMeasureInches() != doubleCurrWaist) {
+                                singleton.updateWaist(doubleCurrWaist);
+                            }
+                            if (singleton.getCurrProfile().getThighMeasureInches() != doubleCurrThigh) {
+                                singleton.updateThigh(doubleCurrThigh);
+                            }
+
                         } else {
                             if (singleton.getCurrProfile().getHeightCentimeters() != doubleCurrHeight) {
                                 singleton.updateCurrHeight(doubleCurrHeight);
@@ -172,6 +227,15 @@ public class ProfileFragment extends Fragment {
                             if (singleton.getCurrProfile().getGoalWeightKilos() != doubleGoalWeight) {
                                 singleton.updateCurrHeight(doubleGoalWeight);
                             }
+                            if (singleton.getCurrProfile().getArmMeasureCentimeter() != doubleCurrArm) {
+                                singleton.updateArm(doubleCurrArm);
+                            }
+                            if (singleton.getCurrProfile().getWaistMeasureCentimeter() != doubleCurrWaist) {
+                                singleton.updateWaist(doubleCurrWaist);
+                            }
+                            if (singleton.getCurrProfile().getThighMeasureCentimeter() != doubleCurrThigh) {
+                                singleton.updateThigh(doubleCurrThigh);
+                            }
                         }
 
                         if (singleton.getCurrProfile().getIsImperial()) {
@@ -183,17 +247,27 @@ public class ProfileFragment extends Fragment {
                         currentWeight.setText(currWeight);
                         targetWeight.setText(goalWeight);
 
+                        arm.setText(currArm);
+                        waist.setText(currWaist);
+                        thigh.setText(currThigh);
+
                         bmi.setText(String.valueOf((int) singleton.getCurrProfile().calculateBMI()));
                         calorieCount.setText(String.valueOf((int) singleton.getCurrProfile().calcCaloriesBurnedNaturally()));
 
                         height.setVisibility(View.VISIBLE);
                         currentWeight.setVisibility(View.VISIBLE);
                         targetWeight.setVisibility(View.VISIBLE);
+                        arm.setVisibility(View.VISIBLE);
+                        waist.setVisibility(View.VISIBLE);
+                        thigh.setVisibility(View.VISIBLE);
 
                         currHeightEditText.setVisibility(View.INVISIBLE);
                         currHeightImperialLayout.setVisibility(View.INVISIBLE);
                         currWeightEditText.setVisibility(View.INVISIBLE);
                         goalWeightEditText.setVisibility(View.INVISIBLE);
+                        currentArmEditText.setVisibility(View.INVISIBLE);
+                        currentWaistEditText.setVisibility(View.INVISIBLE);
+                        currentThighEdiText.setVisibility(View.INVISIBLE);
 
                         editButton.setImageResource(R.drawable.ic_mode_edit_white_24dp);
                         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -202,6 +276,9 @@ public class ProfileFragment extends Fragment {
                         currentHeightLabel.setLayoutParams(layoutParams);
                         currentWeightLabel.setLayoutParams(layoutParams);
                         goalWeightLabel.setLayoutParams(layoutParams);
+                        currentArmLabel.setLayoutParams(layoutParams);
+                        currentWaistLabel.setLayoutParams(layoutParams);
+                        currentThighLabel.setLayoutParams(layoutParams);
                     } else {
                         Toast.makeText(getContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
                     }
@@ -223,10 +300,16 @@ public class ProfileFragment extends Fragment {
             height.setText(String.valueOf((int) model.getHeightFeetPart()) + "'" + String.valueOf((int) model.getHeightInchesPart()));
             currentWeight.setText(String.valueOf(model.getCurrWeightPounds()));
             targetWeight.setText(String.valueOf(model.getGoalWeightPounds()));
+            arm.setText(String.valueOf(model.getArmMeasureInches()));
+            waist.setText(String.valueOf(model.getWaistMeasureInches()));
+            thigh.setText(String.valueOf(model.getThighMeasureInches()));
         } else {
             height.setText(String.valueOf(model.getHeightCentimeters()));
             currentWeight.setText(String.valueOf(model.getCurrWeightKilos()));
             targetWeight.setText(String.valueOf(model.getGoalWeightKilos()));
+            arm.setText(String.valueOf(model.getArmMeasureCentimeter()));
+            waist.setText(String.valueOf(model.getWaistMeasureCentimeter()));
+            thigh.setText(String.valueOf(model.getThighMeasureCentimeter()));
         }
 
         icon.setImageResource(CheckableImageView.mOriginalIds[(int) model.getImagePos()]);
@@ -236,6 +319,9 @@ public class ProfileFragment extends Fragment {
             currentWeightLabel.setText(R.string.weight_text_imperial);
             currentHeightLabel.setText(R.string.height_text_imperial);
             goalWeightLabel.setText(R.string.goalWeight_text_imperial);
+            currentArmLabel.setText(R.string.arm_text_imperial);
+            currentWaistLabel.setText(R.string.waist_text_imperial);
+            currentThighLabel.setText(R.string.thigh_text_imperial);
         }
 
         // get references

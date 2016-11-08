@@ -12,6 +12,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.fearnot.snapp.Activities.ActivityHome;
+import com.fearnot.snapp.Activities.SignUpActivity;
 import com.fearnot.snapp.Fragments.HomeFragment;
 import com.fearnot.snapp.Fragments.LoginFragment;
 import com.fearnot.snapp.Fragments.welcomeFragment;
@@ -28,6 +29,7 @@ import static java.security.AccessController.getContext;
 public class MainActivity extends AppCompatActivity implements ReplaceFragmentInterface {
     private static final String TAG = "MainActivity.";
     public Context fragmentContext;
+    private Context context;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements ReplaceFragmentIn
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
-
+        context = getApplicationContext();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -45,8 +47,8 @@ public class MainActivity extends AppCompatActivity implements ReplaceFragmentIn
                 if (user != null) {
                     // User is signed in
 
-                    welcomeScreen();
-                    //NutritionSingleton.getInstance().SetUser(user, );
+                   // welcomeScreen();
+                   NutritionSingleton.getInstance().SetUser(user, MainActivity.this);
 
 
                     // Toast
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements ReplaceFragmentIn
         ft.add(R.id.welcome_fragment_container, f);
         ft.commit();
     }
-    
+
 
     @Override
     public void onStart() {

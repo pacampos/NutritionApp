@@ -29,7 +29,6 @@ import static java.security.AccessController.getContext;
 public class MainActivity extends AppCompatActivity implements ReplaceFragmentInterface {
     private static final String TAG = "MainActivity.";
     public Context fragmentContext;
-    private Context context;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -38,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements ReplaceFragmentIn
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
-        context = getApplicationContext();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override

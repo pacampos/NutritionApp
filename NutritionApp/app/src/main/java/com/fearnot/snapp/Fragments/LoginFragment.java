@@ -36,7 +36,9 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 NutritionSingleton.getInstance().setCurrProfile(null);
                 NutritionSingleton.getInstance().setCurrDay(null);
-                ((MainActivity) getActivity()).signIn(usernameInput.getText().toString(), passwordInput.getText().toString(), getContext());
+                // Get rid of whitespace in username field
+                String username = usernameInput.getText().toString().replaceAll("\\s+","");
+                ((MainActivity) getActivity()).signIn(username, passwordInput.getText().toString(), getContext());
             }
         });
 

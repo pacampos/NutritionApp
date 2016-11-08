@@ -96,99 +96,88 @@ public class MeasurementFragment extends Fragment {
                 waist = waistInput.getText().toString();
                 thigh = thighInput.getText().toString();
 
-                if (arm.length() == 0 || waist.length() == 0 || thigh.length() == 0) {
-                    Toast.makeText(getContext(), "Please fill out all fields", Toast.LENGTH_SHORT).show();
-                } else if (!isNumeric(arm)) {
-                    armInput.setError("Please enter a valid arm measurement.");
-                } else if (!isNumeric(waist)) {
-                    waistInput.setError("Please enter a valid waist measurement");
-                } else if (!isNumeric(thigh)) {
-                    thighInput.setError("Please enter a valid thigh measurement");
+                double armMeasure = -1.0;
+                double waistMeasure = -1.0;
+                double thighMeasure = -1.0;
+                if (arm.length() > 0) {
+                    armMeasure = Double.parseDouble(arm);
+                }
+
+                if (waist.length() > 0) {
+                    waistMeasure = Double.parseDouble(waist);
+                }
+
+                if (thigh.length() > 0) {
+                    thighMeasure = Double.parseDouble(thigh);
+                }
+
+                bundle.putDouble(ARM, armMeasure);
+                bundle.putDouble(WAIST, waistMeasure);
+                bundle.putDouble(THIGH, thighMeasure);
+
+
+                String email = bundle.getString(signUpFragment.EMAIL);
+                String password = bundle.getString(signUpFragment.PASSWORD);
+
+                boolean isNewAccount = bundle.getBoolean(signUpFragment.IS_NEW_ACCOUNT);
+                if (isNewAccount) {
+                    ProgressDialog progress = new ProgressDialog(getContext());
+                    progress.setMessage("Finishing signup...");
+                    progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progress.show();
+                    ((SignUpActivity) getActivity()).finishSignup(email, password, bundle, progress);
                 } else {
-                    double armMeasure = 0.0;
-                    double waistMeasure = 0.0;
-                    double thighMeasure = 0.0;
-                    if (arm.length() > 0) {
-                        armMeasure = Double.parseDouble(arm);
-                    }
+                    if (isImperial) {
+                        NutritionSingleton.getInstance().CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),
+                                bundle.getString(signUpFragment.NAME),
+                                bundle.getDouble(signUpFragment.AGE),
+                                bundle.getDouble(goalInformationFragment.IMPERIAL_HEIGHT_INCHES),
+                                bundle.getDouble(goalInformationFragment.IMPERIAL_HEIGHT_FEET),
+                                bundle.getBoolean(signUpFragment.GENDER),
+                                bundle.getDouble(goalInformationFragment.WEIGHT),
+                                bundle.getDouble(goalInformationFragment.GOAL),
+                                bundle.getDouble(signUpFragment.BIRTH_DATE),
+                                bundle.getDouble(signUpFragment.BIRTH_MONTH),
+                                bundle.getDouble(signUpFragment.BIRTH_YEAR),
+                                bundle.getDouble(MeasurementFragment.WAIST),
+                                bundle.getDouble(MeasurementFragment.THIGH),
+                                bundle.getDouble(MeasurementFragment.ARM),
+                                bundle.getDouble(goalInformationFragment.ACTIVITY),
+                                bundle.getBoolean(signUpFragment.METRIC));
 
-                    if (waist.length() > 0) {
-                        waistMeasure = Double.parseDouble(waist);
-                    }
-
-                    if (thigh.length() > 0) {
-                        thighMeasure = Double.parseDouble(thigh);
-                    }
-
-                    bundle.putDouble(ARM, armMeasure);
-                    bundle.putDouble(WAIST, waistMeasure);
-                    bundle.putDouble(THIGH, thighMeasure);
-
-
-                    String email = bundle.getString(signUpFragment.EMAIL);
-                    String password = bundle.getString(signUpFragment.PASSWORD);
-
-                    boolean isNewAccount = bundle.getBoolean(signUpFragment.IS_NEW_ACCOUNT);
-                    if (isNewAccount) {
-                        ProgressDialog progress = new ProgressDialog(getContext());
-                        progress.setMessage("Finishing signup...");
-                        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                        progress.show();
-                        ((SignUpActivity) getActivity()).finishSignup(email, password, bundle, progress);
+                        Calendar sevendayalarm = Calendar.getInstance();
+                        sevendayalarm.add(Calendar.HOUR_OF_DAY, 20);
+                        Intent intent = new Intent(getContext(), Receiver.class);
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 1, intent, 0);
+                        AlarmManager am = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+                        am.setRepeating(AlarmManager.RTC_WAKEUP, sevendayalarm.getTimeInMillis(), 1000 * 60 * 24 * 10, pendingIntent);
+                        replaceFragmentInterface.replaceFragment(new SwitchUserFragment());
                     } else {
-                        if (isImperial) {
-                            NutritionSingleton.getInstance().CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),
-                                    bundle.getString(signUpFragment.NAME),
-                                    bundle.getDouble(signUpFragment.AGE),
-                                    bundle.getDouble(goalInformationFragment.IMPERIAL_HEIGHT_INCHES),
-                                    bundle.getDouble(goalInformationFragment.IMPERIAL_HEIGHT_FEET),
-                                    bundle.getBoolean(signUpFragment.GENDER),
-                                    bundle.getDouble(goalInformationFragment.WEIGHT),
-                                    bundle.getDouble(goalInformationFragment.GOAL),
-                                    bundle.getDouble(signUpFragment.BIRTH_DATE),
-                                    bundle.getDouble(signUpFragment.BIRTH_MONTH),
-                                    bundle.getDouble(signUpFragment.BIRTH_YEAR),
-                                    bundle.getDouble(MeasurementFragment.WAIST),
-                                    bundle.getDouble(MeasurementFragment.THIGH),
-                                    bundle.getDouble(MeasurementFragment.ARM),
-                                    bundle.getDouble(goalInformationFragment.ACTIVITY),
-                                    bundle.getBoolean(signUpFragment.METRIC));
+                        NutritionSingleton.getInstance().CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),
+                                bundle.getString(signUpFragment.NAME),
+                                bundle.getDouble(signUpFragment.AGE),
+                                bundle.getDouble(goalInformationFragment.HEIGHT),
+                                bundle.getBoolean(signUpFragment.GENDER),
+                                bundle.getDouble(goalInformationFragment.WEIGHT),
+                                bundle.getDouble(goalInformationFragment.GOAL),
+                                bundle.getDouble(signUpFragment.BIRTH_DATE),
+                                bundle.getDouble(signUpFragment.BIRTH_MONTH),
+                                bundle.getDouble(signUpFragment.BIRTH_YEAR),
+                                bundle.getDouble(MeasurementFragment.WAIST),
+                                bundle.getDouble(MeasurementFragment.THIGH),
+                                bundle.getDouble(MeasurementFragment.ARM),
+                                bundle.getDouble(goalInformationFragment.ACTIVITY),
+                                bundle.getBoolean(signUpFragment.METRIC));
 
-                            Calendar sevendayalarm = Calendar.getInstance();
-                            sevendayalarm.add(Calendar.HOUR_OF_DAY, 20);
-                            Intent intent = new Intent(getContext(), Receiver.class);
-                            PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 1, intent, 0);
-                            AlarmManager am = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-                            am.setRepeating(AlarmManager.RTC_WAKEUP, sevendayalarm.getTimeInMillis(), 1000 * 60 * 24 * 10, pendingIntent);
-                            replaceFragmentInterface.replaceFragment(new SwitchUserFragment());
-                        } else {
-                            NutritionSingleton.getInstance().CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),
-                                    bundle.getString(signUpFragment.NAME),
-                                    bundle.getDouble(signUpFragment.AGE),
-                                    bundle.getDouble(goalInformationFragment.HEIGHT),
-                                    bundle.getBoolean(signUpFragment.GENDER),
-                                    bundle.getDouble(goalInformationFragment.WEIGHT),
-                                    bundle.getDouble(goalInformationFragment.GOAL),
-                                    bundle.getDouble(signUpFragment.BIRTH_DATE),
-                                    bundle.getDouble(signUpFragment.BIRTH_MONTH),
-                                    bundle.getDouble(signUpFragment.BIRTH_YEAR),
-                                    bundle.getDouble(MeasurementFragment.WAIST),
-                                    bundle.getDouble(MeasurementFragment.THIGH),
-                                    bundle.getDouble(MeasurementFragment.ARM),
-                                    bundle.getDouble(goalInformationFragment.ACTIVITY),
-                                    bundle.getBoolean(signUpFragment.METRIC));
-
-                            Calendar sevendayalarm = Calendar.getInstance();
-                            sevendayalarm.add(Calendar.HOUR_OF_DAY, 20);
-                            Intent intent = new Intent(getContext(), Receiver.class);
-                            PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 1, intent, 0);
-                            AlarmManager am = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-                            am.setRepeating(AlarmManager.RTC_WAKEUP, sevendayalarm.getTimeInMillis(), 1000 * 60 * 24 * 10, pendingIntent);
-                            replaceFragmentInterface.replaceFragment(new SwitchUserFragment());
-                        }
-
-
+                        Calendar sevendayalarm = Calendar.getInstance();
+                        sevendayalarm.add(Calendar.HOUR_OF_DAY, 20);
+                        Intent intent = new Intent(getContext(), Receiver.class);
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 1, intent, 0);
+                        AlarmManager am = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+                        am.setRepeating(AlarmManager.RTC_WAKEUP, sevendayalarm.getTimeInMillis(), 1000 * 60 * 24 * 10, pendingIntent);
+                        replaceFragmentInterface.replaceFragment(new SwitchUserFragment());
                     }
+
 
                 }
 

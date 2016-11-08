@@ -300,16 +300,40 @@ public class ProfileFragment extends Fragment {
             height.setText(String.valueOf((int) model.getHeightFeetPart()) + "'" + String.valueOf((int) model.getHeightInchesPart()));
             currentWeight.setText(String.valueOf(model.getCurrWeightPounds()));
             targetWeight.setText(String.valueOf(model.getGoalWeightPounds()));
-            arm.setText(String.valueOf(model.getArmMeasureInches()));
-            waist.setText(String.valueOf(model.getWaistMeasureInches()));
-            thigh.setText(String.valueOf(model.getThighMeasureInches()));
+            if (model.getArmMeasureInches() == -1.0) {
+                arm.setText("");
+            } else {
+                arm.setText(String.valueOf(model.getArmMeasureInches()));
+            }
+            if (model.getWaistMeasureInches() == -1.0) {
+                waist.setText("");
+            } else {
+                waist.setText(String.valueOf(model.getWaistMeasureInches()));
+            }
+            if (model.getThighMeasureInches() == -1.0) {
+                waist.setText("");
+            } else {
+                thigh.setText(String.valueOf(model.getThighMeasureInches()));
+            }
         } else {
             height.setText(String.valueOf(model.getHeightCentimeters()));
             currentWeight.setText(String.valueOf(model.getCurrWeightKilos()));
             targetWeight.setText(String.valueOf(model.getGoalWeightKilos()));
-            arm.setText(String.valueOf(model.getArmMeasureCentimeter()));
-            waist.setText(String.valueOf(model.getWaistMeasureCentimeter()));
-            thigh.setText(String.valueOf(model.getThighMeasureCentimeter()));
+
+            if (model.getArmMeasureCentimeter() == -1.0) {
+                arm.setText("");
+            } else {
+                arm.setText(String.valueOf(model.getArmMeasureCentimeter()));
+            }
+            if (model.getWaistMeasureCentimeter() == -1.0) {
+                waist.setText("");
+            } else {
+                waist.setText(String.valueOf(model.getWaistMeasureCentimeter()));
+            }
+            if (model.getThighMeasureCentimeter() == -1.0) {
+                thigh.setText(String.valueOf(model.getThighMeasureCentimeter()));
+            }
+
         }
 
         icon.setImageResource(CheckableImageView.mOriginalIds[(int) model.getImagePos()]);

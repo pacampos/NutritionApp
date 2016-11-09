@@ -74,7 +74,7 @@ public class goalInformationFragment extends Fragment {
         final TextView goalWeightTextView = (TextView) v.findViewById(R.id.goalWeightLabel);
         LinearLayout heightImperialLayout = (LinearLayout) v.findViewById(R.id.imperialHeightLayout);
         LinearLayout heightMetricLayout = (LinearLayout) v.findViewById(R.id.metricHeightLayout);
-        mRelativeLayout = (FrameLayout) v.findViewById(R.id.rl);
+        mRelativeLayout = (FrameLayout) v.findViewById(R.id.rl1); // TODO this is null - instantiate correctly
 
         notSureActivityLevel.setOnClickListener(new View.OnClickListener() {
             @Override

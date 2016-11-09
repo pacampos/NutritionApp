@@ -1,25 +1,31 @@
 package com.fearnot.snapp.Fragments;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ImageButton;
 
 import com.fearnot.snapp.Interfaces.ReplaceFragmentInterface;
 import com.fearnot.snapp.R;
 import com.fearnot.snapp.Views.CheckableImageView;
 
 import static android.R.attr.defaultValue;
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.fearnot.snapp.RegexHelper.isNumeric;
 
 public class goalInformationFragment extends Fragment {
@@ -36,8 +42,12 @@ public class goalInformationFragment extends Fragment {
     private String heightInches;
     private String heightFeet;
     private String goalWeight;
+    private TextView notSureActivityLevel;
     private int activityLevelFactor;
     private Bundle bundle;
+    private PopupWindow mPopupWindow;
+    private TextView tv;
+    private FrameLayout mRelativeLayout;
 
     public goalInformationFragment() {
         // Required empty public constructor
@@ -54,6 +64,7 @@ public class goalInformationFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_goal_information, container, false);
 
         // get references
+        notSureActivityLevel= (TextView) v.findViewById(R.id.notSureLevel);
         final EditText weightInput = (EditText) v.findViewById(R.id.weightInput);
         final TextView weightTextView = (TextView) v.findViewById(R.id.currentWeightLabel);
         final EditText heightInput = (EditText) v.findViewById(R.id.heightInput);
@@ -63,6 +74,15 @@ public class goalInformationFragment extends Fragment {
         final TextView goalWeightTextView = (TextView) v.findViewById(R.id.goalWeightLabel);
         LinearLayout heightImperialLayout = (LinearLayout) v.findViewById(R.id.imperialHeightLayout);
         LinearLayout heightMetricLayout = (LinearLayout) v.findViewById(R.id.metricHeightLayout);
+        mRelativeLayout = (FrameLayout) v.findViewById(R.id.rl);
+
+        notSureActivityLevel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createView(0);
+                notSureActivityLevel.setClickable(false);
+            }
+        });
 
         if (isImperial == true) {
             weightTextView.setText(R.string.weight_text_imperial);
@@ -154,7 +174,46 @@ public class goalInformationFragment extends Fragment {
 
         return v;
     }
+    private void createView(int type) {
 
+        // Initialize a new instance of LayoutInflater service
+        LayoutInflater inflater = (LayoutInflater) getContext().getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        // Inflate the custom layout/view
+        View customView = inflater.inflate(R.layout.custom_layout, null);
+
+        tv = (TextView) customView.findViewById(R.id.tv);
+
+        // Initialize a new instance of popup window
+        mPopupWindow = new PopupWindow(
+                customView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+
+        // Set an elevation value for popup window
+        // Call requires API level 21
+        if (Build.VERSION.SDK_INT >= 21) {
+            mPopupWindow.setElevation(5.0f);
+        }
+
+        // Get a reference for the custom view close button
+        ImageButton closeButton = (ImageButton) customView.findViewById(R.id.ib_close);
+
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Dismiss the popup window
+                mPopupWindow.dismiss();
+                notSureActivityLevel.setClickable(true);
+            }
+        });
+
+        if (type == 0) {
+            tv.setText("Insert text here on what each level is.");
+        }
+        mPopupWindow.showAtLocation(mRelativeLayout, Gravity.CENTER, 0, 0);
+    }
 
     @Override
     public void onAttach(Context context) {

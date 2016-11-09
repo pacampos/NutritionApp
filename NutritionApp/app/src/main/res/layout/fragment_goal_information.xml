@@ -151,7 +151,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/notSureLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

@@ -27,7 +27,7 @@
     <string name="goalExercise_text">Exercise Goal</string>
     <string name="exercise_placeholder">Hours per Day</string>
     <string name="activityLevel_title">Average Daily Activity Level</string>
-    <string name="activityLevelInfoButton">Not sure what you are?</string>
+    <string name="activityLevelInfoButton"><a href="http://www.livestrong.com/article/401892-what-are-sedentary-moderate-high-activity-exercise-levels/">Not sure what you are? </a></string>
     <string name="spinner_title">Choose your activity level</string>
 
     <string-array name="activityLevel_array">

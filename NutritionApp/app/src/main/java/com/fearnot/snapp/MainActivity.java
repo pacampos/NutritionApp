@@ -1,7 +1,6 @@
 package com.fearnot.snapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -11,10 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.fearnot.snapp.Activities.ActivityHome;
-import com.fearnot.snapp.Activities.SignUpActivity;
-import com.fearnot.snapp.Fragments.HomeFragment;
-import com.fearnot.snapp.Fragments.LoginFragment;
 import com.fearnot.snapp.Fragments.welcomeFragment;
 import com.fearnot.snapp.Interfaces.ReplaceFragmentInterface;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,15 +17,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GetTokenResult;
-
-import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity implements ReplaceFragmentInterface {
     private static final String TAG = "MainActivity.";
     public Context fragmentContext;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements ReplaceFragmentIn
     }
 
     public void signIn(String email, String password, Context context) {
-        fragmentContext = context;
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -107,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements ReplaceFragmentIn
                                     Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(MainActivity.this, "Signed In", Toast.LENGTH_SHORT).show();
-                            mAuth = FirebaseAuth.getInstance();
                             NutritionSingleton.getInstance().SetUser(mAuth.getCurrentUser(), fragmentContext);
                         }
                     }

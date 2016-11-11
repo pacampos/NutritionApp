@@ -6,7 +6,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,20 +18,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fearnot.snapp.Activities.SignUpActivity;
+import com.fearnot.snapp.Activities.ActivityHome;
 import com.fearnot.snapp.Interfaces.ReplaceFragmentInterface;
 import com.fearnot.snapp.NutritionSingleton;
 import com.fearnot.snapp.R;
 import com.fearnot.snapp.Receiver;
 import com.fearnot.snapp.Views.CheckableImageView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Calendar;
 
 import static android.R.attr.defaultValue;
-import static com.fearnot.snapp.RegexHelper.isNumeric;
 
 
 public class MeasurementFragment extends Fragment {
+    public static String TAG = "MeasurementFragment";
     public static String ARM = "com.example.nutritionapp.arm";
     public static String WAIST = "com.example.nutritionapp.waist";
     public static String THIGH = "com.example.nutritionapp.thigh";
@@ -47,6 +53,7 @@ public class MeasurementFragment extends Fragment {
     private EditText thighInput;
     private TextView thighTextView;
     private Button goToButton;
+    private ProgressDialog progress;
 
     private ReplaceFragmentInterface replaceFragmentInterface;
 
@@ -121,11 +128,7 @@ public class MeasurementFragment extends Fragment {
 
                 boolean isNewAccount = bundle.getBoolean(signUpFragment.IS_NEW_ACCOUNT);
                 if (isNewAccount) {
-                    ProgressDialog progress = new ProgressDialog(getContext());
-                    progress.setMessage("Finishing signup...");
-                    progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    progress.show();
-                    ((SignUpActivity) getActivity()).finishSignup(email, password, bundle, progress);
+                    finishSignup(email, password, bundle);
                 } else {
                     if (isImperial) {
                         NutritionSingleton.getInstance().CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),
@@ -195,5 +198,83 @@ public class MeasurementFragment extends Fragment {
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + " must implement OnArticleSelectedListener");
         }
+    }
+
+    public void finishSignup(String email, String password, final Bundle bundle) {
+        progress = new ProgressDialog(getContext());
+        progress.setMessage("Finishing signup...");
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.show();
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress.hide();
+                                progress.dismiss();
+                            }
+                        });
+                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(getActivity(), "Could not sign up",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getActivity(), "Signed In", Toast.LENGTH_SHORT).show();
+                            NutritionSingleton.getInstance().CreateNewAccount(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            if (bundle.getBoolean(signUpFragment.METRIC)) {
+                                NutritionSingleton.getInstance().CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),
+                                        bundle.getString(signUpFragment.NAME),
+                                        bundle.getDouble(signUpFragment.AGE),
+                                        bundle.getDouble(goalInformationFragment.IMPERIAL_HEIGHT_INCHES),
+                                        bundle.getDouble(goalInformationFragment.IMPERIAL_HEIGHT_FEET),
+                                        bundle.getBoolean(signUpFragment.GENDER),
+                                        bundle.getDouble(goalInformationFragment.WEIGHT),
+                                        bundle.getDouble(goalInformationFragment.GOAL),
+                                        bundle.getDouble(signUpFragment.BIRTH_DATE),
+                                        bundle.getDouble(signUpFragment.BIRTH_MONTH),
+                                        bundle.getDouble(signUpFragment.BIRTH_YEAR),
+                                        bundle.getDouble(MeasurementFragment.WAIST),
+                                        bundle.getDouble(MeasurementFragment.THIGH),
+                                        bundle.getDouble(MeasurementFragment.ARM),
+                                        bundle.getDouble(goalInformationFragment.ACTIVITY),
+                                        bundle.getBoolean(signUpFragment.METRIC));
+
+                                NutritionSingleton.getInstance().switchProfiles(0);
+                            } else {
+                                NutritionSingleton.getInstance().CreateNewProfile(bundle.getDouble(signUpFragment.IMAGE_POS),
+                                        bundle.getString(signUpFragment.NAME),
+                                        bundle.getDouble(signUpFragment.AGE),
+                                        bundle.getDouble(goalInformationFragment.HEIGHT),
+                                        bundle.getBoolean(signUpFragment.GENDER),
+                                        bundle.getDouble(goalInformationFragment.WEIGHT),
+                                        bundle.getDouble(goalInformationFragment.GOAL), bundle.getDouble(signUpFragment.BIRTH_DATE),
+                                        bundle.getDouble(signUpFragment.BIRTH_MONTH),
+                                        bundle.getDouble(signUpFragment.BIRTH_YEAR),
+                                        bundle.getDouble(MeasurementFragment.WAIST),
+                                        bundle.getDouble(MeasurementFragment.THIGH),
+                                        bundle.getDouble(MeasurementFragment.ARM),
+                                        bundle.getDouble(goalInformationFragment.ACTIVITY),
+                                        bundle.getBoolean(signUpFragment.METRIC));
+                                NutritionSingleton.getInstance().switchProfiles(0);
+                            }
+
+                            Calendar sevendayalarm = Calendar.getInstance();
+                            sevendayalarm.add(Calendar.HOUR_OF_DAY, 20);
+                            Intent intent = new Intent(getContext(), Receiver.class);
+                            PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
+
+                            AlarmManager am = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+                            am.setRepeating(AlarmManager.RTC_WAKEUP, sevendayalarm.getTimeInMillis(), 1000 * 60 * 24 * 10, pendingIntent);
+                            startActivity(new Intent(getActivity(), ActivityHome.class));
+                        }
+
+                    }
+                });
     }
 }

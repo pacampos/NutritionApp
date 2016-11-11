@@ -18,7 +18,6 @@ import android.widget.ListView;
 
 import com.fearnot.snapp.Interfaces.ReplaceFragmentInterface;
 import com.fearnot.snapp.Model.CompactFood;
-import com.fearnot.snapp.Model.Food;
 import com.fearnot.snapp.R;
 import com.fearnot.snapp.fatservices.FoodService;
 import com.fearnot.snapp.fatservices.Response;

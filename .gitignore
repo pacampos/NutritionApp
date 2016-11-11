@@ -1,2 +1,4 @@
 misc.xml
 *.apk
+.idea/*
+NutritionApp/.idea/*

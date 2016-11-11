@@ -31,6 +31,7 @@ import static com.fearnot.snapp.RegexHelper.isValidPassword;
 
 
 public class signUpFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
+    public static String TAG = "signUpFragment";
     public static String IS_NEW_ACCOUNT = "com.example.nutritionapp.is_new_account";
 
     public static String EMAIL = "com.example.nutritionapp.username";

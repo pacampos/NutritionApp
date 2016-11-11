@@ -83,29 +83,6 @@ public class MainActivity extends AppCompatActivity implements ReplaceFragmentIn
         }
     }
 
-    public void signIn(String email, String password, Context context) {
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithEmail:failed", task.getException());
-                            Toast.makeText(MainActivity.this, "Could not sign in, make sure all your info is correct and try again.",
-                                    Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(MainActivity.this, "Signed In", Toast.LENGTH_SHORT).show();
-                            NutritionSingleton.getInstance().SetUser(mAuth.getCurrentUser(), fragmentContext);
-                        }
-                    }
-                });
-
-    }
-
 
     @Override
     public void replaceFragment(Fragment fragment) {

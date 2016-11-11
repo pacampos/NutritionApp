@@ -60,8 +60,6 @@ public class NutritionSingleton {
 
     public void SetUser(FirebaseUser user, Context context) {
         progressContext = context;
-
-
         /* set the firebase user given to use by the auth object */
         mUser = user;
         /* use this user's uid as the unique recognizer for the user */
@@ -95,45 +93,6 @@ public class NutritionSingleton {
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.welcome_fragment_container, f);
                 ft.commit();
-
-//
-//                for (final DataSnapshot snapshot : dataSnapshot.getChildren())
-//                {
-//                    name = snapshot.getKey();
-//                    final DatabaseReference profileRef = ref.child(name);
-//                    profileRef.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(DataSnapshot dataSnapshot) {
-//                            /* add all profiles to the profiles array */
-//                            profiles.add(dataSnapshot.getValue(ProfileModel.class));
-//                            ProfileModel currModel = profiles.get(profiles.size() - 1);
-//                            currModel.id = profiles.size() - 1;
-//                            long childrenCount = dataSnapshot.getChildrenCount();
-//                            int profileSize = profiles.size();
-//
-//                            if (childrenCount / 23 == profileSize) {
-//                                progress.dismiss();
-//                                /* start the fragment that switches profiles */
-//
-//                                AppCompatActivity beforeLogin = (AppCompatActivity) progressContext;
-//                                //get manager
-//                                FragmentManager fm = beforeLogin.getSupportFragmentManager();
-//
-//                                SwitchUserFragment f = new SwitchUserFragment(); // instantiate switch profile Fragment
-//                                // create transaction
-//                                FragmentTransaction ft = fm.beginTransaction();
-//                                ft.replace(R.id.welcome_fragment_container, f);
-//                                ft.commit();
-//
-//                                profileRef.removeEventListener(this);
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(DatabaseError databaseError) {
-//                        }
-//                    });
-//                }
                 ref.removeEventListener(this);
             }
 

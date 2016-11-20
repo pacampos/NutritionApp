@@ -308,7 +308,7 @@
                 android:background="#52b7bd"
                 android:minHeight="25dp"
                 android:minWidth="0dp"
-                android:text="Serving"
+                android:text="Food Pyramid"
                 android:textColor="@color/white"
                 android:layout_width="180dp" />
 

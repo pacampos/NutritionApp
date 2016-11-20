@@ -166,7 +166,7 @@ public class FoodJournalFragment extends Fragment {
         Toolbar toolbar = (Toolbar) v.findViewById(R.id.foodJournalToolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Food Journal");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("");
 
         final Drawable upArrow = getResources().getDrawable(R.drawable.ic_menu_2x);
         upArrow.setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);

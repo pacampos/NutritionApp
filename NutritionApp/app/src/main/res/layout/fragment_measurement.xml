@@ -127,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:text="@string/nextButtonText"
+                android:text="@string/startReachingText"
                 android:textColor="@color/white"
                 android:layout_width="180dp" />
 

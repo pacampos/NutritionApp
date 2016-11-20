@@ -183,7 +183,7 @@
             android:background="#52b7bd"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:text="@string/startReachingText"
+            android:text="@string/nextButtonText"
             android:textColor="#ffffff" />
     </LinearLayout>
     </FrameLayout>

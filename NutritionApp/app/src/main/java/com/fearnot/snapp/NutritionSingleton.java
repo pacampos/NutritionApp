@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.fearnot.snapp.Fragments.SwitchUserFragment;
 import com.fearnot.snapp.Model.DayModel;
@@ -16,6 +17,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -56,14 +58,8 @@ public class NutritionSingleton {
         return mUser;
     }
 
-    void SetUser(FirebaseUser user, Context context) {
+    public void SetUser(FirebaseUser user, Context context) {
         progressContext = context;
-        progress = new ProgressDialog(progressContext);
-        progress.setMessage("Retrieving Profiles...");
-        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progress.setIndeterminate(true);
-        progress.show();
-
         /* set the firebase user given to use by the auth object */
         mUser = user;
         /* use this user's uid as the unique recognizer for the user */
@@ -76,50 +72,33 @@ public class NutritionSingleton {
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String name = null;
-                for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    name = snapshot.getKey();
-                    final DatabaseReference profileRef = ref.child(name);
-                    profileRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            /* add all profiles to the profiles array */
-                            profiles.add(dataSnapshot.getValue(ProfileModel.class));
-                            ProfileModel currModel = profiles.get(profiles.size() - 1);
-                            currModel.id = profiles.size() - 1;
-                            long childrenCount = dataSnapshot.getChildrenCount();
-                            int profileSize = profiles.size();
-
-                            if (childrenCount / 23 == profileSize) {
-                                progress.dismiss();
-                                /* start the fragment that switches profiles */
-
-                                AppCompatActivity beforeLogin = (AppCompatActivity) progressContext;
-                                //get manager
-                                FragmentManager fm = beforeLogin.getSupportFragmentManager();
-
-                                SwitchUserFragment f = new SwitchUserFragment(); // instantiate switch profile Fragment
-                                // create transaction
-                                FragmentTransaction ft = fm.beginTransaction();
-                                ft.replace(R.id.welcome_fragment_container, f);
-                                ft.commit();
-
-                                profileRef.removeEventListener(this);
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                        }
-                    });
-
+//                String name = null;
+                if(profiles != null){
+                    profiles.clear();
+                }
+                GenericTypeIndicator<HashMap<String, ProfileModel>> t = new GenericTypeIndicator<HashMap<String, ProfileModel>>() {};
+                HashMap<String, ProfileModel> profileMap = dataSnapshot.getValue(t);
+                for( String key : profileMap.keySet()){
+                    profiles.add(profileMap.get(key));
                 }
 
+
+                /* start the fragment that switches profiles */
+                AppCompatActivity beforeLogin = (AppCompatActivity) progressContext;
+                //get manager
+                FragmentManager fm = beforeLogin.getSupportFragmentManager();
+
+                SwitchUserFragment f = new SwitchUserFragment(); // instantiate switch profile Fragment
+                // create transaction
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.welcome_fragment_container, f);
+                ft.commit();
                 ref.removeEventListener(this);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                Log.i("Singleton", databaseError.getMessage()+"/n"+databaseError.getDetails());
             }
         };
 

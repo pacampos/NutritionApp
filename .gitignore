@@ -1,2 +1,5 @@
 misc.xml
 *.apk
+.idea/*
+NutritionApp/.idea/*
+projectFilesBackup/.idea/workspace.xml

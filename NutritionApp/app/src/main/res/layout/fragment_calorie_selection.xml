@@ -51,18 +51,19 @@
         android:layout_weight="0.44"
             android:layout_marginTop="10dp" />
 
-        <LinearLayout
+     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
+         <TextView
                 android:text="Portions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView12"
                 android:layout_weight="1"
-                android:paddingStart="10dp" />
+                android:paddingStart="10dp"
+             android:textStyle="normal|bold" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -75,10 +76,19 @@
 
         </LinearLayout>
 
-        <Button
-            android:text="Submit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/submitCalories"
-            android:layout_weight="0.03" />
+     <TextView
+         android:text="Please select the serving type and input the number of portions"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:id="@+id/textView26"
+         android:layout_weight="0.07"
+         android:textAlignment="center"
+         android:textStyle="normal|italic" />
+
+     <Button
+         android:text="Submit"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:id="@+id/submitCalories"
+         android:layout_weight="0.03" />
  </LinearLayout>

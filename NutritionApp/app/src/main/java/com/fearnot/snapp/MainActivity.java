@@ -43,14 +43,15 @@ public class MainActivity extends AppCompatActivity implements ReplaceFragmentIn
 
 
                     // Toast
-                    Toast.makeText(getApplicationContext(), user.getEmail(), Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(getApplicationContext(), user.getEmail(), Toast.LENGTH_SHORT).show();
                     // TODO: this may be a way to enable persistence sign-in while the login token is valid
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
                     welcomeScreen();
 
-                    Toast.makeText(getApplicationContext(), "You are currently not logged in.", Toast.LENGTH_SHORT).show();
+                 //
+                    //   Toast.makeText(getApplicationContext(), "You are currently not logged in.", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
             }
